@@ -1,13 +1,25 @@
-'''Qt loader'''
-# pylint: disable=no-member, c-extension-no-member, import-outside-toplevel, invalid-name
-# SPDX-License-Identifier: GPL-3.0-only
-import sys
-from yuki_iptv.time import print_with_time
-
-class YukiData: # pylint: disable=too-few-public-methods, missing-class-docstring
-    pass
-
-YukiData.qt6_disable_printed = False
+#
+# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya
+#
+# This file is part of yuki-iptv.
+#
+# yuki-iptv is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# yuki-iptv is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with yuki-iptv  If not, see <http://www.gnu.org/licenses/>.
+#
+# The Font Awesome pictograms are licensed under the CC BY 4.0 License
+# https://creativecommons.org/licenses/by/4.0/
+#
 
 def get_qt_library():
     '''Get correct Qt library - PyQt6/5'''
@@ -17,17 +29,12 @@ def get_qt_library():
     QtCore = False
     QtGui = False
     try:
-        if '--disable-qt6' in sys.argv:
-            if not YukiData.qt6_disable_printed:
-                YukiData.qt6_disable_printed = True
-                print_with_time("Qt6 force disabled\n")
-            raise Exception("")
         from PyQt6 import QtWidgets
         from PyQt6 import QtCore
         from PyQt6 import QtGui
         QShortcut = QtGui.QShortcut
         qt_library = "PyQt6"
-    except: # pylint: disable=bare-except
+    except:
         from PyQt5 import QtWidgets
         from PyQt5 import QtCore
         from PyQt5 import QtGui

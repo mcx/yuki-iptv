@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-21 01:49+0000\n"
-"PO-Revision-Date: 2022-03-04 15:19+0100\n"
+"POT-Creation-Date: 2023-04-05 07:18+0300\n"
+"PO-Revision-Date: 2023-04-05 07:18+0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
 "Language: hr\n"
@@ -13,1116 +13,1409 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.2\n"
 
-msgid "name"
-msgstr "Hrvatski"
-
-msgid "m3u_ready"
-msgstr "Spremno"
-
-msgid "m3u_m3ueditor"
-msgstr "m3u uređivač"
-
-msgid "m3u_noname"
-msgstr "Bezimeno"
-
-msgid "m3u_waschanged"
-msgstr "Dokument je promijenjen.<br>Želite li spremiti promjene?"
-
-msgid "m3u_saveconfirm"
-msgstr "Potvrda spremanja"
-
-msgid "m3u_file"
-msgstr "Datoteka"
-
-msgid "m3u_loadm3u"
-msgstr "Učitaj M3U"
-
-msgid "m3u_saveas"
-msgstr "Spremi kao"
-
-msgid "m3u_find"
-msgstr "potraži"
-
-msgid "m3u_replacewith"
-msgstr "zamijeni s"
-
-msgid "m3u_replaceall"
-msgstr "zamijeni sve"
-
-msgid "m3u_deleterow"
-msgstr "obriši redak"
-
-msgid "m3u_addrow"
-msgstr "dodaj redak"
-
-msgid "m3u_movedown"
-msgstr "pomakni dolje"
-
-msgid "m3u_moveup"
-msgstr "pomakni gore"
-
-msgid "m3u_filtergroup"
-msgstr "filtriraj grupu (pritisni Enter)"
-
-msgid "m3u_searchterm"
-msgstr ""
-"upišite izraz pretrage i pritisnite enter\n"
-" koristite rezultate → za odabir željenog stupca"
-
-msgid "m3u_choosecolumn"
-msgstr "odaberite stupac za pretragu"
-
-msgid "m3u_openfile"
-msgstr "Otvori datoteku"
-
-msgid "m3u_playlists"
-msgstr "Popisi izvođenja (*.m3u)"
-
-msgid "m3u_loaded"
-msgstr "učitano"
-
-msgid "m3u_savefile"
-msgstr "Spremi datoteku"
-
-msgid "m3u_m3ufiles"
-msgstr "Popisi izvođenja (*.m3u, *.xspf)"
-
-msgid "error"
-msgstr "Greška"
-
-msgid "playerror"
-msgstr "Greška reprodukcije"
-
-msgid "error2"
+#: usr/lib/yuki-iptv/yuki-iptv.py:227 usr/lib/yuki-iptv/yuki-iptv.py:770
+#: usr/lib/yuki-iptv/yuki-iptv.py:782
+msgid "yuki-iptv error"
 msgstr "yuki-iptv greška"
 
-msgid "starting"
-msgstr "pokretanje"
+#: usr/lib/yuki-iptv/yuki-iptv.py:231 usr/lib/yuki-iptv/yuki-iptv.py:775
+#: usr/lib/yuki-iptv/yuki-iptv.py:787
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:164
+msgid "Error"
+msgstr "Greška"
 
-msgid "binarynotfound"
-msgstr "Binarni moduli nisu pronađeni!"
+#: usr/lib/yuki-iptv/yuki-iptv.py:280
+msgid "IPTV player"
+msgstr "IPTV reproduktor"
 
-msgid "nocacheplaylist"
-msgstr "Predmemorija popisa izvođenja isključena"
+#: usr/lib/yuki-iptv/yuki-iptv.py:535
+msgid "Loading TV guide cache..."
+msgstr ""
 
-msgid "loadingplaylist"
-msgstr "Učitavanje popisa izvođenja..."
+#: usr/lib/yuki-iptv/yuki-iptv.py:678 usr/lib/yuki-iptv/yuki-iptv.py:898
+#: usr/lib/yuki-iptv/yuki-iptv.py:949 usr/lib/yuki-iptv/yuki-iptv.py:950
+#: usr/lib/yuki-iptv/yuki-iptv.py:951 usr/lib/yuki-iptv/yuki-iptv.py:4611
+#: usr/lib/yuki-iptv/yuki-iptv.py:4790 usr/lib/yuki-iptv/yuki_iptv/m3u.py:108
+#: usr/lib/yuki-iptv/yuki_iptv/m3u.py:110
+#: usr/lib/yuki-iptv/yuki_iptv/xspf.py:43
+#: usr/lib/yuki-iptv/yuki_iptv/xtreamtom3u.py:30
+msgid "All channels"
+msgstr "Svi programi"
 
-msgid "playlistloaderror"
+#: usr/lib/yuki-iptv/yuki-iptv.py:771
+msgid "Processing error"
+msgstr "Greška obrade"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:783
+msgid "Could not connect"
+msgstr "Nemoguće povezivanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:821 usr/lib/yuki-iptv/yuki-iptv.py:826
+msgid ""
+"Failed to load playlist - unknown encoding! Please use playlists in UTF-8 "
+"encoding."
+msgstr ""
+"Neuspjelo učitavanje popisa izvođenja - nepoznato kôdiranje! Koristite popis "
+"izvođenja u UTF-8 kôdiranju."
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:855 usr/lib/yuki-iptv/yuki-iptv.py:891
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:114
+msgid "Playlist loading error!"
 msgstr "Greška učitavanja popisa izvođenja!"
 
-msgid "playlistloaddone"
-msgstr "Učitavanje popisa izvođenja završeno!"
+#: usr/lib/yuki-iptv/yuki-iptv.py:951 usr/lib/yuki-iptv/yuki-iptv.py:4791
+#: usr/lib/yuki-iptv/yuki-iptv.py:5402
+msgid "Favourites"
+msgstr "Omiljeni"
 
-msgid "cachingplaylist"
-msgstr "Stvaranje predmemorije popisa izvođenja..."
-
-msgid "playlistcached"
-msgstr "Predmemorija popisa izvođenja spremljena!"
-
-msgid "usingcachedplaylist"
-msgstr "Koristi se predmemorija popisa izvođenja"
-
-msgid "settings"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1018 usr/lib/yuki-iptv/yuki-iptv.py:1591
+#: usr/lib/yuki-iptv/yuki-iptv.py:6843 usr/lib/yuki-iptv/yuki-iptv.py:7940
+msgid "Settings"
 msgstr "Postavke"
 
-msgid "help"
-msgstr "Pomoć"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1023
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:367
+msgid "Shortcuts"
+msgstr "Prečaci"
 
-msgid "channelsettings"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1037
+msgid "Description"
+msgstr "Opis"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1037
+msgid "Shortcut"
+msgstr "Prečac"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1054 usr/lib/yuki-iptv/yuki-iptv.py:3598
+#: usr/lib/yuki-iptv/yuki-iptv.py:5361
+msgid "Are you sure?"
+msgstr "Jeste li sigurni?"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1079 usr/lib/yuki-iptv/yuki-iptv.py:3492
+msgid "Double click to change"
+msgstr "Dvostruki klik za promjenu"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1096
+msgid "Reset to defaults"
+msgstr "Vrati izvorno"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1104
+msgid "Modify shortcut"
+msgstr "Promjena prečaca"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1114
+msgid ""
+"Press the key combination\n"
+"you want to assign"
+msgstr ""
+"Pritisnite kombinaciju tipka\n"
+"koje želite dodijeliti"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1164
+msgid "Shortcut already used"
+msgstr "Prečac se već koristi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1169
+msgid "Cancel"
+msgstr "Odustani"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1171
+msgid "OK"
+msgstr "U redu"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1218
+msgid "playlist"
+msgstr "popis izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1223
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:376
+msgid "&About yuki-iptv"
+msgstr "&O yuki-iptv"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1228 usr/lib/yuki-iptv/yuki-iptv.py:3427
+msgid "License"
+msgstr "Licenca"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1233 usr/lib/yuki-iptv/yuki-iptv.py:2790
+#: usr/lib/yuki-iptv/yuki-iptv.py:6855
+msgid ""
+"Channel\n"
+"sort"
+msgstr ""
+"Poredak\n"
+"programa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1238 usr/lib/yuki-iptv/yuki-iptv.py:5405
+msgid "Video settings"
 msgstr "Postavke programa"
 
-msgid "selectplaylist"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1243 usr/lib/yuki-iptv/yuki-iptv.py:5404
+msgid "Open in external player"
+msgstr "Otvori u vanjskom reproduktoru"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1248 usr/lib/yuki-iptv/yuki-iptv.py:1260
+#: usr/lib/yuki-iptv/yuki-iptv.py:1365 usr/lib/yuki-iptv/yuki-iptv.py:5400
+#: usr/lib/yuki-iptv/yuki-iptv.py:5679 usr/lib/yuki-iptv/yuki-iptv.py:5751
+#: usr/lib/yuki-iptv/yuki-iptv.py:6851 usr/lib/yuki-iptv/yuki-iptv.py:7943
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:349
+msgid "TV guide"
+msgstr "TV vodič"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1264 usr/lib/yuki-iptv/yuki-iptv.py:5949
+msgid "No TV guide for channel"
+msgstr "Nema TV vodiča za program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1293 usr/lib/yuki-iptv/yuki-iptv.py:1874
+#: usr/lib/yuki-iptv/yuki-iptv.py:5104 usr/lib/yuki-iptv/yuki-iptv.py:5762
+msgid "Search channel"
+msgstr "Potraži program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1295 usr/lib/yuki-iptv/yuki-iptv.py:1524
+#: usr/lib/yuki-iptv/yuki-iptv.py:1526 usr/lib/yuki-iptv/yuki-iptv.py:1876
+#: usr/lib/yuki-iptv/yuki-iptv.py:5764
+msgid "Search"
+msgstr "Pretraži"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1305
+msgid "Show only channels in playlist"
+msgstr "Prikaži samo programe u popisu izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1345 usr/lib/yuki-iptv/yuki-iptv.py:6819
+msgid "Recording scheduler"
+msgstr "Raspored snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1350 usr/lib/yuki-iptv/yuki-iptv.py:6559
+#: usr/lib/yuki-iptv/yuki-iptv.py:6837 usr/lib/yuki-iptv/yuki-iptv.py:7942
+msgid "Archive"
+msgstr "Arhiva programa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1355 usr/lib/yuki-iptv/yuki-iptv.py:1360
+#: usr/lib/yuki-iptv/yuki-iptv.py:6847
+msgid "Playlists"
+msgstr "Popisi izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1401
+msgid "Name should not be empty!"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1409
+msgid "URL not specified!"
+msgstr "URL nije naveden!"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1417 usr/lib/yuki-iptv/yuki-iptv.py:2046
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:88
+msgid "Select m3u playlist"
 msgstr "Odaberi m3u popis izvođenja"
 
-msgid "selectepg"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1426 usr/lib/yuki-iptv/yuki-iptv.py:2055
+msgid "Select EPG file (XMLTV or JTV EPG)"
 msgstr "Odaberi EPG datoteku (XMLTV ili JTV EPG)"
 
-msgid "selectwritefolder"
-msgstr "Odaberi mape za snimanje i slike zaslona"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1432
+msgid "Name"
+msgstr "Naziv"
 
-msgid "deinterlace"
-msgstr "Raspletanje"
-
-msgid "useragent"
-msgstr "Korisnički agent"
-
-msgid "empty"
-msgstr "Nijedan"
-
-msgid "channel"
-msgstr "Program"
-
-msgid "savesettings"
-msgstr "Spremi postavke"
-
-msgid "save"
-msgstr "Spremi"
-
-msgid "m3uplaylist"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1433 usr/lib/yuki-iptv/yuki-iptv.py:2785
+msgid "M3U / XSPF playlist"
 msgstr "M3U / XSPF popis izvođenja"
 
-msgid "updateatboot"
-msgstr ""
-"Nadopuni popis izvođenja\n"
-"pri pokretanju"
-
-msgid "epgaddress"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1434 usr/lib/yuki-iptv/yuki-iptv.py:2787
+msgid ""
+"TV guide\n"
+"address\n"
+"(XMLTV or JTV)"
 msgstr ""
 "Adresa\n"
 "TV vodiča\n"
 "(XMLTV ili JTV)"
 
-msgid "udpproxy"
-msgstr "UDP proxy"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1437 usr/lib/yuki-iptv/yuki-iptv.py:1439
+#: usr/lib/yuki-iptv/yuki-iptv.py:2814 usr/lib/yuki-iptv/yuki-iptv.py:2817
+msgid "Path to file or URL"
+msgstr "Putanja do datoteke ili URL-a"
 
-msgid "writefolder"
-msgstr ""
-"Mapa za snimanje\n"
-"i slike zaslona"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1446 usr/lib/yuki-iptv/yuki-iptv.py:2011
+#: usr/lib/yuki-iptv/yuki-iptv.py:3320 usr/lib/yuki-iptv/yuki-iptv.py:3337
+msgid "Save"
+msgstr "Spremi"
 
-msgid "orselectyourprovider"
-msgstr "Ili odaberite pružatelja usluge"
-
-msgid "resetchannelsettings"
-msgstr "Vrati izvorne postavke i poredak programa"
-
-msgid "notselected"
-msgstr "Nije odabrano"
-
-msgid "close"
-msgstr "Zatvori"
-
-msgid "nochannelselected"
-msgstr "Nema odabranog programa"
-
-msgid "pause"
-msgstr "Pauza"
-
-msgid "play"
-msgstr "Reprodukcija"
-
-msgid "exitfullscreen"
-msgstr "Za izlazak iz cjelozaslonskog prikaza pritisnite"
-
-msgid "volume"
-msgstr "Glasnoća zvuka"
-
-msgid "volumeoff"
-msgstr "Utišano"
-
-msgid "select"
-msgstr "Gledaj"
-
-msgid "tvguide"
-msgstr "TV vodič"
-
-msgid "startrecording"
-msgstr "Pokreni snimanje"
-
-msgid "loading"
-msgstr "Učitavanje..."
-
-msgid "doingscreenshot"
-msgstr "Stvaranje slike zaslona..."
-
-msgid "screenshotsaved"
-msgstr "Slika zaslona spremljena!"
-
-msgid "screenshotsaveerror"
-msgstr "Greška spremanja slike zaslona!"
-
-msgid "notvguideforchannel"
-msgstr "Nema TV vodiča za program"
-
-msgid "preparingrecord"
-msgstr "Pripremanje snimanja"
-
-msgid "nochannelselforrecord"
-msgstr "Nema odabranog programa za snimanje"
-
-msgid "stop"
-msgstr "Zaustavi"
-
-msgid "fullscreen"
-msgstr "Cjelozaslonski prikaz"
-
-msgid "openrecordingsfolder"
-msgstr "Otvori mapu snimanja"
-
-msgid "record"
-msgstr "Snimi"
-
-msgid "screenshot"
-msgstr "Slika zaslona"
-
-msgid "prevchannel"
-msgstr "Prijašnji program"
-
-msgid "nextchannel"
-msgstr "Sljedeći program"
-
-msgid "tvguideupdating"
-msgstr "Nadopuna TV vodiča..."
-
-msgid "tvguideupdatingerror"
-msgstr "Greška nadopune TV vodiča!"
-
-msgid "tvguideupdatingdone"
-msgstr "Nadopuna TV vodiča završena!"
-
-msgid "recordwaiting"
-msgstr "Čekanje snimanja"
-
-msgid "allchannels"
-msgstr "Svi programi"
-
-msgid "favourite"
-msgstr "Omiljeni"
-
-msgid "interfacelang"
-msgstr "Jezik sučelja"
-
-msgid "tvguideoffset"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1454
+msgid "TV guide offset"
 msgstr "Pomak TV vodiča"
 
-msgid "hours"
-msgstr "sata"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1456
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-msgid "hwaccel"
-msgstr ""
-"Hardversko\n"
-"ubrzanje"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1521 usr/lib/yuki-iptv/yuki-iptv.py:2131
+#: usr/lib/yuki-iptv/yuki-iptv.py:2149 usr/lib/yuki-iptv/yuki-iptv.py:2515
+#: usr/lib/yuki-iptv/yuki-iptv.py:5261 usr/lib/yuki-iptv/yuki-iptv.py:5264
+#: usr/lib/yuki-iptv/yuki-iptv.py:5279
+msgid "Default"
+msgstr "Zadano"
 
-msgid "sort"
-msgstr ""
-"Poredak\n"
-"programa"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1566
+msgid "Open"
+msgstr "Otvori"
 
-msgid "sortitems1"
-msgstr "kao u popisu izvođenja"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1585 usr/lib/yuki-iptv/yuki-iptv.py:5398
+msgid "Select"
+msgstr "Gledaj"
 
-msgid "sortitems2"
-msgstr "abecedni poredak"
-
-msgid "sortitems3"
-msgstr "obrnuti abecedni poredak"
-
-msgid "sortitems4"
-msgstr "prilagođeni"
-
-msgid "donotforgetsort"
-msgstr ""
-"Ne zaboravite postaviti\n"
-"prilagođeni poredak u postavkama!"
-
-msgid "moresettings"
-msgstr "Više postavki"
-
-msgid "lesssettings"
-msgstr "Manje postavki"
-
-msgid "enabled"
-msgstr "omogućeno"
-
-msgid "disabled"
-msgstr "onemogućeno"
-
-msgid "seconds"
-msgstr "sekunde."
-
-msgid "cache"
-msgstr "Predmemorija"
-
-msgid "chansearch"
-msgstr "Potraži program"
-
-msgid "reconnecting"
-msgstr "Ponovno povezivanje..."
-
-msgid "group"
-msgstr "Grupa"
-
-msgid "hide"
-msgstr "Sakrij program"
-
-msgid "contrast"
-msgstr "Kontrast"
-
-msgid "brightness"
-msgstr "Svjetlina"
-
-msgid "hue"
-msgstr "Nijansa"
-
-msgid "saturation"
-msgstr "Zasićenje"
-
-msgid "gamma"
-msgstr "Gama"
-
-msgid "timeshift"
-msgstr "Arhiva programa"
-
-msgid "tab_main"
-msgstr "Općenito"
-
-msgid "tab_video"
-msgstr "Slika"
-
-msgid "tab_network"
-msgstr "Mreža"
-
-msgid "tab_other"
-msgstr "Ostalo"
-
-msgid "mpv_options"
-msgstr "mpv mogućnosti"
-
-msgid "donotupdateepg"
-msgstr ""
-"Ne nadopunjuj\n"
-"EPG pri pokretanju"
-
-msgid "search"
-msgstr "Pretraži"
-
-msgid "tab_gui"
-msgstr "Korisničko sučelje"
-
-msgid "epg_gui"
-msgstr ""
-"Sučelje\n"
-"TV vodiča"
-
-msgid "classic"
-msgstr "Klasično"
-
-msgid "simple"
-msgstr "Jednostavno"
-
-msgid "simple_noicons"
-msgstr "Jednostavno (bez ikona)"
-
-msgid "update"
-msgstr "Nadopuni"
-
-msgid "scheduler"
-msgstr "Raspored snimanja"
-
-msgid "choosechannel"
-msgstr "Odaberi program"
-
-msgid "bitrate1"
-msgstr "bps"
-
-msgid "bitrate2"
-msgstr "kbps"
-
-msgid "bitrate3"
-msgstr "Mbps"
-
-msgid "bitrate4"
-msgstr "Gbps"
-
-msgid "bitrate5"
-msgstr "Tbps"
-
-msgid "starttime"
-msgstr "Vrijeme početka snimanja"
-
-msgid "endtime"
-msgstr "Vrijeme završetka snimanja"
-
-msgid "addrecord"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1587 usr/lib/yuki-iptv/yuki-iptv.py:1855
+msgid "Add"
 msgstr "Dodaj"
 
-msgid "delrecord"
-msgstr "Ukloni"
-
-msgid "plannedrec"
-msgstr "Planirana snimanja"
-
-msgid "warningstr"
-msgstr "Snimanje dva programa istovremeno nije moguće!"
-
-msgid "status"
-msgstr "Stanje"
-
-msgid "recnothing"
-msgstr "Nema planiranih snimanja"
-
-msgid "recwaiting"
-msgstr "Čekanje snimanja"
-
-msgid "recrecording"
-msgstr "Snimanje"
-
-msgid "activerec"
-msgstr "Aktivna snimanja"
-
-msgid "page"
-msgstr "Stranica"
-
-msgid "fasterview"
-msgstr ""
-"Za brže učitavanje programa, postavite predmemoriju\n"
-"na 1 ili više sekundi u mrežnim postavkama"
-
-msgid "playlists"
-msgstr "Popisi izvođenja"
-
-msgid "provselect"
-msgstr "Odaberi"
-
-msgid "provadd"
-msgstr "Dodaj"
-
-msgid "provedit"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1588
+msgid "Edit"
 msgstr "Uredi"
 
-msgid "provdelete"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1589
+msgid "Delete"
 msgstr "Obriši"
 
-msgid "provname"
-msgstr "Naziv"
-
-msgid "of"
-msgstr "od"
-
-msgid "importhypnotix"
-msgstr "Uvezi iz Hypnotixa"
-
-msgid "channelsonpage"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1590
+msgid "Favourites+"
 msgstr ""
-"Programa na\n"
-"stranici"
 
-msgid "resetdefplaylists"
-msgstr "Vrati izvorno"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1678
+msgid "Channel"
+msgstr "Program"
 
-msgid "license"
-msgstr "Licenca"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1679 usr/lib/yuki-iptv/yuki-iptv.py:1891
+msgid "Start record time"
+msgstr "Vrijeme početka snimanja"
 
-msgid "openprevchan"
-msgstr ""
-"Otvori posljednji program\n"
-"pri pokretanju"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1680 usr/lib/yuki-iptv/yuki-iptv.py:1892
+msgid "End record time"
+msgstr "Vrijeme završetka snimanja"
 
-msgid "smscheduler"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1749 usr/lib/yuki-iptv/yuki-iptv.py:7939
+msgid "Scheduler"
 msgstr "Raspored"
 
-msgid "praction"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1786
+msgid "No planned recordings"
+msgstr "Nema planiranih snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1791 usr/lib/yuki-iptv/yuki-iptv.py:7251
+msgid "Waiting for record"
+msgstr "Čekanje snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1821
+msgid "Recording"
+msgstr "Snimanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1822
+msgid "Status"
+msgstr "Stanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1845
+msgid "Planned recordings"
+msgstr "Planirana snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1846
+msgid "Active recordings"
+msgstr "Aktivna snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1851
+msgid "Choose channel"
+msgstr "Odaberi program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1857
+msgid "Remove"
+msgstr "Ukloni"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:1907
+msgid ""
+"Post-recording\n"
+"action"
 msgstr ""
 "Radnja nakon\n"
 "završetka snimanja"
 
-msgid "nothingtodo"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1909
+msgid "Nothing to do"
 msgstr "Ne čini ništa"
 
-msgid "stoppress"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1910
+msgid "Press Stop"
 msgstr "Zaustavi snimanje"
 
-msgid "turnoffpc"
-msgstr "Isključi PC"
+#: usr/lib/yuki-iptv/yuki-iptv.py:1963
+msgid "Recording of two channels simultaneously is not available!"
+msgstr "Snimanje dva programa istovremeno nije moguće!"
 
-msgid "exitprogram"
-msgstr "Zatvori program"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2007 usr/lib/yuki-iptv/yuki-iptv.py:2855
+#: usr/lib/yuki-iptv/yuki-iptv.py:3384 usr/lib/yuki-iptv/yuki-iptv.py:3441
+msgid "Close"
+msgstr "Zatvori"
 
-msgid "nohypnotixpf"
-msgstr "Nema pronađenih Hypnotix popisa izvođenja!"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2015
+msgid ""
+"Do not forget\n"
+"to set custom sort order in settings!"
+msgstr ""
+"Ne zaboravite postaviti\n"
+"prilagođeni poredak u postavkama!"
 
-msgid "theme"
-msgstr "Tema"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2064
+msgid "Select folder for recordings and screenshots"
+msgstr "Odaberi mape za snimanje i slike zaslona"
 
-msgid "videoaspect"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2079 usr/lib/yuki-iptv/yuki-iptv.py:2788
+msgid "Deinterlace"
+msgstr "Raspletanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2080 usr/lib/yuki-iptv/yuki-iptv.py:2929
+msgid "User agent"
+msgstr "Korisnički agent"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2081
+msgid "Group"
+msgstr "Grupa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2083
+msgid "Hide"
+msgstr "Sakrij"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2102
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2103
+msgid "Brightness"
+msgstr "Svjetlina"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2104
+msgid "Hue"
+msgstr "Nijansa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2105
+msgid "Saturation"
+msgstr "Zasićenje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2106 usr/lib/yuki-iptv/yuki-iptv.py:2230
+msgid "Gamma"
+msgstr "Gama"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2107 usr/lib/yuki-iptv/yuki-iptv.py:3095
+msgid "Aspect ratio"
 msgstr "Omjer slike"
 
-msgid "default"
-msgstr "Zadano"
-
-msgid "zoom"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2108 usr/lib/yuki-iptv/yuki-iptv.py:3096
+msgid "Scale / Zoom"
 msgstr "Razmjer / Zumiranje"
 
-msgid "openexternal"
-msgstr "Otvori u vanjskom reproduktoru"
-
-msgid "open"
-msgstr "Otvori"
-
-msgid "remembervol"
-msgstr "Zapamti glasnoću zvuka"
-
-msgid "hidempv"
-msgstr "Sakrij mpv panel"
-
-msgid "filepath"
-msgstr "Putanja do datoteke ili URL-a"
-
-msgid "panscan"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2109 usr/lib/yuki-iptv/yuki-iptv.py:3097
+msgid "Pan and scan"
 msgstr "Obreži i prilagodi"
 
-msgid "tab_exp"
-msgstr "Eksperimentalno"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2110
+msgid "EPG name"
+msgstr "EPG naziv"
 
-msgid "exp1"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2180 usr/lib/yuki-iptv/yuki-iptv.py:2930
+msgid "HTTP Referer:"
 msgstr ""
-"Prilagodba bočnog\n"
-"lebdećeg panela"
 
-msgid "exp2"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2188 usr/lib/yuki-iptv/yuki-iptv.py:2189
+#: usr/lib/yuki-iptv/yuki-iptv.py:2203 usr/lib/yuki-iptv/yuki-iptv.py:2206
+#: usr/lib/yuki-iptv/yuki-iptv.py:6307 usr/lib/yuki-iptv/yuki-iptv.py:6310
+#: usr/lib/yuki-iptv/yuki-iptv.py:6322 usr/lib/yuki-iptv/yuki-iptv.py:6326
+msgid "Average Bitrate"
+msgstr "Brzina prijenosa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2203 usr/lib/yuki-iptv/yuki-iptv.py:2206
+#: usr/lib/yuki-iptv/yuki-iptv.py:2219 usr/lib/yuki-iptv/yuki-iptv.py:2224
+#: usr/lib/yuki-iptv/yuki-iptv.py:2241 usr/lib/yuki-iptv/yuki-iptv.py:2256
+#: usr/lib/yuki-iptv/yuki-iptv.py:2260 usr/lib/yuki-iptv/yuki-iptv.py:2271
+#: usr/lib/yuki-iptv/yuki-iptv.py:2304 usr/lib/yuki-iptv/yuki-iptv.py:2308
+#: usr/lib/yuki-iptv/yuki-iptv.py:6307 usr/lib/yuki-iptv/yuki-iptv.py:6310
+#: usr/lib/yuki-iptv/yuki-iptv.py:6338 usr/lib/yuki-iptv/yuki-iptv.py:6340
+#: usr/lib/yuki-iptv/yuki-iptv.py:6351 usr/lib/yuki-iptv/yuki-iptv.py:6355
+msgid "General"
+msgstr "Općenito"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2204 usr/lib/yuki-iptv/yuki-iptv.py:2207
+#: usr/lib/yuki-iptv/yuki-iptv.py:7305
+msgid "kbps"
+msgstr "kbps"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2219
+msgid "Dimensions"
+msgstr "Razlučivost"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2224
+msgid "Aspect"
+msgstr "Omjer slike"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2227 usr/lib/yuki-iptv/yuki-iptv.py:2230
+#: usr/lib/yuki-iptv/yuki-iptv.py:2232 usr/lib/yuki-iptv/yuki-iptv.py:2305
+#: usr/lib/yuki-iptv/yuki-iptv.py:6339 usr/lib/yuki-iptv/yuki-iptv.py:6352
+msgid "Color"
+msgstr "Boja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2227
+msgid "Pixel Format"
+msgstr "Format piksela"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2232
+msgid "Bits Per Pixel"
+msgstr "Bita po pikselu"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2241 usr/lib/yuki-iptv/yuki-iptv.py:2271
+msgid "Codec"
+msgstr "Kôdek"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2252
+msgid "surround sound"
 msgstr ""
-"Širina popisa izvođenja\n"
-"u cjelozaslonskom prikazu"
 
-msgid "exp3"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2253 usr/lib/yuki-iptv/yuki-iptv.py:2262
+#: usr/lib/yuki-iptv/yuki-iptv.py:2309 usr/lib/yuki-iptv/yuki-iptv.py:6341
+#: usr/lib/yuki-iptv/yuki-iptv.py:6359
+msgid "Layout"
+msgstr "Izgled"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2253
+msgid "Channels"
+msgstr "Kanali"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2256
+msgid "Sample Rate"
+msgstr "Frekvencija"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2260
+msgid "Format"
 msgstr ""
-"Visina popisa izvođenja\n"
-"u cjelozaslonskom prikazu"
 
-msgid "expwarning"
+#: usr/lib/yuki-iptv/yuki-iptv.py:2262
+msgid "Channel Count"
+msgstr "Broj kanala"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2463 usr/lib/yuki-iptv/yuki-iptv.py:5448
+#: usr/lib/yuki-iptv/yuki-iptv.py:7332
+msgid "Loading..."
+msgstr "Učitavanje..."
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2533 usr/lib/yuki-iptv/yuki-iptv.py:2834
+msgid "Save settings"
+msgstr "Spremi postavke"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2786
+msgid ""
+"Update playlist\n"
+"at launch"
+msgstr ""
+"Nadopuni popis izvođenja\n"
+"pri pokretanju"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2789
+msgid ""
+"Hardware\n"
+"acceleration"
+msgstr ""
+"Hardversko\n"
+"ubrzanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2791
+msgid "Cache"
+msgstr "Predmemorija"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2792
+msgid "UDP proxy"
+msgstr "UDP proxy"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2793
+msgid ""
+"Folder for recordings\n"
+"and screenshots"
+msgstr ""
+"Mapa za snimanje\n"
+"i slike zaslona"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2830
+#, python-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2832
+msgid "Or select provider"
+msgstr "Ili odaberite pružatelja usluge"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2837
+msgid "Reset channel settings and sorting"
+msgstr "Vrati izvorne postavke i poredak programa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2839
+msgid "Clear logo cache"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2842
+msgid "as in playlist"
+msgstr "kao u popisu izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2843
+msgid "alphabetical order"
+msgstr "abecedni poredak"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2844
+msgid "reverse alphabetical order"
+msgstr "obrnuti abecedni poredak"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2845
+msgid "custom"
+msgstr "prilagođeni"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2870 usr/lib/yuki-iptv/yuki-iptv.py:2878
+msgid "Update"
+msgstr "Nadopuni"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2897
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2901
+msgid "Load EPG for"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2937
+msgid "mpv options"
+msgstr "mpv mogućnosti"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2939
+msgid "list"
+msgstr "popis"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2948
+msgid ""
+"Do not update\n"
+"EPG at boot"
+msgstr ""
+"Ne nadopunjuj\n"
+"EPG pri pokretanju"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2952
+msgid ""
+"TV guide\n"
+"interface"
+msgstr ""
+"Sučelje\n"
+"TV vodiča"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2953
+msgid ""
+"Open previous channel\n"
+"at startup"
+msgstr ""
+"Otvori posljednji program\n"
+"pri pokretanju"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2954
+msgid "Hide mpv panel"
+msgstr "Sakrij mpv panel"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2955
+msgid "Hide EPG percentage"
+msgstr "Sakrij prikaz EPG napredka"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2956
+msgid "Hide bitrate / video info"
+msgstr "Sakrij brzinu prijenosa / video informacije"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2957
+msgid "Move window by dragging"
+msgstr "Pomiči prozor povlačenjem"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2958
+msgid "Enable styles redefinition"
+msgstr "Omogući redefiniranje izgleda"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2959
+msgid "Volume change step"
+msgstr "Korak promjene glasnoće zvuka"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2961
+msgid ""
+"Channels on\n"
+"page"
+msgstr ""
+"Programa na\n"
+"stranici"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2968
+msgid "Classic"
+msgstr "Klasično"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2969
+msgid "Simple"
+msgstr "Jednostavno"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2970
+msgid "Simple (no icons)"
+msgstr "Jednostavno (bez ikona)"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2989 usr/lib/yuki-iptv/yuki-iptv.py:2990
+#: usr/lib/yuki-iptv/yuki-iptv.py:2999 usr/lib/yuki-iptv/yuki-iptv.py:3002
+#: usr/lib/yuki-iptv/yuki-iptv.py:3039 usr/lib/yuki-iptv/yuki-iptv.py:3040
+#: usr/lib/yuki-iptv/yuki-iptv.py:3053 usr/lib/yuki-iptv/yuki-iptv.py:3054
+#: usr/lib/yuki-iptv/yuki-iptv.py:3091 usr/lib/yuki-iptv/yuki-iptv.py:3092
+msgid "WARNING: experimental function, working with problems"
+msgstr "UPOZORENJE: eksperimentalna funkcija, radi s problemima"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:2999 usr/lib/yuki-iptv/yuki-iptv.py:3002
+msgid "Incompatible with option Playlist in separate window"
+msgstr "Nekompatibilno s mogućnošću: Popis izvođenja u zasebnom prozoru"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3008
+msgid ""
+"The settings here\n"
+"may be unstable!"
 msgstr ""
 "Ove postavke\n"
 "možda su nestabilne!"
 
-msgid "mouseswitchchannels"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3010
+msgid ""
+"Playlist width\n"
+"in full screen mode"
 msgstr ""
-"Prebaci program\n"
-"kotačićem miša"
+"Širina popisa izvođenja\n"
+"u cjelozaslonskom prikazu"
 
-msgid "actions"
-msgstr "Radnje"
-
-msgid "defaultchangevol"
-msgstr ""
-"po zadanome promijeni:\n"
-"glasnoću zvuka"
-
-msgid "showplaylistmouse"
-msgstr ""
-"Prikaži popis izvođenja\n"
-"pri pomaku miša"
-
-msgid "showcontrolsmouse"
-msgstr ""
-"Prikaži upravljanja\n"
-"pri pomaku miša"
-
-msgid "volumeshort"
-msgstr "Glasnoća"
-
-msgid "hidetvguide"
-msgstr "Sakrij TV vodič"
-
-msgid "flpopacity"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3020
+msgid "Floating panels opacity"
 msgstr "Prozirnost lebdećih panela"
 
-msgid "showhideplaylist"
-msgstr "Prikaži/Sakrij popis izvođenja"
-
-msgid "showhidectrlpanel"
-msgstr "Prikaži/Sakrij panel upravljanja"
-
-msgid "mininterface"
-msgstr "Jednostavno sučelje"
-
-msgid "panelposition"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3028
+msgid ""
+"Floating panel\n"
+"position"
 msgstr ""
 "Položaj lebdećeg\n"
 "panela"
 
-msgid "left"
-msgstr "Lijevo"
-
-msgid "right"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3030
+msgid "Right"
 msgstr "Desno"
 
-msgid "doscreenshotsvia"
-msgstr "Uslikaj sliku zaslona koristeći"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3031
+msgid "Left"
+msgstr "Lijevo"
 
-msgid "playlistsep"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3034
+msgid "Playlist in separate window"
 msgstr "Popis izvođenja u zasebnom prozoru"
 
-msgid "volumechangestep"
-msgstr "Korak promjene glasnoće zvuka"
-
-msgid "hideepgpercentage"
-msgstr "Sakrij prikaz EPG napredka"
-
-msgid "xtreamnoconn"
-msgstr "Nemoguće povezivanje"
-
-msgid "procerror"
-msgstr "Greška obrade"
-
-msgid "username"
-msgstr "Korisničko ime"
-
-msgid "password"
-msgstr "Lozinka"
-
-msgid "url"
-msgstr "URL"
-
-msgid "multipleplnote"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3043
+msgid ""
+"Switch channels with\n"
+"the mouse wheel"
 msgstr ""
-"Možete postaviti više popisa izvođenja klikom \n"
-"na Datoteka - tipku Popisi izvođenja (nakon spremanja postavki)"
-
-msgid "favoritesplaylistsep"
-msgstr "Omiljeni (zasebni popis izvođenja)"
-
-msgid "nochannels"
-msgstr "Nema programa"
-
-msgid "epgname"
-msgstr "EPG naziv"
-
-msgid "epgid"
-msgstr "EPG id"
-
-msgid "iaepgmatch"
-msgstr "Netočno EPG podudaranje"
-
-msgid "using"
-msgstr "Koristi se"
-
-msgid "Aspect"
-msgstr "Omjer slike"
-
-msgid "Average Bitrate"
-msgstr "Brzina prijenosa"
-
-msgid "Channel Count"
-msgstr "Broj kanala"
-
-msgid "Channels"
-msgstr "Kanali"
-
-msgid "Codec"
-msgstr "Kôdek"
-
-msgid "colour"
-msgstr "Boja"
-
-msgid "Dimensions"
-msgstr "Razlučivost"
-
-msgid "Format"
-msgstr "Format"
-
-msgid "Gamma"
-msgstr "Gama"
-
-msgid "general"
-msgstr "Općenito"
-
-msgid "layout"
-msgstr "Izgled"
-
-msgid "Pixel Format"
-msgstr "Format piksela"
-
-msgid "Sample Rate"
-msgstr "Frekvencija"
-
-msgid "Stream Information"
-msgstr "Informacije strujanja"
-
-msgid "Video"
-msgstr "Slika"
-
-msgid "Audio"
-msgstr "Zvuk"
-
-msgid "checkforupdates"
-msgstr "Provjera nadopuna"
-
-msgid "gotlatestversion"
-msgstr "Imate najnoviju dostupnu inačicu!"
-
-msgid "newversiongetfail"
-msgstr "Greška preuzimanja informacija najnovije inačice"
-
-msgid "newversionavail"
-msgstr ""
-"Nova inačica je dostupna! Želite li posjetiti web stranicu kako bi ju "
-"instalirali?"
-
-msgid "aboutqt"
-msgstr "O Qt-u"
-
-msgid "applog"
-msgstr "yuki-iptv zapis"
-
-msgid "mpvlog"
-msgstr "mpv zapis"
-
-msgid "copytoclipboard"
-msgstr "Kopiraj u međuspremnik"
-
-msgid "choosesavefilename"
-msgstr "Odaberi naziv datoteke za spremanje"
-
-msgid "logs"
-msgstr "Zapisi"
-
-msgid "Bits Per Pixel"
-msgstr "Bita po pikselu"
-
-msgid "epgloading"
-msgstr "EPG učitavanje..."
-
-msgid "unknownencoding"
-msgstr ""
-"Neuspjelo učitavanje popisa izvođenja - nepoznato kôdiranje! Koristite popis "
-"izvođenja u UTF-8 kôdiranju."
-
-msgid "menubar_exit"
-msgstr "&Zatvori"
-
-msgid "menubar_title_file"
-msgstr "&Datoteka"
-
-msgid "menubar_title_play"
-msgstr "&Reprodukcija"
-
-msgid "menubar_playpause"
-msgstr "&Gledaj / Pauziraj"
-
-msgid "menubar_stop"
-msgstr "&Zaustavi"
-
-msgid "minutes_plural"
-msgid_plural ""
-msgstr[0] "minuta"
-msgstr[1] "minute"
-msgstr[2] "minuta"
-
-msgid "seconds_plural"
-msgid_plural ""
-msgstr[0] "sekunda"
-msgstr[1] "sekunde"
-msgstr[2] "sekundi"
-
-msgid "menubar_previous"
-msgstr "&Prijašnji program"
-
-msgid "menubar_next"
-msgstr "&Sljedeći program"
-
-msgid "speed"
-msgstr "Brzina"
-
-msgid "menubar_normalspeed"
-msgstr "&Normalna brzina"
-
-msgid "menubar_video"
-msgstr "&Slika"
-
-msgid "menubar_audio"
-msgstr "&Zvuk"
-
-msgid "menubar_fullscreen"
-msgstr "&Cjelozaslonski prikaz"
-
-msgid "menubar_compactmode"
-msgstr "&Jednostavniji prikaz"
-
-msgid "menubar_csforchannel"
-msgstr "&Postavke programa"
-
-msgid "menubar_view"
-msgstr "Pog&led"
-
-msgid "menubar_options"
-msgstr "&Mogućnosti"
-
-msgid "menubar_settings"
-msgstr "&Postavke"
-
-msgid "menubar_about"
-msgstr "&O yuki-iptv"
-
-msgid "menubar_help"
-msgstr "&Pomoć"
-
-msgid "menubar_screenshot"
-msgstr "&Uslikaj zaslon"
-
-msgid "menubar_mute"
-msgstr "&Utišaj zvuk"
-
-msgid "menubar_track"
-msgstr "&Zapis"
-
-msgid "empty_sm"
-msgstr "prazno"
-
-msgid "menubar_checkupdates"
-msgstr "&Provjeri nadopune"
-
-msgid "ffmpeg_processing"
-msgstr "Obrada snimanja..."
-
-msgid "menubar_volumeminus"
-msgstr "Glasno&ća zvuka -"
-
-msgid "menubar_volumeplus"
-msgstr "Glasno&ća zvuka +"
-
-msgid "list"
-msgstr "popis"
-
-msgid "menubar_m3ueditor"
-msgstr "&m3u uređivač"
-
-msgid "menubar_playlists"
-msgstr "&Popis izvođenja"
-
-msgid "menubar_channelsort"
-msgstr "&Poredak programa"
-
-msgid "menubar_filters"
-msgstr "F&iltriranje"
-
-msgid "menubar_postproc"
-msgstr "&Dodatna obrada"
-
-msgid "menubar_deblock"
-msgstr "&Deblokiraj"
-
-msgid "menubar_dering"
-msgstr "De&ring"
-
-msgid "menubar_debanding"
-msgstr "Debanding (&gradfun)"
-
-msgid "menubar_noise"
-msgstr "Dodaj za&sićenje"
-
-msgid "menubar_black"
-msgstr "Dodaj &crne obrube"
-
-msgid "menubar_phase"
-msgstr "&Automatsko otkrivanje faze"
-
-msgid "menubar_extrastereo"
-msgstr "&Dodatni stereo"
-
-msgid "menubar_karaoke"
-msgstr "&Karaoke"
-
-msgid "menubar_earvax"
-msgstr "&Optimizacija za slušalice"
-
-msgid "menubar_volnorm"
-msgstr "Normalizacije &glasnoće zvuka"
-
-msgid "errorvfapply"
-msgstr "Greška primjene filtra"
-
-msgid "menubar_softscaling"
-msgstr "Soft&verska prilagodba"
-
-msgid "menubar_updateepg"
-msgstr "&Nadopuni TV vodič"
-
-msgid "playername"
-msgstr "IPTV reproduktor"
-
-msgid "hidebitrateinfo"
-msgstr "Sakrij brzinu prijenosa / video informacije"
-
-msgid "movedragging"
-msgstr "Pomiči prozor povlačenjem"
-
-msgid "playlist"
-msgstr "popis izvođenja"
-
-msgid "ignoringmpvoptions"
-msgstr "Prilagođene MPV mogućnosti nevaljane, zanemarujem ih"
-
-msgid "showonlychplaylist"
-msgstr "Prikaži samo programe u popisu izvođenja"
-
-msgid "channels"
-msgstr "programi"
-
-msgid "hideplaylistleftclk"
-msgstr "Sakrij popis izvođenja lijevim klikom"
-
-msgid "styleredefoff"
-msgstr "Omogući redefiniranje izgleda"
-
-msgid "alwaysontop"
-msgstr "Uvijek na vrhu"
-
-msgid "expfunctionwarning"
-msgstr "UPOZORENJE: eksperimentalna funkcija, radi s problemima"
-
-msgid "menubar_expfunction"
-msgstr "eksperimentalna funkcija"
-
-msgid "autoreconnection"
+"Prebaci program\n"
+"kotačićem miša"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3044
+msgid ""
+"Automatic\n"
+"reconnection"
 msgstr ""
 "Automatsko ponovno\n"
 "povezivanje"
 
-msgid "customua"
-msgstr "- prilagođeno -"
-
-msgid "deletefromfav"
-msgstr "Ukloni iz omiljenih"
-
-msgid "scrrecnosubfolders"
-msgstr "Ne stvaraj podmape slika zaslona i snimanja"
-
-msgid "nocacheepg"
-msgstr "Ne stvaraj EPG predmemoriju"
-
-msgid "nourlset"
-msgstr "URL nije naveden!"
-
-msgid "updcurplaylist"
-msgstr "&Nadopuni trenutni popis izvođenja"
-
-msgid "shortcuts"
-msgstr "Prečaci"
-
-msgid "shortcut"
-msgstr "Prečac"
-
-msgid "desc"
-msgstr "Opis"
-
-msgid "exitfullscreen2"
-msgstr "Izlazak iz cjelozaslonskog prikaza"
-
-msgid "showclock"
-msgstr "Prikaži sat"
-
-msgid "tvguideforallchans"
-msgstr "TV vodič za sve programe"
-
-msgid "shortcutchange"
-msgstr "Dvostruki klik za promjenu"
-
-msgid "modifyshortcut"
-msgstr "Promjena prečaca"
-
-msgid "pressnewkey"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3045
+msgid ""
+"by default:\n"
+"change volume"
 msgstr ""
-"Pritisnite kombinaciju tipka\n"
-"koje želite dodijeliti"
+"po zadanome promijeni:\n"
+"glasnoću zvuka"
 
-msgid "cancel"
-msgstr "Odustani"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3057
+msgid ""
+"Show playlist\n"
+"on mouse move"
+msgstr ""
+"Prikaži popis izvođenja\n"
+"pri pomaku miša"
 
-msgid "ok"
-msgstr "U redu"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3060
+msgid ""
+"Show controls\n"
+"on mouse move"
+msgstr ""
+"Prikaži upravljanja\n"
+"pri pomaku miša"
 
-msgid "shortcutused"
-msgstr "Prečac se već koristi"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3064
+msgid "Hide playlist by left click"
+msgstr "Sakrij popis izvođenja lijevim klikom"
 
-msgid "resettodefaults"
-msgstr "Vrati izvorno"
-
-msgid "areyousure"
-msgstr "Jeste li sigurni?"
-
-msgid "usingmode"
-msgstr "Način korištenja"
-
-msgid "catchup"
-msgstr "Hvatanje"
-
-msgid "enablecatchup"
-msgstr "Omogući hvatanje programa"
-
-msgid "writingepgcache"
-msgstr "Zapisivanje EPG predmemorije"
-
-msgid "movies"
-msgstr "Filmovi"
-
-msgid "series"
-msgstr "Serije"
-
-msgid "back"
-msgstr "Natrag"
-
-msgid "tvchannels"
-msgstr "TV programi"
-
-msgid "nothingfound"
-msgstr "Ništa nije pronađeno"
-
-msgid "searchmovie"
-msgstr "Pretraži film"
-
-msgid "searchserie"
-msgstr "Pretraži seriju"
-
-msgid "hidetvprogram"
-msgstr "Sakrij trenutni televizijski program"
-
-msgid "m3u_playlistsaved"
-msgstr "Popis izvođenja je uspješno spremljen!"
-
-msgid "channellogos"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3068
+msgid "Channel logos"
 msgstr "Logotipi programa"
 
-msgid "preferm3u"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3070
+msgid "Prefer M3U"
 msgstr "Preferiraj iz M3U popisa izvođenja"
 
-msgid "preferepg"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3071
+msgid "Prefer EPG"
 msgstr "Preferiraj iz EPG vodiča"
 
-msgid "donotloadfromepg"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3072
+msgid "Do not load from EPG"
 msgstr "Ne učitavaj iz EPG vodiča"
 
-msgid "donotloadanylogos"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3073
+msgid "Do not load any logos"
 msgstr "Ne učitavaj logotipe"
 
-msgid "subtitles"
-msgstr "Podnaslovi"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3076
+msgid "Do not cache EPG"
+msgstr "Ne stvaraj EPG predmemoriju"
 
-msgid "off"
-msgstr "Isključi"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3081
+msgid ""
+"Do not create screenshots\n"
+"and recordings subfolders"
+msgstr "Ne stvaraj podmape slika zaslona i snimanja"
 
-msgid "incompatiblewithspw"
-msgstr "Nekompatibilno s mogućnošću: Popis izvođenja u zasebnom prozoru"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3086
+msgid "Hide the current television program"
+msgstr "Sakrij trenutni televizijski program"
 
-msgid "menubar_subtitles"
-msgstr "&Podnaslovi"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3117
+msgid "Enable catchup"
+msgstr "Omogući hvatanje programa"
 
-msgid "videosettings"
-msgstr "Postavke programa"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3133
+msgid "Main"
+msgstr "Općenito"
 
-msgid "hidech"
-msgstr "Sakrij"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3134 usr/lib/yuki-iptv/yuki-iptv.py:6345
+msgid "Video"
+msgstr "Slika"
 
-msgid "menubar_videosettings"
-msgstr "&Postavke programa"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3135
+msgid "Network"
+msgstr "Mreža"
 
-msgid "helptext"
+#: usr/lib/yuki-iptv/yuki-iptv.py:3136
+msgid "GUI"
+msgstr "Korisničko sučelje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3137
+msgid "Actions"
+msgstr "Radnje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3138
+msgid "Catchup"
+msgstr "Hvatanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3139
+msgid "EPG"
 msgstr ""
-"yuki-iptv, inačica {}\n"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3140
+msgid "Other"
+msgstr "Ostalo"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3141
+msgid "Debug"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3328 usr/lib/yuki-iptv/yuki-iptv.py:3345
+msgid "Username"
+msgstr "Korisničko ime"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3330 usr/lib/yuki-iptv/yuki-iptv.py:3347
+msgid "Password"
+msgstr "Lozinka"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3332 usr/lib/yuki-iptv/yuki-iptv.py:3349
+msgid "URL"
+msgstr "URL"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3437
+msgid "About Qt"
+msgstr "O Qt-u"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:3703
+msgid ""
+"yuki-iptv\n"
+"version: {}\n"
+"codename: {}\n"
 "\n"
 "© 2021-2022 Astroncia\n"
-"© 2023 yuki-chan-nya\n"
+"© {} yuki-chan-nya\n"
 "https://github.com/yuki-chan-nya\n"
 "\n"
-"IPTV reproduktor\n"
+"IPTV player\n"
 "\n"
-"Podržava TV vodič (EPG) samo u XMLTV i JTV formatu!\n"
+"Supports TV guide (EPG) only in XMLTV and JTV formats!\n"
 "\n"
-"Program ne radi?\n"
-"Desni klik miša otvara postavke programa\n"
-"\n"
-"Ikone od Font Awesome ( https://fontawesome.com/ )\n"
-"Ikone su licencirane pod CC BY 4.0 Licencom\n"
+"Icons by Font Awesome ( https://fontawesome.com/ )\n"
+"Icons licensed under the CC BY 4.0 License\n"
 "( https://creativecommons.org/licenses/by/4.0/ )"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4019 usr/lib/yuki-iptv/yuki-iptv.py:4304
+#: usr/lib/yuki-iptv/yuki-iptv.py:5931 usr/lib/yuki-iptv/yuki-iptv.py:6231
+#: usr/lib/yuki-iptv/yuki-iptv.py:6368
+msgid "No channel selected"
+msgstr "Nema odabranog programa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4046
+msgid "Processing record..."
+msgstr "Obrada snimanja..."
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4222 usr/lib/yuki-iptv/yuki-iptv.py:5062
+#: usr/lib/yuki-iptv/yuki-iptv.py:5388 usr/lib/yuki-iptv/yuki-iptv.py:5486
+#: usr/lib/yuki-iptv/yuki-iptv.py:5515
+msgid "Nothing found"
+msgstr "Ništa nije pronađeno"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4286 usr/lib/yuki-iptv/yuki-iptv.py:6799
+msgid "Pause"
+msgstr "Pauza"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4290
+msgid "Play"
+msgstr "Reprodukcija"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4452 usr/lib/yuki-iptv/yuki-iptv.py:4534
+#: usr/lib/yuki-iptv/yuki-iptv.py:6823 usr/lib/yuki-iptv/yuki-iptv.py:7724
+msgid "Volume"
+msgstr "Glasnoća zvuka"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4462
+msgid "To exit fullscreen mode press"
+msgstr "Za izlazak iz cjelozaslonskog prikaza pritisnite"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4554 usr/lib/yuki-iptv/yuki-iptv.py:4562
+msgid "Volume off"
+msgstr "Utišano"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:4706
+msgid "of"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5115
+msgid "Search movie"
+msgstr "Pretraži film"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5126
+msgid "Search series"
+msgstr "Pretraži seriju"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5288
+msgid "Delete from favourites"
+msgstr "Ukloni iz omiljenih"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5401
+msgid "Hide TV guide"
+msgstr "Sakrij TV vodič"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5403
+msgid "Favourites+ (separate playlist)"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5453
+msgid "EPG loading..."
+msgstr "EPG učitavanje..."
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5519 usr/lib/yuki-iptv/yuki-iptv.py:5538
+msgid "Back"
+msgstr "Natrag"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5569
+msgid "TV channels"
+msgstr "TV programi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5569
+msgid "Movies"
+msgstr "Filmovi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5569
+msgid "Series"
+msgstr "Serije"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5780
+msgid "Page"
+msgstr "Stranica"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5910
+msgid "Doing screenshot..."
+msgstr "Stvaranje slike zaslona..."
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5924
+msgid "Screenshot saved!"
+msgstr "Slika zaslona spremljena!"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:5927
+msgid "Screenshot saving error!"
+msgstr "Greška spremanja slike zaslona!"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6045 usr/lib/yuki-iptv/yuki-iptv.py:6049
+msgid "channels"
+msgstr "programi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6069
+msgid "Preparing record"
+msgstr "Pripremanje snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6104
+msgid "No channel selected for record"
+msgstr "Nema odabranog programa za snimanje"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6190
+msgid "Custom MPV options invalid, ignoring them"
+msgstr "Prilagođene MPV mogućnosti nevaljane, zanemarujem ih"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6357
+msgid "Audio"
+msgstr "Zvuk"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6371 usr/lib/yuki-iptv/yuki-iptv.py:7934
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:343
+msgid "Stream Information"
+msgstr "Informacije strujanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6442
+msgid "Playing error"
+msgstr "Greška reprodukcije"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6580
+msgid "Using mode"
+msgstr "Način korištenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6803
+msgid "Stop"
+msgstr "Zaustavi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6807
+msgid "Fullscreen"
+msgstr "Cjelozaslonski prikaz"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6811
+msgid "Open recordings folder"
+msgstr "Otvori mapu snimanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6815 usr/lib/yuki-iptv/yuki-iptv.py:7918
+msgid "Record"
+msgstr "Snimi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6833 usr/lib/yuki-iptv/yuki-iptv.py:7919
+msgid "Screenshot"
+msgstr "Slika zaslona"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6859
+msgid "Previous channel"
+msgstr "Prijašnji program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6863
+msgid "Next channel"
+msgstr "Sljedeći program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6867
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:359
+msgid "m3u Editor"
+msgstr "m3u uređivač"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6871
+msgid "Help"
+msgstr "Pomoć"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:6890
+msgid "Writing EPG cache"
+msgstr "Zapisivanje EPG predmemorije"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7190 usr/lib/yuki-iptv/yuki_iptv/epg.py:130
+msgid "Updating TV guide..."
+msgstr "Nadopuna TV vodiča..."
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7215 usr/lib/yuki-iptv/yuki-iptv.py:7380
+msgid "TV guide update error!"
+msgstr "Greška nadopune TV vodiča!"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7305
+msgid "bps"
+msgstr "bps"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7306
+msgid "Mbps"
+msgstr "Mbps"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7306
+msgid "Gbps"
+msgstr "Gbps"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7306
+msgid "Tbps"
+msgstr "Tbps"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7360
+msgid "TV guide update done!"
+msgstr "Nadopuna TV vodiča završena!"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7378
+msgid "EPG is outdated!"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7900
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:212
+#, python-format
+msgid "-%d second"
+msgid_plural "-%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7901
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:213
+#, python-format
+msgid "+%d second"
+msgid_plural "+%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7902 usr/lib/yuki-iptv/yuki-iptv.py:7904
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:214
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:216
+#, python-format
+msgid "-%d minute"
+msgid_plural "-%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7903 usr/lib/yuki-iptv/yuki-iptv.py:7905
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:215
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:217
+#, python-format
+msgid "+%d minute"
+msgid_plural "+%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7914 usr/lib/yuki-iptv/yuki-iptv.py:7931
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:304
+msgid "V&olume -"
+msgstr "Glasno&ća zvuka -"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7915 usr/lib/yuki-iptv/yuki-iptv.py:7932
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:308
+msgid "Vo&lume +"
+msgstr "Glasno&ća zvuka +"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7916
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:235
+msgid "&Normal speed"
+msgstr "&Normalna brzina"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7917 usr/lib/yuki-iptv/yuki-iptv.py:7922
+msgid "Quit the program"
+msgstr "Zatvori program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7920
+msgid "Exit fullscreen"
+msgstr "Izlazak iz cjelozaslonskog prikaza"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7921
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:355
+msgid "&Update TV guide"
+msgstr "&Nadopuni TV vodič"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7923
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:328
+msgid "Show/hide playlist"
+msgstr "Prikaži/Sakrij popis izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7924
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:332
+msgid "Show/hide controls panel"
+msgstr "Prikaži/Sakrij panel upravljanja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7925
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:264
+msgid "&Video settings"
+msgstr "&Postavke programa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7926 usr/lib/yuki-iptv/yuki-iptv.py:7927
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:255
+msgid "&Fullscreen"
+msgstr "&Cjelozaslonski prikaz"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7928
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:300
+msgid "&Mute audio"
+msgstr "&Utišaj zvuk"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7929
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:194
+msgid "&Play / Pause"
+msgstr "&Gledaj / Pauziraj"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7930
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:198
+msgid "&Stop"
+msgstr "&Zaustavi"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7933
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:250
+msgid "&Next"
+msgstr "&Sljedeći program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7935
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:246
+msgid "&Previous"
+msgstr "&Prijašnji program"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7936
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:184
+msgid "&m3u Editor"
+msgstr "&m3u uređivač"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7937
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:176
+msgid "&Playlists"
+msgstr "&Popis izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7938
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:180
+msgid "&Update current playlist"
+msgstr "&Nadopuni trenutni popis izvođenja"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7941
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:363
+msgid "&Channel sort"
+msgstr "&Poredak programa"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7944
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:259
+msgid "&Compact mode"
+msgstr "&Jednostavniji prikaz"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7945
+msgid "TV guide for all channels"
+msgstr "TV vodič za sve programe"
+
+#: usr/lib/yuki-iptv/yuki-iptv.py:7946
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:336
+msgid "Window always on top"
+msgstr "Uvijek na vrhu"
+
+#: usr/lib/yuki-iptv/yuki_iptv/epg.py:81
+msgid "Updating TV guide... (loading {}/{})"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki_iptv/epg.py:88
+#: usr/lib/yuki-iptv/yuki_iptv/xmltv.py:53
+msgid "Updating TV guide... (parsing {}/{})"
+msgstr ""
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:109
+msgid "loaded"
+msgstr "učitano"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:152
+msgid "Save File"
+msgstr "Spremi datoteku"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:154
+msgid "Playlists (*.m3u)"
+msgstr "Popisi izvođenja (*.m3u)"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:162
+msgid "Playlist successfully saved!"
+msgstr "Popis izvođenja je uspješno spremljen!"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:171
+msgid "Load M3U"
+msgstr "Učitaj M3U"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:175
+msgid "Save as"
+msgstr "Spremi kao"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:180
+msgid "File"
+msgstr "Datoteka"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:266
+msgid "find"
+msgstr "potraži"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:271
+msgid "replace with"
+msgstr "zamijeni s"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:276
+msgid "replace all"
+msgstr "zamijeni sve"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:284
+msgid "delete row"
+msgstr "obriši redak"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:292
+msgid "add row"
+msgstr "dodaj redak"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:311
+msgid "filter group (press Enter)"
+msgstr "filtriraj grupu (pritisni Enter)"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:313
+msgid ""
+"insert search term and press enter\n"
+" use Selector → to choose column to search"
+msgstr ""
+"upišite izraz pretrage i pritisnite enter\n"
+" koristite rezultate → za odabir željenog stupca"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:369
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:394
+msgid "Ready"
+msgstr "Spremno"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:375
+msgid "Save Confirmation"
+msgstr "Potvrda spremanja"
+
+#: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:377
+msgid "The document was changed.<br>Do you want to save the changes?"
+msgstr "Dokument je promijenjen.<br>Želite li spremiti promjene?"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:100
+msgid "Error applying filters"
+msgstr "Greška primjene filtra"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:188
+msgid "&Exit"
+msgstr "&Zatvori"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:269
+msgid "&Screenshot"
+msgstr "&Uslikaj zaslon"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:274
+msgid "&Postprocessing"
+msgstr "&Dodatna obrada"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:277
+msgid "&Deblock"
+msgstr "&Deblokiraj"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:280
+msgid "De&ring"
+msgstr "De&ring"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:283
+msgid "Debanding (&gradfun)"
+msgstr "Debanding (&gradfun)"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:286
+msgid "Add n&oise"
+msgstr "Dodaj za&sićenje"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:289
+msgid "Add &black borders"
+msgstr "Dodaj &crne obrube"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:292
+msgid "Soft&ware scaling"
+msgstr "Soft&verska prilagodba"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:295
+msgid "&Autodetect phase"
+msgstr "&Automatsko otkrivanje faze"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:314
+msgid "&Extrastereo"
+msgstr "&Dodatni stereo"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:317
+msgid "&Karaoke"
+msgstr "&Karaoke"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:320
+msgid "&Headphone optimization"
+msgstr "&Optimizacija za slušalice"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:323
+msgid "Volume &normalization"
+msgstr "Normalizacije &glasnoće zvuka"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:370
+msgid "&Settings"
+msgstr "&Postavke"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:380
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:382
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:522
+msgid "empty"
+msgstr "prazno"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:423
+msgid "&File"
+msgstr "&Datoteka"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:434
+msgid "&Play"
+msgstr "&Reprodukcija"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:442
+msgid "Speed"
+msgstr "Brzina"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:452
+msgid "&Video"
+msgstr "&Slika"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:453
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:473
+msgid "&Track"
+msgstr "&Zapis"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:458
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:475
+msgid "F&ilters"
+msgstr "F&iltriranje"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:472
+msgid "&Audio"
+msgstr "&Zvuk"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:488
+msgid "Vie&w"
+msgstr "Pog&led"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:497
+msgid "&Options"
+msgstr "&Mogućnosti"
+
+#: usr/lib/yuki-iptv/yuki_iptv/menubar.py:505
+msgid "&Help"
+msgstr "&Pomoć"
+
+#: usr/lib/yuki-iptv/yuki_iptv/xmltv.py:41
+msgid "Updating TV guide... (unpacking {}/{})"
+msgstr ""

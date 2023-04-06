@@ -1,10 +1,36 @@
-'''xspf compatibility'''
+#
+# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya
+#
+# This file is part of yuki-iptv.
+#
+# yuki-iptv is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# yuki-iptv is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with yuki-iptv  If not, see <http://www.gnu.org/licenses/>.
+#
+# The Font Awesome pictograms are licensed under the CC BY 4.0 License
+# https://creativecommons.org/licenses/by/4.0/
+#
+import logging
+import gettext
 import xml.etree.ElementTree as ET
-from yuki_iptv.lang import _
-from yuki_iptv.time import print_with_time
-# SPDX-License-Identifier: GPL-3.0-only
-def parse_xspf(xspf): # pylint: disable=missing-function-docstring
-    print_with_time("Trying parsing as XSPF...")
+
+logger = logging.getLogger(__name__)
+_ = gettext.gettext
+all_channels = _('All channels')
+
+
+def parse_xspf(xspf):
+    logger.info("Trying parsing as XSPF...")
     array = []
     tree = ET.ElementTree(ET.fromstring(xspf)).getroot()
     for track in tree.findall("{*}trackList/{*}track"):
@@ -15,7 +41,7 @@ def parse_xspf(xspf): # pylint: disable=missing-function-docstring
             'tvg-name': '',
             'tvg-ID': '',
             'tvg-logo': '',
-            'tvg-group': _('allchannels'),
+            'tvg-group': all_channels,
             'tvg-url': '',
             'catchup': 'default',
             'catchup-source': '',

@@ -1,33 +1,51 @@
-'''settings.json parser'''
-# SPDX-License-Identifier: GPL-3.0-only
-# pylint: disable=missing-function-docstring
+#
+# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya
+#
+# This file is part of yuki-iptv.
+#
+# yuki-iptv is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# yuki-iptv is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with yuki-iptv  If not, see <http://www.gnu.org/licenses/>.
+#
+# The Font Awesome pictograms are licensed under the CC BY 4.0 License
+# https://creativecommons.org/licenses/by/4.0/
+#
 import os
 import json
 from pathlib import Path
 
-def parse_settings( # pylint: disable=too-many-arguments
-    local_dir, def_deinterlace, save_folder_default,
-    lang_default, def_timezone, dock_widget_width
+
+def parse_settings(
+    local_dir, save_folder_default,
+    def_timezone, dock_widget_width
 ):
     settings_default = {
         "m3u": "",
         "epg": "",
-        "deinterlace": def_deinterlace,
+        "deinterlace": False,
         "udp_proxy": "",
         "save_folder": save_folder_default,
-        "provider": "",
         "nocache": True,
-        "lang": lang_default,
         "epgoffset": def_timezone,
-        "hwaccel": True,
+        "hwaccel": False,
         "sort": 0,
         "cache_secs": 0,
-        "useragent": 2,
+        "epgdays": 1,
+        "ua": "Mozilla/5.0",
         "mpv_options": '',
         'donotupdateepg': False,
         'channelsonpage': 100,
         'openprevchan': False,
-        'remembervol': True,
         'hidempv': False,
         'hideepgpercentage': False,
         'hidebitrateinfo': False,
@@ -48,7 +66,6 @@ def parse_settings( # pylint: disable=too-many-arguments
         'flpopacity': 0.7,
         'panelposition': 0,
         'playlistsep': False,
-        'screenshot': 0,
         'videoaspect': 0,
         'zoom': 0,
         'panscan': 0.0,

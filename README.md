@@ -5,19 +5,31 @@
   
 ⚠️ Disclaimer: yuki-iptv doesn't provide any playlists or other digital content.  
 The channels and pictures in the screenshots are for demonstration purposes only.  
+  
+**Looking for testers and translators!**
 
 ## Download
 
-[Ubuntu Launchpad PPA (stable)](https://launchpad.net/~yuki-chan-nya/+archive/ubuntu/yuki-iptv-stable) **(recommended)**  
-[Ubuntu Launchpad PPA (develop)](https://launchpad.net/~yuki-chan-nya/+archive/ubuntu/yuki-iptv-develop)
+[Ubuntu Launchpad PPA (stable)](https://launchpad.net/~yuki-iptv/+archive/ubuntu/yuki-iptv-stable):  
+```
+sudo add-apt-repository ppa:yuki-iptv/yuki-iptv-stable
+sudo apt update
+sudo apt install yuki-iptv
+```
 
-## Information
+[Ubuntu Launchpad PPA (develop)](https://launchpad.net/~yuki-iptv/+archive/ubuntu/yuki-iptv-develop):  
+```
+sudo add-apt-repository ppa:yuki-iptv/yuki-iptv-develop
+sudo apt update
+sudo apt install yuki-iptv
+```
 
-Software provided **as is**, no guarantees.  
+[Arch Linux AUR (stable)](https://aur.archlinux.org/packages/yuki-iptv)  
+[Arch Linux AUR (develop)](https://aur.archlinux.org/packages/yuki-iptv-git)  
 
 ## License
 
-Code: [GPL-3.0-only](https://github.com/yuki-chan-nya/yuki-iptv/blob/stable/COPYING)  
+Code: [GPL-3.0-or-later](https://github.com/yuki-chan-nya/yuki-iptv/blob/stable/COPYING)  
 Icons: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)  
   
 *Icons by [Font Awesome](https://fontawesome.com/)*  
@@ -37,7 +49,7 @@ Icons: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - Hide channels  
 - Sorting channels  
 - Video settings for each channel - contrast, brightness, hue, saturation, gamma  
-- Change user agent for each channel  
+- Change user agent / HTTP Referer for each channel  
 - M3U playlist editor  
 - TV archive / catchup  
 - Internalization  
