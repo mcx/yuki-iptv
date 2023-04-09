@@ -1,6 +1,6 @@
 #
-# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
-# Copyright (c) 2023 yuki-chan-nya
+# Copyright (c) 2021, 2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya <yukichandev@proton.me>
 #
 # This file is part of yuki-iptv.
 #
@@ -26,7 +26,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(os.getcwd(), 'usr', 'lib', 'yuki-iptv')))
 
-from yuki_iptv.xmltv import parse_as_xmltv  # noqa: E402
+from yuki_iptv.epg_xmltv import parse_as_xmltv  # noqa: E402
 
 
 def test_xmltv():

@@ -1,6 +1,6 @@
 #
-# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
-# Copyright (c) 2023 yuki-chan-nya
+# Copyright (c) 2021, 2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya <yukichandev@proton.me>
 #
 # This file is part of yuki-iptv.
 #
@@ -31,25 +31,6 @@ class YukiData:
     '''Data class'''
     WRITTEN = False
     WRITTENQT = False
-
-
-def globalPos(arg):
-    try:
-        ret = arg.globalPosition().toPoint()
-    except:
-        if not YukiData.WRITTEN:
-            YukiData.WRITTEN = True
-            logger.debug("Qt 5 (globalPos) compatibility enabled")
-        ret = arg.globalPos()
-    return ret
-
-
-def getX(arg1):
-    return arg1.x()
-
-
-def getY(arg2):
-    return arg2.y()
 
 
 def _exec(obj, arg=None):

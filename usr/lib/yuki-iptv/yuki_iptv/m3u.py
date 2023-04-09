@@ -1,6 +1,6 @@
 #
-# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
-# Copyright (c) 2023 yuki-chan-nya
+# Copyright (c) 2021, 2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya <yukichandev@proton.me>
 #
 # This file is part of yuki-iptv.
 #
@@ -181,7 +181,7 @@ class M3UParser:
                         except:
                             pass
                 if epg_m3u_url:
-                    self.m3u_epg = epg_m3u_url if epg_m3u_url != 'http://server/jtv.zip' else ''
+                    self.m3u_epg = epg_m3u_url
             else:
                 if line:
                     if line.startswith('#'):

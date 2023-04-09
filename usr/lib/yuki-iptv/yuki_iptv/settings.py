@@ -1,6 +1,6 @@
 #
-# Copyright (c) 2021-2022 Astroncia <kestraly@gmail.com>
-# Copyright (c) 2023 yuki-chan-nya
+# Copyright (c) 2021, 2022 Astroncia <kestraly@gmail.com>
+# Copyright (c) 2023 yuki-chan-nya <yukichandev@proton.me>
 #
 # This file is part of yuki-iptv.
 #
@@ -25,18 +25,15 @@ import json
 from pathlib import Path
 
 
-def parse_settings(
-    local_dir, save_folder_default,
-    def_timezone, dock_widget_width
-):
+def parse_settings():
     settings_default = {
         "m3u": "",
         "epg": "",
         "deinterlace": False,
         "udp_proxy": "",
-        "save_folder": save_folder_default,
+        "save_folder": str(Path(os.environ['HOME'], '.config', 'yuki-iptv', 'saves')),
         "nocache": True,
-        "epgoffset": def_timezone,
+        "epgoffset": 0,
         "hwaccel": False,
         "sort": 0,
         "cache_secs": 0,
@@ -44,19 +41,15 @@ def parse_settings(
         "ua": "Mozilla/5.0",
         "mpv_options": '',
         'donotupdateepg': False,
-        'channelsonpage': 100,
         'openprevchan': False,
         'hidempv': False,
         'hideepgpercentage': False,
         'hidebitrateinfo': False,
-        'movedragging': False,
         'styleredefoff': True,
         'volumechangestep': 1,
-        'exp2': dock_widget_width,
         'mouseswitchchannels': False,
         'autoreconnection': False,
         'showplaylistmouse': True,
-        'hideplaylistleftclk': False,
         'channellogos': 0,
         'nocacheepg': False,
         'scrrecnosubfolders': False,
@@ -65,7 +58,6 @@ def parse_settings(
         'catchupenable': False,
         'flpopacity': 0.7,
         'panelposition': 0,
-        'playlistsep': False,
         'videoaspect': 0,
         'zoom': 0,
         'panscan': 0.0,
@@ -75,6 +67,8 @@ def parse_settings(
 
     settings = settings_default
     settings_loaded = False
+
+    local_dir = str(Path(os.environ['HOME'], '.config', 'yuki-iptv'))
 
     if os.path.isfile(str(Path(local_dir, 'settings.json'))):
         settings_file = open(str(Path(local_dir, 'settings.json')), 'r', encoding="utf8")
