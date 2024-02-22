@@ -133,6 +133,10 @@ def parse_as_xmltv(
                     prog_desc = programme.find("./desc").text
                 except Exception:
                     prog_desc = ""
+                if not prog_title:
+                    prog_title = ""
+                if not prog_desc:
+                    prog_desc = ""
                 programmes_epg[channel_epg_1].append(
                     {
                         "start": start,
