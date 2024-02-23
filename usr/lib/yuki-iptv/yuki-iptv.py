@@ -6980,9 +6980,9 @@ if __name__ == "__main__":
 
         def get_about_text():
             about_txt = (
-                f"yuki-iptv {APP_VERSION}<br><br>Copyright © 2021, 2022 Astroncia<br>"
-                f"Copyright © {COPYRIGHT_YEAR} Ame-chan-angel<br><br>"
-                + _("IPTV player with EPG support")
+                "yuki-iptv © 2021, 2022 Astroncia<br>"
+                + f"© {COPYRIGHT_YEAR} Ame-chan-angel<br><br>"
+                + APP_VERSION
             )
             about_txt += "<br><br>" + _("Using Qt {} ({})").format(
                 QtCore.QT_VERSION_STR, qt_library
@@ -6993,6 +6993,7 @@ if __name__ == "__main__":
             if not mpv_version:
                 mpv_version = "UNKNOWN"
             about_txt += "<br>" + _("Using libmpv {}").format(mpv_version)
+            about_txt += "<br><br>" + _("IPTV player with EPG support")
             return about_txt
 
         def main_channel_settings():
