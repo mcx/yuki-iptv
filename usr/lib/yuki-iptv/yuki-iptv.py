@@ -147,7 +147,6 @@ else:
     qt_icon_information = QtWidgets.QMessageBox.Icon.Information
 
 APP_VERSION = "__DEB_VERSION__"
-COPYRIGHT_YEAR = "2023, 2024"
 
 setproctitle.setproctitle("yuki-iptv")
 try:
@@ -365,38 +364,6 @@ if __name__ == "__main__":
     locale.setlocale(locale.LC_NUMERIC, "C")
 
     try:
-        logger.info("yuki-iptv - IPTV player with EPG support")
-        logger.info("")
-        logger.info("Copyright (c) 2021, 2022 Astroncia")
-        logger.info(f"Copyright (c) {COPYRIGHT_YEAR} Ame-chan-angel")
-        logger.info("")
-        logger.info(
-            "This program is free software: you can redistribute it and/or modify"
-        )
-        logger.info(
-            "it under the terms of the GNU General Public License as published by"
-        )
-        logger.info("the Free Software Foundation, either version 3 of the License, or")
-        logger.info("(at your option) any later version.")
-        logger.info("")
-        logger.info("This program is distributed in the hope that it will be useful,")
-        logger.info("but WITHOUT ANY WARRANTY; without even the implied warranty of")
-        logger.info("MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the")
-        logger.info("GNU General Public License for more details.")
-        logger.info("")
-        logger.info("You should have received a copy of the GNU General Public License")
-        logger.info(
-            "along with this program.  If not, see <https://www.gnu.org/licenses/>."
-        )
-        logger.info("")
-        logger.info(
-            "The Font Awesome pictograms are licensed under the CC BY 4.0 License."
-        )
-        logger.info(
-            "Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com"
-        )
-        logger.info("License - https://creativecommons.org/licenses/by/4.0/")
-        logger.info("")
         is_unofficial_build = ""
         if os.path.isfile("/.flatpak-info"):
             is_unofficial_build = "Flatpak"
