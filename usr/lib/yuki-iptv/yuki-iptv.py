@@ -6974,9 +6974,6 @@ if __name__ == "__main__":
 
         player = None
 
-        QT_URL = "<a href='https://www.qt.io/'>https://www.qt.io/</a>"
-        MPV_URL = "<a href='https://mpv.io/'>mpv</a> "
-
         def get_about_text():
             about_txt = f"<b>yuki-iptv {APP_VERSION}</b>"
             about_txt += "<br><br>" + _("IPTV player with EPG support")
