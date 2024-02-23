@@ -359,9 +359,6 @@ if __name__ == "__main__":
     except Exception:
         logger.warning('app.setStyle("fusion") FAILED')
 
-    # dummy, for xgettext
-    PLAYERNAME = _("IPTV player with EPG support")
-
     # This is necessary since PyQT stomps over the locale settings needed by libmpv.
     # This needs to happen after importing PyQT before
     # creating the first mpv.MPV instance.
@@ -3661,7 +3658,7 @@ if __name__ == "__main__":
             "yuki-iptv is based on Astroncia IPTV code.\n"
             "\n"
             "Original Astroncia IPTV code is licensed under GPL-3.0-only.\n"
-            "I have permission from original code author (Astroncia)\n"
+            "I (Ame-chan-angel) have permission from original code author (Astroncia)\n"
             "to relicense code to GPL-3.0-or-later.\n"
             "\n"
             "The Font Awesome pictograms are licensed under the CC BY 4.0 License.\n"
@@ -6979,11 +6976,8 @@ if __name__ == "__main__":
         MPV_URL = "<a href='https://mpv.io/'>mpv</a> "
 
         def get_about_text():
-            about_txt = (
-                "yuki-iptv © 2021, 2022 Astroncia<br>"
-                + f"© {COPYRIGHT_YEAR} Ame-chan-angel<br><br>"
-                + APP_VERSION
-            )
+            about_txt = f"<b>yuki-iptv {APP_VERSION}</b>"
+            about_txt += "<br><br>" + _("IPTV player with EPG support")
             about_txt += "<br><br>" + _("Using Qt {} ({})").format(
                 QtCore.QT_VERSION_STR, qt_library
             )
@@ -6993,7 +6987,6 @@ if __name__ == "__main__":
             if not mpv_version:
                 mpv_version = "UNKNOWN"
             about_txt += "<br>" + _("Using libmpv {}").format(mpv_version)
-            about_txt += "<br><br>" + _("IPTV player with EPG support")
             return about_txt
 
         def main_channel_settings():
