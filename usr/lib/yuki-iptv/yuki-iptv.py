@@ -416,8 +416,10 @@ if __name__ == "__main__":
         logger.info("Using Python " + sys.version.replace("\n", ""))
         logger.info(f"Qt library: {qt_library}")
         logger.info(f"Qt version: {QtCore.QT_VERSION_STR}")
+        QT_PLATFORM = ""
         try:
             logger.info(f"Qt platform: {app.platformName()}")
+            QT_PLATFORM = f" ({app.platformName()})"
         except Exception:
             logger.warning("Failed to determine Qt platform!")
         logger.info("")
@@ -6978,8 +6980,10 @@ if __name__ == "__main__":
         def get_about_text():
             about_txt = f"<b>yuki-iptv {APP_VERSION}</b>"
             about_txt += "<br><br>" + _("IPTV player with EPG support")
-            about_txt += "<br><br>" + _("Using Qt {} ({})").format(
-                QtCore.QT_VERSION_STR, qt_library
+            about_txt += (
+                "<br><br>"
+                + _("Using Qt {} ({})").format(QtCore.QT_VERSION_STR, qt_library)
+                + QT_PLATFORM
             )
             mpv_version = player.mpv_version
             if " " in mpv_version:
