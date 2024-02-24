@@ -33,7 +33,6 @@ from pathlib import Path
 from yuki_iptv.xdg import LOCAL_DIR
 from yuki_iptv.epg_xmltv import parse_as_xmltv
 from yuki_iptv.epg_zip import parse_epg_zip
-from yuki_iptv.epg_listtv import parse_txt
 from yuki_iptv.requests_timeout import requests_get
 
 _ = gettext.gettext
@@ -137,10 +136,6 @@ def fetch_epg(settings, catchup_days1, return_dict1):
                         programmes_epg = merge_two_dicts(programmes_epg, pr_zip)
                     zip_epg = None
                     pr_zip = None
-                    epg = ""
-                elif epg[0:6] == b"tv.all":  # TXT (TV.ALL)
-                    zip_epg = None
-                    programmes_epg = merge_two_dicts(programmes_epg, parse_txt(epg))
                     epg = ""
                 else:
                     zip_epg = None
