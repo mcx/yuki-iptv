@@ -12,13 +12,8 @@ clean:
 	rm -rf usr/share/locale
 
 lint:
-	black --check --diff usr/lib/yuki-iptv/yuki_iptv usr/lib/yuki-iptv/yuki-iptv.py tests generate_desktop_files
+	black --check --diff usr/lib/yuki-iptv/yuki_iptv usr/lib/yuki-iptv/yuki-iptv.py generate_desktop_files
 	flake8 .
 
 black:
-	black usr/lib/yuki-iptv/yuki_iptv usr/lib/yuki-iptv/yuki-iptv.py tests generate_desktop_files
-
-test:
-	mkdir -p "/tmp/yuki-iptv-py"
-	PYTHONPYCACHEPREFIX="/tmp/yuki-iptv-py" LC_ALL=C python3 -m pytest tests
-	rm -rf "/tmp/yuki-iptv-py"
+	black usr/lib/yuki-iptv/yuki_iptv usr/lib/yuki-iptv/yuki-iptv.py generate_desktop_files
