@@ -44,7 +44,7 @@ class YukiData:
     data = {}
     cur_vf_filters = []
     keyboard_sequences = []
-    if qt_library == "PyQt6" or qt_library == "PySide6":
+    if qt_library == "PyQt6":
         str_offset = " " * 44
     else:
         str_offset = ""
@@ -350,7 +350,7 @@ def init_menubar(data):
     YukiData.alwaysontopAction.triggered.connect(alwaysontop_action)
     YukiData.alwaysontopAction.setCheckable(True)
     doSetShortcut(YukiData.alwaysontopAction, kbd("alwaysontop"))
-    if qt_library == "PyQt6" or qt_library == "PySide6":
+    if qt_library == "PyQt6":
         YukiData.alwaysontopAction.setVisible(False)
 
     YukiData.streaminformationAction = qaction(_("Stream Information"), data)

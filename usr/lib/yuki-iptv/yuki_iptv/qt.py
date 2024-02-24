@@ -28,7 +28,7 @@ _ = gettext.gettext
 
 
 def get_qt_library():
-    """Get correct Qt library - PySide6/PyQt6/PyQt5"""
+    """Get correct Qt library - PyQt6/PyQt5"""
     qt_library = "none"
     QShortcut = False
     QtWidgets = False
@@ -36,32 +36,21 @@ def get_qt_library():
     QtGui = False
     QtOpenGLWidgets = False
     try:
-        from PySide6 import QtWidgets
-        from PySide6 import QtCore
-        from PySide6 import QtGui
-        from PySide6 import QtOpenGLWidgets
-
-        QtCore.QT_VERSION_STR = QtCore.qVersion()
+        from PyQt6 import QtWidgets
+        from PyQt6 import QtCore
+        from PyQt6 import QtGui
+        from PyQt6 import QtOpenGLWidgets
 
         QShortcut = QtGui.QShortcut
-        qt_library = "PySide6"
+        qt_library = "PyQt6"
     except Exception:
-        try:
-            from PyQt6 import QtWidgets
-            from PyQt6 import QtCore
-            from PyQt6 import QtGui
-            from PyQt6 import QtOpenGLWidgets
+        from PyQt5 import QtWidgets
+        from PyQt5 import QtCore
+        from PyQt5 import QtGui
 
-            QShortcut = QtGui.QShortcut
-            qt_library = "PyQt6"
-        except Exception:
-            from PyQt5 import QtWidgets
-            from PyQt5 import QtCore
-            from PyQt5 import QtGui
-
-            QtOpenGLWidgets = QtWidgets
-            QShortcut = QtWidgets.QShortcut
-            qt_library = "PyQt5"
+        QtOpenGLWidgets = QtWidgets
+        QShortcut = QtWidgets.QShortcut
+        qt_library = "PyQt5"
     return qt_library, QtWidgets, QtCore, QtGui, QShortcut, QtOpenGLWidgets
 
 

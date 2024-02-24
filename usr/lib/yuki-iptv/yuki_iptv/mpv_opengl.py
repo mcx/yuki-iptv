@@ -28,11 +28,6 @@ from yuki_iptv.qt import get_qt_library
 logger = logging.getLogger(__name__)
 qt_library, QtWidgets, QtCore, QtGui, QShortcut, QtOpenGLWidgets = get_qt_library()
 
-if qt_library == "PySide6":
-    use_slot = QtCore.Slot
-else:
-    use_slot = QtCore.pyqtSlot
-
 
 def get_process_address(_, name):
     glctx = QtGui.QOpenGLContext.currentContext()
@@ -73,7 +68,7 @@ class MPVOpenGLWidget(QtOpenGLWidgets.QOpenGLWidget):
         opengl_fbo = {"w": w, "h": h, "fbo": self.defaultFramebufferObject()}
         self.ctx.render(flip_y=True, opengl_fbo=opengl_fbo)
 
-    @use_slot()
+    @QtCore.pyqtSlot()
     def maybe_update(self):
         if self.window().isMinimized():
             self.makeCurrent()
