@@ -836,6 +836,7 @@ if __name__ == "__main__":
                                 f"{xtream_username}&password={xtream_password}"
                             )
                     except Exception as e3:
+                        logger.warning(traceback.format_exc())
                         message2 = "{}\n\n{}".format(
                             _("yuki-iptv error"),
                             str(
