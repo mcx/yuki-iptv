@@ -48,12 +48,7 @@ from functools import partial
 import chardet
 import setproctitle
 from unidecode import unidecode
-
-try:
-    from gi.repository import Gio, GLib
-except Exception:
-    pass
-
+from gi.repository import Gio, GLib
 from yuki_iptv.qt import get_qt_library, show_exception
 from yuki_iptv.epg import (
     worker,
