@@ -67,3 +67,86 @@ sed -i "s/__DEB_VERSION__/%{version}/g" usr/lib/yuki-iptv/yuki-iptv.py
 
 %install
 cp -af usr %{buildroot}
+
+%changelog
+* Tue Jan 23 2024 Ame-chan-angel <amechanangel@proton.me> - 0.0.9
+  - l10n: Update translations
+  - Respect XDG environment variables
+  - Fix YouTube channels recording
+  - Add file filter when adding playlist
+  - Add file filter when opening file in M3U editor
+* Tue Nov 07 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.8
+  - l10n: Update translations
+  - Fix parsing channel name with comma
+  - Show audio/video desynchronization
+  - Show group in channel tooltip
+  - Add ability to select EPG date
+  - Fix osc disabling via mpv options
+  - Fix crashing if save settings called when EPG is updating
+  - Fix page selection taking focus and blocking keybinds
+  - Fix crash in channel search
+  - Add rewind
+  - Add frame-step and frame-back-step commands
+  - Fix loading playlists with trailing spaces in URL
+  - Fix crashing in movies
+  - Fix requests timeout
+  - Fix changing playlist name when editing it
+  - Update XTream library
+  - Show XTream expiration dates in playlists window
+  - Fix catchup on XTream playlists
+  - Load EPG for XTream
+* Mon Jun 05 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.7
+  - Fix encoding in remote playlists
+  - Use Wand for channel logos
+  - Add tvg-group tag support
+* Sun May 14 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.6
+  - Add 'Hide EPG from playlist' option
+  - Add 'Multicast optimization' option
+  - Fix control panel not aware of multiple screens
+  - Detect group in xspf playlists
+  - Increase connect and read timeout
+* Tue May 02 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.5
+  - Load EPG for all days available
+* Sat Apr 15 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.4
+  - Optimize channel logos load
+  - Show warning if ffmpeg crashed
+  - Remember video / audio / subtitle tracks for channel
+  - Add subtitles selector
+  - Fix pause button behaviour on changing channels
+  - UI improvements
+  - packaging: add python3-pydbus to depends
+* Sun Apr 09 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.3
+  - EPG: trying to fix EPG cache load freezing
+  - EPG: fix XMLTV timezone parsing
+  - EPG: re-implement JTV support from scratch
+  - EPG: Add support for XMLTV inside zip archive
+  - Show Qt and libmpv versions in about window
+  - Add TV.ALL EPG format support
+  - Fix autoreconnection option
+  - Show logo when file ended
+  - Fix channel looping
+* Thu Apr 06 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.2
+  - l10n: Update translations
+  - Fix disabling osc via MPV options
+  - Make libmpv respect loglevel option
+  - Lazy load EPG cache
+  - Lazy load channel logos
+  - Fix crash if no TV channels found
+  - tv guide: add channel search
+  - scheduler: add channel search
+  - channel logos: respect useragent and referer when downloading
+  - settings: disable hardware acceleration and deinterlace by default
+  - Change default User-Agent to Mozilla/5.0
+  - Allow custom HTTP Referer for individual channels
+  - Allow custom user agent
+  - Verbose EPG loading
+  - Show channel name on changing in fullscreen mode
+  - Fix custom channel sort in multiple playlists with same channel name
+  - Fix favourites in multiple playlists with same channel name
+  - Fix channel settings in multiple playlists with same channel name
+  - Update pyxtream library
+  - Check playlist name is not empty before saving
+  - Drop default EPG URLs
+  - Drop import from Hypnotix
+* Mon Mar 27 2023 Ame-chan-angel <amechanangel@proton.me> - 0.0.1
+  - Change project name to yuki-iptv
