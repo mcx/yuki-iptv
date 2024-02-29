@@ -21,7 +21,6 @@ The channels and pictures in the screenshots are for demonstration purposes only
 ## Repository mirrors
 
 [GitHub](https://github.com/yuki-iptv/yuki-iptv) **(main repository)**  
-[GitLab](https://gitlab.com/yuki-iptv/yuki-iptv)  
 [Codeberg](https://codeberg.org/yuki-iptv/yuki-iptv)  
 
 ## Features
