@@ -359,21 +359,6 @@ if __name__ == "__main__":
     locale.setlocale(locale.LC_NUMERIC, "C")
 
     try:
-        is_unofficial_build = ""
-        if os.path.isfile("/.flatpak-info"):
-            is_unofficial_build = "Flatpak"
-        if "APPIMAGE" in os.environ:
-            is_unofficial_build = "AppImage"
-        if "SNAP" in os.environ:
-            is_unofficial_build = "Snap"
-        if is_unofficial_build:
-            APP_VERSION = APP_VERSION + f" ({is_unofficial_build})"
-            logger.warning(
-                "You are using an unofficial "
-                f"build of yuki-iptv ({is_unofficial_build})."
-            )
-            logger.warning("You won't receive any support from yuki-iptv.")
-            logger.info("")
         logger.info(f"Version: {APP_VERSION}")
         logger.info("Using Python " + sys.version.replace("\n", ""))
         logger.info(f"Qt library: {qt_library}")
