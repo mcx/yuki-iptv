@@ -21,7 +21,7 @@ The channels and pictures in the screenshots are for demonstration purposes only
 ## Repository mirrors
 
 [GitHub](https://github.com/yuki-iptv/yuki-iptv) **(main repository)**  
-[Codeberg](https://codeberg.org/yuki-iptv/yuki-iptv)  
+[Codeberg](https://codeberg.org/Ame-chan-angel/yuki-iptv)  
 
 ## Features
 
@@ -116,7 +116,7 @@ You should have received a copy of the GNU General Public License
 along with yuki-iptv. If not, see <https://www.gnu.org/licenses/>.
 ```
 
-[Clarification](https://github.com/yuki-iptv/yuki-iptv/blob/master/LICENSE-NOTICE.txt)
+[Clarification](https://codeberg.org/Ame-chan-angel/yuki-iptv/src/branch/master/LICENSE-NOTICE.txt)
 
 ```monospace
 The Font Awesome pictograms are licensed under the CC BY 4.0 License.
