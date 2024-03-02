@@ -3593,7 +3593,7 @@ if __name__ == "__main__":
             "yuki-iptv is based on Astroncia IPTV code.\n"
             "\n"
             "Original Astroncia IPTV code is licensed under GPL-3.0-only.\n"
-            "I (Ame-chan-angel) have permission from original code author (Astroncia)\n"
+            "I have permission from original code author (Astroncia)\n"
             "to relicense code to GPL-3.0-or-later.\n"
             "\n"
             "The Font Awesome pictograms are licensed under the CC BY 4.0 License.\n"
