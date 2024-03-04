@@ -683,15 +683,36 @@ if __name__ == "__main__":
                 os.mkdir(str(Path(save_folder)))
             except Exception:
                 logger.warning("Failed to create save folder!")
+                show_exception("Failed to create save folder!")
                 save_folder = SAVE_FOLDER_DEFAULT
                 if not os.path.isdir(str(Path(save_folder))):
                     os.mkdir(str(Path(save_folder)))
 
+        if not os.access(save_folder, os.W_OK | os.X_OK):
+            save_folder = SAVE_FOLDER_DEFAULT
+            logger.warning(
+                "Save folder is not writable (os.access), using default save folder"
+            )
+            show_exception(
+                "Save folder is not writable (os.access), using default save folder"
+            )
+
         if not settings["scrrecnosubfolders"]:
-            if not os.path.isdir(str(Path(save_folder, "screenshots"))):
-                os.mkdir(str(Path(save_folder, "screenshots")))
-            if not os.path.isdir(str(Path(save_folder, "recordings"))):
-                os.mkdir(str(Path(save_folder, "recordings")))
+            try:
+                if not os.path.isdir(str(Path(save_folder, "screenshots"))):
+                    os.mkdir(str(Path(save_folder, "screenshots")))
+                if not os.path.isdir(str(Path(save_folder, "recordings"))):
+                    os.mkdir(str(Path(save_folder, "recordings")))
+            except Exception:
+                save_folder = SAVE_FOLDER_DEFAULT
+                logger.warning(
+                    "Save folder is not writable (subfolders), "
+                    "using default save folder"
+                )
+                show_exception(
+                    "Save folder is not writable (subfolders), "
+                    "using default save folder"
+                )
         else:
             if os.path.isdir(str(Path(save_folder, "screenshots"))):
                 try:
@@ -2969,7 +2990,7 @@ if __name__ == "__main__":
             if settings["epgoffset"] != soffset.value():
                 if os.path.isfile(str(Path(LOCAL_DIR, "epg.cache"))):
                     os.remove(str(Path(LOCAL_DIR, "epg.cache")))
-            sfld_text = sfld.text()
+            sfld_text = sfld.text().strip()
             HOME_SYMBOL = "~"
             try:
                 if "HOME" in os.environ:
@@ -2995,7 +3016,7 @@ if __name__ == "__main__":
                 "epg": sepg.text().strip(),
                 "deinterlace": sdei.isChecked(),
                 "udp_proxy": udp_proxy_text,
-                "save_folder": sfld_text,
+                "save_folder": sfld_text if sfld_text else SAVE_FOLDER_DEFAULT,
                 "nocache": supdate.isChecked(),
                 "epgoffset": soffset.value(),
                 "hwaccel": shwaccel.isChecked(),
