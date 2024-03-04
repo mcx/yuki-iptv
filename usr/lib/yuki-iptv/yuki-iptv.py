@@ -3592,8 +3592,38 @@ if __name__ == "__main__":
         xtream_win.setCentralWidget(wid4)
 
         wid5 = QtWidgets.QWidget()
-        layout36 = QtWidgets.QGridLayout()
-        wid5.setLayout(layout36)
+        stream_information_win_layout = QtWidgets.QVBoxLayout()
+        stream_information_layout = QtWidgets.QGridLayout()
+        stream_information_layout_widget = QtWidgets.QWidget()
+        stream_information_layout_widget.setLayout(stream_information_layout)
+
+        url_data_widget = QtWidgets.QWidget()
+        url_data_layout = QtWidgets.QVBoxLayout()
+        url_data_widget.setLayout(url_data_layout)
+
+        url_label = QtWidgets.QLabel(_("URL") + "\n")
+        url_label.setStyleSheet("color:green")
+        bold_fnt_4 = QtGui.QFont()
+        bold_fnt_4.setBold(True)
+        url_label.setFont(bold_fnt_4)
+
+        url_data_layout.addWidget(url_label)
+
+        url_text = QtWidgets.QLineEdit()
+        url_text.setReadOnly(True)
+
+        @idle_function
+        def setUrlText(unused=None):
+            url_text.setText(playing_url)
+            url_text.setCursorPosition(0)
+            if streaminfo_win.isVisible():
+                streaminfo_win.hide()
+
+        url_data_layout.addWidget(url_text)
+
+        stream_information_win_layout.addWidget(url_data_widget)
+        stream_information_win_layout.addWidget(stream_information_layout_widget)
+        wid5.setLayout(stream_information_win_layout)
         streaminfo_win.setCentralWidget(wid5)
 
         def show_license():
@@ -4791,6 +4821,7 @@ if __name__ == "__main__":
                 playing = True
                 win.update()
                 playing_url = play_url
+                setUrlText()
                 ua_choose = def_user_agent
                 if (
                     settings["m3u"] in channel_sets
@@ -4822,6 +4853,7 @@ if __name__ == "__main__":
             playing_chan = ""
             playing_group = -1
             playing_url = ""
+            setUrlText()
             hideLoading()
             setChanText("")
             playing = False
@@ -7009,13 +7041,13 @@ if __name__ == "__main__":
                 la2.setStyleSheet("color:green")
                 la2.setFont(bold_fnt)
                 la2.setText("\n" + stream_info_lbname + "\n")
-                layout36.addWidget(la2, dat_count, 0)
+                stream_information_layout.addWidget(la2, dat_count, 0)
                 dat_count += 1
 
             la1 = QtWidgets.QLabel()
             la1.setFont(bold_fnt)
             la1.setText(name44)
-            layout36.addWidget(la1, dat_count, 0)
+            stream_information_layout.addWidget(la1, dat_count, 0)
 
             for dat1 in stream_props_out:
                 dat_count += 1
@@ -7036,8 +7068,8 @@ if __name__ == "__main__":
                 ):
                     stream_info.data["audio"] = [wdg2, stream_props_out]
 
-                layout36.addWidget(wdg1, dat_count, 0)
-                layout36.addWidget(wdg2, dat_count, 1)
+                stream_information_layout.addWidget(wdg1, dat_count, 0)
+                stream_information_layout.addWidget(wdg2, dat_count, 1)
             return dat_count + 1
 
         def timer_bitrate():
@@ -7057,8 +7089,10 @@ if __name__ == "__main__":
         def open_stream_info():
             global playing_chan, time_stop
             if playing_chan:
-                for stream_info_i in reversed(range(layout36.count())):
-                    layout36.itemAt(stream_info_i).widget().setParent(None)
+                for stream_info_i in reversed(range(stream_information_layout.count())):
+                    stream_information_layout.itemAt(stream_info_i).widget().setParent(
+                        None
+                    )
 
                 stream_props = [
                     stream_info.video_properties[_("General")],
@@ -7073,7 +7107,7 @@ if __name__ == "__main__":
                 bold_fnt_2 = QtGui.QFont()
                 bold_fnt_2.setBold(True)
                 stream_info_video_lbl.setFont(bold_fnt_2)
-                layout36.addWidget(stream_info_video_lbl, 0, 0)
+                stream_information_layout.addWidget(stream_info_video_lbl, 0, 0)
                 dat_count = process_stream_info(
                     dat_count, _("General"), stream_props[0], ""
                 )
@@ -8421,11 +8455,11 @@ if __name__ == "__main__":
                     except Exception:
                         video_bitrate = ""
                     try:
-                        audio_codec = player.audio_codec.split(" ")[0]
+                        audio_codec = player.audio_codec.split(" ")[0].strip()
                     except Exception:
                         audio_codec = "no audio"
                     try:
-                        codec = player.video_codec.split(" ")[0]
+                        codec = player.video_codec.split(" ")[0].strip()
                         width = player.width
                         height = player.height
                     except Exception:
@@ -8442,22 +8476,8 @@ if __name__ == "__main__":
                     else:
                         avsync = "0.0"
                     if (
-                        (
-                            not (
-                                codec.lower() == "png"
-                                and width == 800
-                                and height == 600
-                            )
-                        )
-                        and (
-                            not (
-                                codec.lower() == "png"
-                                and width == 1024
-                                and height == 699
-                            )
-                        )
-                        and (width and height)
-                    ):
+                        not (codec.lower() == "png" and width == 800 and height == 600)
+                    ) and (width and height):
                         if settings["hidebitrateinfo"]:
                             label12.setText("")
                         else:
