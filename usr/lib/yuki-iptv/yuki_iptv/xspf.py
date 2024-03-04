@@ -23,6 +23,7 @@
 #
 import logging
 import gettext
+import traceback
 import xml.etree.ElementTree as ET
 
 logger = logging.getLogger(__name__)
@@ -140,7 +141,7 @@ def parse_xspf(xspf):
                             extension.attrib["application"]
                             == "http://www.videolan.org/vlc/playlist/0"
                         ):
-                            # User-Agent
+                            # VLC options (User-Agent and HTTP referrer)
                             try:
                                 vlc_option = extension.find("{*}vlc:option")
                                 if vlc_option is None:
@@ -193,9 +194,10 @@ def parse_xspf(xspf):
             )
         except Exception:
             logger.warning("Failed to parse channel!")
+            logger.warning(traceback.format_exc())
 
     if not array:
-        raise Exception("No channels found!")
+        raise Exception("No channels found or XSPF parsing failed!")
 
     # Memory optimize
     playlists = None
