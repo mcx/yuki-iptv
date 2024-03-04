@@ -937,7 +937,11 @@ if __name__ == "__main__":
                         m3u = ""
                         exp3 = traceback.format_exc()
                         logger.warning("Playlist URL loading error!" + "\n" + exp3)
-                        show_exception(_("Playlist loading error!"))
+                        show_exception(
+                            _("Playlist loading error!")
+                            + "\n\n"
+                            + traceback.format_exc()
+                        )
 
         m3u_parser = M3UParser(settings["udp_proxy"], _)
         epg_url = ""
@@ -979,7 +983,9 @@ if __name__ == "__main__":
                 logger.warning(
                     "Playlist parsing error!" + "\n" + traceback.format_exc()
                 )
-                show_exception(_("Playlist loading error!"))
+                show_exception(
+                    _("Playlist loading error!") + "\n\n" + traceback.format_exc()
+                )
                 m3u = ""
                 array = {}
                 groups = []

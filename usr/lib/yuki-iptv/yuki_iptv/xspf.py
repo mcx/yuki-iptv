@@ -30,36 +30,175 @@ _ = gettext.gettext
 all_channels = _("All channels")
 
 
+def process_nodes(node, playlists, parent_title):
+    # We don't support nested groups, so we call it "Parent title / Title"
+    if "title" in node.attrib:
+        if node.attrib["title"]:
+            # vlc:node
+            child_nodes = node.findall("{*}vlc:node")
+            if not child_nodes:
+                child_nodes = node.findall("{*}node")
+            if child_nodes:
+                for child_node in child_nodes:
+                    process_nodes(
+                        child_node,
+                        playlists,
+                        f"{parent_title}{node.attrib['title']} / ",
+                    )
+            # vlc:item
+            items = node.findall("{*}vlc:item")
+            if not items:
+                items = node.findall("{*}item")
+            if items:
+                for item in items:
+                    if "tid" in item.attrib:
+                        if item.attrib["tid"]:
+                            playlists[
+                                item.attrib["tid"].strip()
+                            ] = f"{parent_title}{node.attrib['title'].strip()}"
+
+
 def parse_xspf(xspf):
     logger.info("Trying parsing as XSPF...")
     array = []
-    tree = ET.ElementTree(ET.fromstring(xspf)).getroot()
+    tree = ET.ElementTree(ET.fromstring(xspf.lstrip())).getroot()
+    playlists = {}
+
+    # Extensions
+    try:
+        extension = tree.find("{*}extension")
+        if extension is not None:
+            if "application" in extension.attrib:
+                if (
+                    extension.attrib["application"]
+                    == "http://www.videolan.org/vlc/playlist/0"
+                ):
+                    nodes = extension.findall("{*}vlc:node")
+                    if not nodes:
+                        nodes = extension.findall("{*}node")
+                    if nodes:
+                        for node in nodes:
+                            process_nodes(node, playlists, "")
+    except Exception:
+        pass
+
+    # Default logo
+    default_logo = ""
+    try:
+        tree_default_logo = tree.find("{*}image")
+        if tree_default_logo is not None:
+            default_logo = tree_default_logo.text.strip()
+    except Exception:
+        pass
+
     for track in tree.findall("{*}trackList/{*}track"):
-        title = track.find("{*}title").text.strip()
-        group = ""
+        # XSPF spec requires us to not stop processing
+        # if we cannot process one track
+        # ( see https://www.xspf.org/spec#61-graceful-failure )
         try:
-            group = track.find("{*}album").text.strip()
-            if " - " in group:
-                group = group.split(" - ")[0]
+            # Location
+            try:
+                location = track.find("{*}location").text.strip()
+            except Exception:
+                # Ignore channels with no URL
+                continue
+
+            # Title
+            try:
+                title = track.find("{*}title").text.strip()
+            except Exception:
+                # If title is not specified, use URL
+                title = location
+
+            useragent = ""
+            referer = ""
+
+            # Group
+            group = ""
+            group_changed_by_album = False
+            try:
+                group = track.find("{*}album").text.strip()
+                if " - " in group:
+                    group = group.split(" - ")[0]
+                group_changed_by_album = True
+            except Exception:
+                pass
+
+            # Logo
+            logo = ""
+            try:
+                logo = track.find("{*}image").text.strip()
+            except Exception:
+                pass
+
+            # Extensions
+            try:
+                extension = track.find("{*}extension")
+                if extension is not None:
+                    if "application" in extension.attrib:
+                        if (
+                            extension.attrib["application"]
+                            == "http://www.videolan.org/vlc/playlist/0"
+                        ):
+                            # User-Agent
+                            try:
+                                vlc_option = extension.find("{*}vlc:option")
+                                if vlc_option is None:
+                                    vlc_option = extension.find("{*}option")
+                                if vlc_option is not None:
+                                    vlc_option = vlc_option.text.strip()
+                                    if vlc_option.startswith("http-user-agent="):
+                                        useragent = vlc_option.replace(
+                                            "http-user-agent=", "", 1
+                                        )
+                                    if vlc_option.startswith("http-referrer="):
+                                        referer = vlc_option.replace(
+                                            "http-referrer=", "", 1
+                                        )
+                            except Exception:
+                                pass
+                            # Playlists
+                            try:
+                                vlc_id = extension.find("{*}vlc:id")
+                                if vlc_id is None:
+                                    vlc_id = extension.find("{*}id")
+                                if vlc_id is not None:
+                                    if vlc_id.text.strip() in playlists:
+                                        if group_changed_by_album:
+                                            title = f"{title} ({group})"
+                                        group = playlists[vlc_id.text.strip()]
+                            except Exception:
+                                pass
+            except Exception:
+                pass
+
+            if not group:
+                group = all_channels
+
+            array.append(
+                {
+                    "title": title,
+                    "tvg-name": "",
+                    "tvg-ID": "",
+                    "tvg-logo": logo if logo else default_logo,
+                    "tvg-group": group,
+                    "tvg-url": "",
+                    "catchup": "default",
+                    "catchup-source": "",
+                    "catchup-days": "7",
+                    "useragent": useragent,
+                    "referer": referer,
+                    "url": location,
+                }
+            )
         except Exception:
-            pass
-        if not group:
-            group = all_channels
-        location = track.find("{*}location").text.strip()
-        array.append(
-            {
-                "title": title,
-                "tvg-name": "",
-                "tvg-ID": "",
-                "tvg-logo": "",
-                "tvg-group": group,
-                "tvg-url": "",
-                "catchup": "default",
-                "catchup-source": "",
-                "catchup-days": "7",
-                "useragent": "",
-                "referer": "",
-                "url": location,
-            }
-        )
+            logger.warning("Failed to parse channel!")
+
+    if not array:
+        raise Exception("No channels found!")
+
+    # Memory optimize
+    playlists = None
+    tree = None
+
     return [array, []]
