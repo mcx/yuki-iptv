@@ -77,7 +77,7 @@ def fetch_remote_channel_icon(loglevel, chan_name, logo_url, req_data_ua, req_da
                         if use_wand:
                             with Image(file=im_logo_bytes) as original:
                                 with original.convert("png") as im_logo:
-                                    im_logo.resize(64, 64)
+                                    im_logo.transform(resize="64x64>")
                                     im_logo.save(filename=cache_file)
                                 icon_ret = cache_file
                         else:
