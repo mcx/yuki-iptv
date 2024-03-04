@@ -7185,7 +7185,8 @@ if __name__ == "__main__":
 
         @idle_function
         def end_file_error_callback(unused=None):
-            if loading.isVisible():
+            logger.warning("Playing error!")
+            if YukiData.is_loading:
                 mpv_stop()
                 chan.setText("")
                 loading.setText(_("Playing error"))
@@ -8396,7 +8397,7 @@ if __name__ == "__main__":
 
         def do_reconnect():
             global x_conn
-            if (playing_chan and not loading.isVisible()) and (
+            if (playing_chan and not YukiData.is_loading) and (
                 player.cache_buffering_state == 0
             ):
                 logger.info("Reconnecting to stream")
@@ -8417,7 +8418,7 @@ if __name__ == "__main__":
                         logger.info("Connection loss detector enabled")
                     try:
                         if (
-                            playing_chan and not loading.isVisible()
+                            playing_chan and not YukiData.is_loading
                         ) and player.cache_buffering_state == 0:
                             if not x_conn:
                                 logger.warning(
