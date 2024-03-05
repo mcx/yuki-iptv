@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-19 17:53+0000\n"
 "PO-Revision-Date: 2024-03-05 19:34+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Last-Translator: Ame-chan-angel <amechanangel@proton.me>\n"
 "Language-Team: Chinese (Traditional) <https://translate.codeberg.org/"
 "projects/yuki-iptv/yuki-iptv/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -103,7 +103,8 @@ msgstr "修改捷徑"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1257
 msgid "Press the key combination\n"
 "you want to assign"
-msgstr "按下您要\n"
+msgstr ""
+"按下您要\n"
 "指派的組合鍵"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1309
@@ -214,7 +215,8 @@ msgstr "M3U/XSPF播放清單"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1768 usr/lib/yuki-iptv/yuki-iptv.py:3113
 msgid "TV guide\n"
 "address"
-msgstr "電視節目單\n"
+msgstr ""
+"電視節目單\n"
 "地址"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1771 usr/lib/yuki-iptv/yuki-iptv.py:1773
