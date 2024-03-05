@@ -2,7 +2,7 @@
 
 **IPTV player with EPG support**
 
-[![Screenshot](https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd)](https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd)
+[![Screenshot](https://codeberg.org/attachments/80c17041-40da-410a-848f-558019e69391)](https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd)
 
 ⚠️ Disclaimer: yuki-iptv doesn't provide content or TV channels.  
 The channels and pictures in the screenshots are for demonstration purposes only.
