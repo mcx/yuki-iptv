@@ -3,14 +3,16 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-19 17:53+0000\n"
-"PO-Revision-Date: 2024-02-19 18:05\n"
-"Last-Translator: \n"
-"Language-Team: Turkish\n"
+"PO-Revision-Date: 2024-03-05 19:34+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Turkish <https://translate.codeberg.org/projects/yuki-iptv/"
+"yuki-iptv/tr/>\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:364 usr/lib/yuki-iptv/yuki-iptv.py:6986
 msgid "IPTV player with EPG support"
@@ -51,7 +53,9 @@ msgstr "Bağlantı kurulamadı"
 #: usr/lib/yuki-iptv/yuki-iptv.py:922 usr/lib/yuki-iptv/yuki-iptv.py:976
 #: usr/lib/yuki-iptv/yuki-iptv.py:985
 msgid "Failed to load playlist - unknown encoding! Please use playlists in UTF-8 encoding."
-msgstr "Oynatma listesi yüklenemedi, bilinmeyen kodlama! Lütfen oynatma listelerini UTF-8 kodlamasında kullanın."
+msgstr ""
+"Oynatma listesi yüklenemedi, bilinmeyen kodlama! Lütfen oynatma listelerini "
+"UTF-8 kodlamasında kullanın."
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:994 usr/lib/yuki-iptv/yuki-iptv.py:1036
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:122
@@ -1139,7 +1143,8 @@ msgstr "filtre grubu (Enter'e basın)"
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:328
 msgid "insert search term and press enter\n"
 " use Selector → to choose column to search"
-msgstr "Arama terimini girin ve enter tuşuna basın,\n"
+msgstr ""
+"Arama terimini girin ve enter tuşuna basın,\n"
 " aranacak sütunu seçmek için Seçiciyi kullanın →"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:382
@@ -1291,4 +1296,3 @@ msgstr "ffmpeg çöktü!"
 #: usr/lib/yuki-iptv/yuki_iptv/record.py:139
 msgid "exit code:"
 msgstr "çıkış kodu:"
-

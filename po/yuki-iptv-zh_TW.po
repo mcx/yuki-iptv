@@ -3,14 +3,16 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-19 17:53+0000\n"
-"PO-Revision-Date: 2024-02-19 18:05\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Traditional\n"
+"PO-Revision-Date: 2024-03-05 19:34+0000\n"
+"Last-Translator: Ame-chan-angel <amechanangel@proton.me>\n"
+"Language-Team: Chinese (Traditional) <https://translate.codeberg.org/"
+"projects/yuki-iptv/yuki-iptv/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:364 usr/lib/yuki-iptv/yuki-iptv.py:6986
 msgid "IPTV player with EPG support"
@@ -101,7 +103,8 @@ msgstr "修改捷徑"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1257
 msgid "Press the key combination\n"
 "you want to assign"
-msgstr "按下您要\n"
+msgstr ""
+"按下您要\n"
 "指派的組合鍵"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1309
@@ -212,7 +215,8 @@ msgstr "M3U/XSPF播放清單"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1768 usr/lib/yuki-iptv/yuki-iptv.py:3113
 msgid "TV guide\n"
 "address"
-msgstr "電視節目單\n"
+msgstr ""
+"電視節目單\n"
 "地址"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1771 usr/lib/yuki-iptv/yuki-iptv.py:1773
@@ -1285,4 +1289,3 @@ msgstr ""
 #: usr/lib/yuki-iptv/yuki_iptv/record.py:139
 msgid "exit code:"
 msgstr ""
-
