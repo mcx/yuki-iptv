@@ -111,6 +111,4 @@ License - https://creativecommons.org/licenses/by/4.0/
 
 ## Localization
 
-To help with localization you can use [Codeberg Translate](https://translate.codeberg.org/engage/yuki-iptv/).  
-  
-[![Translation status](https://translate.codeberg.org/widget/yuki-iptv/yuki-iptv/287x66-white.png)](https://translate.codeberg.org/engage/yuki-iptv/)
+To help with localization you can use [Codeberg Translate](https://translate.codeberg.org/engage/yuki-iptv/).
