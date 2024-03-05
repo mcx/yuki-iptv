@@ -2,26 +2,18 @@
 
 **IPTV player with EPG support**
 
-[![Screenshot](https://gist.githubusercontent.com/Ame-chan-angel/c37f80c2cb00afbdbd98959186e1ab80/raw/e59228169ace1634fae96f65aace5f4d2d7fa71c/screenshot.png)](https://gist.githubusercontent.com/Ame-chan-angel/c37f80c2cb00afbdbd98959186e1ab80/raw/e59228169ace1634fae96f65aace5f4d2d7fa71c/screenshot.png)
+[![Screenshot](https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd)](https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd)
 
 ⚠️ Disclaimer: yuki-iptv doesn't provide content or TV channels.  
 The channels and pictures in the screenshots are for demonstration purposes only.
 
 ## Content
 
-- [Repository mirrors](#repository-mirrors)
 - [Features](#features)
 - [Ubuntu PPA](#ubuntu-ppa)
 - [Open Build Service (rpm packages)](#open-build-service-rpm-packages)
-- [Unofficial builds](#unofficial-builds)
-- [HowTo make playlists for movies/series](#howto-make-playlists-for-moviesseries)
+- [HowTo make playlists for movies/series](#howto-make-playlists-for-movies-series)
 - [License](#license)
-- [Localization](#localization)
-
-## Repository mirrors
-
-[GitHub](https://github.com/yuki-iptv/yuki-iptv) **(main repository)**  
-[Codeberg](https://codeberg.org/Ame-chan-angel/yuki-iptv)  
 
 ## Features
 
@@ -59,14 +51,6 @@ https://software.opensuse.org/download.html?project=home%3Aame-chan%3Ayuki-iptv&
 **Multimedia codecs:**  
 For **Fedora** and **CentOS** you'll need https://rpmfusion.org  
 For **openSUSE** you'll need **libopenh264-7** (for h264 decoding) (run ```zypper install libopenh264-7``` as root)  
-
-## Unofficial builds
-
-**Might be outdated!**  
-**Use at your own risk!**  
-  
-Flathub: https://flathub.org/apps/io.github.yuki_iptv.yuki-iptv  
-(**Known issue: [Channel logos not working](https://github.com/flathub/io.github.yuki_iptv.yuki-iptv/issues/3)**)
 
 ## HowTo make playlists for movies/series
   
@@ -123,8 +107,3 @@ The Font Awesome pictograms are licensed under the CC BY 4.0 License.
 Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
 License - https://creativecommons.org/licenses/by/4.0/
 ```
-
-## Localization
-
-To help with localization you can use [Crowdin](https://crowdin.com/project/yuki-iptv) or create pull request with translated .po file.  
-To add a new language, write me on the Crowdin page.

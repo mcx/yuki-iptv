@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: yuki-iptv
 Upstream-Contact: Ame-chan-angel <amechanangel@proton.me>
-Source: https://github.com/yuki-iptv/yuki-iptv
+Source: https://codeberg.org/Ame-chan-angel/yuki-iptv
 
 Files: *
 Copyright:

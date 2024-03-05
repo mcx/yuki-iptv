@@ -7344,7 +7344,7 @@ if __name__ == "__main__":
             return hashlib.sha512(playlist["m3u"].encode("utf-8")).hexdigest()
 
         def get_playlists():
-            prefix = "/io/github/yuki_iptv/Playlist/"
+            prefix = "/page/codeberg/ame_chan_angel/yuki_iptv/Playlist/"
             current_playlist = (f"{prefix}Unknown", _("Unknown"), "")
             current_playlist_name = _("Unknown")
             for playlist in playlists_saved:
@@ -7449,7 +7449,10 @@ if __name__ == "__main__":
                 ):
                     track_id = mpris_data[2][0]
                     position = mpris_data[2][1] / 1000000  # microseconds to seconds
-                    if track_id != "/io/github/yuki_iptv/Track/NoTrack":
+                    if (
+                        track_id
+                        != "/page/codeberg/ame_chan_angel/yuki_iptv/Track/NoTrack"
+                    ):
                         exInMainThread_partial(
                             partial(mpris_set_position, track_id, position)
                         )
@@ -7538,9 +7541,9 @@ if __name__ == "__main__":
                     playing_url.encode("utf-8")
                 ).hexdigest()
                 mpris_trackid = (
-                    f"/io/github/yuki_iptv/Track/{playing_url_hash}"
+                    f"/page/codeberg/ame_chan_angel/yuki_iptv/Track/{playing_url_hash}"
                     if playing_url
-                    else "/io/github/yuki_iptv/Track/NoTrack"
+                    else "/page/codeberg/ame_chan_angel/yuki_iptv/Track/NoTrack"
                 )
                 # Logo
                 artUrl = ""
