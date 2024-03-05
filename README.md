@@ -14,6 +14,7 @@ The channels and pictures in the screenshots are for demonstration purposes only
 - [Open Build Service (rpm packages)](#open-build-service-rpm-packages)
 - [HowTo make playlists for movies/series](#howto-make-playlists-for-movies-series)
 - [License](#license)
+- [Localization](#localization)
 
 ## Features
 
@@ -107,3 +108,9 @@ The Font Awesome pictograms are licensed under the CC BY 4.0 License.
 Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
 License - https://creativecommons.org/licenses/by/4.0/
 ```
+
+## Localization
+
+To help with localization you can use [Codeberg Translate](https://translate.codeberg.org/engage/yuki-iptv/).  
+  
+[![Translation status](https://translate.codeberg.org/widget/yuki-iptv/yuki-iptv/287x66-white.png)](https://translate.codeberg.org/engage/yuki-iptv/)
