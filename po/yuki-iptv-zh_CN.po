@@ -3,14 +3,16 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-19 17:53+0000\n"
-"PO-Revision-Date: 2024-02-19 18:05\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
+"PO-Revision-Date: 2024-03-05 19:34+0000\n"
+"Last-Translator: Ame-chan-angel <amechanangel@proton.me>\n"
+"Language-Team: Chinese (Simplified) <https://translate.codeberg.org/projects/"
+"yuki-iptv/yuki-iptv/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:364 usr/lib/yuki-iptv/yuki-iptv.py:6986
 msgid "IPTV player with EPG support"
@@ -101,7 +103,8 @@ msgstr "修改快捷键"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1257
 msgid "Press the key combination\n"
 "you want to assign"
-msgstr "按下您要\n"
+msgstr ""
+"按下您要\n"
 "指派的组合键"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1309
@@ -212,7 +215,8 @@ msgstr "M3U / XSPF 播放列表"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1768 usr/lib/yuki-iptv/yuki-iptv.py:3113
 msgid "TV guide\n"
 "address"
-msgstr "电视节目表\n"
+msgstr ""
+"电视节目表\n"
 "地址"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1771 usr/lib/yuki-iptv/yuki-iptv.py:1773
@@ -316,7 +320,8 @@ msgstr "移除"
 #: usr/lib/yuki-iptv/yuki-iptv.py:2311
 msgid "Post-recording\n"
 "action"
-msgstr "后录制\n"
+msgstr ""
+"后录制\n"
 "操作"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2313
@@ -479,13 +484,15 @@ msgstr "保存设置"
 #: usr/lib/yuki-iptv/yuki-iptv.py:3112
 msgid "Update playlist\n"
 "at launch"
-msgstr "启动时更新\n"
+msgstr ""
+"启动时更新\n"
 "播放列表"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3115
 msgid "Hardware\n"
 "acceleration"
-msgstr "硬件\n"
+msgstr ""
+"硬件\n"
 "加速"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3116
@@ -545,13 +552,15 @@ msgstr "列表"
 #: usr/lib/yuki-iptv/yuki-iptv.py:3238
 msgid "Do not update\n"
 "EPG at boot"
-msgstr "启动时\n"
+msgstr ""
+"启动时\n"
 "不更新EPG"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3243
 msgid "Open previous channel\n"
 "at startup"
-msgstr "启动时打开\n"
+msgstr ""
+"启动时打开\n"
 "以前的频道"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3245
@@ -595,7 +604,8 @@ msgstr "浮动面板不透明度"
 #: usr/lib/yuki-iptv/yuki-iptv.py:3308
 msgid "Floating panel\n"
 "position"
-msgstr "浮动面板\n"
+msgstr ""
+"浮动面板\n"
 "位置"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3311
@@ -609,31 +619,36 @@ msgstr "左侧"
 #: usr/lib/yuki-iptv/yuki-iptv.py:3316
 msgid "Switch channels with\n"
 "the mouse wheel"
-msgstr "用鼠标滚轮\n"
+msgstr ""
+"用鼠标滚轮\n"
 "切换频道"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3319
 msgid "Automatic\n"
 "reconnection"
-msgstr "自动\n"
+msgstr ""
+"自动\n"
 "重连"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3322
 msgid "by default:\n"
 "change volume"
-msgstr "默认：\n"
+msgstr ""
+"默认：\n"
 "更改音量"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3340
 msgid "Show playlist\n"
 "on mouse move"
-msgstr "鼠标移动时\n"
+msgstr ""
+"鼠标移动时\n"
 "显示播放列表"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3345
 msgid "Show controls\n"
 "on mouse move"
-msgstr "鼠标移动时\n"
+msgstr ""
+"鼠标移动时\n"
 "显示控件"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3350
@@ -663,7 +678,8 @@ msgstr "不缓存EPG"
 #: usr/lib/yuki-iptv/yuki-iptv.py:3363
 msgid "Do not create screenshots\n"
 "and recordings subfolders"
-msgstr "不创建屏幕截图\n"
+msgstr ""
+"不创建屏幕截图\n"
 "和录制子文件夹"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3369
@@ -1146,7 +1162,8 @@ msgstr "过滤器组（按下Enter）"
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:328
 msgid "insert search term and press enter\n"
 " use Selector → to choose column to search"
-msgstr "插入搜索词并按下Enter\n"
+msgstr ""
+"插入搜索词并按下Enter\n"
 " 使用选择器 → 选择列进行搜索"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:382
@@ -1298,4 +1315,3 @@ msgstr "ffmpeg已崩溃！"
 #: usr/lib/yuki-iptv/yuki_iptv/record.py:139
 msgid "exit code:"
 msgstr "退出代码："
-
