@@ -1,3 +1,5 @@
+# This file is distributed under the same license as the yuki-iptv package.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: yuki-iptv\n"
