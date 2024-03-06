@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-19 17:53+0000\n"
-"PO-Revision-Date: 2024-03-05 19:34+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-03-06 02:16+0000\n"
+"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://translate.codeberg.org/projects/yuki-iptv/"
 "yuki-iptv/pl/>\n"
 "Language: pl_PL\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:364 usr/lib/yuki-iptv/yuki-iptv.py:6986
 msgid "IPTV player with EPG support"
-msgstr ""
+msgstr "Odtwarzacz IPTV z obsługą EPG"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:635
 msgid "Loading TV guide cache..."
@@ -524,7 +524,7 @@ msgstr "lub wybierz dostawcę"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3166
 msgid "Reset channel settings"
-msgstr ""
+msgstr "Resetuj ustawienia kanału"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3168
 msgid "Clear logo cache"
