@@ -25,6 +25,11 @@ def convert_xtream_to_m3u(_, data, skip_init=False, append_group=""):
     output = "#EXTM3U\n" if not skip_init else ""
     for channel in data:
         name = channel.name
+        # Add EPG channel ID in case channel name and epg_id are different.
+        try:
+            epg_channel_id = channel.epg_channel_id if channel.epg_channel_id else ""
+        except Exception:
+            epg_channel_id = ""
         try:
             group = channel.group_title if channel.group_title else ""
         except Exception:
@@ -34,6 +39,8 @@ def convert_xtream_to_m3u(_, data, skip_init=False, append_group=""):
         logo = channel.logo if channel.logo else ""
         url = channel.url
         line = "#EXTINF:0"
+        if epg_channel_id:
+            line += f' tvg-id="{epg_channel_id}"'
         if logo:
             line += f' tvg-logo="{logo}"'
         if group:
