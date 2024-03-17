@@ -1,12 +1,12 @@
 # This file is distributed under the same license as the yuki-iptv package.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-19 17:53+0000\n"
-"PO-Revision-Date: 2024-03-05 19:34+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-03-17 07:53+0000\n"
+"Last-Translator: infoyayinakisi <infoyayinakisi@users.noreply.translate."
+"codeberg.org>\n"
 "Language-Team: Turkish <https://translate.codeberg.org/projects/yuki-iptv/"
 "yuki-iptv/tr/>\n"
 "Language: tr_TR\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:364 usr/lib/yuki-iptv/yuki-iptv.py:6986
 msgid "IPTV player with EPG support"
-msgstr ""
+msgstr "EPG destekli IPTV oynatıcı"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:635
 msgid "Loading TV guide cache..."
@@ -516,7 +516,7 @@ msgstr "Veya sağlayıcı seçin"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3166
 msgid "Reset channel settings"
-msgstr ""
+msgstr "Kanal ayarlarını sıfırla"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3168
 msgid "Clear logo cache"
