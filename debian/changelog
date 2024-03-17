@@ -1,3 +1,19 @@
+yuki-iptv (0.0.10) unstable; urgency=medium
+
+  * Translations update from Weblate
+  * Show channel URL in stream information window
+  * Do not crash if save folder is not writable
+  * Fix aspect ratio in channel logos
+  * xspf: Add support for logos and VLC extensions
+  * Fix crash if EPG title is None
+  * Fix playing error not shown correctly in fullscreen mode
+  * Remove channel sorting
+  * Fix MPRIS
+  * Fix VOD matching
+  * Add EPG id for XTream channels
+
+ -- Ame-chan-angel <amechanangel@proton.me>  Sun, 17 Mar 2024 12:37:31 +0000
+
 yuki-iptv (0.0.9) unstable; urgency=medium
 
   * l10n: Update translations

@@ -69,6 +69,18 @@ sed -i "s/__DEB_VERSION__/%{version}/g" usr/lib/yuki-iptv/yuki-iptv.py
 cp -af usr %{buildroot}
 
 %changelog
+* Sun Mar 17 2024 Ame-chan-angel <amechanangel@proton.me> - 0.0.10
+  - Translations update from Weblate
+  - Show channel URL in stream information window
+  - Do not crash if save folder is not writable
+  - Fix aspect ratio in channel logos
+  - xspf: Add support for logos and VLC extensions
+  - Fix crash if EPG title is None
+  - Fix playing error not shown correctly in fullscreen mode
+  - Remove channel sorting
+  - Fix MPRIS
+  - Fix VOD matching
+  - Add EPG id for XTream channels
 * Tue Jan 23 2024 Ame-chan-angel <amechanangel@proton.me> - 0.0.9
   - l10n: Update translations
   - Respect XDG environment variables

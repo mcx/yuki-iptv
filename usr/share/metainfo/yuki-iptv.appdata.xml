@@ -42,6 +42,21 @@
   </screenshots>
 
   <releases>
+    <release version="0.0.10" date="2024-03-17">
+      <description>
+        <p>Translations update from Weblate</p>
+        <p>Show channel URL in stream information window</p>
+        <p>Do not crash if save folder is not writable</p>
+        <p>Fix aspect ratio in channel logos</p>
+        <p>xspf: Add support for logos and VLC extensions</p>
+        <p>Fix crash if EPG title is None</p>
+        <p>Fix playing error not shown correctly in fullscreen mode</p>
+        <p>Remove channel sorting</p>
+        <p>Fix MPRIS</p>
+        <p>Fix VOD matching</p>
+        <p>Add EPG id for XTream channels</p>
+      </description>
+    </release>
     <release version="0.0.9" date="2024-01-23">
       <description>
         <p>l10n: Update translations</p>
