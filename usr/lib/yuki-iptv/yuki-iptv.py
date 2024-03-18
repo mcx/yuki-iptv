@@ -6972,7 +6972,7 @@ if __name__ == "__main__":
             about_txt += "<br><br>" + _("IPTV player with EPG support")
             about_txt += (
                 "<br><br>"
-                + _("Using Qt {} ({})").format(QtCore.QT_VERSION_STR, qt_library)
+                + _("Using Qt {} ({})").format(QtCore.qVersion(), qt_library)
                 + QT_PLATFORM
             )
             mpv_version = player.mpv_version
