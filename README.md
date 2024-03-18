@@ -12,6 +12,7 @@ The channels and pictures in the screenshots are for demonstration purposes only
 - [Features](#features)
 - [Ubuntu PPA](#ubuntu-ppa)
 - [Open Build Service (rpm packages)](#open-build-service-rpm-packages)
+- [Unofficial builds](#unofficial-builds)
 - [HowTo make playlists for movies/series](#howto-make-playlists-for-movies-series)
 - [License](#license)
 - [Localization](#localization)
@@ -52,6 +53,14 @@ https://software.opensuse.org/download.html?project=home%3Aame-chan%3Ayuki-iptv&
 **Multimedia codecs:**  
 For **Fedora** and **CentOS** you'll need https://rpmfusion.org  
 For **openSUSE** you'll need **libopenh264-7** (for h264 decoding) (run ```zypper install libopenh264-7``` as root)  
+
+## Unofficial builds
+
+**Might be outdated!**  
+**Use at your own risk!**  
+  
+Flathub: https://flathub.org/apps/io.github.yuki_iptv.yuki-iptv  
+(**Known issue: [Channel logos not working](https://github.com/flathub/io.github.yuki_iptv.yuki-iptv/issues/3)**)
 
 ## HowTo make playlists for movies/series
   
