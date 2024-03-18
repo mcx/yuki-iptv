@@ -363,7 +363,7 @@ if __name__ == "__main__":
         logger.info(f"Version: {APP_VERSION}")
         logger.info("Using Python " + sys.version.replace("\n", ""))
         logger.info(f"Qt library: {qt_library}")
-        logger.info(f"Qt version: {QtCore.QT_VERSION_STR}")
+        logger.info(f"Qt version: {QtCore.qVersion()}")
         QT_PLATFORM = ""
         try:
             logger.info(f"Qt platform: {app.platformName()}")
