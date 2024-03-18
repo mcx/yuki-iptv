@@ -1495,10 +1495,10 @@ class YukiData:
 def mpris_handle_method_call(
     connection, sender, object_path, interface_name, method_name, params, invocation
 ):
-    logger.debug(
-        f"object_path = {object_path} interface_name = {interface_name} "
-        f"method_name = {method_name} params = {params.unpack()}"
-    )
+    # logger.debug(
+    #     f"object_path = {object_path} interface_name = {interface_name} "
+    #     f"method_name = {method_name} params = {params.unpack()}"
+    # )
     if interface_name == "org.freedesktop.DBus.Properties" and method_name == "Get":
         invocation.return_value(
             gi.repository.GLib.Variant.new_tuple(
