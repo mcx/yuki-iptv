@@ -381,12 +381,12 @@ def init_menubar(data):
     YukiData.aboutAction.triggered.connect(lambda: YukiData.show_help())
 
     # Empty (track list)
-    YukiData.empty_action = qaction("<{}>".format(_("empty")), data)
-    YukiData.empty_action.setEnabled(False)
-    YukiData.empty_action1 = qaction("<{}>".format(_("empty")), data)
-    YukiData.empty_action1.setEnabled(False)
-    YukiData.empty_action2 = qaction("<{}>".format(_("empty")), data)
-    YukiData.empty_action2.setEnabled(False)
+    def get_empty_action():
+        empty_action = qaction("<{}>".format(_("empty")), data)
+        empty_action.setEnabled(False)
+        return empty_action
+
+    YukiData.get_empty_action = get_empty_action
 
     # Filters mapping
     YukiData.filter_mapping = {
@@ -529,8 +529,7 @@ def clear_menu(menu):
         #    clear_menu(mb_action.menu())
         #    mb_action.menu().deleteLater()
         else:
-            if mb_action.text() != "<{}>".format(_("empty")):
-                mb_action.deleteLater()
+            mb_action.deleteLater()
 
 
 def recursive_filter_setstate(state):
@@ -590,9 +589,9 @@ def update_menubar(track_list, playing_chan, m3u, aot_file):
         YukiData.menubars[i][2].clear()
         if track_list and playing_chan:
             if not [x for x in track_list if x["type"] == "video"]:
-                YukiData.menubars[i][0].addAction(YukiData.empty_action)
+                YukiData.menubars[i][0].addAction(YukiData.get_empty_action())
             if not [x for x in track_list if x["type"] == "audio"]:
-                YukiData.menubars[i][1].addAction(YukiData.empty_action1)
+                YukiData.menubars[i][1].addAction(YukiData.get_empty_action())
             # Subtitles off
             sub_off_action = qaction(_("None"), YukiData.data)
             if YukiData.player.sid == "no" or not YukiData.player.sid:
@@ -629,9 +628,9 @@ def update_menubar(track_list, playing_chan, m3u, aot_file):
                     trk2.triggered.connect(partial(yuki_trackset, track["id"], "sid"))
                     YukiData.menubars[i][2].addAction(trk2)
         else:
-            YukiData.menubars[i][0].addAction(YukiData.empty_action)
-            YukiData.menubars[i][1].addAction(YukiData.empty_action1)
-            YukiData.menubars[i][2].addAction(YukiData.empty_action2)
+            YukiData.menubars[i][0].addAction(YukiData.get_empty_action())
+            YukiData.menubars[i][1].addAction(YukiData.get_empty_action())
+            YukiData.menubars[i][2].addAction(YukiData.get_empty_action())
 
 
 def init_yuki_iptv_menubar(data, app, menubar):
