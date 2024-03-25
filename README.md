@@ -60,7 +60,6 @@ For **openSUSE** you'll need **libopenh264-7** (for h264 decoding) (run ```zyppe
 **Use at your own risk!**  
   
 Flathub: https://flathub.org/apps/io.github.yuki_iptv.yuki-iptv  
-(**Known issue: [Channel logos not working](https://github.com/flathub/io.github.yuki_iptv.yuki-iptv/issues/3)**)
 
 ## HowTo make playlists for movies/series
   
