@@ -208,6 +208,7 @@ class stream_info:
 
 
 class YukiData:
+    resume_playback = False
     compact_mode = False
     playlist_hidden = False
     controlpanel_hidden = False
@@ -7187,6 +7188,7 @@ if __name__ == "__main__":
         def end_file_error_callback(unused=None):
             logger.warning("Playing error!")
             if YukiData.is_loading:
+                YukiData.resume_playback = not player.pause
                 mpv_stop()
                 chan.setText("")
                 loading.setText(_("Playing error"))
@@ -7267,6 +7269,9 @@ if __name__ == "__main__":
 
         def go_channel(i1):
             pause_state = player.pause
+            if YukiData.resume_playback:
+                YukiData.resume_playback = False
+                pause_state = False
             row = win.listWidget.currentRow()
             if row == -1:
                 row = row0
