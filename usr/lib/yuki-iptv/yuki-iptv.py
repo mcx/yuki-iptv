@@ -27,6 +27,7 @@ import os
 import os.path
 import time
 import datetime
+import math
 import json
 import locale
 import uuid
@@ -5349,6 +5350,9 @@ if __name__ == "__main__":
         all_channels_lang = _("All channels")
         favourites_lang = _("Favourites")
 
+        def get_page_count(array_len):
+            return math.ceil(array_len / 100)
+
         def gen_chans():
             global playing_chan, current_group, array, page_box, channelfilter
             global prog_match_arr, channel_logos_request_old
@@ -5388,11 +5392,11 @@ if __name__ == "__main__":
             ch_array = {x14["title"]: x14 for x14 in ch_array}
             try:
                 if filter_txt:
-                    page_box.setMaximum(round(len(ch_array) / 100) + 1)
-                    of_lbl.setText(get_of_txt(round(len(ch_array) / 100) + 1))
+                    page_box.setMaximum(get_page_count(len(ch_array)))
+                    of_lbl.setText(get_of_txt(get_page_count(len(ch_array))))
                 else:
-                    page_box.setMaximum(round(len(array_filtered) / 100) + 1)
-                    of_lbl.setText(get_of_txt(round(len(array_filtered) / 100) + 1))
+                    page_box.setMaximum(get_page_count(len(array_filtered)))
+                    of_lbl.setText(get_of_txt(get_page_count(len(array_filtered))))
             except Exception:
                 pass
             res = {}
@@ -6490,7 +6494,7 @@ if __name__ == "__main__":
         page_box = QtWidgets.QSpinBox()
         page_box.setSuffix("        ")
         page_box.setMinimum(1)
-        page_box.setMaximum(round(len(array) / 100) + 1)
+        page_box.setMaximum(get_page_count(len(array)))
         page_box.setStyleSheet(
             """
             QSpinBox::down-button  {
@@ -6518,7 +6522,7 @@ if __name__ == "__main__":
         )
         page_box.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         page_box.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
-        of_lbl.setText(get_of_txt(round(len(array) / 100) + 1))
+        of_lbl.setText(get_of_txt(get_page_count(len(array))))
 
         def page_change():
             win.listWidget.verticalScrollBar().setValue(0)
