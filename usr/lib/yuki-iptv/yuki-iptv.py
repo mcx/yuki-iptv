@@ -4980,6 +4980,7 @@ if __name__ == "__main__":
                     dockWidget_playlist.hide()
                     chan.hide()
                     label12.hide()
+                    label_avsync.hide()
                     for lbl3 in hlayout2_btns:
                         if lbl3 not in show_lbls_fullscreen:
                             lbl3.hide()
@@ -5037,6 +5038,7 @@ if __name__ == "__main__":
                             DOCKWIDGET_CONTROLPANEL_HEIGHT_HIGH
                         )
                     label12.show()
+                    label_avsync.show()
                     for lbl3 in hlayout2_btns:
                         if lbl3 not in show_lbls_fullscreen:
                             lbl3.show()
@@ -7897,6 +7899,16 @@ if __name__ == "__main__":
         myFont5.setPointSize(12)
         label13.setFont(myFont5)
 
+        label_avsync = QtWidgets.QLabel("")
+
+        label_avsync_font = QtGui.QFont()
+        label_avsync_font.setPointSize(12)
+        label_avsync.setFont(label_avsync_font)
+
+        label_avsync.setText("A-V -0.00")
+        label_avsync.setMinimumSize(label_avsync.sizeHint())
+        label_avsync.setText("")
+
         hdd_gif_label = QtWidgets.QLabel()
         hdd_gif_label.setPixmap(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "hdd.png"))).pixmap(
@@ -7961,6 +7973,7 @@ if __name__ == "__main__":
             hlayout2.addWidget(hlayout2_btn)
         hlayout2.addStretch(1000000)
         hlayout2.addWidget(label12)
+        hlayout2.addWidget(label_avsync)
         hlayout2.addWidget(hdd_gif_label)
 
         vlayout3.addLayout(hlayout2)
@@ -8450,7 +8463,7 @@ if __name__ == "__main__":
                     try:
                         if player.video_bitrate:
                             bitrate_arr = [
-                                _("bps"),
+                                _("bps") + " ",
                                 _("kbps"),
                                 _("Mbps"),
                                 _("Gbps"),
@@ -8489,15 +8502,18 @@ if __name__ == "__main__":
                     ) and (width and height):
                         if settings["hidebitrateinfo"]:
                             label12.setText("")
+                            label_avsync.setText("")
                         else:
                             label12.setText(
-                                f"  {width}x{height}{video_bitrate}"
-                                f" - {codec} / {audio_codec} - A-V {avsync}"
+                                f"  {width}x{height}"
+                                f" - {codec} / {audio_codec}{video_bitrate} -"
                             )
+                            label_avsync.setText(f"A-V {avsync}")
                         if loading.text() == _("Loading..."):
                             hideLoading()
                     else:
                         label12.setText("")
+                        label_avsync.setText("")
                     ic2 += 0.1
                     if ic2 > 9.9:
                         ic2 = 0
