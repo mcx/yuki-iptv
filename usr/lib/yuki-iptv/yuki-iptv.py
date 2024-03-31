@@ -243,6 +243,14 @@ class YukiData:
     old_playing_url = ""
 
 
+# Fonts
+class YukiFonts:
+    font_bold = None
+    font_11_bold = None
+    font_12 = None
+    font_12_bold = None
+
+
 stream_info.video_properties = {}
 stream_info.audio_properties = {}
 stream_info.video_bitrates = []
@@ -1224,11 +1232,23 @@ if __name__ == "__main__":
 
         keyseq = KeySequenceEdit()
 
-        bold_fnt_1 = QtGui.QFont()
-        bold_fnt_1.setBold(True)
+        # Fonts
+        YukiFonts.font_bold = QtGui.QFont()
+        YukiFonts.font_bold.setBold(True)
+
+        YukiFonts.font_11_bold = QtGui.QFont()
+        YukiFonts.font_11_bold.setPointSize(11)
+        YukiFonts.font_11_bold.setBold(True)
+
+        YukiFonts.font_12 = QtGui.QFont()
+        YukiFonts.font_12.setPointSize(12)
+
+        YukiFonts.font_12_bold = QtGui.QFont()
+        YukiFonts.font_12_bold.setPointSize(12)
+        YukiFonts.font_12_bold.setBold(True)
 
         la_sl = QtWidgets.QLabel()
-        la_sl.setFont(bold_fnt_1)
+        la_sl.setFont(YukiFonts.font_bold)
         la_sl.setText(_("Press the key combination\nyou want to assign"))
 
         def keyseq_ok_clicked():
@@ -1792,10 +1812,7 @@ if __name__ == "__main__":
         yuki_iptv_icon = QtWidgets.QLabel()
         yuki_iptv_icon.setPixmap(TV_ICON.pixmap(QtCore.QSize(32, 32)))
         yuki_iptv_label = QtWidgets.QLabel()
-        myFont6 = QtGui.QFont()
-        myFont6.setPointSize(11)
-        myFont6.setBold(True)
-        yuki_iptv_label.setFont(myFont6)
+        yuki_iptv_label.setFont(YukiFonts.font_11_bold)
         yuki_iptv_label.setTextFormat(QtCore.Qt.TextFormat.RichText)
         yuki_iptv_label.setText(
             '<br>&nbsp;<span style="color: #b35900;">yuki-iptv</span><br>'
@@ -2199,17 +2216,12 @@ if __name__ == "__main__":
         scheduler_widget = QtWidgets.QWidget()
         scheduler_layout = QtWidgets.QGridLayout()
         scheduler_clock = QtWidgets.QLabel(get_current_time())
-        myFont4 = QtGui.QFont()
-        myFont4.setPointSize(11)
-        myFont4.setBold(True)
-        scheduler_clock.setFont(myFont4)
+        scheduler_clock.setFont(YukiFonts.font_11_bold)
         scheduler_clock.setStyleSheet("color: green")
         plannedrec_lbl = QtWidgets.QLabel("{}:".format(_("Planned recordings")))
         activerec_lbl = QtWidgets.QLabel("{}:".format(_("Active recordings")))
         statusrec_lbl = QtWidgets.QLabel()
-        myFont5 = QtGui.QFont()
-        myFont5.setBold(True)
-        statusrec_lbl.setFont(myFont5)
+        statusrec_lbl.setFont(YukiFonts.font_bold)
         choosechannel_lbl = QtWidgets.QLabel("{}:".format(_("Choose channel")))
         choosechannel_ch = QtWidgets.QComboBox()
         tvguide_sch = QtWidgets.QListWidget()
@@ -2327,10 +2339,7 @@ if __name__ == "__main__":
         warning_lbl = QtWidgets.QLabel(
             _("Recording of two channels simultaneously is not available!")
         )
-        myFont5 = QtGui.QFont()
-        myFont5.setPointSize(11)
-        myFont5.setBold(True)
-        warning_lbl.setFont(myFont5)
+        warning_lbl.setFont(YukiFonts.font_11_bold)
         warning_lbl.setStyleSheet("color: red")
         warning_lbl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
@@ -2360,9 +2369,7 @@ if __name__ == "__main__":
         wid = QtWidgets.QWidget()
 
         title = QtWidgets.QLabel()
-        myFont2 = QtGui.QFont()
-        myFont2.setBold(True)
-        title.setFont(myFont2)
+        title.setFont(YukiFonts.font_bold)
         title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
         deinterlace_lbl = QtWidgets.QLabel("{}:".format(_("Deinterlace")))
@@ -3605,9 +3612,7 @@ if __name__ == "__main__":
 
         url_label = QtWidgets.QLabel(_("URL") + "\n")
         url_label.setStyleSheet("color:green")
-        bold_fnt_4 = QtGui.QFont()
-        bold_fnt_4.setBold(True)
-        url_label.setFont(bold_fnt_4)
+        url_label.setFont(YukiFonts.font_bold)
 
         url_data_layout.addWidget(url_label)
 
@@ -4505,10 +4510,7 @@ if __name__ == "__main__":
         chan = QtWidgets.QLabel(_("No channel selected"))
         chan.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         chan.setStyleSheet("color: green")
-        myFont4 = QtGui.QFont()
-        myFont4.setPointSize(11)
-        myFont4.setBold(True)
-        chan.setFont(myFont4)
+        chan.setFont(YukiFonts.font_11_bold)
         chan.resize(200, 30)
 
         def centerwidget(wdg3, offset1=0):
@@ -5265,9 +5267,7 @@ if __name__ == "__main__":
                 super().__init__(parent)
 
                 self.name_label = QtWidgets.QLabel()
-                myFont = QtGui.QFont()
-                myFont.setBold(True)
-                self.name_label.setFont(myFont)
+                self.name_label.setFont(YukiFonts.font_bold)
                 self.description_label = QtWidgets.QLabel()
 
                 self.icon_label = QtWidgets.QLabel()
@@ -6083,10 +6083,7 @@ if __name__ == "__main__":
         loading.setStyleSheet("color: #778a30")
         hideLoading()
 
-        myFont2 = QtGui.QFont()
-        myFont2.setPointSize(12)
-        myFont2.setBold(True)
-        loading.setFont(myFont2)
+        loading.setFont(YukiFonts.font_12_bold)
         combobox = QtWidgets.QComboBox()
         combobox.currentIndexChanged.connect(group_change)
         for group in groups:
@@ -6273,7 +6270,7 @@ if __name__ == "__main__":
                             season = YukiData.series[sel_serie].seasons[season_name]
                             season_item = QtWidgets.QListWidgetItem()
                             season_item.setText("== " + season.name + " ==")
-                            season_item.setFont(bold_fnt_1)
+                            season_item.setFont(YukiFonts.font_bold)
                             win.seriesWidget.addItem(season_item)
                             for episode_name in season.episodes.keys():
                                 episode = season.episodes[episode_name]
@@ -7040,19 +7037,16 @@ if __name__ == "__main__":
         def process_stream_info(
             dat_count, name44, stream_props_out, stream_info_lbname
         ):
-            bold_fnt = QtGui.QFont()
-            bold_fnt.setBold(True)
-
             if stream_info_lbname:
                 la2 = QtWidgets.QLabel()
                 la2.setStyleSheet("color:green")
-                la2.setFont(bold_fnt)
+                la2.setFont(YukiFonts.font_bold)
                 la2.setText("\n" + stream_info_lbname + "\n")
                 stream_information_layout.addWidget(la2, dat_count, 0)
                 dat_count += 1
 
             la1 = QtWidgets.QLabel()
-            la1.setFont(bold_fnt)
+            la1.setFont(YukiFonts.font_bold)
             la1.setText(name44)
             stream_information_layout.addWidget(la1, dat_count, 0)
 
@@ -7111,9 +7105,7 @@ if __name__ == "__main__":
                 dat_count = 1
                 stream_info_video_lbl = QtWidgets.QLabel(_("Video") + "\n")
                 stream_info_video_lbl.setStyleSheet("color:green")
-                bold_fnt_2 = QtGui.QFont()
-                bold_fnt_2.setBold(True)
-                stream_info_video_lbl.setFont(bold_fnt_2)
+                stream_info_video_lbl.setFont(YukiFonts.font_bold)
                 stream_information_layout.addWidget(stream_info_video_lbl, 0, 0)
                 dat_count = process_stream_info(
                     dat_count, _("General"), stream_props[0], ""
@@ -7902,20 +7894,13 @@ if __name__ == "__main__":
         btn_next_channel.clicked.connect(next_channel)
 
         label_video_data = QtWidgets.QLabel("")
-        myFont4 = QtGui.QFont()
-        myFont4.setPointSize(12)
         label_volume = QtWidgets.QLabel("")
         label_volume.setMinimumWidth(50)
-        label_video_data.setFont(myFont4)
-        myFont5 = QtGui.QFont()
-        myFont5.setPointSize(12)
-        label_volume.setFont(myFont5)
+        label_video_data.setFont(YukiFonts.font_12)
+        label_volume.setFont(YukiFonts.font_12)
 
         label_avsync = QtWidgets.QLabel("")
-
-        label_avsync_font = QtGui.QFont()
-        label_avsync_font.setPointSize(12)
-        label_avsync.setFont(label_avsync_font)
+        label_avsync.setFont(YukiFonts.font_12)
 
         label_avsync.setText("A-V -0.00")
         label_avsync.setMinimumSize(label_avsync.sizeHint())
@@ -8011,21 +7996,15 @@ if __name__ == "__main__":
         dockWidget_controlPanel.setFixedHeight(DOCKWIDGET_CONTROLPANEL_HEIGHT_LOW)
 
         l1 = QtWidgets.QLabel(win)
-        myFont1 = QtGui.QFont()
-        myFont1.setPointSize(12)
-        myFont1.setBold(True)
         l1.setStyleSheet("background-color: " + BCOLOR)
-        l1.setFont(myFont1)
+        l1.setFont(YukiFonts.font_12_bold)
         l1.setWordWrap(True)
         l1.move(50, 50)
         l1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
         rewind = QtWidgets.QWidget(win)
-        myFont3 = QtGui.QFont()
-        myFont3.setPointSize(12)
-        myFont3.setBold(True)
         rewind.setStyleSheet("background-color: " + BCOLOR)
-        rewind.setFont(myFont3)
+        rewind.setFont(YukiFonts.font_12_bold)
         rewind.move(50, 50)
         rewind.resize(rewind.width(), rewind.height() + 5)
 
@@ -8109,9 +8088,7 @@ if __name__ == "__main__":
 
         rewind_label = QtWidgets.QLabel(_("Rewind"))
         rewind_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        bold_fnt_3 = QtGui.QFont()
-        bold_fnt_3.setBold(True)
-        rewind_label.setFont(bold_fnt_3)
+        rewind_label.setFont(YukiFonts.font_bold)
         rewind_label.setStyleSheet("color: pink")
 
         rewind_slider = Slider(QtCore.Qt.Orientation.Horizontal)
