@@ -2113,11 +2113,11 @@ if __name__ == "__main__":
 
         @idle_function
         def set_record_icon(unused=None):
-            label5_1.setIcon(record_icon)
+            btn_record.setIcon(record_icon)
 
         @idle_function
         def set_record_stop_icon(unused=None):
-            label5_1.setIcon(record_stop_icon)
+            btn_record.setIcon(record_stop_icon)
 
         def record_timer():
             try:
@@ -4130,19 +4130,19 @@ if __name__ == "__main__":
                 global event_handler
                 try:
                     if not player.pause:
-                        label3.setIcon(
+                        btn_playpause.setIcon(
                             QtGui.QIcon(
                                 str(Path("yuki_iptv", ICONS_FOLDER, "pause.png"))
                             )
                         )
-                        label3.setToolTip(_("Pause"))
+                        btn_playpause.setToolTip(_("Pause"))
                     else:
-                        label3.setIcon(
+                        btn_playpause.setIcon(
                             QtGui.QIcon(
                                 str(Path("yuki_iptv", ICONS_FOLDER, "play.png"))
                             )
                         )
-                        label3.setToolTip(_("Play"))
+                        btn_playpause.setToolTip(_("Play"))
                     if event_handler:
                         try:
                             event_handler.on_playpause()
@@ -4213,10 +4213,10 @@ if __name__ == "__main__":
             volume_option1 = read_option("volume")
             if volume_option1 is not None:
                 logger.info(f"Set volume to {vol_remembered}")
-                label7.setValue(vol_remembered)
+                volume_slider.setValue(vol_remembered)
                 mpv_volume_set()
             else:
-                label7.setValue(100)
+                volume_slider.setValue(100)
                 mpv_volume_set()
 
             return aot_action1
@@ -4980,7 +4980,7 @@ if __name__ == "__main__":
                     fullscreen = True
                     dockWidget_playlist.hide()
                     chan.hide()
-                    label12.hide()
+                    label_video_data.hide()
                     label_avsync.hide()
                     for lbl3 in hlayout2_btns:
                         if lbl3 not in show_lbls_fullscreen:
@@ -5038,7 +5038,7 @@ if __name__ == "__main__":
                         dockWidget_controlPanel.setFixedHeight(
                             DOCKWIDGET_CONTROLPANEL_HEIGHT_HIGH
                         )
-                    label12.show()
+                    label_video_data.show()
                     label_avsync.show()
                     for lbl3 in hlayout2_btns:
                         if lbl3 not in show_lbls_fullscreen:
@@ -5104,31 +5104,31 @@ if __name__ == "__main__":
             time_stop = time.time() + 3
             if player.mute:
                 if old_value > 50:
-                    label6.setIcon(
+                    btn_volume.setIcon(
                         QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "volume.png")))
                     )
                 else:
-                    label6.setIcon(
+                    btn_volume.setIcon(
                         QtGui.QIcon(
                             str(Path("yuki_iptv", ICONS_FOLDER, "volume-low.png"))
                         )
                     )
                 mpv_override_mute(False)
-                label7.setValue(old_value)
+                volume_slider.setValue(old_value)
                 show_volume(old_value)
             else:
-                label6.setIcon(
+                btn_volume.setIcon(
                     QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "mute.png")))
                 )
                 mpv_override_mute(True)
-                old_value = label7.value()
-                label7.setValue(0)
+                old_value = volume_slider.value()
+                volume_slider.setValue(0)
                 show_volume(_("Volume off"))
 
         def mpv_volume_set():
             global time_stop, l1, fullscreen
             time_stop = time.time() + 3
-            vol = int(label7.value())
+            vol = int(volume_slider.value())
             try:
                 if vol == 0:
                     show_volume(_("Volume off"))
@@ -5139,17 +5139,17 @@ if __name__ == "__main__":
             mpv_override_volume(vol)
             if vol == 0:
                 mpv_override_mute(True)
-                label6.setIcon(
+                btn_volume.setIcon(
                     QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "mute.png")))
                 )
             else:
                 mpv_override_mute(False)
                 if vol > 50:
-                    label6.setIcon(
+                    btn_volume.setIcon(
                         QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "volume.png")))
                     )
                 else:
-                    label6.setIcon(
+                    btn_volume.setIcon(
                         QtGui.QIcon(
                             str(Path("yuki_iptv", ICONS_FOLDER, "volume-low.png"))
                         )
@@ -7240,7 +7240,7 @@ if __name__ == "__main__":
             else:
                 volume = int(player.volume + settings["volumechangestep"])
                 volume = min(volume, 200)
-                label7.setValue(volume)
+                volume_slider.setValue(volume)
                 mpv_volume_set()
 
         @idle_function
@@ -7253,7 +7253,7 @@ if __name__ == "__main__":
                 volume = max(volume, 0)
                 time_stop = time.time() + 3
                 show_volume(volume)
-                label7.setValue(volume)
+                volume_slider.setValue(volume)
                 mpv_volume_set()
 
         class ControlPanelDockWidget(QtWidgets.QDockWidget):
@@ -7331,7 +7331,7 @@ if __name__ == "__main__":
             win.activateWindow()
 
         def mpris_set_volume(val):
-            label7.setValue(int(val * 100))
+            volume_slider.setValue(int(val * 100))
             mpv_volume_set()
 
         def mpris_seek(val):
@@ -7812,96 +7812,104 @@ if __name__ == "__main__":
             str(Path("yuki_iptv", ICONS_FOLDER, "stoprecord.png"))
         )
 
-        label3 = QtWidgets.QPushButton()
-        label3.setIcon(QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "pause.png"))))
-        label3.setToolTip(_("Pause"))
-        label3.clicked.connect(mpv_play)
-        label4 = QtWidgets.QPushButton()
-        label4.setIcon(QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "stop.png"))))
-        label4.setToolTip(_("Stop"))
-        label4.clicked.connect(mpv_stop)
-        label5 = QtWidgets.QPushButton()
-        label5.setIcon(
+        btn_playpause = QtWidgets.QPushButton()
+        btn_playpause.setIcon(
+            QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "pause.png")))
+        )
+        btn_playpause.setToolTip(_("Pause"))
+        btn_playpause.clicked.connect(mpv_play)
+        btn_stop = QtWidgets.QPushButton()
+        btn_stop.setIcon(QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "stop.png"))))
+        btn_stop.setToolTip(_("Stop"))
+        btn_stop.clicked.connect(mpv_stop)
+        btn_fullscreen = QtWidgets.QPushButton()
+        btn_fullscreen.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "fullscreen.png")))
         )
-        label5.setToolTip(_("Fullscreen"))
-        label5.clicked.connect(mpv_fullscreen)
-        label5_0 = QtWidgets.QPushButton()
-        label5_0.setIcon(
+        btn_fullscreen.setToolTip(_("Fullscreen"))
+        btn_fullscreen.clicked.connect(mpv_fullscreen)
+        btn_open_recordings_folder = QtWidgets.QPushButton()
+        btn_open_recordings_folder.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "folder.png")))
         )
-        label5_0.setToolTip(_("Open recordings folder"))
-        label5_0.clicked.connect(open_recording_folder)
-        label5_1 = QtWidgets.QPushButton()
-        label5_1.setIcon(record_icon)
-        label5_1.setToolTip(_("Record"))
-        label5_1.clicked.connect(do_record)
-        label5_2 = QtWidgets.QPushButton()
-        label5_2.setIcon(
+        btn_open_recordings_folder.setToolTip(_("Open recordings folder"))
+        btn_open_recordings_folder.clicked.connect(open_recording_folder)
+        btn_record = QtWidgets.QPushButton()
+        btn_record.setIcon(record_icon)
+        btn_record.setToolTip(_("Record"))
+        btn_record.clicked.connect(do_record)
+        btn_show_scheduler = QtWidgets.QPushButton()
+        btn_show_scheduler.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "calendar.png")))
         )
-        label5_2.setToolTip(_("Recording scheduler"))
-        label5_2.clicked.connect(show_scheduler)
-        label6 = QtWidgets.QPushButton()
-        label6.setIcon(QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "volume.png"))))
-        label6.setToolTip(_("Volume"))
-        label6.clicked.connect(mpv_mute)
-        LABEL7_SET_WIDTH = 150
-        label7 = QtWidgets.QSlider(QtCore.Qt.Orientation.Horizontal)
-        label7.setMinimum(0)
-        label7.setMaximum(200)
-        label7.setFixedWidth(LABEL7_SET_WIDTH)
-        label7.valueChanged.connect(mpv_volume_set_custom)
-        label7_1 = QtWidgets.QPushButton()
-        label7_1.setIcon(
+        btn_show_scheduler.setToolTip(_("Recording scheduler"))
+        btn_show_scheduler.clicked.connect(show_scheduler)
+        btn_volume = QtWidgets.QPushButton()
+        btn_volume.setIcon(
+            QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "volume.png")))
+        )
+        btn_volume.setToolTip(_("Volume"))
+        btn_volume.clicked.connect(mpv_mute)
+        VOLUME_SLIDER_SET_WIDTH = 150
+        volume_slider = QtWidgets.QSlider(QtCore.Qt.Orientation.Horizontal)
+        volume_slider.setMinimum(0)
+        volume_slider.setMaximum(200)
+        volume_slider.setFixedWidth(VOLUME_SLIDER_SET_WIDTH)
+        volume_slider.valueChanged.connect(mpv_volume_set_custom)
+        btn_screenshot = QtWidgets.QPushButton()
+        btn_screenshot.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "screenshot.png")))
         )
-        label7_1.setToolTip(_("Screenshot").capitalize())
-        label7_1.clicked.connect(do_screenshot)
-        label7_2 = QtWidgets.QPushButton()
-        label7_2.setIcon(
+        btn_screenshot.setToolTip(_("Screenshot").capitalize())
+        btn_screenshot.clicked.connect(do_screenshot)
+        btn_show_archive = QtWidgets.QPushButton()
+        btn_show_archive.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "timeshift.png")))
         )
-        label7_2.setToolTip(_("Archive"))
-        label7_2.clicked.connect(show_archive)
+        btn_show_archive.setToolTip(_("Archive"))
+        btn_show_archive.clicked.connect(show_archive)
         if not settings["catchupenable"]:
-            label7_2.setVisible(False)
-        label8 = QtWidgets.QPushButton()
-        label8.setIcon(
+            btn_show_archive.setVisible(False)
+        btn_show_settings = QtWidgets.QPushButton()
+        btn_show_settings.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "settings.png")))
         )
-        label8.setToolTip(_("Settings"))
-        label8.clicked.connect(show_settings)
-        label8_0 = QtWidgets.QPushButton()
-        label8_0.setIcon(
+        btn_show_settings.setToolTip(_("Settings"))
+        btn_show_settings.clicked.connect(show_settings)
+        btn_show_playlists = QtWidgets.QPushButton()
+        btn_show_playlists.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "tv-blue.png")))
         )
-        label8_0.setToolTip(_("Playlists"))
-        label8_0.clicked.connect(show_playlists)
-        label8_1 = QtWidgets.QPushButton()
-        label8_1.setIcon(
+        btn_show_playlists.setToolTip(_("Playlists"))
+        btn_show_playlists.clicked.connect(show_playlists)
+        btn_tv_guide = QtWidgets.QPushButton()
+        btn_tv_guide.setIcon(
             QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "tvguide.png")))
         )
-        label8_1.setToolTip(_("TV guide"))
-        label8_1.clicked.connect(show_tvguide)
-        label8_2 = QtWidgets.QPushButton()
-        label8_2.setIcon(QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "prev.png"))))
-        label8_2.setToolTip(_("Previous channel"))
-        label8_2.clicked.connect(prev_channel)
-        label8_3 = QtWidgets.QPushButton()
-        label8_3.setIcon(QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "next.png"))))
-        label8_3.setToolTip(_("Next channel"))
-        label8_3.clicked.connect(next_channel)
+        btn_tv_guide.setToolTip(_("TV guide"))
+        btn_tv_guide.clicked.connect(show_tvguide)
+        btn_prev_channel = QtWidgets.QPushButton()
+        btn_prev_channel.setIcon(
+            QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "prev.png")))
+        )
+        btn_prev_channel.setToolTip(_("Previous channel"))
+        btn_prev_channel.clicked.connect(prev_channel)
+        btn_next_channel = QtWidgets.QPushButton()
+        btn_next_channel.setIcon(
+            QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "next.png")))
+        )
+        btn_next_channel.setToolTip(_("Next channel"))
+        btn_next_channel.clicked.connect(next_channel)
 
-        label12 = QtWidgets.QLabel("")
+        label_video_data = QtWidgets.QLabel("")
         myFont4 = QtGui.QFont()
         myFont4.setPointSize(12)
-        label13 = QtWidgets.QLabel("")
-        label13.setMinimumWidth(50)
-        label12.setFont(myFont4)
+        label_volume = QtWidgets.QLabel("")
+        label_volume.setMinimumWidth(50)
+        label_video_data.setFont(myFont4)
         myFont5 = QtGui.QFont()
         myFont5.setPointSize(12)
-        label13.setFont(myFont5)
+        label_volume.setFont(myFont5)
 
         label_avsync = QtWidgets.QLabel("")
 
@@ -7936,47 +7944,47 @@ if __name__ == "__main__":
         hlayout1.addWidget(stop_label)
 
         hlayout2_btns = [
-            label3,
-            label4,
-            label5,
-            label5_1,
-            label5_2,
-            label5_0,
-            label6,
-            label7,
-            label13,
-            label7_1,
-            label7_2,
-            label8_1,
-            label8_2,
-            label8_3,
+            btn_playpause,
+            btn_stop,
+            btn_fullscreen,
+            btn_record,
+            btn_show_scheduler,
+            btn_open_recordings_folder,
+            btn_volume,
+            volume_slider,
+            label_volume,
+            btn_screenshot,
+            btn_show_archive,
+            btn_tv_guide,
+            btn_prev_channel,
+            btn_next_channel,
         ]
 
         show_lbls_fullscreen = [
-            label3,
-            label4,
-            label5,
-            label5_1,
-            label6,
-            label7,
-            label13,
-            label7_1,
-            label7_2,
-            label8_1,
-            label8_2,
-            label8_3,
+            btn_playpause,
+            btn_stop,
+            btn_fullscreen,
+            btn_record,
+            btn_volume,
+            volume_slider,
+            label_volume,
+            btn_screenshot,
+            btn_show_archive,
+            btn_tv_guide,
+            btn_prev_channel,
+            btn_next_channel,
         ]
 
         fs_widget = QtWidgets.QWidget()
         fs_widget_l = QtWidgets.QHBoxLayout()
-        label8.setMaximumWidth(32)
-        fs_widget_l.addWidget(label8)
+        btn_show_settings.setMaximumWidth(32)
+        fs_widget_l.addWidget(btn_show_settings)
         fs_widget.setLayout(fs_widget_l)
 
         for hlayout2_btn in hlayout2_btns:
             hlayout2.addWidget(hlayout2_btn)
-        hlayout2.addStretch(1000000)
-        hlayout2.addWidget(label12)
+        hlayout2.addStretch(1000000)  # TODO: find better solution
+        hlayout2.addWidget(label_video_data)
         hlayout2.addWidget(label_avsync)
         hlayout2.addWidget(hdd_gif_label)
 
@@ -8505,10 +8513,10 @@ if __name__ == "__main__":
                         not (codec.lower() == "png" and width == 800 and height == 600)
                     ) and (width and height):
                         if settings["hidebitrateinfo"]:
-                            label12.setText("")
+                            label_video_data.setText("")
                             label_avsync.setText("")
                         else:
-                            label12.setText(
+                            label_video_data.setText(
                                 f"  {width}x{height}"
                                 f" - {codec} / {audio_codec}{video_bitrate} -"
                             )
@@ -8516,7 +8524,7 @@ if __name__ == "__main__":
                         if loading.text() == _("Loading..."):
                             hideLoading()
                     else:
-                        label12.setText("")
+                        label_video_data.setText("")
                         label_avsync.setText("")
                     ic2 += 0.1
                     if ic2 > 9.9:
@@ -8727,7 +8735,7 @@ if __name__ == "__main__":
             dockWidget_playlist.setWidget(widget)
             playlist_widget.hide()
 
-        LABEL7_WIDTH = False
+        VOLUME_SLIDER_WIDTH = False
 
         def resizeandmove_controlpanel():
             lb2_width = 0
@@ -8749,10 +8757,10 @@ if __name__ == "__main__":
             controlpanel_widget.move(maptoglobal(p_3.x() - 100, win.height() - 100))
 
         def show_controlpanel():
-            global LABEL7_WIDTH
-            if not LABEL7_WIDTH:
-                LABEL7_WIDTH = label7.width()
-            label7.setFixedWidth(LABEL7_SET_WIDTH)
+            global VOLUME_SLIDER_WIDTH
+            if not VOLUME_SLIDER_WIDTH:
+                VOLUME_SLIDER_WIDTH = volume_slider.width()
+            volume_slider.setFixedWidth(VOLUME_SLIDER_SET_WIDTH)
             controlpanel_widget.setWindowOpacity(0.55)
             if channelfilter.usePopup:
                 controlpanel_widget.setWindowFlags(
@@ -8773,8 +8781,8 @@ if __name__ == "__main__":
             resizeandmove_controlpanel()
 
         def hide_controlpanel():
-            if LABEL7_WIDTH:
-                label7.setFixedWidth(LABEL7_WIDTH)
+            if VOLUME_SLIDER_WIDTH:
+                volume_slider.setFixedWidth(VOLUME_SLIDER_WIDTH)
             cp_layout.removeWidget(widget2)
             dockWidget_controlPanel.setWidget(widget2)
             controlpanel_widget.hide()
@@ -8864,7 +8872,7 @@ if __name__ == "__main__":
                         and not is_show_volume()
                     ):
                         l1.hide()
-                    label13.setText(f"{int(player.volume)}%")
+                    label_volume.setText(f"{int(player.volume)}%")
                     dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
                     if fullscreen and not key_t_visible:
                         # Check cursor inside window
