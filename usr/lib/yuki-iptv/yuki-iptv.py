@@ -3020,6 +3020,8 @@ if __name__ == "__main__":
 
             old_uuid = settings["uuid"] if "uuid" in settings else False
 
+            hideplleftmousechk = hideplaylistbyleftmouseclick_flag.isChecked()
+
             settings_arr = {
                 "m3u": sm3u.text().strip(),
                 "epg": sepg.text().strip(),
@@ -3052,6 +3054,7 @@ if __name__ == "__main__":
                 "showcontrolsmouse": showcontrolsmouse_flag.isChecked(),
                 "catchupenable": catchupenable_flag.isChecked(),
                 "hidechannellogos": hidechannellogos_flag.isChecked(),
+                "hideplaylistbyleftmouseclick": hideplleftmousechk,
                 "rewindenable": rewindenable_flag.isChecked(),
                 "flpopacity": flpopacity_input.value(),
                 "panelposition": panelposition_choose.currentIndex(),
@@ -3372,6 +3375,14 @@ if __name__ == "__main__":
         hidechannellogos_flag = QtWidgets.QCheckBox()
         hidechannellogos_flag.setChecked(settings["hidechannellogos"])
 
+        hideplaylistbyleftmouseclick_label = QtWidgets.QLabel(
+            "{}:".format(_("Show/hide playlist by left mouse click"))
+        )
+        hideplaylistbyleftmouseclick_flag = QtWidgets.QCheckBox()
+        hideplaylistbyleftmouseclick_flag.setChecked(
+            settings["hideplaylistbyleftmouseclick"]
+        )
+
         tabs = QtWidgets.QTabWidget()
 
         tab_main = QtWidgets.QWidget()
@@ -3446,16 +3457,18 @@ if __name__ == "__main__":
         )
         tab_gui.layout.addWidget(panelposition_label, 0, 0)
         tab_gui.layout.addWidget(panelposition_choose, 0, 1)
-        tab_gui.layout.addWidget(hideepgfromplaylist_label, 1, 0)
-        tab_gui.layout.addWidget(hideepgfromplaylist_flag, 1, 1)
-        tab_gui.layout.addWidget(hideepgpercentage_label, 2, 0)
-        tab_gui.layout.addWidget(hideepgpercentage_flag, 2, 1)
-        tab_gui.layout.addWidget(hidebitrateinfo_label, 3, 0)
-        tab_gui.layout.addWidget(hidebitrateinfo_flag, 3, 1)
-        tab_gui.layout.addWidget(hidetvprogram_label, 4, 0)
-        tab_gui.layout.addWidget(hidetvprogram_flag, 4, 1)
-        tab_gui.layout.addWidget(hidechannellogos_label, 5, 0)
-        tab_gui.layout.addWidget(hidechannellogos_flag, 5, 1)
+        tab_gui.layout.addWidget(hideplaylistbyleftmouseclick_label, 1, 0)
+        tab_gui.layout.addWidget(hideplaylistbyleftmouseclick_flag, 1, 1)
+        tab_gui.layout.addWidget(hideepgfromplaylist_label, 2, 0)
+        tab_gui.layout.addWidget(hideepgfromplaylist_flag, 2, 1)
+        tab_gui.layout.addWidget(hideepgpercentage_label, 3, 0)
+        tab_gui.layout.addWidget(hideepgpercentage_flag, 3, 1)
+        tab_gui.layout.addWidget(hidebitrateinfo_label, 4, 0)
+        tab_gui.layout.addWidget(hidebitrateinfo_flag, 4, 1)
+        tab_gui.layout.addWidget(hidetvprogram_label, 5, 0)
+        tab_gui.layout.addWidget(hidetvprogram_flag, 5, 1)
+        tab_gui.layout.addWidget(hidechannellogos_label, 6, 0)
+        tab_gui.layout.addWidget(hidechannellogos_flag, 6, 1)
         tab_gui.setLayout(tab_gui.layout)
 
         tab_actions.layout = QtWidgets.QGridLayout()
@@ -5060,7 +5073,7 @@ if __name__ == "__main__":
                         currentWidthHeight[3],
                     )
                     if not isPlaylistVisible:
-                        key_t()
+                        show_hide_playlist()
                     if settings["panelposition"] == 1:
                         tvguide_close_lbl.move(
                             win.width() - tvguide_lbl.width() - 40, tvguide_lbl_offset
@@ -7005,7 +7018,7 @@ if __name__ == "__main__":
             global fullscreen
             if not fullscreen:
                 try:
-                    key_t()
+                    show_hide_playlist()
                 except Exception:
                     pass
 
@@ -7223,6 +7236,8 @@ if __name__ == "__main__":
             global right_click_menu, fullscreen
             if right_click_menu.isVisible():
                 right_click_menu.hide()
+            elif settings["hideplaylistbyleftmouseclick"]:
+                show_hide_playlist()
 
         @idle_function
         def my_up_binding_execute(unused=None):
@@ -8841,7 +8856,7 @@ if __name__ == "__main__":
         def timer_mouse():
             try:
                 if win.isVisible():
-                    global fullscreen, key_t_visible, dockWidget_playlistVisible
+                    global fullscreen, dockWidget_playlistVisible
                     global dockWidget_controlPanelVisible, rewindWidgetVisible
                     if (
                         l1.isVisible()
@@ -8851,7 +8866,7 @@ if __name__ == "__main__":
                         l1.hide()
                     label_volume.setText(f"{int(player.volume)}%")
                     dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
-                    if fullscreen and not key_t_visible:
+                    if fullscreen:
                         # Check cursor inside window
                         cur_pos = QtGui.QCursor.pos()
                         is_inside_window = (
@@ -8946,9 +8961,8 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
-        key_t_visible = False
-
-        def key_t():
+        @idle_function
+        def show_hide_playlist(unused=None):
             global fullscreen
             if not fullscreen:
                 if dockWidget_playlist.isVisible():
@@ -9040,7 +9054,7 @@ if __name__ == "__main__":
             player.command("frame-back-step")
 
         funcs = {
-            "key_t": key_t,
+            "key_t": show_hide_playlist,
             "esc_handler": esc_handler,
             "mpv_fullscreen": mpv_fullscreen,
             "mpv_fullscreen_2": mpv_fullscreen,
@@ -9227,7 +9241,7 @@ if __name__ == "__main__":
                         showhideeverything()
                     else:
                         if compactstate["playlist_hidden"]:
-                            key_t()
+                            show_hide_playlist()
                         if compactstate["controlpanel_hidden"]:
                             lowpanel_ch()
             except Exception:
