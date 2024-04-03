@@ -8466,11 +8466,11 @@ if __name__ == "__main__":
                     except Exception:
                         video_bitrate = ""
                     try:
-                        audio_codec = player.audio_codec.split(" ")[0].strip().lower()
+                        audio_codec = player.audio_codec.split(" ")[0].strip()
                     except Exception:
                         audio_codec = "no audio"
                     try:
-                        codec = player.video_codec.split(" ")[0].strip().lower()
+                        codec = player.video_codec.split(" ")[0].strip()
                         width = player.width
                         height = player.height
                     except Exception:
@@ -8486,9 +8486,9 @@ if __name__ == "__main__":
                             avsync = f"<span style='color: #B58B00;'>{avsync}</span>"
                     else:
                         avsync = "0.0"
-                    if (not (codec == "png" and width == 800 and height == 600)) and (
-                        width and height
-                    ):
+                    if (
+                        not (codec.lower() == "png" and width == 800 and height == 600)
+                    ) and (width and height):
                         if settings["hidebitrateinfo"]:
                             label_video_data.setText("")
                             label_avsync.setText("")
