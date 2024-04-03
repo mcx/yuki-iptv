@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-03 02:18+0000\n"
-"PO-Revision-Date: 2024-04-03 02:21+0000\n"
+"PO-Revision-Date: 2024-04-03 02:27+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Russian <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -810,7 +810,9 @@ msgstr "Скрыть логотипы телеканалов"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3379
 msgid "Show/hide playlist by left mouse click"
-msgstr "Показывать/скрывать плейлист левым кликом мыши"
+msgstr ""
+"Показывать/скрывать плейлист\n"
+"левым кликом мыши"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3398 usr/lib/yuki-iptv/yuki-iptv.py:3420
 msgid "Main"
