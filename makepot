@@ -8,5 +8,5 @@ sed -i \
         -e '/^# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR./d' \
         yuki-iptv.pot
 echo "Updating .po files..."
-find po -type f -name '*.po' -exec msgmerge -U -N {} yuki-iptv.pot \;
+find po -type f -name '*.po' -exec msgmerge -U -N "{}" ./yuki-iptv.pot \;
 find po -type f -name '*.po~' -delete
