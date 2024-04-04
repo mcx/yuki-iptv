@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-04 22:12+0000\n"
-"PO-Revision-Date: 2024-04-03 02:27+0000\n"
+"PO-Revision-Date: 2024-04-04 22:18+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Russian <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -14,9 +14,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Generator: Weblate 5.4.2\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
+"n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:590
 msgid "Loading TV guide cache..."
@@ -642,7 +642,7 @@ msgstr "Слева"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3283
 msgid "Separate window"
-msgstr ""
+msgstr "В отдельном окне"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3287
 msgid ""
@@ -873,7 +873,7 @@ msgstr "Страница"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:6594
 msgid "Playlist"
-msgstr ""
+msgstr "Плейлист"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:6635
 msgid "Doing screenshot..."

@@ -4,8 +4,9 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-04 22:12+0000\n"
-"PO-Revision-Date: 2024-03-05 19:34+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-04-04 22:18+0000\n"
+"Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
+"codeberg.org>\n"
 "Language-Team: French <https://translate.codeberg.org/projects/yuki-iptv/"
 "yuki-iptv/fr/>\n"
 "Language: fr_FR\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:590
 msgid "Loading TV guide cache..."
@@ -523,7 +524,7 @@ msgstr "Sélectionner un fournisseur"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3136
 msgid "Reset channel settings"
-msgstr ""
+msgstr "Réinitialiser les paramètres de chaîne"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3138
 msgid "Clear logo cache"

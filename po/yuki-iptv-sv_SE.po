@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-04 22:12+0000\n"
-"PO-Revision-Date: 2024-03-05 19:34+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-04-04 22:18+0000\n"
+"Last-Translator: Umeaman <Umeaman@users.noreply.translate.codeberg.org>\n"
 "Language-Team: Swedish <https://translate.codeberg.org/projects/yuki-iptv/"
 "yuki-iptv/sv/>\n"
 "Language: sv_SE\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:590
 msgid "Loading TV guide cache..."
@@ -35,7 +35,7 @@ msgstr "fel med yuki-iptv"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:855
 msgid "Processing error"
-msgstr ""
+msgstr "Fel vid behandling"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:861 usr/lib/yuki-iptv/yuki-iptv.py:873
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:169
@@ -93,7 +93,7 @@ msgstr "Dubbelklicka för att ändra"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1217
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Återställ till fabriksinställningar"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1225
 msgid "Modify shortcut"
@@ -128,7 +128,7 @@ msgstr "Licens"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1351 usr/lib/yuki-iptv/yuki-iptv.py:6034
 msgid "Video settings"
-msgstr ""
+msgstr "Video-inställningar"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1356 usr/lib/yuki-iptv/yuki-iptv.py:6033
 msgid "Open in external player"
@@ -150,7 +150,7 @@ msgstr "Ingen TV-guide för kanal"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1400 usr/lib/yuki-iptv/yuki-iptv.py:2249
 #: usr/lib/yuki-iptv/yuki-iptv.py:5773 usr/lib/yuki-iptv/yuki-iptv.py:6500
 msgid "Search channel"
-msgstr ""
+msgstr "Sök kanal"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1402 usr/lib/yuki-iptv/yuki-iptv.py:1847
 #: usr/lib/yuki-iptv/yuki-iptv.py:1849 usr/lib/yuki-iptv/yuki-iptv.py:2251
@@ -160,7 +160,7 @@ msgstr "Sök"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1414
 msgid "Show only channels in playlist"
-msgstr ""
+msgstr "Visa endast kanaler i spellista"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1504 usr/lib/yuki-iptv/yuki-iptv.py:7912
 #: usr/lib/yuki-iptv/yuki-iptv.py:9208
@@ -183,15 +183,15 @@ msgstr "Utgångsdatum"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1580 usr/lib/yuki-iptv/yuki-iptv.py:7402
 #: usr/lib/yuki-iptv/yuki-iptv.py:7403
 msgid "Unknown"
-msgstr ""
+msgstr "Okänd"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1721
 msgid "Name should not be empty!"
-msgstr ""
+msgstr "Namnet bör inte vara tomt!"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1729
 msgid "URL not specified!"
-msgstr ""
+msgstr "URL inte specificerat!"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1737
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:95
@@ -215,6 +215,8 @@ msgid ""
 "TV guide\n"
 "address"
 msgstr ""
+"Adress till\n"
+"TV-guide"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1759 usr/lib/yuki-iptv/yuki-iptv.py:1761
 #: usr/lib/yuki-iptv/yuki-iptv.py:3109 usr/lib/yuki-iptv/yuki-iptv.py:3112
@@ -245,7 +247,7 @@ msgstr "Standard"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1893
 msgid "Open"
-msgstr ""
+msgstr "Öppna"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1914
 msgid "Select"
@@ -289,7 +291,7 @@ msgstr "Inga planerade inspelningar"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2155 usr/lib/yuki-iptv/yuki-iptv.py:8462
 msgid "Waiting for record"
-msgstr ""
+msgstr "Väntar på inspelning"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2196
 msgid "Recording"
@@ -593,7 +595,7 @@ msgstr ""
 #: usr/lib/yuki-iptv/yuki-iptv.py:3303 usr/lib/yuki-iptv/yuki-iptv.py:3306
 #: usr/lib/yuki-iptv/yuki-iptv.py:3527
 msgid "WARNING: experimental function, working with problems"
-msgstr ""
+msgstr "VARNING: experimentell funktion, jobbar med problem"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3269
 msgid "Floating panels opacity"
@@ -1231,11 +1233,11 @@ msgstr ""
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:295
 msgid "Add n&oise"
-msgstr ""
+msgstr "Lägg till o&-ljud"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:298
 msgid "Add &black borders"
-msgstr ""
+msgstr "Lägg till &svarta kanter"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:301
 msgid "Soft&ware scaling"
@@ -1251,7 +1253,7 @@ msgstr ""
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:326
 msgid "&Karaoke"
-msgstr ""
+msgstr "&Kareoki"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:330
 msgid "&Headphone optimization"
