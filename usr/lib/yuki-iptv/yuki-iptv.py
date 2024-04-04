@@ -5032,8 +5032,8 @@ if __name__ == "__main__":
                     if l1.isVisible() and l1.text().startswith(_("Volume")):
                         l1.hide()
                     win.menu_bar_qt.show()
-                    hide_playlist()
-                    hide_controlpanel()
+                    hide_playlist_fullscreen()
+                    hide_controlpanel_fullscreen()
                     dockWidget_playlist.setWindowOpacity(1)
                     dockWidget_playlist.hide()
                     dockWidget_controlPanel.setWindowOpacity(1)
@@ -8703,7 +8703,7 @@ if __name__ == "__main__":
         def maptoglobal(x6, y6):
             return win.mapToGlobal(QtCore.QPoint(x6, y6))
 
-        def show_playlist():
+        def show_playlist_fullscreen():
             if settings["panelposition"] == 0:
                 playlist_widget.move(
                     maptoglobal(win.width() - dockWidget_playlist.width(), 0)
@@ -8722,7 +8722,7 @@ if __name__ == "__main__":
             pl_layout.addWidget(widget)
             playlist_widget.show()
 
-        def hide_playlist():
+        def hide_playlist_fullscreen():
             pl_layout.removeWidget(widget)
             dockWidget_playlist.setWidget(widget)
             playlist_widget.hide()
@@ -8748,7 +8748,7 @@ if __name__ == "__main__":
             )
             controlpanel_widget.move(maptoglobal(p_3.x() - 100, win.height() - 100))
 
-        def show_controlpanel():
+        def show_controlpanel_fullscreen():
             global VOLUME_SLIDER_WIDTH
             if not VOLUME_SLIDER_WIDTH:
                 VOLUME_SLIDER_WIDTH = volume_slider.width()
@@ -8772,7 +8772,7 @@ if __name__ == "__main__":
             controlpanel_widget.show()
             resizeandmove_controlpanel()
 
-        def hide_controlpanel():
+        def hide_controlpanel_fullscreen():
             if VOLUME_SLIDER_WIDTH:
                 volume_slider.setFixedWidth(VOLUME_SLIDER_WIDTH)
             cp_layout.removeWidget(widget2)
@@ -8897,10 +8897,10 @@ if __name__ == "__main__":
                             ):
                                 if not dockWidget_playlistVisible:
                                     dockWidget_playlistVisible = True
-                                    show_playlist()
+                                    show_playlist_fullscreen()
                             else:
                                 dockWidget_playlistVisible = False
-                                hide_playlist()
+                                hide_playlist_fullscreen()
                         # Control panel
                         if settings["showcontrolsmouse"]:
                             cursor_y = win.container.mapFromGlobal(
@@ -8917,10 +8917,10 @@ if __name__ == "__main__":
                             ):
                                 if not dockWidget_controlPanelVisible:
                                     dockWidget_controlPanelVisible = True
-                                    show_controlpanel()
+                                    show_controlpanel_fullscreen()
                             else:
                                 dockWidget_controlPanelVisible = False
-                                hide_controlpanel()
+                                hide_controlpanel_fullscreen()
                     if settings["rewindenable"]:
                         # Check cursor inside window
                         cur_pos = QtGui.QCursor.pos()
