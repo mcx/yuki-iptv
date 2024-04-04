@@ -5377,7 +5377,7 @@ if __name__ == "__main__":
         favourites_lang = _("Favourites")
 
         def get_page_count(array_len):
-            return math.ceil(array_len / 100)
+            return max(1, math.ceil(array_len / 100))
 
         def gen_chans():
             global playing_chan, current_group, array, page_box, channelfilter
