@@ -3280,6 +3280,7 @@ if __name__ == "__main__":
         panelposition_choose = QtWidgets.QComboBox()
         panelposition_choose.addItem(_("Right"))
         panelposition_choose.addItem(_("Left"))
+        panelposition_choose.addItem(_("Separate window"))
         panelposition_choose.setCurrentIndex(settings["panelposition"])
 
         mouseswitchchannels_label = QtWidgets.QLabel(
@@ -4338,17 +4339,22 @@ if __name__ == "__main__":
             def resize_rewind(self):
                 rewind_normal_offset = 150
                 rewind_fullscreen_offset = 180
+                if settings["panelposition"] == 2:
+                    dockWidget_playlist_cur_width = 0
+                else:
+                    dockWidget_playlist_cur_width = dockWidget_playlist.width()
 
                 if not fullscreen:
                     if not dockWidget_controlPanel.isVisible():
                         set_label_width(
-                            rewind, self.windowWidth - dockWidget_playlist.width() + 58
+                            rewind,
+                            self.windowWidth - dockWidget_playlist_cur_width + 58,
                         )
                         move_label(
                             rewind,
                             int(
                                 ((self.windowWidth - rewind.width()) / 2)
-                                - (dockWidget_playlist.width() / 1.7)
+                                - (dockWidget_playlist_cur_width / 1.7)
                             ),
                             int(
                                 (self.windowHeight - rewind.height())
@@ -4357,13 +4363,14 @@ if __name__ == "__main__":
                         )
                     else:
                         set_label_width(
-                            rewind, self.windowWidth - dockWidget_playlist.width() + 58
+                            rewind,
+                            self.windowWidth - dockWidget_playlist_cur_width + 58,
                         )
                         move_label(
                             rewind,
                             int(
                                 ((self.windowWidth - rewind.width()) / 2)
-                                - (dockWidget_playlist.width() / 1.7)
+                                - (dockWidget_playlist_cur_width / 1.7)
                             ),
                             int(
                                 (self.windowHeight - rewind.height())
@@ -4388,10 +4395,15 @@ if __name__ == "__main__":
             def update(self):
                 global l1, tvguide_lbl, fullscreen
 
+                if settings["panelposition"] == 2:
+                    dockWidget_playlist_cur_width2 = 0
+                else:
+                    dockWidget_playlist_cur_width2 = dockWidget_playlist.width()
+
                 self.windowWidth = self.width()
                 self.windowHeight = self.height()
                 self.updateWindowSize()
-                if settings["panelposition"] == 0:
+                if settings["panelposition"] in (0, 2):
                     move_label(tvguide_lbl, 2, tvguide_lbl_offset)
                 else:
                     move_label(
@@ -4403,13 +4415,13 @@ if __name__ == "__main__":
                 if not fullscreen:
                     if not dockWidget_controlPanel.isVisible():
                         set_label_width(
-                            l1, self.windowWidth - dockWidget_playlist.width() + 58
+                            l1, self.windowWidth - dockWidget_playlist_cur_width2 + 58
                         )
                         move_label(
                             l1,
                             int(
                                 ((self.windowWidth - l1.width()) / 2)
-                                - (dockWidget_playlist.width() / 1.7)
+                                - (dockWidget_playlist_cur_width2 / 1.7)
                             ),
                             int((self.windowHeight - l1.height()) - 20),
                         )
@@ -4417,13 +4429,13 @@ if __name__ == "__main__":
                         h2 = 10
                     else:
                         set_label_width(
-                            l1, self.windowWidth - dockWidget_playlist.width() + 58
+                            l1, self.windowWidth - dockWidget_playlist_cur_width2 + 58
                         )
                         move_label(
                             l1,
                             int(
                                 ((self.windowWidth - l1.width()) / 2)
-                                - (dockWidget_playlist.width() / 1.7)
+                                - (dockWidget_playlist_cur_width2 / 1.7)
                             ),
                             int(
                                 (self.windowHeight - l1.height())
@@ -4443,7 +4455,7 @@ if __name__ == "__main__":
                     h = 0
                     h2 = 10
                 if dockWidget_playlist.isVisible():
-                    if settings["panelposition"] == 0:
+                    if settings["panelposition"] in (0, 2):
                         move_label(lbl2, 0, lbl2_offset)
                     else:
                         move_label(
@@ -5087,6 +5099,7 @@ if __name__ == "__main__":
                     if YukiData.compact_mode:
                         win.menu_bar_qt.hide()
                         setShortcutState(True)
+                    dockWidget_playlist.lower()
                     time04 = time.time() - time03
                     logger.info(
                         f"Leaving fullscreen ended, took {round(time04, 2)} seconds"
@@ -5211,7 +5224,7 @@ if __name__ == "__main__":
             )
         )
         tvguide_close_lbl.resize(32, 32)
-        if settings["panelposition"] == 0:
+        if settings["panelposition"] in (0, 2):
             tvguide_close_lbl.move(tvguide_lbl.width() + 5, tvguide_lbl_offset)
         else:
             tvguide_close_lbl.move(
@@ -6574,10 +6587,18 @@ if __name__ == "__main__":
         widget.layout().addWidget(widget4)
         widget.layout().addWidget(chan)
         widget.layout().addWidget(loading)
-        dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
-        dockWidget_playlist.setTitleBarWidget(QtWidgets.QWidget())
+        if settings["panelposition"] == 2:
+            dockWidget_playlist.resize(
+                DOCKWIDGET_PLAYLIST_WIDTH, dockWidget_playlist.height()
+            )
+            playlist_label = QtWidgets.QLabel(_("Playlist"))
+            playlist_label.setFont(YukiFonts.font_12_bold)
+            dockWidget_playlist.setTitleBarWidget(playlist_label)
+        else:
+            dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
+            dockWidget_playlist.setTitleBarWidget(QtWidgets.QWidget())
         dockWidget_playlist.setWidget(widget)
-        dockWidget_playlist.setFloating(False)
+        dockWidget_playlist.setFloating(settings["panelposition"] == 2)
         dockWidget_playlist.setFeatures(
             QtWidgets.QDockWidget.DockWidgetFeature.NoDockWidgetFeatures
         )
@@ -6585,10 +6606,25 @@ if __name__ == "__main__":
             win.addDockWidget(
                 QtCore.Qt.DockWidgetArea.RightDockWidgetArea, dockWidget_playlist
             )
-        else:
+        elif settings["panelposition"] == 1:
             win.addDockWidget(
                 QtCore.Qt.DockWidgetArea.LeftDockWidgetArea, dockWidget_playlist
             )
+        elif settings["panelposition"] == 2:
+            separate_playlist_data = read_option("separate_playlist")
+            if separate_playlist_data:
+                dockWidget_playlist.setGeometry(
+                    separate_playlist_data["x"],
+                    separate_playlist_data["y"],
+                    separate_playlist_data["w"],
+                    separate_playlist_data["h"],
+                )
+            else:
+                dockWidget_playlist.resize(dockWidget_playlist.width(), win.height())
+                dockWidget_playlist.move(
+                    win.pos().x() + win.width() - dockWidget_playlist.width() + 25,
+                    win.pos().y(),
+                )
 
         FORBIDDEN_CHARS = ('"', "*", ":", "<", ">", "?", "\\", "/", "|", "[", "]")
 
@@ -8220,6 +8256,23 @@ if __name__ == "__main__":
                         },
                     )
                     logger.info("Main window position / width / height saved")
+                    if settings["panelposition"] == 2:
+                        logger.info(
+                            "Saving separate playlist window "
+                            "position / width / height..."
+                        )
+                        write_option(
+                            "separate_playlist",
+                            {
+                                "x": dockWidget_playlist.geometry().x(),
+                                "y": dockWidget_playlist.geometry().y(),
+                                "w": dockWidget_playlist.width(),
+                                "h": dockWidget_playlist.height(),
+                            },
+                        )
+                        logger.info(
+                            "Separate playlist window position / width / height saved"
+                        )
             except Exception:
                 pass
             try:
@@ -8704,13 +8757,13 @@ if __name__ == "__main__":
             return win.mapToGlobal(QtCore.QPoint(x6, y6))
 
         def show_playlist_fullscreen():
-            if settings["panelposition"] == 0:
+            if settings["panelposition"] in (0, 2):
                 playlist_widget.move(
-                    maptoglobal(win.width() - dockWidget_playlist.width(), 0)
+                    maptoglobal(win.width() - DOCKWIDGET_PLAYLIST_WIDTH, 0)
                 )
             else:
                 playlist_widget.move(maptoglobal(0, 0))
-            playlist_widget.setFixedWidth(dockWidget_playlist.width())
+            playlist_widget.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
             playlist_widget_height = win.height() - 50
             playlist_widget.resize(playlist_widget.width(), playlist_widget_height)
             playlist_widget.setWindowOpacity(0.55)
@@ -8865,7 +8918,8 @@ if __name__ == "__main__":
                     ):
                         l1.hide()
                     label_volume.setText(f"{int(player.volume)}%")
-                    dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
+                    if settings["panelposition"] != 2:
+                        dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
                     if fullscreen:
                         # Check cursor inside window
                         cur_pos = QtGui.QCursor.pos()
@@ -8882,7 +8936,7 @@ if __name__ == "__main__":
                                 QtGui.QCursor.pos()
                             ).x()
                             win_width = win.width()
-                            if settings["panelposition"] == 0:
+                            if settings["panelposition"] in (0, 2):
                                 is_cursor_x = cursor_x > win_width - (
                                     DOCKWIDGET_PLAYLIST_WIDTH + 10
                                 )
