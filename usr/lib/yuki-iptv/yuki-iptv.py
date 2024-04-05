@@ -813,7 +813,16 @@ if __name__ == "__main__":
                     cache_path="",
                 )
             except Exception:
+                exc = traceback.format_exc()
                 logger.warning("XTream init failure")
+                logger.warning(exc)
+                msg3 = QtWidgets.QMessageBox(
+                    qt_icon_warning,
+                    _("Error"),
+                    exc,
+                    QtWidgets.QMessageBox.StandardButton.Ok,
+                )
+                msg3.exec()
                 xt = EmptyClass()
                 xt.auth_data = {}
             return xt, xtream_username, xtream_password, xtream_url
@@ -846,13 +855,14 @@ if __name__ == "__main__":
                                 f"{xtream_url}/xmltv.php?username="
                                 f"{xtream_username}&password={xtream_password}"
                             )
-                    except Exception as e3:
-                        logger.warning(traceback.format_exc())
+                    except Exception:
+                        exc = traceback.format_exc()
+                        logger.warning(exc)
                         message2 = "{}\n\n{}".format(
                             _("yuki-iptv error"),
                             str(
                                 "XTream API: {}\n\n{}".format(
-                                    _("Processing error"), str(e3)
+                                    _("Processing error"), str(exc)
                                 )
                             ),
                         )
@@ -6994,9 +7004,9 @@ if __name__ == "__main__":
                     key, value = pair.split("=")
                     options[key.replace("--", "")] = value
                     options_2[key.replace("--", "")] = value
-        except Exception as e1:
+        except Exception:
             logger.warning("Could not parse MPV options!")
-            logger.warning(e1)
+            logger.warning(traceback.format_exc())
         logger.info("Testing custom mpv options...")
         logger.info(options_2)
         try:
@@ -7816,8 +7826,8 @@ if __name__ == "__main__":
                         )
 
             event_handler = MPRISEventHandler()
-        except Exception as mpris_e:
-            logger.warning(mpris_e)
+        except Exception:
+            logger.warning(traceback.format_exc())
             logger.warning("Failed to set up MPRIS!")
 
         def update_scheduler_programme():
