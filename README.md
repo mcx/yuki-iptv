@@ -55,7 +55,8 @@ sudo apt install yuki-iptv
 
 ## Open Build Service (rpm packages)
 
-https://software.opensuse.org/download.html?project=home%3Aame-chan%3Ayuki-iptv&package=yuki-iptv  
+Stable: https://software.opensuse.org/download.html?project=home%3Aame-chan%3Ayuki-iptv&package=yuki-iptv  
+Develop: https://software.opensuse.org/download.html?project=home%3Aame-chan%3Ayuki-iptv-develop&package=yuki-iptv  
   
 **Multimedia codecs:**  
 For **Fedora** and **CentOS** you'll need https://rpmfusion.org  
