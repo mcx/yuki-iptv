@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-04 22:12+0000\n"
-"PO-Revision-Date: 2024-04-04 22:18+0000\n"
+"PO-Revision-Date: 2024-04-05 12:32+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Dutch <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -752,7 +752,7 @@ msgstr "Links"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3283
 msgid "Separate window"
-msgstr ""
+msgstr "Los venster"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:3287 usr/lib/yuki-iptv/yuki-iptv.py:3286
 #: usr/lib/yuki-iptv/yuki-iptv.py:3316
@@ -1045,7 +1045,7 @@ msgstr "Pagina"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:6594
 msgid "Playlist"
-msgstr ""
+msgstr "Afspeellijst"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:6635 usr/lib/yuki-iptv/yuki-iptv.py:6599
 #: usr/lib/yuki-iptv/yuki-iptv.py:6592
