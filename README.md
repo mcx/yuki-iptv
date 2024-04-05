@@ -39,6 +39,13 @@ The channels and pictures in the screenshots are for demonstration purposes only
 
 ## Ubuntu PPA
 
+Stable PPA: https://launchpad.net/~yuki-iptv/+archive/ubuntu/yuki-iptv-stable  
+```
+sudo add-apt-repository ppa:yuki-iptv/yuki-iptv-stable
+sudo apt update
+sudo apt install yuki-iptv
+```
+  
 Develop PPA: https://launchpad.net/~yuki-iptv/+archive/ubuntu/yuki-iptv-develop  
 ```
 sudo add-apt-repository ppa:yuki-iptv/yuki-iptv-develop
