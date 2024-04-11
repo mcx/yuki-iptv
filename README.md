@@ -117,7 +117,7 @@ You should have received a copy of the GNU General Public License
 along with yuki-iptv. If not, see <https://www.gnu.org/licenses/>.
 ```
 
-[Clarification (see LICENSE-NOTICE.txt)](https://codeberg.org/Ame-chan-angel/yuki-iptv/src/branch/master/LICENSE-NOTICE.txt)
+[Clarification *(see LICENSE-NOTICE.txt)*](https://codeberg.org/Ame-chan-angel/yuki-iptv/src/branch/master/LICENSE-NOTICE.txt)
 
 ```monospace
 The Font Awesome pictograms are licensed under the CC BY 4.0 License.
