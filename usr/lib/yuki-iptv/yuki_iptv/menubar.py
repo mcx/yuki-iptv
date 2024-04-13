@@ -161,6 +161,7 @@ def reload_menubar_shortcuts():
     doSetShortcut(YukiData.streaminformationAction, kbd("open_stream_info"))
     doSetShortcut(YukiData.showepgAction, kbd("show_tvguide_2"))
     doSetShortcut(YukiData.forceupdateepgAction, kbd("force_update_epg"))
+    doSetShortcut(YukiData.sortAction, kbd("show_sort"))
     doSetShortcut(YukiData.settingsAction, kbd("show_settings"))
     sec_keys_1 = [
         kbd("(lambda: mpv_seek(-10))"),
@@ -369,6 +370,10 @@ def init_menubar(data):
 
     # Options
 
+    YukiData.sortAction = qaction(_("&Channel sort"), data)
+    YukiData.sortAction.triggered.connect(lambda: YukiData.show_sort())
+    doSetShortcut(YukiData.sortAction, kbd("show_sort"))
+
     YukiData.shortcutsAction = qaction("&" + _("Shortcuts"), data)
     YukiData.shortcutsAction.triggered.connect(lambda: YukiData.show_shortcuts())
 
@@ -507,6 +512,8 @@ def populate_menubar(
     # Options
 
     options_menu = menubar.addMenu(_("&Options"))
+    options_menu.addAction(YukiData.sortAction)
+    options_menu.addSeparator()
     options_menu.addAction(YukiData.shortcutsAction)
     options_menu.addAction(YukiData.settingsAction)
 
@@ -660,6 +667,7 @@ def init_menubar_player(
     my_down_binding_execute,
     show_m3u_editor,
     show_playlists,
+    show_sort,
     show_exception,
     get_curwindow_pos,
     force_update_epg,

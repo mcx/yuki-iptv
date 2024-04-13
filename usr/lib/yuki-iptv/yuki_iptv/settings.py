@@ -36,6 +36,7 @@ def parse_settings():
         "save_folder": SAVE_FOLDER_DEFAULT,
         "epgoffset": 0,
         "hwaccel": False,
+        "sort": 0,
         "cache_secs": 0,
         "epgdays": 1,
         "ua": "Mozilla/5.0",

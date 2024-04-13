@@ -23,8 +23,8 @@
 #
 import os
 import logging
-import traceback
 import chardet
+import traceback
 from yuki_iptv.qt import get_qt_library, show_exception
 from yuki_iptv.xtreamtom3u import convert_xtream_to_m3u
 from yuki_iptv.requests_timeout import requests_get
@@ -45,7 +45,7 @@ class EmptyClass:
     pass
 
 
-def load_playlist(_, settings, YukiData, load_xtream, channel_sets):
+def load_playlist(_, settings, YukiData, load_xtream, channel_sets, channel_sort):
     (
         qt_library,
         QtWidgets,
@@ -289,6 +289,30 @@ def load_playlist(_, settings, YukiData, load_xtream, channel_sets):
         groups.remove(_("All channels"))
     groups = [_("All channels"), _("Favourites")] + groups
 
+    logger.info("Sorting playlist...")
+
+    def sort_custom(sub):
+        try:
+            return channel_sort.index(sub)
+        except Exception:
+            return len(array) + 10
+
+    def doSort(arr0):
+        if settings["sort"] == 0:
+            return arr0
+        if settings["sort"] == 1:
+            return sorted(arr0)
+        if settings["sort"] == 2:
+            return sorted(arr0, reverse=True)
+        if settings["sort"] == 3:
+            try:
+                return sorted(arr0, key=sort_custom)
+            except Exception:
+                return arr0
+        return arr0
+
+    array_sorted = doSort(array)
+
     logger.info("Playling loading done!")
 
-    return array, groups, m3u_exists, xt, YukiData
+    return array, array_sorted, groups, m3u_exists, xt, YukiData

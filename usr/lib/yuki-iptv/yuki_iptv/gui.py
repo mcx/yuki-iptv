@@ -528,6 +528,12 @@ class YukiGUIClass:
 
         self.clear_logo_cache = QtWidgets.QPushButton(_("Clear logo cache"))
 
+        self.sort_widget = QtWidgets.QComboBox()
+        self.sort_widget.addItem(_("as in playlist"))
+        self.sort_widget.addItem(_("alphabetical order"))
+        self.sort_widget.addItem(_("reverse alphabetical order"))
+        self.sort_widget.addItem(_("custom"))
+
         self.ssaveclose = QtWidgets.QWidget()
         self.ssaveclose_layout = QtWidgets.QHBoxLayout()
         self.ssaveclose_layout.addWidget(self.ssave)
@@ -764,6 +770,7 @@ class YukiGUIClass:
         self.epg_label = QtWidgets.QLabel("{}:".format(_("TV guide\naddress")))
         self.dei_label = QtWidgets.QLabel("{}:".format(_("Deinterlace")))
         self.hwaccel_label = QtWidgets.QLabel("{}:".format(_("Hardware\nacceleration")))
+        self.sort_label = QtWidgets.QLabel("{}:".format(_("Channel\nsort")))
         self.cache_label = QtWidgets.QLabel("{}:".format(_("Cache")))
         self.udp_label = QtWidgets.QLabel("{}:".format(_("UDP proxy")))
         self.fld_label = QtWidgets.QLabel(
@@ -801,6 +808,8 @@ class YukiGUIClass:
         self.tab_main.layout.addWidget(self.sfolder, 0, 2)
         self.tab_main.layout.addWidget(self.scrrecnosubfolders_label, 1, 0)
         self.tab_main.layout.addWidget(self.scrrecnosubfolders_flag, 1, 1)
+        self.tab_main.layout.addWidget(self.sort_label, 2, 0)
+        self.tab_main.layout.addWidget(self.sort_widget, 2, 1)
         self.tab_main.layout.addWidget(self.openprevchan_label, 3, 0)
         self.tab_main.layout.addWidget(self.openprevchan_flag, 3, 1)
         self.tab_main.setLayout(self.tab_main.layout)
@@ -1220,6 +1229,11 @@ class YukiGUIClass:
         self.license_win.setWindowTitle(_("License"))
         self.license_win.setWindowIcon(self.main_icon)
 
+        self.sort_win = QtWidgets.QMainWindow()
+        self.sort_win.resize(400, 500)
+        self.sort_win.setWindowTitle(_("Channel sort"))
+        self.sort_win.setWindowIcon(self.main_icon)
+
         self.chan_win = QtWidgets.QMainWindow()
         self.chan_win.resize(400, 250)
         self.chan_win.setWindowTitle(_("Video settings"))
@@ -1297,6 +1311,7 @@ class YukiGUIClass:
             "save_folder": sfld_text if sfld_text else SAVE_FOLDER_DEFAULT,
             "epgoffset": self.soffset.value(),
             "hwaccel": self.shwaccel.isChecked(),
+            "sort": self.sort_widget.currentIndex(),
             "cache_secs": self.scache1.value(),
             "epgdays": self.epgdays.value(),
             "ua": self.useragent_choose_2.text(),
@@ -1875,3 +1890,67 @@ class YukiGUIClass:
         self.playlists_win_widget_main.setLayout(self.playlists_win_widget_main_layout)
 
         self.playlists_win.setCentralWidget(self.playlists_win_widget_main)
+
+    def create_sort_widgets(self):
+        _ = self._
+        QtCore = self.QtCore
+        QtWidgets = self.QtWidgets
+
+        self.close_sort_btn = QtWidgets.QPushButton(_("Close"))
+        self.close_sort_btn.clicked.connect(self.sort_win.hide)
+        self.close_sort_btn.setStyleSheet("color: red;")
+
+        self.save_sort_btn = QtWidgets.QPushButton(_("Save"))
+        self.save_sort_btn.setStyleSheet("font-weight: bold; color: green;")
+
+        self.sort_label = QtWidgets.QLabel(
+            _("Do not forget\nto set custom sort order in settings!")
+        )
+        self.sort_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+
+        self.sort_widget3 = QtWidgets.QWidget()
+
+        self.sort_widget4 = QtWidgets.QWidget()
+        self.sort_widget4_layout = QtWidgets.QHBoxLayout()
+        self.sort_widget4_layout.addWidget(self.save_sort_btn)
+        self.sort_widget4_layout.addWidget(self.close_sort_btn)
+        self.sort_widget4.setLayout(self.sort_widget4_layout)
+
+        self.sort_widget_main = QtWidgets.QWidget()
+        self.sort_layout = QtWidgets.QVBoxLayout()
+        self.sort_layout.addWidget(self.sort_label)
+        self.sort_layout.addWidget(self.sort_widget3)
+        self.sort_layout.addWidget(self.sort_widget4)
+        self.sort_layout.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignTop
+        )
+        self.sort_widget_main.setLayout(self.sort_layout)
+        self.sort_win.setCentralWidget(self.sort_widget_main)
+
+    def create_sort_widgets2(self, ICONS_FOLDER):
+        _ = self._
+        QtCore = self.QtCore
+        QtWidgets = self.QtWidgets
+        QtGui = self.QtGui
+
+        self.sort_upbtn = QtWidgets.QPushButton()
+        self.sort_upbtn.setIcon(
+            QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "arrow-up.png")))
+        )
+        self.sort_downbtn = QtWidgets.QPushButton()
+        self.sort_downbtn.setIcon(
+            QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "arrow-down.png")))
+        )
+
+        self.sort_widget2 = QtWidgets.QWidget()
+        self.sort_layout2 = QtWidgets.QVBoxLayout()
+        self.sort_layout2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.sort_layout2.addWidget(self.sort_upbtn)
+        self.sort_layout2.addWidget(self.sort_downbtn)
+        self.sort_widget2.setLayout(self.sort_layout2)
+
+        self.sort_list = QtWidgets.QListWidget()
+        self.sort_layout3 = QtWidgets.QHBoxLayout()
+        self.sort_layout3.addWidget(self.sort_list)
+        self.sort_layout3.addWidget(self.sort_widget2)
+        self.sort_widget3.setLayout(self.sort_layout3)

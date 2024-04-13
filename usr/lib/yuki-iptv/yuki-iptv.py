@@ -814,8 +814,17 @@ if __name__ == "__main__":
                 xt.auth_data = {}
             return xt, xtream_username, xtream_password, xtream_url
 
-        array, groups, m3u_exists, xt, YukiData = load_playlist(
-            _, settings, YukiData, load_xtream, channel_sets
+        channel_sort = {}
+        if os.path.isfile(str(Path(LOCAL_DIR, "sortchannels.json"))):
+            with open(
+                str(Path(LOCAL_DIR, "sortchannels.json")), encoding="utf8"
+            ) as channel_sort_file1:
+                channel_sort3 = json.loads(channel_sort_file1.read())
+                if settings["m3u"] in channel_sort3:
+                    channel_sort = channel_sort3[settings["m3u"]]
+
+        array, array_sorted, groups, m3u_exists, xt, YukiData = load_playlist(
+            _, settings, YukiData, load_xtream, channel_sets, channel_sort
         )
 
         try:
@@ -1631,6 +1640,28 @@ if __name__ == "__main__":
 
         YukiGUI.create_scheduler_widgets(get_current_time())
 
+        def save_sort():
+            global channel_sort
+            channel_sort = [
+                YukiGUI.sort_list.item(z0).text()
+                for z0 in range(YukiGUI.sort_list.count())
+            ]
+            channel_sort2 = {}
+            if os.path.isfile(Path(LOCAL_DIR, "sortchannels.json")):
+                with open(
+                    Path(LOCAL_DIR, "sortchannels.json"), encoding="utf8"
+                ) as file5:
+                    channel_sort2 = json.loads(file5.read())
+            channel_sort2[settings["m3u"]] = channel_sort
+            with open(
+                Path(LOCAL_DIR, "sortchannels.json"), "w", encoding="utf8"
+            ) as channel_sort_file:
+                channel_sort_file.write(json.dumps(channel_sort2))
+            YukiGUI.sort_win.hide()
+
+        YukiGUI.create_sort_widgets()
+        YukiGUI.save_sort_btn.clicked.connect(save_sort)
+
         YukiGUI.tvguide_sch.itemClicked.connect(programme_clicked)
         YukiGUI.addrecord_btn.clicked.connect(addrecord_clicked)
         YukiGUI.delrecord_btn.clicked.connect(delrecord_clicked)
@@ -2098,6 +2129,8 @@ if __name__ == "__main__":
                 os.remove(str(Path(LOCAL_DIR, "channelsettings.json")))
             if os.path.isfile(str(Path(LOCAL_DIR, "favouritechannels.json"))):
                 os.remove(str(Path(LOCAL_DIR, "favouritechannels.json")))
+            if os.path.isfile(str(Path(LOCAL_DIR, "sortchannels.json"))):
+                os.remove(str(Path(LOCAL_DIR, "sortchannels.json")))
             save_settings()
 
         def do_clear_logo_cache():
@@ -2167,6 +2200,7 @@ if __name__ == "__main__":
         YukiGUI.nocacheepg_flag.setChecked(settings["nocacheepg"])
         YukiGUI.scrrecnosubfolders_flag.setChecked(settings["scrrecnosubfolders"])
         YukiGUI.hidetvprogram_flag.setChecked(settings["hidetvprogram"])
+        YukiGUI.sort_widget.setCurrentIndex(settings["sort"])
 
         for videoaspect_var_1 in YukiGUI.videoaspect_vars:
             YukiGUI.videoaspect_def_choose.addItem(videoaspect_var_1)
@@ -2312,6 +2346,17 @@ if __name__ == "__main__":
                 YukiGUI.help_win.show()
             else:
                 YukiGUI.help_win.hide()
+
+        def show_sort():
+            if not YukiGUI.sort_win.isVisible():
+                YukiGUI.sort_list.clear()
+                for sort_label_ch in array_sorted if not channel_sort else channel_sort:
+                    YukiGUI.sort_list.addItem(sort_label_ch)
+
+                moveWindowToCenter(YukiGUI.sort_win)
+                YukiGUI.sort_win.show()
+            else:
+                YukiGUI.sort_win.hide()
 
         def populate_playlists():
             YukiGUI.playlists_list.clear()
@@ -2715,6 +2760,7 @@ if __name__ == "__main__":
                 my_down_binding_execute,
                 show_playlist_editor,
                 show_playlists,
+                show_sort,
                 show_exception,
                 get_curwindow_pos,
                 force_update_epg_act,
@@ -3777,14 +3823,14 @@ if __name__ == "__main__":
             return max(1, math.ceil(array_len / 100))
 
         def gen_chans():
-            global playing_channel, current_group, array, page_box, channelfilter
+            global playing_channel, current_group, array
             global prog_match_arr, channel_logos_request_old
             global channel_logos_process, multiprocessing_manager_dict
 
             channel_logos_request = {}
 
             try:
-                idx = (page_box.value() - 1) * 100
+                idx = (YukiGUI.page_box.value() - 1) * 100
             except Exception:
                 idx = 0
             try:
@@ -3793,8 +3839,8 @@ if __name__ == "__main__":
                 filter_txt = ""
 
             # Group and favourites filter
-            array_filtered = {}
-            for j1 in array:
+            array_filtered = []
+            for j1 in array_sorted:
                 group1 = array[j1]["tvg-group"]
                 if current_group != all_channels_lang:
                     if current_group == favourites_lang:
@@ -3803,22 +3849,21 @@ if __name__ == "__main__":
                     else:
                         if group1 != current_group:
                             continue
-                array_filtered[j1] = array[j1]
+                array_filtered.append(j1)
 
-            ch_array = {
-                x13: array_filtered[x13]
+            ch_array = [
+                x13
                 for x13 in array_filtered
                 if unidecode(filter_txt).lower().strip()
                 in unidecode(x13).lower().strip()
-            }
-            ch_array = list(ch_array.values())[idx : idx + 100]
-            ch_array = {x14["title"]: x14 for x14 in ch_array}
+            ]
+            ch_array = ch_array[idx : idx + 100]
             try:
                 if filter_txt:
-                    page_box.setMaximum(get_page_count(len(ch_array)))
+                    YukiGUI.page_box.setMaximum(get_page_count(len(ch_array)))
                     YukiGUI.of_lbl.setText(get_of_txt(get_page_count(len(ch_array))))
                 else:
-                    page_box.setMaximum(get_page_count(len(array_filtered)))
+                    YukiGUI.page_box.setMaximum(get_page_count(len(array_filtered)))
                     YukiGUI.of_lbl.setText(
                         get_of_txt(get_page_count(len(array_filtered)))
                     )
@@ -3848,25 +3893,23 @@ if __name__ == "__main__":
 
                 # Second, match from tvg-id
                 if not is_epgname_found:
-                    if array_filtered[i]["tvg-ID"]:
-                        if str(array_filtered[i]["tvg-ID"]) in prog_ids:
-                            prog_search_lst = prog_ids[str(array_filtered[i]["tvg-ID"])]
+                    if array[i]["tvg-ID"]:
+                        if str(array[i]["tvg-ID"]) in prog_ids:
+                            prog_search_lst = prog_ids[str(array[i]["tvg-ID"])]
                             if prog_search_lst:
                                 prog_search = prog_search_lst[0].lower()
                                 is_epgname_found = True
 
                 # Third, match from tvg-name
                 if not is_epgname_found:
-                    if array_filtered[i]["tvg-name"]:
-                        if exists_in_epg(
-                            str(array_filtered[i]["tvg-name"]).lower(), programmes
-                        ):
-                            prog_search = str(array_filtered[i]["tvg-name"]).lower()
+                    if array[i]["tvg-name"]:
+                        if exists_in_epg(str(array[i]["tvg-name"]).lower(), programmes):
+                            prog_search = str(array[i]["tvg-name"]).lower()
                             is_epgname_found = True
                         else:
-                            spaces_replaced_name = array_filtered[i][
-                                "tvg-name"
-                            ].replace(" ", "_")
+                            spaces_replaced_name = array[i]["tvg-name"].replace(
+                                " ", "_"
+                            )
                             if exists_in_epg(
                                 str(spaces_replaced_name).lower(), programmes
                             ):
@@ -3929,8 +3972,8 @@ if __name__ == "__main__":
                 if settings["channellogos"] != 3:
                     try:
                         channel_logo1 = ""
-                        if "tvg-logo" in array_filtered[i]:
-                            channel_logo1 = array_filtered[i]["tvg-logo"]
+                        if "tvg-logo" in array[i]:
+                            channel_logo1 = array[i]["tvg-logo"]
 
                         epg_logo1 = ""
                         if prog_search in epg_icons:
@@ -3939,7 +3982,7 @@ if __name__ == "__main__":
                         req_data_ua, req_data_ref = get_ua_ref_for_channel(
                             orig_chan_name
                         )
-                        channel_logos_request[array_filtered[i]["title"]] = [
+                        channel_logos_request[array[i]["title"]] = [
                             channel_logo1,
                             epg_logo1,
                             req_data_ua,
@@ -3961,9 +4004,7 @@ if __name__ == "__main__":
                 MAX_SIZE = 28
                 orig_prog = prog
                 try:
-                    tooltip_group = "{}: {}".format(
-                        _("Group"), array_filtered[i]["tvg-group"]
-                    )
+                    tooltip_group = "{}: {}".format(_("Group"), array[i]["tvg-group"])
                 except Exception:
                     tooltip_group = "{}: {}".format(_("Group"), _("All channels"))
                 if len(prog) > MAX_SIZE:
@@ -4204,6 +4245,25 @@ if __name__ == "__main__":
             # Add QListWidgetItem into QListWidget
             win.listWidget.addItem(channels[channel][0])
             win.listWidget.setItemWidget(channels[channel][0], channels[channel][1])
+
+        def sort_upbtn_clicked():
+            curIndex = YukiGUI.sort_list.currentRow()
+            if curIndex != -1 and curIndex > 0:
+                curItem = YukiGUI.sort_list.takeItem(curIndex)
+                YukiGUI.sort_list.insertItem(curIndex - 1, curItem)
+                YukiGUI.sort_list.setCurrentRow(curIndex - 1)
+
+        def sort_downbtn_clicked():
+            curIndex1 = YukiGUI.sort_list.currentRow()
+            if curIndex1 != -1 and curIndex1 < YukiGUI.sort_list.count() - 1:
+                curItem1 = YukiGUI.sort_list.takeItem(curIndex1)
+                YukiGUI.sort_list.insertItem(curIndex1 + 1, curItem1)
+                YukiGUI.sort_list.setCurrentRow(curIndex1 + 1)
+
+        YukiGUI.create_sort_widgets2(ICONS_FOLDER)
+
+        YukiGUI.sort_upbtn.clicked.connect(sort_upbtn_clicked)
+        YukiGUI.sort_downbtn.clicked.connect(sort_downbtn_clicked)
 
         def tvguide_context_menu():
             update_tvguide()
@@ -4816,7 +4876,7 @@ if __name__ == "__main__":
             win.listWidget.verticalScrollBar().setValue(0)
             redraw_chans()
             try:
-                page_box.clearFocus()
+                YukiGUI.page_box.clearFocus()
             except Exception:
                 pass
 
@@ -5137,16 +5197,16 @@ if __name__ == "__main__":
         def update_tvguide_2():
             YukiGUI.epg_win_checkbox.clear()
             if YukiGUI.showonlychplaylist_chk.isChecked():
-                for chan_0 in array:
-                    YukiGUI.epg_win_count.setText(
-                        "({}: {})".format(_("channels"), len(array))
-                    )
+                YukiGUI.epg_win_count.setText(
+                    "({}: {})".format(_("channels"), len(array_sorted))
+                )
+                for chan_0 in array_sorted:
                     YukiGUI.epg_win_checkbox.addItem(chan_0)
             else:
+                YukiGUI.epg_win_count.setText(
+                    "({}: {})".format(_("channels"), len(programmes))
+                )
                 for chan_0 in programmes:
-                    YukiGUI.epg_win_count.setText(
-                        "({}: {})".format(_("channels"), len(programmes))
-                    )
                     YukiGUI.epg_win_checkbox.addItem(chan_0)
 
         def show_tvguide_2():
@@ -5661,17 +5721,17 @@ if __name__ == "__main__":
             next_row = row + i1
             if next_row < 0:
                 # Previous page
-                if page_box.value() - 1 == 0:
+                if YukiGUI.page_box.value() - 1 == 0:
                     next_row = 0
                 else:
-                    page_box.setValue(page_box.value() - 1)
+                    YukiGUI.page_box.setValue(YukiGUI.page_box.value() - 1)
                     next_row = win.listWidget.count()
             elif next_row > win.listWidget.count() - 1:
                 # Next page
-                if page_box.value() + 1 > page_box.maximum():
+                if YukiGUI.page_box.value() + 1 > YukiGUI.page_box.maximum():
                     next_row = row
                 else:
-                    page_box.setValue(page_box.value() + 1)
+                    YukiGUI.page_box.setValue(YukiGUI.page_box.value() + 1)
                     next_row = 0
             next_row = max(next_row, 0)
             next_row = min(next_row, win.listWidget.count() - 1)
@@ -6155,7 +6215,7 @@ if __name__ == "__main__":
             logger.warning("Failed to set up MPRIS!")
 
         def update_scheduler_programme():
-            channel_list_2 = [chan_name for chan_name in array]
+            channel_list_2 = [chan_name for chan_name in array_sorted]
             ch_choosed = YukiGUI.choosechannel_ch.currentText()
             YukiGUI.tvguide_sch.clear()
             if ch_choosed in channel_list_2:
@@ -6171,7 +6231,7 @@ if __name__ == "__main__":
                 YukiGUI.scheduler_win.hide()
             else:
                 YukiGUI.choosechannel_ch.clear()
-                channel_list = [chan_name for chan_name in array]
+                channel_list = [chan_name for chan_name in array_sorted]
                 for chan1 in channel_list:
                     YukiGUI.choosechannel_ch.addItem(chan1)
                 if item_selected in channel_list:
@@ -6547,7 +6607,7 @@ if __name__ == "__main__":
 
         @async_gui_blocking_function
         def thread_tvguide_update():
-            global stopped, first_boot, programmes, btn_update
+            global stopped, first_boot, programmes
             global tvguide_sets, epg_updating, waiting_for_epg
             global epg_failed, first_boot_1, multiprocessing_manager_dict
             global epg_update_allowed, epg_data
@@ -6765,7 +6825,7 @@ if __name__ == "__main__":
 
         @async_gui_blocking_function
         def thread_tvguide_update_pt2():
-            global stopped, time_stop, first_boot, programmes, btn_update
+            global stopped, time_stop, first_boot, programmes
             global static_text, tvguide_sets, epg_updating, ic
             global waiting_for_epg, epg_failed, prog_ids
             global epg_icons, thread_tvguide_update_pt2_e2
@@ -7006,6 +7066,7 @@ if __name__ == "__main__":
                 or YukiGUI.help_win.isActiveWindow()
                 or YukiGUI.streaminfo_win.isActiveWindow()
                 or YukiGUI.license_win.isActiveWindow()
+                or YukiGUI.sort_win.isActiveWindow()
                 or YukiGUI.chan_win.isActiveWindow()
                 or YukiGUI.ext_win.isActiveWindow()
                 or YukiGUI.scheduler_win.isActiveWindow()
@@ -7025,6 +7086,7 @@ if __name__ == "__main__":
                 YukiGUI.help_win.isActiveWindow()
                 or YukiGUI.streaminfo_win.isActiveWindow()
                 or YukiGUI.license_win.isActiveWindow()
+                or YukiGUI.sort_win.isActiveWindow()
                 or YukiGUI.chan_win.isActiveWindow()
                 or YukiGUI.ext_win.isActiveWindow()
                 or YukiGUI.scheduler_win.isActiveWindow()
@@ -7260,6 +7322,7 @@ if __name__ == "__main__":
             player.command("frame-back-step")
 
         funcs = {
+            "show_sort": show_sort,
             "key_t": show_hide_playlist,
             "esc_handler": esc_handler,
             "mpv_fullscreen": mpv_fullscreen,
@@ -7357,6 +7420,7 @@ if __name__ == "__main__":
             "reload_playlist": _("&Update current playlist").replace("&", ""),
             "show_scheduler": _("Scheduler"),
             "show_settings": _("Settings"),
+            "show_sort": _("Channel sort"),
             "show_timeshift": _("Archive"),
             "show_tvguide": _("TV guide"),
             "showhideeverything": _("&Compact mode").replace("&", ""),
@@ -7385,8 +7449,6 @@ if __name__ == "__main__":
 
         if "show_clock" in main_keybinds:
             main_keybinds.pop("show_clock")
-        if "show_sort" in main_keybinds:
-            main_keybinds.pop("show_sort")
 
         seq = get_seq()
 
