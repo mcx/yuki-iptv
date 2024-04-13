@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-13 18:21+0000\n"
-"PO-Revision-Date: 2024-04-04 22:18+0000\n"
+"PO-Revision-Date: 2024-04-13 18:27+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Russian <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
+"n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:580
@@ -85,7 +85,7 @@ msgstr "Не указан URL!"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1256
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:95
 msgid "Select playlist"
-msgstr ""
+msgstr "Выберите плейлист"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1266
 msgid "Select EPG file"
@@ -100,7 +100,7 @@ msgstr "По умолчанию"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1308
 msgid "Failed to open external player!"
-msgstr ""
+msgstr "Невозможно открыть во внешнем плеере!"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1424
 msgid "Channel"
@@ -552,7 +552,7 @@ msgstr "&Предыдущий"
 #: usr/lib/yuki-iptv/yuki-iptv.py:7355
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:190
 msgid "P&laylist editor"
-msgstr ""
+msgstr "&Редактор плейлистов"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7356
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:182
@@ -1189,7 +1189,7 @@ msgstr "Сохранить файл"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:159
 msgid "Playlists (*.m3u *.m3u8)"
-msgstr ""
+msgstr "Плейлисты (*.m3u *.m3u8)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:167
 msgid "Playlist successfully saved!"
@@ -1197,11 +1197,11 @@ msgstr "Плейлист успешно сохранён!"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:176
 msgid "&Open file"
-msgstr ""
+msgstr "&Открыть файл"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:180
 msgid "&Save as"
-msgstr ""
+msgstr "&Сохранить как"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:185
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:428
@@ -1242,7 +1242,7 @@ msgstr ""
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:382
 msgid "Playlist editor"
-msgstr ""
+msgstr "Редактор плейлистов"
 
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:392
 #: usr/lib/yuki-iptv/yuki_iptv/m3u_editor.py:418
