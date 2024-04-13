@@ -211,6 +211,91 @@ class stream_info:
 
 
 class YukiData:
+    aot_action = None
+    archive_epg = None
+    array = None
+    channel_logos_process = None
+    channel_logos_request_old = None
+    channel_sets = None
+    channel_sort = None
+    combobox = None
+    cur_always_on_top_state = None
+    current_group = None
+    currentMaximized = None
+    currentMoviesGroup = None
+    currentWidthHeight = None
+    dockWidget_controlPanelVisible = None
+    dockWidget_playlistVisible = None
+    do_save_settings = None
+    epg_data = None
+    epg_failed = None
+    epg_icons = None
+    epg_ready = None
+    epg_selected_date = None
+    epg_thread_2 = None
+    epg_update_allowed = None
+    epg_updating = None
+    event_handler = None
+    favourite_sets = None
+    ffmpeg_processes = None
+    first_boot = None
+    first_boot_1 = None
+    first_change = None
+    first_playmode_change = None
+    firstVolRun = None
+    force_turnoff_osc = None
+    fullscreen = None
+    gl_is_static = None
+    ic = None
+    ic1 = None
+    ic2 = None
+    ic3 = None
+    isControlPanelVisible = None
+    isPlaylistVisible = None
+    is_recording = None
+    is_recording_old = None
+    item_selected = None
+    last_cursor_moved = None
+    last_cursor_time = None
+    main_keybinds = None
+    menubar_state = None
+    movie_logos_process = None
+    movie_logos_request_old = None
+    mpv_osc_enabled = None
+    mp_manager_dict = None
+    old_value = None
+    player = None
+    player_tracks = None
+    playing = None
+    playing_archive = None
+    playing_channel = None
+    playing_group = None
+    playing_url = None
+    prev_cursor = None
+    previous_text = None
+    prog_ids = None
+    prog_match_arr = None
+    programmes = None
+    record_file = None
+    recording_time = None
+    recViaScheduler = None
+    rewindWidgetVisible = None
+    right_click_menu = None
+    row0 = None
+    settings = None
+    state = None
+    static_text = None
+    stopped = None
+    thread_tvguide_progress_lock = None
+    thread_tvguide_update_pt2_e2 = None
+    timer_logos_update_lock = None
+    time_stop = None
+    tvguide_lbl = None
+    tvguide_sets = None
+    use_local_tvguide = None
+    VOLUME_SLIDER_WIDTH = None
+    waiting_for_epg = None
+    x_conn = None
     resume_playback = False
     compact_mode = False
     playlist_hidden = False
@@ -306,12 +391,12 @@ if __name__ == "__main__":
             if YukiData.mpris_loop:
                 YukiData.mpris_running = False
                 YukiData.mpris_loop.quit()
-            if epg_thread_2:
+            if YukiData.epg_thread_2:
                 try:
-                    epg_thread_2.kill()
+                    YukiData.epg_thread_2.kill()
                 except Exception:
                     try:
-                        epg_thread_2.terminate()
+                        YukiData.epg_thread_2.terminate()
                     except Exception:
                         pass
             if multiprocessing_manager:
@@ -378,7 +463,7 @@ if __name__ == "__main__":
         enable_libmpv_render_context = False  # TODO: for native Wayland
 
         multiprocessing_manager = Manager()
-        multiprocessing_manager_dict = multiprocessing_manager.dict()
+        YukiData.mp_manager_dict = multiprocessing_manager.dict()
 
         from thirdparty import mpv
 
@@ -387,39 +472,37 @@ if __name__ == "__main__":
             file01.write("#EXTM3U\n#EXTINF:-1,-\nhttp://255.255.255.255\n")
             file01.close()
 
-        channel_sets = {}
-        prog_ids = {}
-        epg_icons = {}
+        YukiData.channel_sets = {}
+        YukiData.prog_ids = {}
+        YukiData.epg_icons = {}
 
         def save_channel_sets():
-            global channel_sets
             file2 = open(
                 str(Path(LOCAL_DIR, "channelsettings.json")), "w", encoding="utf8"
             )
-            file2.write(json.dumps(channel_sets))
+            file2.write(json.dumps(YukiData.channel_sets))
             file2.close()
 
         if not os.path.isfile(str(Path(LOCAL_DIR, "channelsettings.json"))):
             save_channel_sets()
         else:
             file1 = open(str(Path(LOCAL_DIR, "channelsettings.json")), encoding="utf8")
-            channel_sets = json.loads(file1.read())
+            YukiData.channel_sets = json.loads(file1.read())
             file1.close()
 
-        settings, settings_loaded = parse_settings()
+        YukiData.settings, settings_loaded = parse_settings()
 
-        favourite_sets = []
+        YukiData.favourite_sets = []
 
         def save_favourite_sets():
-            global favourite_sets
             favourite_sets_2 = {}
             if os.path.isfile(Path(LOCAL_DIR, "favouritechannels.json")):
                 with open(
                     Path(LOCAL_DIR, "favouritechannels.json"), encoding="utf8"
                 ) as fsetfile:
                     favourite_sets_2 = json.loads(fsetfile.read())
-            if settings["m3u"]:
-                favourite_sets_2[settings["m3u"]] = favourite_sets
+            if YukiData.settings["m3u"]:
+                favourite_sets_2[YukiData.settings["m3u"]] = YukiData.favourite_sets
             file2 = open(
                 Path(LOCAL_DIR, "favouritechannels.json"), "w", encoding="utf8"
             )
@@ -431,22 +514,21 @@ if __name__ == "__main__":
         else:
             file1 = open(Path(LOCAL_DIR, "favouritechannels.json"), encoding="utf8")
             favourite_sets1 = json.loads(file1.read())
-            if settings["m3u"] in favourite_sets1:
-                favourite_sets = favourite_sets1[settings["m3u"]]
+            if YukiData.settings["m3u"] in favourite_sets1:
+                YukiData.favourite_sets = favourite_sets1[YukiData.settings["m3u"]]
             file1.close()
 
-        player_tracks = {}
+        YukiData.player_tracks = {}
 
         def save_player_tracks():
-            global player_tracks
             player_tracks_2 = {}
             if os.path.isfile(Path(LOCAL_DIR, "tracks.json")):
                 with open(
                     Path(LOCAL_DIR, "tracks.json"), encoding="utf8"
                 ) as tracks_file0:
                     player_tracks_2 = json.loads(tracks_file0.read())
-            if settings["m3u"]:
-                player_tracks_2[settings["m3u"]] = player_tracks
+            if YukiData.settings["m3u"]:
+                player_tracks_2[YukiData.settings["m3u"]] = YukiData.player_tracks
             tracks_file1 = open(Path(LOCAL_DIR, "tracks.json"), "w", encoding="utf8")
             tracks_file1.write(json.dumps(player_tracks_2))
             tracks_file1.close()
@@ -454,11 +536,11 @@ if __name__ == "__main__":
         if os.path.isfile(str(Path(LOCAL_DIR, "tracks.json"))):
             tracks_file = open(Path(LOCAL_DIR, "tracks.json"), encoding="utf8")
             player_tracks1 = json.loads(tracks_file.read())
-            if settings["m3u"] in player_tracks1:
-                player_tracks = player_tracks1[settings["m3u"]]
+            if YukiData.settings["m3u"] in player_tracks1:
+                YukiData.player_tracks = player_tracks1[YukiData.settings["m3u"]]
             tracks_file.close()
 
-        if settings["hwaccel"]:
+        if YukiData.settings["hwaccel"]:
             logger.info("Hardware acceleration enabled")
         else:
             logger.info("Hardware acceleration disabled")
@@ -483,19 +565,19 @@ if __name__ == "__main__":
         else:
             YukiData.use_dark_icon_theme = False
 
-        if settings["catchupenable"]:
+        if YukiData.settings["catchupenable"]:
             logger.info("Catchup enabled")
         else:
             logger.info("Catchup disabled")
 
         # URL override for command line
         if args1.URL:
-            settings["m3u"] = args1.URL
-            settings["epg"] = ""
+            YukiData.settings["m3u"] = args1.URL
+            YukiData.settings["epg"] = ""
 
-        tvguide_sets = {}
+        YukiData.tvguide_sets = {}
 
-        epg_thread_2 = None
+        YukiData.epg_thread_2 = None
 
         @idle_function
         def start_epg_hdd_animation(unused=None):
@@ -513,58 +595,55 @@ if __name__ == "__main__":
 
         @async_gui_blocking_function
         def save_tvguide_sets():
-            global epg_thread_2, tvguide_sets
             try:
                 start_epg_hdd_animation()
             except Exception:
                 pass
             logger.info("Writing EPG cache...")
-            epg_thread_2 = get_context("spawn").Process(
+            YukiData.epg_thread_2 = get_context("spawn").Process(
                 name="[yuki-iptv] save_epg_cache",
                 target=save_epg_cache,
                 daemon=True,
                 args=(
-                    tvguide_sets,
-                    settings,
-                    prog_ids,
-                    epg_icons,
+                    YukiData.tvguide_sets,
+                    YukiData.settings,
+                    YukiData.prog_ids,
+                    YukiData.epg_icons,
                 ),
             )
-            epg_thread_2.start()
-            epg_thread_2.join()
+            YukiData.epg_thread_2.start()
+            YukiData.epg_thread_2.join()
             logger.info("Writing EPG cache done")
             try:
                 stop_epg_hdd_animation()
             except Exception:
                 pass
 
-        first_boot = False
-        epg_updating = False
+        YukiData.first_boot = False
+        YukiData.epg_updating = False
 
         @idle_function
         def force_update_epg(unused=None):
-            global use_local_tvguide, first_boot
             if os.path.exists(str(Path(LOCAL_DIR, "epg.cache"))):
                 os.remove(str(Path(LOCAL_DIR, "epg.cache")))
-            use_local_tvguide = False
-            if not epg_updating:
-                first_boot = False
+            YukiData.use_local_tvguide = False
+            if not YukiData.epg_updating:
+                YukiData.first_boot = False
 
-        epg_update_allowed = True
+        YukiData.epg_update_allowed = True
 
-        if settings["donotupdateepg"]:
-            epg_update_allowed = False
+        if YukiData.settings["donotupdateepg"]:
+            YukiData.epg_update_allowed = False
 
         def force_update_epg_act():
-            global epg_failed, epg_update_allowed
             logger.info("Force update EPG triggered")
-            epg_update_allowed = True
-            if epg_failed:
-                epg_failed = False
+            YukiData.epg_update_allowed = True
+            if YukiData.epg_failed:
+                YukiData.epg_failed = False
             force_update_epg()
 
-        use_local_tvguide = True
-        epg_ready = False
+        YukiData.use_local_tvguide = True
+        YukiData.epg_ready = False
 
         def mainwindow_isvisible():
             try:
@@ -574,20 +653,18 @@ if __name__ == "__main__":
 
         @idle_function
         def update_epg_func_static_enable(unused=None):
-            global static_text, time_stop
-            state.setStaticYuki(True)
-            state.show()
-            static_text = _("Loading TV guide cache...")
-            state.setTextYuki("")
-            time_stop = time.time() + 3
+            YukiData.state.setStaticYuki(True)
+            YukiData.state.show()
+            YukiData.static_text = _("Loading TV guide cache...")
+            YukiData.state.setTextYuki("")
+            YukiData.time_stop = time.time() + 3
 
         @idle_function
         def update_epg_func_static_disable(unused=None):
-            global time_stop
-            state.setStaticYuki(False)
-            state.hide()
-            state.setTextYuki("")
-            time_stop = time.time()
+            YukiData.state.setStaticYuki(False)
+            YukiData.state.hide()
+            YukiData.state.setTextYuki("")
+            YukiData.time_stop = time.time()
 
         @idle_function
         def btn_update_click(unused=None):
@@ -595,8 +672,7 @@ if __name__ == "__main__":
 
         @async_gui_blocking_function
         def update_epg_func():
-            global settings, tvguide_sets, prog_ids, epg_icons, programmes, epg_ready
-            if settings["nocacheepg"]:
+            if YukiData.settings["nocacheepg"]:
                 logger.info("No cache EPG active, deleting old EPG cache file")
                 try:
                     if os.path.isfile(str(Path(LOCAL_DIR, "epg.cache"))):
@@ -616,30 +692,30 @@ if __name__ == "__main__":
                     .apply(
                         load_epg_cache,
                         (
-                            settings["m3u"],
-                            settings["epg"],
-                            epg_ready,
+                            YukiData.settings["m3u"],
+                            YukiData.settings["epg"],
+                            YukiData.epg_ready,
                         ),
                     )
                 )
                 is_program_actual1 = False
                 if tvguide_json:
                     if "tvguide_sets" in tvguide_json:
-                        tvguide_sets = tvguide_json["tvguide_sets"]
+                        YukiData.tvguide_sets = tvguide_json["tvguide_sets"]
                     if "prog_ids" in tvguide_json:
-                        prog_ids = tvguide_json["prog_ids"]
+                        YukiData.prog_ids = tvguide_json["prog_ids"]
                     if "epg_icons" in tvguide_json:
-                        epg_icons = tvguide_json["epg_icons"]
+                        YukiData.epg_icons = tvguide_json["epg_icons"]
                     if "is_program_actual" in tvguide_json:
                         is_program_actual1 = tvguide_json["is_program_actual"]
                     if "programmes_1" in tvguide_json:
-                        programmes = tvguide_json["programmes_1"]
+                        YukiData.programmes = tvguide_json["programmes_1"]
                     tvguide_json = None
                 if not is_program_actual1:
                     logger.info("EPG cache expired, updating...")
-                    epg_ready = True
+                    YukiData.epg_ready = True
                     force_update_epg()
-                epg_ready = True
+                YukiData.epg_ready = True
 
                 update_epg_func_static_disable()
 
@@ -650,7 +726,7 @@ if __name__ == "__main__":
                 btn_update_click()
             else:
                 logger.info("No EPG cache found")
-                epg_ready = True
+                YukiData.epg_ready = True
                 force_update_epg()
 
         if YukiData.use_dark_icon_theme:
@@ -665,10 +741,13 @@ if __name__ == "__main__":
         )
 
         channels = {}
-        programmes = {}
+        YukiData.programmes = {}
 
         playlist_editor = PlaylistEditor(
-            _=_, icon=YukiGUI.main_icon, icons_folder=ICONS_FOLDER, settings=settings
+            _=_,
+            icon=YukiGUI.main_icon,
+            icons_folder=ICONS_FOLDER,
+            settings=YukiData.settings,
         )
 
         def show_playlist_editor():
@@ -679,7 +758,7 @@ if __name__ == "__main__":
                 playlist_editor.show()
                 moveWindowToCenter(playlist_editor)
 
-        save_folder = settings["save_folder"]
+        save_folder = YukiData.settings["save_folder"]
 
         if not os.path.isdir(str(Path(save_folder))):
             try:
@@ -700,7 +779,7 @@ if __name__ == "__main__":
                 "Save folder is not writable (os.access), using default save folder"
             )
 
-        if not settings["scrrecnosubfolders"]:
+        if not YukiData.settings["scrrecnosubfolders"]:
             try:
                 if not os.path.isdir(str(Path(save_folder, "screenshots"))):
                     os.mkdir(str(Path(save_folder, "screenshots")))
@@ -731,8 +810,8 @@ if __name__ == "__main__":
         def getArrayItem(arr_item):
             arr_item_ret = None
             if arr_item:
-                if arr_item in array:
-                    arr_item_ret = array[arr_item]
+                if arr_item in YukiData.array:
+                    arr_item_ret = YukiData.array[arr_item]
                 elif arr_item in YukiData.movies:
                     arr_item_ret = YukiData.movies[arr_item]
                 else:
@@ -785,13 +864,15 @@ if __name__ == "__main__":
             ) = m3u_url.split("::::::::::::::")
             if not os.path.isdir(str(Path(LOCAL_DIR, "xtream"))):
                 os.mkdir(str(Path(LOCAL_DIR, "xtream")))
-            xtream_headers = {"User-Agent": settings["ua"]}
-            if settings["referer"]:
-                xtream_headers["Referer"] = settings["referer"]
+            xtream_headers = {"User-Agent": YukiData.settings["ua"]}
+            if YukiData.settings["referer"]:
+                xtream_headers["Referer"] = YukiData.settings["referer"]
             try:
                 xt = XTream(
                     log_xtream,
-                    hashlib.sha512(settings["m3u"].encode("utf-8")).hexdigest(),
+                    hashlib.sha512(
+                        YukiData.settings["m3u"].encode("utf-8")
+                    ).hexdigest(),
                     xtream_username,
                     xtream_password,
                     xtream_url,
@@ -814,17 +895,22 @@ if __name__ == "__main__":
                 xt.auth_data = {}
             return xt, xtream_username, xtream_password, xtream_url
 
-        channel_sort = {}
+        YukiData.channel_sort = {}
         if os.path.isfile(str(Path(LOCAL_DIR, "sortchannels.json"))):
             with open(
                 str(Path(LOCAL_DIR, "sortchannels.json")), encoding="utf8"
             ) as channel_sort_file1:
                 channel_sort3 = json.loads(channel_sort_file1.read())
-                if settings["m3u"] in channel_sort3:
-                    channel_sort = channel_sort3[settings["m3u"]]
+                if YukiData.settings["m3u"] in channel_sort3:
+                    YukiData.channel_sort = channel_sort3[YukiData.settings["m3u"]]
 
-        array, array_sorted, groups, m3u_exists, xt, YukiData = load_playlist(
-            _, settings, YukiData, load_xtream, channel_sets, channel_sort
+        YukiData.array, array_sorted, groups, m3u_exists, xt, YukiData = load_playlist(
+            _,
+            YukiData.settings,
+            YukiData,
+            load_xtream,
+            YukiData.channel_sets,
+            YukiData.channel_sort,
         )
 
         try:
@@ -834,8 +920,8 @@ if __name__ == "__main__":
                 )
                 settings_file2_json = json.loads(settings_file2.read())
                 settings_file2.close()
-                if settings["epg"] and not settings_file2_json["epg"]:
-                    settings_file2_json["epg"] = settings["epg"]
+                if YukiData.settings["epg"] and not settings_file2_json["epg"]:
+                    settings_file2_json["epg"] = YukiData.settings["epg"]
                     settings_file4 = open(
                         str(Path(LOCAL_DIR, "settings.json")), "w", encoding="utf8"
                     )
@@ -857,7 +943,6 @@ if __name__ == "__main__":
         YukiGUI.create_windows()
 
         def resettodefaults_btn_clicked():
-            global main_keybinds
             resettodefaults_btn_clicked_msg = QtWidgets.QMessageBox.question(
                 None,
                 MAIN_WINDOW_TITLE,
@@ -871,21 +956,21 @@ if __name__ == "__main__":
                 == QtWidgets.QMessageBox.StandardButton.Yes
             ):
                 logger.info("Restoring default keybinds")
-                main_keybinds = main_keybinds_default.copy()
-                YukiGUI.shortcuts_table.setRowCount(len(main_keybinds))
+                YukiData.main_keybinds = main_keybinds_default.copy()
+                YukiGUI.shortcuts_table.setRowCount(len(YukiData.main_keybinds))
                 keybind_i = -1
-                for keybind in main_keybinds:
+                for keybind in YukiData.main_keybinds:
                     keybind_i += 1
                     YukiGUI.shortcuts_table.setItem(
                         keybind_i,
                         0,
                         get_widget_item(main_keybinds_translations[keybind]),
                     )
-                    if isinstance(main_keybinds[keybind], str):
-                        keybind_str = main_keybinds[keybind]
+                    if isinstance(YukiData.main_keybinds[keybind], str):
+                        keybind_str = YukiData.main_keybinds[keybind]
                     else:
                         keybind_str = QtGui.QKeySequence(
-                            main_keybinds[keybind]
+                            YukiData.main_keybinds[keybind]
                         ).toString()
                     kbd_widget = get_widget_item(keybind_str)
                     kbd_widget.setToolTip(_("Double click to change"))
@@ -895,7 +980,7 @@ if __name__ == "__main__":
                     str(Path(LOCAL_DIR, "hotkeys.json")), "w", encoding="utf8"
                 )
                 hotkeys_file_1.write(
-                    json.dumps({"current_profile": {"keys": main_keybinds}})
+                    json.dumps({"current_profile": {"keys": YukiData.main_keybinds}})
                 )
                 hotkeys_file_1.close()
                 reload_keybinds()
@@ -943,14 +1028,20 @@ if __name__ == "__main__":
                     ).setText(sel_keyseq)
                     for name55, value55 in main_keybinds_translations.items():
                         if value55 == search_value:
-                            main_keybinds[name55] = sel_keyseq
+                            YukiData.main_keybinds[name55] = sel_keyseq
                             hotkeys_file = open(
                                 str(Path(LOCAL_DIR, "hotkeys.json")),
                                 "w",
                                 encoding="utf8",
                             )
                             hotkeys_file.write(
-                                json.dumps({"current_profile": {"keys": main_keybinds}})
+                                json.dumps(
+                                    {
+                                        "current_profile": {
+                                            "keys": YukiData.main_keybinds
+                                        }
+                                    }
+                                )
                             )
                             hotkeys_file.close()
                             reload_keybinds()
@@ -979,7 +1070,7 @@ if __name__ == "__main__":
             try:
                 ch_3 = YukiGUI.epg_win_checkbox.currentText()
                 ch_3_guide = update_tvguide(
-                    ch_3, True, date_selected=epg_selected_date
+                    ch_3, True, date_selected=YukiData.epg_selected_date
                 ).replace("!@#$%^^&*(", "\n")
                 ch_3_guide = ch_3_guide.replace("\n", "<br>").replace("<br>", "", 1)
                 if ch_3_guide.strip():
@@ -1009,16 +1100,14 @@ if __name__ == "__main__":
                     YukiGUI.epg_win_checkbox.view().setRowHidden(item6, True)
 
         def epg_date_changed(epg_date):
-            global epg_selected_date
-            epg_selected_date = datetime.datetime.fromordinal(
+            YukiData.epg_selected_date = datetime.datetime.fromordinal(
                 epg_date.toPyDate().toordinal()
             ).timestamp()
             epg_win_checkbox_changed()
 
-        archive_epg = None
+        YukiData.archive_epg = None
 
         def do_open_archive(link):
-            global archive_epg
             if "#__archive__" in link:
                 archive_json = json.loads(
                     urllib.parse.unquote_plus(link.split("#__archive__")[1])
@@ -1032,22 +1121,22 @@ if __name__ == "__main__":
                 prog_index = archive_json[3]
 
                 if "#__rewind__" not in link:
-                    archive_epg = archive_json
+                    YukiData.archive_epg = archive_json
 
                 catchup_id = ""
                 try:
                     match1 = archive_json[0].lower()
                     try:
-                        match1 = prog_match_arr[match1]
+                        match1 = YukiData.prog_match_arr[match1]
                     except Exception:
                         pass
-                    if exists_in_epg(match1, programmes):
-                        if get_epg(programmes, match1):
+                    if exists_in_epg(match1, YukiData.programmes):
+                        if get_epg(YukiData.programmes, match1):
                             if (
                                 "catchup-id"
-                                in get_epg(programmes, match1)[int(prog_index)]
+                                in get_epg(YukiData.programmes, match1)[int(prog_index)]
                             ):
-                                catchup_id = get_epg(programmes, match1)[
+                                catchup_id = get_epg(YukiData.programmes, match1)[
                                     int(prog_index)
                                 ]["catchup-id"]
                 except Exception:
@@ -1308,7 +1397,7 @@ if __name__ == "__main__":
             try:
                 subprocess.Popen(
                     YukiGUI.ext_player_txt.text().strip().split(" ")
-                    + [getArrayItem(item_selected)["url"]]
+                    + [getArrayItem(YukiData.item_selected)["url"]]
                 )
             except Exception:
                 logger.warning("Failed to open external player!")
@@ -1319,7 +1408,7 @@ if __name__ == "__main__":
 
         YukiGUI.create4(keyseq, StreaminfoWin, ICONS_FOLDER)
 
-        epg_selected_date = datetime.datetime.fromordinal(
+        YukiData.epg_selected_date = datetime.datetime.fromordinal(
             datetime.date.today().toordinal()
         ).timestamp()
 
@@ -1371,7 +1460,7 @@ if __name__ == "__main__":
             playlists_json1.write(json.dumps(playlists_save0))
             playlists_json1.close()
 
-        time_stop = 0
+        YukiData.time_stop = 0
 
         def moveWindowToCenter(win_arg, force=False):
             used_screen = QtWidgets.QApplication.primaryScreen()
@@ -1397,9 +1486,9 @@ if __name__ == "__main__":
 
         moveWindowToCenter(YukiGUI.epg_win)
 
-        ffmpeg_processes = []
+        YukiData.ffmpeg_processes = []
 
-        init_record(show_exception, ffmpeg_processes)
+        init_record(show_exception, YukiData.ffmpeg_processes)
 
         def convert_time(times_1):
             yr = time.strftime("%Y", time.localtime())
@@ -1443,7 +1532,7 @@ if __name__ == "__main__":
             for char in FORBIDDEN_CHARS:
                 ch = ch.replace(char, "")
             cur_time = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
-            if not settings["scrrecnosubfolders"]:
+            if not YukiData.settings["scrrecnosubfolders"]:
                 out_file = str(
                     Path(
                         save_folder,
@@ -1461,7 +1550,7 @@ if __name__ == "__main__":
                     record_url,
                     out_file,
                     ch_name,
-                    f"Referer: {settings['referer']}",
+                    f"Referer: {YukiData.settings['referer']}",
                     get_ua_ref_for_channel,
                 ),
                 time.time(),
@@ -1475,7 +1564,7 @@ if __name__ == "__main__":
                 if ffmpeg_process:
                     ffmpeg_process.terminate()
 
-        recViaScheduler = False
+        YukiData.recViaScheduler = False
 
         @idle_function
         def record_post_action_after(unused=None):
@@ -1494,7 +1583,6 @@ if __name__ == "__main__":
 
         def record_timer_2():
             try:
-                global recViaScheduler
                 activerec_list_value = (
                     YukiGUI.activerec_list.verticalScrollBar().value()
                 )
@@ -1516,23 +1604,23 @@ if __name__ == "__main__":
                 )
                 pl_text = "REC / " + _("Scheduler")
                 if YukiGUI.activerec_list.count() != 0:
-                    recViaScheduler = True
+                    YukiData.recViaScheduler = True
                     YukiGUI.lbl2.setText(pl_text)
                     YukiGUI.lbl2.show()
                 else:
-                    if recViaScheduler:
+                    if YukiData.recViaScheduler:
                         logger.info(
                             "Record via scheduler ended, waiting"
                             " for ffmpeg process completion..."
                         )
                         record_post_action()
-                    recViaScheduler = False
+                    YukiData.recViaScheduler = False
                     if YukiGUI.lbl2.text() == pl_text:
                         YukiGUI.lbl2.hide()
             except Exception:
                 pass
 
-        is_recording_old = False
+        YukiData.is_recording_old = False
 
         @idle_function
         def set_record_icon(unused=None):
@@ -1544,10 +1632,9 @@ if __name__ == "__main__":
 
         def record_timer():
             try:
-                global is_recording, is_recording_old, ffmpeg_processes
-                if is_recording != is_recording_old:
-                    is_recording_old = is_recording
-                    if is_recording:
+                if YukiData.is_recording != YukiData.is_recording_old:
+                    YukiData.is_recording_old = YukiData.is_recording
+                    if YukiData.is_recording:
                         set_record_stop_icon()
                     else:
                         set_record_icon()
@@ -1584,7 +1671,7 @@ if __name__ == "__main__":
                                 )
                             )
                             sch_recordings[array_name] = do_start_record(array_name)
-                            ffmpeg_processes.append(sch_recordings[array_name])
+                            YukiData.ffmpeg_processes.append(sch_recordings[array_name])
                     if end_time_1 == current_time:
                         if array_name in sch_recordings:
                             YukiGUI.schedulers.takeItem(i3)
@@ -1641,8 +1728,7 @@ if __name__ == "__main__":
         YukiGUI.create_scheduler_widgets(get_current_time())
 
         def save_sort():
-            global channel_sort
-            channel_sort = [
+            YukiData.channel_sort = [
                 YukiGUI.sort_list.item(z0).text()
                 for z0 in range(YukiGUI.sort_list.count())
             ]
@@ -1652,7 +1738,7 @@ if __name__ == "__main__":
                     Path(LOCAL_DIR, "sortchannels.json"), encoding="utf8"
                 ) as file5:
                     channel_sort2 = json.loads(file5.read())
-            channel_sort2[settings["m3u"]] = channel_sort
+            channel_sort2[YukiData.settings["m3u"]] = YukiData.channel_sort
             with open(
                 Path(LOCAL_DIR, "sortchannels.json"), "w", encoding="utf8"
             ) as channel_sort_file:
@@ -1686,8 +1772,8 @@ if __name__ == "__main__":
         # Channel settings window
         def epgname_btn_action():
             prog_ids_0 = []
-            for x0 in prog_ids:
-                for x1 in prog_ids[x0]:
+            for x0 in YukiData.prog_ids:
+                for x1 in YukiData.prog_ids[x0]:
                     if x1 not in prog_ids_0:
                         prog_ids_0.append(x1)
             YukiGUI.esw_select.clear()
@@ -1700,10 +1786,10 @@ if __name__ == "__main__":
 
         YukiGUI.epgname_btn.clicked.connect(epgname_btn_action)
 
-        def_user_agent = settings["ua"]
+        def_user_agent = YukiData.settings["ua"]
         logger.info(f"Default user agent: {def_user_agent}")
-        if settings["referer"]:
-            logger.info(f"Default HTTP referer: {settings['referer']}")
+        if YukiData.settings["referer"]:
+            logger.info(f"Default HTTP referer: {YukiData.settings['referer']}")
         else:
             logger.info("Default HTTP referer: (empty)")
 
@@ -1819,13 +1905,13 @@ if __name__ == "__main__":
         @async_gui_blocking_function
         def monitor_playback():
             try:
-                player.wait_until_playing()
-                player.observe_property("video-params", on_video_params)
-                player.observe_property("video-format", on_video_format)
-                player.observe_property("audio-params", on_audio_params)
-                player.observe_property("audio-codec", on_audio_codec)
-                player.observe_property("video-bitrate", on_bitrate)
-                player.observe_property("audio-bitrate", on_bitrate)
+                YukiData.player.wait_until_playing()
+                YukiData.player.observe_property("video-params", on_video_params)
+                YukiData.player.observe_property("video-format", on_video_format)
+                YukiData.player.observe_property("audio-params", on_audio_params)
+                YukiData.player.observe_property("audio-codec", on_audio_codec)
+                YukiData.player.observe_property("video-bitrate", on_bitrate)
+                YukiData.player.observe_property("audio-bitrate", on_bitrate)
             except Exception:
                 pass
 
@@ -1844,7 +1930,7 @@ if __name__ == "__main__":
             YukiGUI.loading1.show()
             idle_on_metadata()
 
-        event_handler = None
+        YukiData.event_handler = None
 
         def on_before_play():
             YukiGUI.streaminfo_win.hide()
@@ -1860,57 +1946,56 @@ if __name__ == "__main__":
             stream_info.audio_bitrates.clear()
 
         def get_ua_ref_for_channel(channel_name1):
-            useragent_ref = settings["ua"]
-            referer_ref = settings["referer"]
+            useragent_ref = YukiData.settings["ua"]
+            referer_ref = YukiData.settings["referer"]
             if channel_name1:
                 channel_item = getArrayItem(channel_name1)
                 if channel_item:
                     useragent_ref = (
                         channel_item["useragent"]
                         if "useragent" in channel_item and channel_item["useragent"]
-                        else settings["ua"]
+                        else YukiData.settings["ua"]
                     )
                     referer_ref = (
                         channel_item["referer"]
                         if "referer" in channel_item and channel_item["referer"]
-                        else settings["referer"]
+                        else YukiData.settings["referer"]
                     )
-            if settings["m3u"] in channel_sets:
-                channel_set = channel_sets[settings["m3u"]]
+            if YukiData.settings["m3u"] in YukiData.channel_sets:
+                channel_set = YukiData.channel_sets[YukiData.settings["m3u"]]
                 if channel_name1 and channel_name1 in channel_set:
                     channel_config = channel_set[channel_name1]
                     if (
                         "ua" in channel_config
                         and channel_config["ua"]
-                        and channel_config["ua"] != settings["ua"]
+                        and channel_config["ua"] != YukiData.settings["ua"]
                     ):
                         useragent_ref = channel_config["ua"]
                     if (
                         "ref" in channel_config
                         and channel_config["ref"]
-                        and channel_config["ref"] != settings["referer"]
+                        and channel_config["ref"] != YukiData.settings["referer"]
                     ):
                         referer_ref = channel_config["ref"]
             return useragent_ref, referer_ref
 
         def mpv_override_play(arg_override_play, channel_name1=""):
-            global event_handler
             on_before_play()
             useragent_ref, referer_ref = get_ua_ref_for_channel(channel_name1)
-            player.user_agent = useragent_ref
+            YukiData.player.user_agent = useragent_ref
             if referer_ref:
-                player.http_header_fields = f"Referer: {referer_ref}"
+                YukiData.player.http_header_fields = f"Referer: {referer_ref}"
             else:
-                player.http_header_fields = ""
+                YukiData.player.http_header_fields = ""
 
             is_main = arg_override_play.endswith(
                 "/main.png"
             ) or arg_override_play.endswith("\\main.png")
             if not is_main:
-                logger.info(f"Using User-Agent: {player.user_agent}")
+                logger.info(f"Using User-Agent: {YukiData.player.user_agent}")
                 cur_ref = ""
                 try:
-                    for ref1 in player.http_header_fields:
+                    for ref1 in YukiData.player.http_header_fields:
                         if ref1.startswith("Referer: "):
                             ref1 = ref1.replace("Referer: ", "", 1)
                             cur_ref = ref1
@@ -1921,53 +2006,50 @@ if __name__ == "__main__":
                 else:
                     logger.info("Using HTTP Referer: (empty)")
 
-            if "uuid" in settings:
-                if settings["uuid"] and not is_main:
+            if "uuid" in YukiData.settings:
+                if YukiData.settings["uuid"] and not is_main:
                     logger.info("Set X-Playback-Session-Id header")
-                    player.http_header_fields = "X-Playback-Session-Id: " + str(
-                        uuid.uuid1()
+                    YukiData.player.http_header_fields = (
+                        "X-Playback-Session-Id: " + str(uuid.uuid1())
                     )
 
-            player.pause = False
-            player.play(parse_specifiers_now_url(arg_override_play))
-            if event_handler:
+            YukiData.player.pause = False
+            YukiData.player.play(parse_specifiers_now_url(arg_override_play))
+            if YukiData.event_handler:
                 try:
-                    event_handler.on_metadata()
+                    YukiData.event_handler.on_metadata()
                 except Exception:
                     pass
 
         def mpv_override_stop(ignore=False):
-            global event_handler
-            player.command("stop")
+            YukiData.player.command("stop")
             if not ignore:
                 logger.info("Disabling deinterlace for main.png")
-                player.deinterlace = False
-            player.play(str(Path("yuki_iptv", ICONS_FOLDER, "main.png")))
-            player.pause = True
-            if event_handler:
+                YukiData.player.deinterlace = False
+            YukiData.player.play(str(Path("yuki_iptv", ICONS_FOLDER, "main.png")))
+            YukiData.player.pause = True
+            if YukiData.event_handler:
                 try:
-                    event_handler.on_metadata()
+                    YukiData.event_handler.on_metadata()
                 except Exception:
                     pass
 
-        firstVolRun = True
+        YukiData.firstVolRun = True
 
         def mpv_override_volume(volume_val):
-            global event_handler, firstVolRun
-            player.volume = volume_val
+            YukiData.player.volume = volume_val
             YukiData.volume = volume_val
-            if event_handler:
+            if YukiData.event_handler:
                 try:
-                    event_handler.on_volume()
+                    YukiData.event_handler.on_volume()
                 except Exception:
                     pass
 
         def mpv_override_mute(mute_val):
-            global event_handler
-            player.mute = mute_val
-            if event_handler:
+            YukiData.player.mute = mute_val
+            if YukiData.event_handler:
                 try:
-                    event_handler.on_volume()
+                    YukiData.event_handler.on_volume()
                 except Exception:
                     pass
 
@@ -1975,29 +2057,29 @@ if __name__ == "__main__":
             try:
                 mpv_override_stop(ignore)
             except Exception:
-                player.loop = True
+                YukiData.player.loop = True
                 mpv_override_play(str(Path("yuki_iptv", ICONS_FOLDER, "main.png")))
-                player.pause = True
+                YukiData.player.pause = True
 
         def setVideoAspect(va):
             if va == 0:
                 va = -1
             try:
-                player.video_aspect_override = va
+                YukiData.player.video_aspect_override = va
             except Exception:
-                player.video_aspect = va
+                YukiData.player.video_aspect = va
 
         def setZoom(zm):
-            player.video_zoom = zm
+            YukiData.player.video_zoom = zm
 
         def setPanscan(ps):
-            player.panscan = ps
+            YukiData.player.panscan = ps
 
         def getVideoAspect():
             try:
-                va1 = player.video_aspect_override
+                va1 = YukiData.player.video_aspect_override
             except Exception:
-                va1 = player.video_aspect
+                va1 = YukiData.player.video_aspect
             return va1
 
         def doPlay(play_url1, ua_ch=def_user_agent, chan_name_0=""):
@@ -2010,31 +2092,31 @@ if __name__ == "__main__":
             showLoading()
             # Optimizations
             if play_url1.startswith("udp://") or play_url1.startswith("rtp://"):
-                if settings["multicastoptimization"]:
+                if YukiData.settings["multicastoptimization"]:
                     try:
                         # For low latency on multicast
                         logger.info("Using multicast optimized settings")
-                        player.cache = "no"
-                        player.untimed = True
-                        player["cache-pause"] = False
-                        player["audio-buffer"] = 0
-                        player["vd-lavc-threads"] = 1
-                        player["demuxer-lavf-probe-info"] = "nostreams"
-                        player["demuxer-lavf-analyzeduration"] = 0.1
-                        player["video-sync"] = "audio"
-                        player["interpolation"] = False
-                        player["video-latency-hacks"] = True
+                        YukiData.player.cache = "no"
+                        YukiData.player.untimed = True
+                        YukiData.player["cache-pause"] = False
+                        YukiData.player["audio-buffer"] = 0
+                        YukiData.player["vd-lavc-threads"] = 1
+                        YukiData.player["demuxer-lavf-probe-info"] = "nostreams"
+                        YukiData.player["demuxer-lavf-analyzeduration"] = 0.1
+                        YukiData.player["video-sync"] = "audio"
+                        YukiData.player["interpolation"] = False
+                        YukiData.player["video-latency-hacks"] = True
                     except Exception:
                         logger.warning("Failed to set multicast optimized settings!")
             try:
-                if settings["autoreconnection"]:
-                    player.stream_lavf_o = (
+                if YukiData.settings["autoreconnection"]:
+                    YukiData.player.stream_lavf_o = (
                         "-reconnect=1 -reconnect_at_eof=1 "
                         "-reconnect_streamed=1 -reconnect_delay_max=2"
                     )
             except Exception:
                 pass
-            player.loop = False
+            YukiData.player.loop = False
             # Playing
             mpv_override_play(play_url1, chan_name_0)
             # Set channel (video) settings
@@ -2044,9 +2126,9 @@ if __name__ == "__main__":
 
         def chan_set_save():
             chan_3 = YukiGUI.title.text()
-            if settings["m3u"] not in channel_sets:
-                channel_sets[settings["m3u"]] = {}
-            channel_sets[settings["m3u"]][chan_3] = {
+            if YukiData.settings["m3u"] not in YukiData.channel_sets:
+                YukiData.channel_sets[YukiData.settings["m3u"]] = {}
+            YukiData.channel_sets[YukiData.settings["m3u"]][chan_3] = {
                 "deinterlace": YukiGUI.deinterlace_chk.isChecked(),
                 "ua": YukiGUI.useragent_choose.text(),
                 "ref": YukiGUI.referer_choose_custom.text(),
@@ -2067,17 +2149,17 @@ if __name__ == "__main__":
                 ),
             }
             save_channel_sets()
-            if playing_channel == chan_3:
-                player.deinterlace = YukiGUI.deinterlace_chk.isChecked()
-                player.contrast = YukiGUI.contrast_choose.value()
-                player.brightness = YukiGUI.brightness_choose.value()
-                player.hue = YukiGUI.hue_choose.value()
-                player.saturation = YukiGUI.saturation_choose.value()
-                player.gamma = YukiGUI.gamma_choose.value()
-                player.video_zoom = YukiGUI.zoom_vars[
+            if YukiData.playing_channel == chan_3:
+                YukiData.player.deinterlace = YukiGUI.deinterlace_chk.isChecked()
+                YukiData.player.contrast = YukiGUI.contrast_choose.value()
+                YukiData.player.brightness = YukiGUI.brightness_choose.value()
+                YukiData.player.hue = YukiGUI.hue_choose.value()
+                YukiData.player.saturation = YukiGUI.saturation_choose.value()
+                YukiData.player.gamma = YukiGUI.gamma_choose.value()
+                YukiData.player.video_zoom = YukiGUI.zoom_vars[
                     list(YukiGUI.zoom_vars)[YukiGUI.zoom_choose.currentIndex()]
                 ]
-                player.panscan = YukiGUI.panscan_choose.value()
+                YukiData.player.panscan = YukiGUI.panscan_choose.value()
                 setVideoAspect(
                     YukiGUI.videoaspect_vars[
                         list(YukiGUI.videoaspect_vars)[
@@ -2092,24 +2174,24 @@ if __name__ == "__main__":
 
         YukiGUI.chan_win.setCentralWidget(YukiGUI.wid)
 
-        do_save_settings = False
+        YukiData.do_save_settings = False
 
         # Settings window
         def save_settings():
-            global epg_thread_2, do_save_settings
-            settings_old = settings.copy()
+            settings_old = YukiData.settings.copy()
 
-            if settings["epgoffset"] != YukiGUI.soffset.value():
+            if YukiData.settings["epgoffset"] != YukiGUI.soffset.value():
                 if os.path.isfile(str(Path(LOCAL_DIR, "epg.cache"))):
                     os.remove(str(Path(LOCAL_DIR, "epg.cache")))
 
-            if settings["epgdays"] != YukiGUI.epgdays.value():
+            if YukiData.settings["epgdays"] != YukiGUI.epgdays.value():
                 logger.info("EPG days option changed, removing cache")
                 if os.path.exists(str(Path(LOCAL_DIR, "epg.cache"))):
                     os.remove(str(Path(LOCAL_DIR, "epg.cache")))
 
             settings_arr = YukiGUI.get_settings(
-                settings["uuid"] if "uuid" in settings else False, SAVE_FOLDER_DEFAULT
+                YukiData.settings["uuid"] if "uuid" in YukiData.settings else False,
+                SAVE_FOLDER_DEFAULT,
             )
 
             if YukiGUI.catchupenable_flag.isChecked() != settings_old["catchupenable"]:
@@ -2121,7 +2203,7 @@ if __name__ == "__main__":
             settings_file1.write(json.dumps(settings_arr))
             settings_file1.close()
             YukiGUI.settings_win.hide()
-            do_save_settings = True
+            YukiData.do_save_settings = True
             app.quit()
 
         def reset_channel_settings():
@@ -2165,42 +2247,56 @@ if __name__ == "__main__":
         YukiGUI.sclose.clicked.connect(close_settings)
         YukiGUI.sfolder.clicked.connect(save_folder_select)
 
-        YukiGUI.m3u = settings["m3u"]
+        YukiGUI.m3u = YukiData.settings["m3u"]
         YukiGUI.epg = (
-            settings["epg"]
-            if not settings["epg"].startswith("^^::MULTIPLE::^^")
+            YukiData.settings["epg"]
+            if not YukiData.settings["epg"].startswith("^^::MULTIPLE::^^")
             else ""
         )
-        YukiGUI.sudp.setText(settings["udp_proxy"])
-        YukiGUI.sdei.setChecked(settings["deinterlace"])
-        YukiGUI.shwaccel.setChecked(settings["hwaccel"])
-        YukiGUI.sfld.setText(settings["save_folder"])
-        YukiGUI.soffset.setValue(settings["epgoffset"])
-        YukiGUI.scache1.setValue(settings["cache_secs"])
-        YukiGUI.epgdays.setValue(settings["epgdays"])
-        YukiGUI.referer_choose.setText(settings["referer"])
-        YukiGUI.useragent_choose_2.setText(settings["ua"])
-        YukiGUI.mpv_options.setText(settings["mpv_options"])
-        YukiGUI.donot_flag.setChecked(settings["donotupdateepg"])
-        YukiGUI.openprevchan_flag.setChecked(settings["openprevchan"])
-        YukiGUI.hidempv_flag.setChecked(settings["hidempv"])
-        YukiGUI.hideepgpercentage_flag.setChecked(settings["hideepgpercentage"])
-        YukiGUI.hideepgfromplaylist_flag.setChecked(settings["hideepgfromplaylist"])
-        YukiGUI.multicastoptimization_flag.setChecked(settings["multicastoptimization"])
-        YukiGUI.hidebitrateinfo_flag.setChecked(settings["hidebitrateinfo"])
-        YukiGUI.styleredefoff_flag.setChecked(settings["styleredefoff"])
-        YukiGUI.volumechangestep_choose.setValue(settings["volumechangestep"])
-        YukiGUI.flpopacity_input.setValue(settings["flpopacity"])
-        YukiGUI.panelposition_choose.setCurrentIndex(settings["panelposition"])
-        YukiGUI.mouseswitchchannels_flag.setChecked(settings["mouseswitchchannels"])
-        YukiGUI.autoreconnection_flag.setChecked(settings["autoreconnection"])
-        YukiGUI.showplaylistmouse_flag.setChecked(settings["showplaylistmouse"])
-        YukiGUI.showcontrolsmouse_flag.setChecked(settings["showcontrolsmouse"])
-        YukiGUI.channellogos_select.setCurrentIndex(settings["channellogos"])
-        YukiGUI.nocacheepg_flag.setChecked(settings["nocacheepg"])
-        YukiGUI.scrrecnosubfolders_flag.setChecked(settings["scrrecnosubfolders"])
-        YukiGUI.hidetvprogram_flag.setChecked(settings["hidetvprogram"])
-        YukiGUI.sort_widget.setCurrentIndex(settings["sort"])
+        YukiGUI.sudp.setText(YukiData.settings["udp_proxy"])
+        YukiGUI.sdei.setChecked(YukiData.settings["deinterlace"])
+        YukiGUI.shwaccel.setChecked(YukiData.settings["hwaccel"])
+        YukiGUI.sfld.setText(YukiData.settings["save_folder"])
+        YukiGUI.soffset.setValue(YukiData.settings["epgoffset"])
+        YukiGUI.scache1.setValue(YukiData.settings["cache_secs"])
+        YukiGUI.epgdays.setValue(YukiData.settings["epgdays"])
+        YukiGUI.referer_choose.setText(YukiData.settings["referer"])
+        YukiGUI.useragent_choose_2.setText(YukiData.settings["ua"])
+        YukiGUI.mpv_options.setText(YukiData.settings["mpv_options"])
+        YukiGUI.donot_flag.setChecked(YukiData.settings["donotupdateepg"])
+        YukiGUI.openprevchan_flag.setChecked(YukiData.settings["openprevchan"])
+        YukiGUI.hidempv_flag.setChecked(YukiData.settings["hidempv"])
+        YukiGUI.hideepgpercentage_flag.setChecked(
+            YukiData.settings["hideepgpercentage"]
+        )
+        YukiGUI.hideepgfromplaylist_flag.setChecked(
+            YukiData.settings["hideepgfromplaylist"]
+        )
+        YukiGUI.multicastoptimization_flag.setChecked(
+            YukiData.settings["multicastoptimization"]
+        )
+        YukiGUI.hidebitrateinfo_flag.setChecked(YukiData.settings["hidebitrateinfo"])
+        YukiGUI.styleredefoff_flag.setChecked(YukiData.settings["styleredefoff"])
+        YukiGUI.volumechangestep_choose.setValue(YukiData.settings["volumechangestep"])
+        YukiGUI.flpopacity_input.setValue(YukiData.settings["flpopacity"])
+        YukiGUI.panelposition_choose.setCurrentIndex(YukiData.settings["panelposition"])
+        YukiGUI.mouseswitchchannels_flag.setChecked(
+            YukiData.settings["mouseswitchchannels"]
+        )
+        YukiGUI.autoreconnection_flag.setChecked(YukiData.settings["autoreconnection"])
+        YukiGUI.showplaylistmouse_flag.setChecked(
+            YukiData.settings["showplaylistmouse"]
+        )
+        YukiGUI.showcontrolsmouse_flag.setChecked(
+            YukiData.settings["showcontrolsmouse"]
+        )
+        YukiGUI.channellogos_select.setCurrentIndex(YukiData.settings["channellogos"])
+        YukiGUI.nocacheepg_flag.setChecked(YukiData.settings["nocacheepg"])
+        YukiGUI.scrrecnosubfolders_flag.setChecked(
+            YukiData.settings["scrrecnosubfolders"]
+        )
+        YukiGUI.hidetvprogram_flag.setChecked(YukiData.settings["hidetvprogram"])
+        YukiGUI.sort_widget.setCurrentIndex(YukiData.settings["sort"])
 
         for videoaspect_var_1 in YukiGUI.videoaspect_vars:
             YukiGUI.videoaspect_def_choose.addItem(videoaspect_var_1)
@@ -2208,14 +2304,14 @@ if __name__ == "__main__":
         for zoom_var_1 in YukiGUI.zoom_vars:
             YukiGUI.zoom_def_choose.addItem(zoom_var_1)
 
-        YukiGUI.videoaspect_def_choose.setCurrentIndex(settings["videoaspect"])
-        YukiGUI.zoom_def_choose.setCurrentIndex(settings["zoom"])
-        YukiGUI.panscan_def_choose.setValue(settings["panscan"])
-        YukiGUI.catchupenable_flag.setChecked(settings["catchupenable"])
-        YukiGUI.rewindenable_flag.setChecked(settings["rewindenable"])
-        YukiGUI.hidechannellogos_flag.setChecked(settings["hidechannellogos"])
+        YukiGUI.videoaspect_def_choose.setCurrentIndex(YukiData.settings["videoaspect"])
+        YukiGUI.zoom_def_choose.setCurrentIndex(YukiData.settings["zoom"])
+        YukiGUI.panscan_def_choose.setValue(YukiData.settings["panscan"])
+        YukiGUI.catchupenable_flag.setChecked(YukiData.settings["catchupenable"])
+        YukiGUI.rewindenable_flag.setChecked(YukiData.settings["rewindenable"])
+        YukiGUI.hidechannellogos_flag.setChecked(YukiData.settings["hidechannellogos"])
         YukiGUI.hideplaylistbyleftmouseclick_flag.setChecked(
-            settings["hideplaylistbyleftmouseclick"]
+            YukiData.settings["hideplaylistbyleftmouseclick"]
         )
 
         YukiGUI.settings_win.scroll.setWidget(YukiGUI.wid2)
@@ -2241,7 +2337,7 @@ if __name__ == "__main__":
 
         @idle_function
         def setUrlText(unused=None):
-            YukiGUI.url_text.setText(playing_url)
+            YukiGUI.url_text.setText(YukiData.playing_url)
             YukiGUI.url_text.setCursorPosition(0)
             if YukiGUI.streaminfo_win.isVisible():
                 YukiGUI.streaminfo_win.hide()
@@ -2308,20 +2404,20 @@ if __name__ == "__main__":
         def show_shortcuts():
             if not YukiGUI.shortcuts_win.isVisible():
                 # start
-                YukiGUI.shortcuts_table.setRowCount(len(main_keybinds))
+                YukiGUI.shortcuts_table.setRowCount(len(YukiData.main_keybinds))
                 keybind_i = -1
-                for keybind in main_keybinds:
+                for keybind in YukiData.main_keybinds:
                     keybind_i += 1
                     YukiGUI.shortcuts_table.setItem(
                         keybind_i,
                         0,
                         get_widget_item(main_keybinds_translations[keybind]),
                     )
-                    if isinstance(main_keybinds[keybind], str):
-                        keybind_str = main_keybinds[keybind]
+                    if isinstance(YukiData.main_keybinds[keybind], str):
+                        keybind_str = YukiData.main_keybinds[keybind]
                     else:
                         keybind_str = QtGui.QKeySequence(
-                            main_keybinds[keybind]
+                            YukiData.main_keybinds[keybind]
                         ).toString()
                     kbd_widget = get_widget_item(keybind_str)
                     kbd_widget.setToolTip(_("Double click to change"))
@@ -2350,7 +2446,9 @@ if __name__ == "__main__":
         def show_sort():
             if not YukiGUI.sort_win.isVisible():
                 YukiGUI.sort_list.clear()
-                for sort_label_ch in array_sorted if not channel_sort else channel_sort:
+                for sort_label_ch in (
+                    array_sorted if not YukiData.channel_sort else YukiData.channel_sort
+                ):
                     YukiGUI.sort_list.addItem(sort_label_ch)
 
                 moveWindowToCenter(YukiGUI.sort_win)
@@ -2479,31 +2577,30 @@ if __name__ == "__main__":
         YukiGUI.playlists_delete.clicked.connect(playlists_delete_do)
         YukiGUI.playlists_settings.clicked.connect(show_settings)
 
-        fullscreen = False
+        YukiData.fullscreen = False
 
         def set_mpv_osc(osc_value):
-            if mpv_osc_enabled:
+            if YukiData.mpv_osc_enabled:
                 if osc_value != YukiData.osc:
                     YukiData.osc = osc_value
-                    player.osc = osc_value
+                    YukiData.player.osc = osc_value
 
-        mpv_osc_enabled = True
+        YukiData.mpv_osc_enabled = True
 
         def init_mpv_player():
-            global player, mpv_osc_enabled
             mpv_loglevel = "info" if loglevel.lower() != "debug" else "debug"
-            mpv_osc_enabled = True
+            YukiData.mpv_osc_enabled = True
             if "osc" in options:
                 # To prevent 'multiple values for keyword argument'!
-                mpv_osc_enabled = options.pop("osc") != "no"
+                YukiData.mpv_osc_enabled = options.pop("osc") != "no"
             if enable_libmpv_render_context:
                 options["vo"] = "null"
             else:
                 options["wid"] = str(int(win.container.winId()))
             try:
-                player = mpv.MPV(
+                YukiData.player = mpv.MPV(
                     **options,
-                    osc=mpv_osc_enabled,
+                    osc=YukiData.mpv_osc_enabled,
                     script_opts="osc-layout=box,osc-seekbarstyle=bar,"
                     "osc-deadzonesize=0,osc-minmousemove=3",
                     ytdl=True,
@@ -2513,9 +2610,9 @@ if __name__ == "__main__":
             except Exception:
                 logger.warning("mpv init with ytdl failed")
                 try:
-                    player = mpv.MPV(
+                    YukiData.player = mpv.MPV(
                         **options,
-                        osc=mpv_osc_enabled,
+                        osc=YukiData.mpv_osc_enabled,
                         script_opts="osc-layout=box,osc-seekbarstyle=bar,"
                         "osc-deadzonesize=0,osc-minmousemove=3",
                         log_handler=my_log,
@@ -2523,12 +2620,12 @@ if __name__ == "__main__":
                     )
                 except Exception:
                     logger.warning("mpv init with osc failed")
-                    player = mpv.MPV(
+                    YukiData.player = mpv.MPV(
                         **options,
                         log_handler=my_log,
                         loglevel=mpv_loglevel,
                     )
-            if settings["hidempv"]:
+            if YukiData.settings["hidempv"]:
                 try:
                     set_mpv_osc(False)
                 except Exception:
@@ -2539,37 +2636,40 @@ if __name__ == "__main__":
                 container_layout.setContentsMargins(0, 0, 0, 0)
                 container_layout.setSpacing(0)
                 mpv_opengl_widget = MPVOpenGLWidget(
-                    app, player, mpv.MpvRenderContext, mpv.MpvGlGetProcAddressFn
+                    app,
+                    YukiData.player,
+                    mpv.MpvRenderContext,
+                    mpv.MpvGlGetProcAddressFn,
                 )
                 container_layout.addWidget(mpv_opengl_widget)
                 win.container.setLayout(container_layout)
 
             try:
-                player["force-seekable"] = True
+                YukiData.player["force-seekable"] = True
             except Exception:
                 pass
-            if not settings["hwaccel"]:
+            if not YukiData.settings["hwaccel"]:
                 try:
-                    player["x11-bypass-compositor"] = "yes"
+                    YukiData.player["x11-bypass-compositor"] = "yes"
                 except Exception:
                     pass
             try:
-                player["network-timeout"] = 5
+                YukiData.player["network-timeout"] = 5
             except Exception:
                 pass
 
             try:
-                player.title = MAIN_WINDOW_TITLE
+                YukiData.player.title = MAIN_WINDOW_TITLE
             except Exception:
                 pass
 
             try:
-                player["audio-client-name"] = "yuki-iptv"
+                YukiData.player["audio-client-name"] = "yuki-iptv"
             except Exception:
                 logger.warning("mpv audio-client-name set failed")
 
             try:
-                mpv_version = player.mpv_version
+                mpv_version = YukiData.player.mpv_version
                 if not mpv_version.startswith("mpv "):
                     mpv_version = "mpv " + mpv_version
             except Exception:
@@ -2579,27 +2679,33 @@ if __name__ == "__main__":
 
             YukiGUI.textbox.setText(get_about_text())
 
-            if settings["cache_secs"] != 0:
+            if YukiData.settings["cache_secs"] != 0:
                 try:
-                    player["demuxer-readahead-secs"] = settings["cache_secs"]
-                    logger.info(f'Demuxer cache set to {settings["cache_secs"]}s')
+                    YukiData.player["demuxer-readahead-secs"] = YukiData.settings[
+                        "cache_secs"
+                    ]
+                    logger.info(
+                        f'Demuxer cache set to {YukiData.settings["cache_secs"]}s'
+                    )
                 except Exception:
                     pass
                 try:
-                    player["cache-secs"] = settings["cache_secs"]
-                    logger.info(f'Cache set to {settings["cache_secs"]}s')
+                    YukiData.player["cache-secs"] = YukiData.settings["cache_secs"]
+                    logger.info(f'Cache set to {YukiData.settings["cache_secs"]}s')
                 except Exception:
                     pass
             else:
                 logger.info("Using default cache settings")
-            player.user_agent = def_user_agent
-            if settings["referer"]:
-                player.http_header_fields = f"Referer: {settings['referer']}"
-                logger.info(f"HTTP referer: '{settings['referer']}'")
+            YukiData.player.user_agent = def_user_agent
+            if YukiData.settings["referer"]:
+                YukiData.player.http_header_fields = (
+                    f"Referer: {YukiData.settings['referer']}"
+                )
+                logger.info(f"HTTP referer: '{YukiData.settings['referer']}'")
             else:
                 logger.info("No HTTP referer set up")
             mpv_override_volume(100)
-            player.loop = True
+            YukiData.player.loop = True
 
             aot_action1 = None
             try:
@@ -2607,16 +2713,16 @@ if __name__ == "__main__":
                     0,
                     win.menu_bar_qt,
                     win,
-                    player.track_list,
-                    playing_channel,
+                    YukiData.player.track_list,
+                    YukiData.playing_channel,
                     get_keybind,
                 )
                 populate_menubar(
                     1,
-                    right_click_menu,
+                    YukiData.right_click_menu,
                     win,
-                    player.track_list,
-                    playing_channel,
+                    YukiData.player.track_list,
+                    YukiData.playing_channel,
                     get_keybind,
                 )
             except Exception:
@@ -2625,12 +2731,12 @@ if __name__ == "__main__":
             logger.info("redraw_menubar triggered by init")
             redraw_menubar()
 
-            @player.property_observer("duration")
+            @YukiData.player.property_observer("duration")
             def duration_observer(_name, value):
                 try:
-                    if YukiData.old_playing_url != playing_url:
-                        YukiData.old_playing_url = playing_url
-                        event_handler.on_metadata()
+                    if YukiData.old_playing_url != YukiData.playing_url:
+                        YukiData.old_playing_url = YukiData.playing_url
+                        YukiData.event_handler.on_metadata()
                 except Exception:
                     pass
 
@@ -2645,15 +2751,15 @@ if __name__ == "__main__":
                     ) = get_mpris_metadata()
                     mpris_seeked(player_position)
 
-            @player.event_callback("seek")
+            @YukiData.player.event_callback("seek")
             def seek_event(event):
                 seek_event_callback()
 
-            @player.event_callback("file-loaded")
+            @YukiData.player.event_callback("file-loaded")
             def file_loaded_2(event):
                 file_loaded_callback()
 
-            @player.event_callback("end_file")
+            @YukiData.player.event_callback("end_file")
             def ready_handler_2(event):
                 if event["event"]["error"] != 0:
                     end_file_error_callback()
@@ -2662,39 +2768,38 @@ if __name__ == "__main__":
 
             if needs_player_keybinds:
 
-                @player.on_key_press("MBTN_RIGHT")
+                @YukiData.player.on_key_press("MBTN_RIGHT")
                 def my_mouse_right():
                     my_mouse_right_callback()
 
-                @player.on_key_press("MBTN_LEFT")
+                @YukiData.player.on_key_press("MBTN_LEFT")
                 def my_mouse_left():
                     my_mouse_left_callback()
 
-                @player.on_key_press("MBTN_LEFT_DBL")
+                @YukiData.player.on_key_press("MBTN_LEFT_DBL")
                 def my_leftdbl_binding():
                     mpv_fullscreen()
 
-                @player.on_key_press("MBTN_FORWARD")
+                @YukiData.player.on_key_press("MBTN_FORWARD")
                 def my_forward_binding():
                     next_channel()
 
-                @player.on_key_press("MBTN_BACK")
+                @YukiData.player.on_key_press("MBTN_BACK")
                 def my_back_binding():
                     prev_channel()
 
-                @player.on_key_press("WHEEL_UP")
+                @YukiData.player.on_key_press("WHEEL_UP")
                 def my_up_binding():
                     my_up_binding_execute()
 
-                @player.on_key_press("WHEEL_DOWN")
+                @YukiData.player.on_key_press("WHEEL_DOWN")
                 def my_down_binding():
                     my_down_binding_execute()
 
             @idle_function
             def pause_handler(unused=None, unused2=None, unused3=None):
-                global event_handler
                 try:
-                    if not player.pause:
+                    if not YukiData.player.pause:
                         YukiGUI.btn_playpause.setIcon(
                             QtGui.QIcon(
                                 str(Path("yuki_iptv", ICONS_FOLDER, "pause.png"))
@@ -2708,33 +2813,32 @@ if __name__ == "__main__":
                             )
                         )
                         YukiGUI.btn_playpause.setToolTip(_("Play"))
-                    if event_handler:
+                    if YukiData.event_handler:
                         try:
-                            event_handler.on_playpause()
+                            YukiData.event_handler.on_playpause()
                         except Exception:
                             pass
                 except Exception:
                     pass
 
-            player.observe_property("pause", pause_handler)
+            YukiData.player.observe_property("pause", pause_handler)
 
             def yuki_track_set(track, type1):
-                global player_tracks
                 logger.info(f"Set {type1} track to {track}")
-                if playing_channel not in player_tracks:
-                    player_tracks[playing_channel] = {}
+                if YukiData.playing_channel not in YukiData.player_tracks:
+                    YukiData.player_tracks[YukiData.playing_channel] = {}
                 if type1 == "vid":
-                    player.vid = track
-                    player_tracks[playing_channel]["vid"] = track
+                    YukiData.player.vid = track
+                    YukiData.player_tracks[YukiData.playing_channel]["vid"] = track
                 elif type1 == "aid":
-                    player.aid = track
-                    player_tracks[playing_channel]["aid"] = track
+                    YukiData.player.aid = track
+                    YukiData.player_tracks[YukiData.playing_channel]["aid"] = track
                 elif type1 == "sid":
-                    player.sid = track
-                    player_tracks[playing_channel]["sid"] = track
+                    YukiData.player.sid = track
+                    YukiData.player_tracks[YukiData.playing_channel]["sid"] = track
 
             init_menubar_player(
-                player,
+                YukiData.player,
                 mpv_play,
                 mpv_stop,
                 prev_channel,
@@ -2886,12 +2990,12 @@ if __name__ == "__main__":
             def resize_rewind(self):
                 rewind_normal_offset = 150
                 rewind_fullscreen_offset = 180
-                if settings["panelposition"] == 2:
+                if YukiData.settings["panelposition"] == 2:
                     dockWidget_playlist_cur_width = 0
                 else:
                     dockWidget_playlist_cur_width = dockWidget_playlist.width()
 
-                if not fullscreen:
+                if not YukiData.fullscreen:
                     if not dockWidget_controlPanel.isVisible():
                         set_label_width(
                             YukiGUI.rewind,
@@ -2942,9 +3046,7 @@ if __name__ == "__main__":
                     )
 
             def update(self):
-                global state, tvguide_lbl, fullscreen
-
-                if settings["panelposition"] == 2:
+                if YukiData.settings["panelposition"] == 2:
                     dockWidget_playlist_cur_width2 = 0
                 else:
                     dockWidget_playlist_cur_width2 = dockWidget_playlist.width()
@@ -2952,44 +3054,44 @@ if __name__ == "__main__":
                 self.windowWidth = self.width()
                 self.windowHeight = self.height()
                 self.updateWindowSize()
-                if settings["panelposition"] in (0, 2):
-                    move_label(tvguide_lbl, 2, YukiGUI.tvguide_lbl_offset)
+                if YukiData.settings["panelposition"] in (0, 2):
+                    move_label(YukiData.tvguide_lbl, 2, YukiGUI.tvguide_lbl_offset)
                 else:
                     move_label(
-                        tvguide_lbl,
-                        win.width() - tvguide_lbl.width(),
+                        YukiData.tvguide_lbl,
+                        win.width() - YukiData.tvguide_lbl.width(),
                         YukiGUI.tvguide_lbl_offset,
                     )
                 self.resize_rewind()
-                if not fullscreen:
+                if not YukiData.fullscreen:
                     if not dockWidget_controlPanel.isVisible():
                         set_label_width(
-                            state,
+                            YukiData.state,
                             self.windowWidth - dockWidget_playlist_cur_width2 + 58,
                         )
                         move_label(
-                            state,
+                            YukiData.state,
                             int(
-                                ((self.windowWidth - state.width()) / 2)
+                                ((self.windowWidth - YukiData.state.width()) / 2)
                                 - (dockWidget_playlist_cur_width2 / 1.7)
                             ),
-                            int((self.windowHeight - state.height()) - 20),
+                            int((self.windowHeight - YukiData.state.height()) - 20),
                         )
                         h = 0
                         h2 = 10
                     else:
                         set_label_width(
-                            state,
+                            YukiData.state,
                             self.windowWidth - dockWidget_playlist_cur_width2 + 58,
                         )
                         move_label(
-                            state,
+                            YukiData.state,
                             int(
-                                ((self.windowWidth - state.width()) / 2)
+                                ((self.windowWidth - YukiData.state.width()) / 2)
                                 - (dockWidget_playlist_cur_width2 / 1.7)
                             ),
                             int(
-                                (self.windowHeight - state.height())
+                                (self.windowHeight - YukiData.state.height())
                                 - dockWidget_controlPanel.height()
                                 - 10
                             ),
@@ -2997,30 +3099,30 @@ if __name__ == "__main__":
                         h = dockWidget_controlPanel.height()
                         h2 = 20
                 else:
-                    set_label_width(state, self.windowWidth)
+                    set_label_width(YukiData.state, self.windowWidth)
                     move_label(
-                        state,
-                        int((self.windowWidth - state.width()) / 2),
-                        int((self.windowHeight - state.height()) - 20),
+                        YukiData.state,
+                        int((self.windowWidth - YukiData.state.width()) / 2),
+                        int((self.windowHeight - YukiData.state.height()) - 20),
                     )
                     h = 0
                     h2 = 10
                 if dockWidget_playlist.isVisible():
-                    if settings["panelposition"] in (0, 2):
+                    if YukiData.settings["panelposition"] in (0, 2):
                         move_label(YukiGUI.lbl2, 0, YukiGUI.lbl2_offset)
                     else:
                         move_label(
                             YukiGUI.lbl2,
-                            tvguide_lbl.width() + YukiGUI.lbl2.width(),
+                            YukiData.tvguide_lbl.width() + YukiGUI.lbl2.width(),
                             YukiGUI.lbl2_offset,
                         )
                 else:
                     move_label(YukiGUI.lbl2, 0, YukiGUI.lbl2_offset)
-                if state.isVisible():
-                    state_h = state.height()
+                if YukiData.state.isVisible():
+                    state_h = YukiData.state.height()
                 else:
                     state_h = 15
-                tvguide_lbl.setFixedHeight(
+                YukiData.tvguide_lbl.setFixedHeight(
                     (self.windowHeight - state_h - h) - 40 - state_h + h2
                 )
 
@@ -3034,7 +3136,7 @@ if __name__ == "__main__":
             def closeEvent(self, event1):
                 logger.info("Main window closed")
                 try:
-                    player.vo = "null"
+                    YukiData.player.vo = "null"
                 except Exception:
                     pass
                 if YukiGUI.streaminfo_win.isVisible():
@@ -3105,13 +3207,14 @@ if __name__ == "__main__":
                 YukiGUI.loading2.hide()
                 YukiGUI.loading_movie2.stop()
 
-        playing = False
-        playing_channel = ""
-        playing_group = -1
+        YukiData.playing = False
+        YukiData.playing_channel = ""
+        YukiData.playing_group = -1
 
         def show_progress(prog):
-            global playing_archive, fullscreen
-            if not settings["hidetvprogram"] and (prog and not playing_archive):
+            if not YukiData.settings["hidetvprogram"] and (
+                prog and not YukiData.playing_archive
+            ):
                 prog_percentage = round(
                     (time.time() - prog["start"]) / (prog["stop"] - prog["start"]) * 100
                 )
@@ -3129,7 +3232,7 @@ if __name__ == "__main__":
                 YukiGUI.progress.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
                 YukiGUI.start_label.setText(prog_start_time)
                 YukiGUI.stop_label.setText(prog_stop_time)
-                if not fullscreen:
+                if not YukiData.fullscreen:
                     YukiGUI.progress.show()
                     YukiGUI.start_label.show()
                     YukiGUI.stop_label.show()
@@ -3140,17 +3243,16 @@ if __name__ == "__main__":
                 YukiGUI.stop_label.setText("")
                 YukiGUI.stop_label.hide()
 
-        playing_url = ""
+        YukiData.playing_url = ""
 
         @idle_function
         def set_mpv_title(unused=None):
             try:
-                player.title = win.windowTitle()
+                YukiData.player.title = win.windowTitle()
             except Exception:
                 pass
 
         def setChanText(chanText, do_chan_set=False):
-            global time_stop
             chTextStrip = chanText.strip()
             if chTextStrip:
                 win.setWindowTitle(chTextStrip + " - " + MAIN_WINDOW_TITLE)
@@ -3159,62 +3261,61 @@ if __name__ == "__main__":
             set_mpv_title()
             if not do_chan_set:
                 YukiGUI.chan.setText(chanText)
-            if fullscreen and chTextStrip:
-                state.show()
-                state.setTextYuki(chTextStrip)
-                time_stop = time.time() + 1
+            if YukiData.fullscreen and chTextStrip:
+                YukiData.state.show()
+                YukiData.state.setTextYuki(chTextStrip)
+                YukiData.time_stop = time.time() + 1
 
-        playing_archive = False
+        YukiData.playing_archive = False
 
         @idle_function
         def idle_on_metadata(unused=None):
             try:
-                event_handler.on_metadata()
+                YukiData.event_handler.on_metadata()
             except Exception:
                 pass
 
         @async_gui_blocking_function
         def setPlayerSettings(j):
-            global playing_channel
             try:
                 logger.info("setPlayerSettings waiting for channel load...")
                 try:
-                    player.wait_until_playing()
+                    YukiData.player.wait_until_playing()
                 except Exception:
                     pass
-                if j == playing_channel:
+                if j == YukiData.playing_channel:
                     logger.info(f"setPlayerSettings '{j}'")
                     idle_on_metadata()
                     if (
-                        settings["m3u"] in channel_sets
-                        and j in channel_sets[settings["m3u"]]
+                        YukiData.settings["m3u"] in YukiData.channel_sets
+                        and j in YukiData.channel_sets[YukiData.settings["m3u"]]
                     ):
-                        d = channel_sets[settings["m3u"]][j]
-                        player.deinterlace = d["deinterlace"]
+                        d = YukiData.channel_sets[YukiData.settings["m3u"]][j]
+                        YukiData.player.deinterlace = d["deinterlace"]
                         if "ua" not in d:
                             d["ua"] = ""
                         if "ref" not in d:
                             d["ref"] = ""
                         if "contrast" in d:
-                            player.contrast = d["contrast"]
+                            YukiData.player.contrast = d["contrast"]
                         else:
-                            player.contrast = 0
+                            YukiData.player.contrast = 0
                         if "brightness" in d:
-                            player.brightness = d["brightness"]
+                            YukiData.player.brightness = d["brightness"]
                         else:
-                            player.brightness = 0
+                            YukiData.player.brightness = 0
                         if "hue" in d:
-                            player.hue = d["hue"]
+                            YukiData.player.hue = d["hue"]
                         else:
-                            player.hue = 0
+                            YukiData.player.hue = 0
                         if "saturation" in d:
-                            player.saturation = d["saturation"]
+                            YukiData.player.saturation = d["saturation"]
                         else:
-                            player.saturation = 0
+                            YukiData.player.saturation = 0
                         if "gamma" in d:
-                            player.gamma = d["gamma"]
+                            YukiData.player.gamma = d["gamma"]
                         else:
-                            player.gamma = 0
+                            YukiData.player.gamma = 0
                         if "videoaspect" in d:
                             setVideoAspect(
                                 YukiGUI.videoaspect_vars[
@@ -3225,7 +3326,7 @@ if __name__ == "__main__":
                             setVideoAspect(
                                 YukiGUI.videoaspect_vars[
                                     YukiGUI.videoaspect_def_choose.itemText(
-                                        settings["videoaspect"]
+                                        YukiData.settings["videoaspect"]
                                     )
                                 ]
                             )
@@ -3236,95 +3337,97 @@ if __name__ == "__main__":
                         else:
                             setZoom(
                                 YukiGUI.zoom_vars[
-                                    YukiGUI.zoom_def_choose.itemText(settings["zoom"])
+                                    YukiGUI.zoom_def_choose.itemText(
+                                        YukiData.settings["zoom"]
+                                    )
                                 ]
                             )
                         if "panscan" in d:
                             setPanscan(d["panscan"])
                         else:
-                            setPanscan(settings["panscan"])
+                            setPanscan(YukiData.settings["panscan"])
                     else:
-                        player.deinterlace = settings["deinterlace"]
+                        YukiData.player.deinterlace = YukiData.settings["deinterlace"]
                         setVideoAspect(
                             YukiGUI.videoaspect_vars[
                                 YukiGUI.videoaspect_def_choose.itemText(
-                                    settings["videoaspect"]
+                                    YukiData.settings["videoaspect"]
                                 )
                             ]
                         )
                         setZoom(
                             YukiGUI.zoom_vars[
-                                YukiGUI.zoom_def_choose.itemText(settings["zoom"])
+                                YukiGUI.zoom_def_choose.itemText(
+                                    YukiData.settings["zoom"]
+                                )
                             ]
                         )
-                        setPanscan(settings["panscan"])
-                        player.gamma = 0
-                        player.saturation = 0
-                        player.hue = 0
-                        player.brightness = 0
-                        player.contrast = 0
+                        setPanscan(YukiData.settings["panscan"])
+                        YukiData.player.gamma = 0
+                        YukiData.player.saturation = 0
+                        YukiData.player.hue = 0
+                        YukiData.player.brightness = 0
+                        YukiData.player.contrast = 0
                     # Print settings
-                    if player.deinterlace:
+                    if YukiData.player.deinterlace:
                         logger.info("Deinterlace: enabled")
                     else:
                         logger.info("Deinterlace: disabled")
-                    logger.info(f"Contrast: {player.contrast}")
-                    logger.info(f"Brightness: {player.brightness}")
-                    logger.info(f"Hue: {player.hue}")
-                    logger.info(f"Saturation: {player.saturation}")
-                    logger.info(f"Gamma: {player.gamma}")
+                    logger.info(f"Contrast: {YukiData.player.contrast}")
+                    logger.info(f"Brightness: {YukiData.player.brightness}")
+                    logger.info(f"Hue: {YukiData.player.hue}")
+                    logger.info(f"Saturation: {YukiData.player.saturation}")
+                    logger.info(f"Gamma: {YukiData.player.gamma}")
                     logger.info(f"Video aspect: {getVideoAspect()}")
-                    logger.info(f"Zoom: {player.video_zoom}")
-                    logger.info(f"Panscan: {player.panscan}")
+                    logger.info(f"Zoom: {YukiData.player.video_zoom}")
+                    logger.info(f"Panscan: {YukiData.player.panscan}")
                     try:
-                        player["cursor-autohide"] = 1000
-                        player["force-window"] = True
+                        YukiData.player["cursor-autohide"] = 1000
+                        YukiData.player["force-window"] = True
                     except Exception:
                         pass
                     # Restore video / audio / subtitle tracks for channel
-                    if playing_channel in player_tracks:
-                        last_track = player_tracks[playing_channel]
+                    if YukiData.playing_channel in YukiData.player_tracks:
+                        last_track = YukiData.player_tracks[YukiData.playing_channel]
                         if "vid" in last_track:
                             logger.info(
                                 f"Restoring last video track: '{last_track['vid']}'"
                             )
-                            player.vid = last_track["vid"]
+                            YukiData.player.vid = last_track["vid"]
                         else:
-                            player.vid = "auto"
+                            YukiData.player.vid = "auto"
                         if "aid" in last_track:
                             logger.info(
                                 f"Restoring last audio track: '{last_track['aid']}'"
                             )
-                            player.aid = last_track["aid"]
+                            YukiData.player.aid = last_track["aid"]
                         else:
-                            player.aid = "auto"
+                            YukiData.player.aid = "auto"
                         if "sid" in last_track:
                             logger.info(
                                 f"Restoring last sub track: '{last_track['sid']}'"
                             )
-                            player.sid = last_track["sid"]
+                            YukiData.player.sid = last_track["sid"]
                         else:
-                            player.sid = "auto"
+                            YukiData.player.sid = "auto"
                     else:
-                        player.vid = "auto"
-                        player.aid = "auto"
-                        player.sid = "auto"
+                        YukiData.player.vid = "auto"
+                        YukiData.player.aid = "auto"
+                        YukiData.player.sid = "auto"
                     file_loaded_callback()
             except Exception:
                 pass
 
         def itemClicked_event(item, custom_url="", archived=False, is_rewind=False):
-            global playing, playing_channel, item_selected, archive_epg
-            global playing_group, playing_url, playing_archive
             is_ic_ok = True
             try:
                 is_ic_ok = item.text() != _("Nothing found")
             except Exception:
                 pass
             if is_ic_ok:
-                playing_archive = archived
+                YukiData.playing_archive = archived
                 if not archived:
-                    archive_epg = None
+                    YukiData.archive_epg = None
                     YukiGUI.rewind_slider.setValue(100)
                     YukiData.rewind_value = YukiGUI.rewind_slider.value()
                 else:
@@ -3337,9 +3440,9 @@ if __name__ == "__main__":
                     j = item
                 if not j:
                     return
-                playing_channel = j
-                playing_group = playmode_selector.currentIndex()
-                item_selected = j
+                YukiData.playing_channel = j
+                YukiData.playing_group = playmode_selector.currentIndex()
+                YukiData.item_selected = j
                 try:
                     play_url = getArrayItem(j)["url"]
                 except Exception:
@@ -3354,11 +3457,13 @@ if __name__ == "__main__":
                 current_prog = None
                 jlower = j.lower()
                 try:
-                    jlower = prog_match_arr[jlower]
+                    jlower = YukiData.prog_match_arr[jlower]
                 except Exception:
                     pass
-                if settings["epg"] and exists_in_epg(jlower, programmes):
-                    for pr in get_epg(programmes, jlower):
+                if YukiData.settings["epg"] and exists_in_epg(
+                    jlower, YukiData.programmes
+                ):
+                    for pr in get_epg(YukiData.programmes, jlower):
                         if time.time() > pr["start"] and time.time() < pr["stop"]:
                             current_prog = pr
                             break
@@ -3372,50 +3477,48 @@ if __name__ == "__main__":
                     dockWidget_controlPanel.setFixedHeight(
                         DOCKWIDGET_CONTROLPANEL_HEIGHT_LOW
                     )
-                playing = True
+                YukiData.playing = True
                 win.update()
-                playing_url = play_url
+                YukiData.playing_url = play_url
                 setUrlText()
                 ua_choose = def_user_agent
                 if (
-                    settings["m3u"] in channel_sets
-                    and j in channel_sets[settings["m3u"]]
+                    YukiData.settings["m3u"] in YukiData.channel_sets
+                    and j in YukiData.channel_sets[YukiData.settings["m3u"]]
                 ):
-                    ua_choose = channel_sets[settings["m3u"]][j]["ua"]
+                    ua_choose = YukiData.channel_sets[YukiData.settings["m3u"]][j]["ua"]
                 if not custom_url:
                     doPlay(play_url, ua_choose, j)
                 else:
                     doPlay(custom_url, ua_choose, j)
                 btn_update_click()
 
-        item_selected = ""
+        YukiData.item_selected = ""
 
         def itemSelected_event(item):
-            global item_selected
             try:
                 n_1 = item.data(QtCore.Qt.ItemDataRole.UserRole)
-                item_selected = n_1
+                YukiData.item_selected = n_1
                 update_tvguide(n_1)
             except Exception:
                 pass
 
         def mpv_play():
-            player.pause = not player.pause
+            YukiData.player.pause = not YukiData.player.pause
 
         def mpv_stop():
-            global playing, playing_channel, playing_group, playing_url
-            playing_channel = ""
-            playing_group = -1
-            playing_url = ""
+            YukiData.playing_channel = ""
+            YukiData.playing_group = -1
+            YukiData.playing_url = ""
             setUrlText()
             hideLoading()
             setChanText("")
-            playing = False
+            YukiData.playing = False
             stopPlayer()
-            player.loop = True
-            player.deinterlace = False
+            YukiData.player.loop = True
+            YukiData.player.deinterlace = False
             mpv_override_play(str(Path("yuki_iptv", ICONS_FOLDER, "main.png")))
-            player.pause = True
+            YukiData.player.pause = True
             YukiGUI.chan.setText(_("No channel selected"))
             YukiGUI.progress.hide()
             YukiGUI.start_label.hide()
@@ -3429,17 +3532,14 @@ if __name__ == "__main__":
             redraw_menubar()
 
         def esc_handler():
-            global fullscreen
-            if fullscreen:
+            if YukiData.fullscreen:
                 mpv_fullscreen()
 
         def get_always_on_top():
-            global cur_always_on_top_state
-            return cur_always_on_top_state
+            return YukiData.cur_always_on_top_state
 
         def set_always_on_top(always_on_top_state):
-            global cur_always_on_top_state
-            cur_always_on_top_state = always_on_top_state
+            YukiData.cur_always_on_top_state = always_on_top_state
             logger.debug(f"set_always_on_top: {always_on_top_state}")
             whint1 = QtCore.Qt.WindowType.WindowStaysOnTopHint
             if (always_on_top_state and (win.windowFlags() & whint1)) or (
@@ -3490,24 +3590,22 @@ if __name__ == "__main__":
         else:
             logger.info("Always on top disabled")
 
-        cur_always_on_top_state = is_aot
+        YukiData.cur_always_on_top_state = is_aot
 
-        currentWidthHeight = [
+        YukiData.currentWidthHeight = [
             win.geometry().x(),
             win.geometry().y(),
             win.width(),
             win.height(),
         ]
-        currentMaximized = win.isMaximized()
+        YukiData.currentMaximized = win.isMaximized()
 
-        isPlaylistVisible = False
-        isControlPanelVisible = False
+        YukiData.isPlaylistVisible = False
+        YukiData.isControlPanelVisible = False
 
         @idle_function
         def mpv_fullscreen(unused=None):
-            global fullscreen, state, time_stop, currentWidthHeight, currentMaximized
-            global isPlaylistVisible, isControlPanelVisible
-            if not fullscreen:
+            if not YukiData.fullscreen:
                 # Entering fullscreen
                 if not YukiData.fullscreen_locked:
                     YukiData.fullscreen_locked = True
@@ -3517,19 +3615,19 @@ if __name__ == "__main__":
                     YukiGUI.rewind_layout.setContentsMargins(
                         rewind_layout_offset, 0, rewind_layout_offset - 50, 0
                     )
-                    isControlPanelVisible = dockWidget_controlPanel.isVisible()
-                    isPlaylistVisible = dockWidget_playlist.isVisible()
+                    YukiData.isControlPanelVisible = dockWidget_controlPanel.isVisible()
+                    YukiData.isPlaylistVisible = dockWidget_playlist.isVisible()
                     setShortcutState(True)
-                    currentWidthHeight = [
+                    YukiData.currentWidthHeight = [
                         win.geometry().x(),
                         win.geometry().y(),
                         win.width(),
                         win.height(),
                     ]
-                    currentMaximized = win.isMaximized()
+                    YukiData.currentMaximized = win.isMaximized()
                     YukiGUI.channelfilter.usePopup = False
                     win.menu_bar_qt.hide()
-                    fullscreen = True
+                    YukiData.fullscreen = True
                     dockWidget_playlist.hide()
                     YukiGUI.chan.hide()
                     YukiGUI.label_video_data.hide()
@@ -3546,9 +3644,9 @@ if __name__ == "__main__":
                     )
                     win.update()
                     win.showFullScreen()
-                    if settings["panelposition"] == 1:
+                    if YukiData.settings["panelposition"] == 1:
                         tvguide_close_lbl.move(
-                            get_curwindow_pos()[0] - tvguide_lbl.width() - 40,
+                            get_curwindow_pos()[0] - YukiData.tvguide_lbl.width() - 40,
                             YukiGUI.tvguide_lbl_offset,
                         )
                     centerwidget(YukiGUI.loading1)
@@ -3566,8 +3664,10 @@ if __name__ == "__main__":
                     time03 = time.time()
                     YukiGUI.rewind_layout.setContentsMargins(100, 0, 50, 0)
                     setShortcutState(False)
-                    if state.isVisible() and state.text().startswith(_("Volume")):
-                        state.hide()
+                    if YukiData.state.isVisible() and YukiData.state.text().startswith(
+                        _("Volume")
+                    ):
+                        YukiData.state.hide()
                     win.menu_bar_qt.show()
                     hide_playlist_fullscreen()
                     hide_controlpanel_fullscreen()
@@ -3575,15 +3675,19 @@ if __name__ == "__main__":
                     dockWidget_playlist.hide()
                     dockWidget_controlPanel.setWindowOpacity(1)
                     dockWidget_controlPanel.hide()
-                    fullscreen = False
-                    if state.text().endswith(
+                    YukiData.fullscreen = False
+                    if YukiData.state.text().endswith(
                         "{} F".format(_("To exit fullscreen mode press"))
                     ):
-                        state.setTextYuki("")
-                        if not gl_is_static:
-                            state.hide()
+                        YukiData.state.setTextYuki("")
+                        if not YukiData.gl_is_static:
+                            YukiData.state.hide()
                             win.update()
-                    if not player.pause and playing and YukiGUI.start_label.text():
+                    if (
+                        not YukiData.player.pause
+                        and YukiData.playing
+                        and YukiGUI.start_label.text()
+                    ):
                         YukiGUI.progress.show()
                         YukiGUI.start_label.show()
                         YukiGUI.stop_label.show()
@@ -3599,26 +3703,26 @@ if __name__ == "__main__":
                     dockWidget_playlist.show()
                     YukiGUI.chan.show()
                     win.update()
-                    if not currentMaximized:
+                    if not YukiData.currentMaximized:
                         win.showNormal()
                     else:
                         win.showMaximized()
                     win.setGeometry(
-                        currentWidthHeight[0],
-                        currentWidthHeight[1],
-                        currentWidthHeight[2],
-                        currentWidthHeight[3],
+                        YukiData.currentWidthHeight[0],
+                        YukiData.currentWidthHeight[1],
+                        YukiData.currentWidthHeight[2],
+                        YukiData.currentWidthHeight[3],
                     )
-                    if not isPlaylistVisible:
+                    if not YukiData.isPlaylistVisible:
                         show_hide_playlist()
-                    if settings["panelposition"] == 1:
+                    if YukiData.settings["panelposition"] == 1:
                         tvguide_close_lbl.move(
-                            win.width() - tvguide_lbl.width() - 40,
+                            win.width() - YukiData.tvguide_lbl.width() - 40,
                             YukiGUI.tvguide_lbl_offset,
                         )
                     centerwidget(YukiGUI.loading1)
                     centerwidget(YukiGUI.loading2, 50)
-                    if isControlPanelVisible:
+                    if YukiData.isControlPanelVisible:
                         dockWidget_controlPanel.show()
                     else:
                         dockWidget_controlPanel.hide()
@@ -3632,32 +3736,30 @@ if __name__ == "__main__":
                     )
                     YukiData.fullscreen_locked = False
             try:
-                event_handler.on_fullscreen()
+                YukiData.event_handler.on_fullscreen()
             except Exception:
                 pass
 
-        old_value = 100
+        YukiData.old_value = 100
 
         def is_show_volume():
-            global fullscreen
-            showdata = fullscreen
-            if not fullscreen and win.isVisible():
+            showdata = YukiData.fullscreen
+            if not YukiData.fullscreen and win.isVisible():
                 showdata = not dockWidget_controlPanel.isVisible()
             return showdata and not YukiGUI.controlpanel_widget.isVisible()
 
         def show_volume(v1):
             if is_show_volume():
-                state.show()
+                YukiData.state.show()
                 if isinstance(v1, str):
-                    state.setTextYuki(v1)
+                    YukiData.state.setTextYuki(v1)
                 else:
-                    state.setTextYuki("{}: {}%".format(_("Volume"), int(v1)))
+                    YukiData.state.setTextYuki("{}: {}%".format(_("Volume"), int(v1)))
 
         def mpv_mute():
-            global old_value, time_stop, state
-            time_stop = time.time() + 3
-            if player.mute:
-                if old_value > 50:
+            YukiData.time_stop = time.time() + 3
+            if YukiData.player.mute:
+                if YukiData.old_value > 50:
                     YukiGUI.btn_volume.setIcon(
                         QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "volume.png")))
                     )
@@ -3668,20 +3770,19 @@ if __name__ == "__main__":
                         )
                     )
                 mpv_override_mute(False)
-                YukiGUI.volume_slider.setValue(old_value)
-                show_volume(old_value)
+                YukiGUI.volume_slider.setValue(YukiData.old_value)
+                show_volume(YukiData.old_value)
             else:
                 YukiGUI.btn_volume.setIcon(
                     QtGui.QIcon(str(Path("yuki_iptv", ICONS_FOLDER, "mute.png")))
                 )
                 mpv_override_mute(True)
-                old_value = YukiGUI.volume_slider.value()
+                YukiData.old_value = YukiGUI.volume_slider.value()
                 YukiGUI.volume_slider.setValue(0)
                 show_volume(_("Volume off"))
 
         def mpv_volume_set():
-            global time_stop, state, fullscreen
-            time_stop = time.time() + 3
+            YukiData.time_stop = time.time() + 3
             vol = int(YukiGUI.volume_slider.value())
             try:
                 if vol == 0:
@@ -3725,10 +3826,10 @@ if __name__ == "__main__":
         def tvguide_close_lbl_func(arg):
             hide_tvguide()
 
-        tvguide_lbl = YukiGUI.ScrollableLabel(win)
-        tvguide_lbl.move(0, YukiGUI.tvguide_lbl_offset)
-        tvguide_lbl.setFixedWidth(TVGUIDE_WIDTH)
-        tvguide_lbl.hide()
+        YukiData.tvguide_lbl = YukiGUI.ScrollableLabel(win)
+        YukiData.tvguide_lbl.move(0, YukiGUI.tvguide_lbl_offset)
+        YukiData.tvguide_lbl.setFixedWidth(TVGUIDE_WIDTH)
+        YukiData.tvguide_lbl.hide()
 
         class ClickableLabel(QtWidgets.QLabel):
             def __init__(self, whenClicked, win, parent=None):
@@ -3750,18 +3851,21 @@ if __name__ == "__main__":
             )
         )
         tvguide_close_lbl.resize(32, 32)
-        if settings["panelposition"] in (0, 2):
-            tvguide_close_lbl.move(tvguide_lbl.width() + 5, YukiGUI.tvguide_lbl_offset)
+        if YukiData.settings["panelposition"] in (0, 2):
+            tvguide_close_lbl.move(
+                YukiData.tvguide_lbl.width() + 5, YukiGUI.tvguide_lbl_offset
+            )
         else:
             tvguide_close_lbl.move(
-                win.width() - tvguide_lbl.width() - 40, YukiGUI.tvguide_lbl_offset
+                win.width() - YukiData.tvguide_lbl.width() - 40,
+                YukiGUI.tvguide_lbl_offset,
             )
             YukiGUI.lbl2.move(
-                tvguide_lbl.width() + YukiGUI.lbl2.width(), YukiGUI.lbl2_offset
+                YukiData.tvguide_lbl.width() + YukiGUI.lbl2.width(), YukiGUI.lbl2_offset
             )
         tvguide_close_lbl.hide()
 
-        current_group = _("All channels")
+        YukiData.current_group = _("All channels")
 
         if not os.path.isdir(str(Path(LOCAL_DIR, "logo_cache"))):
             os.mkdir(str(Path(LOCAL_DIR, "logo_cache")))
@@ -3774,14 +3878,14 @@ if __name__ == "__main__":
             # return of_txt
             return _("of") + " " + str(of_num)
 
-        prog_match_arr = {}
+        YukiData.prog_match_arr = {}
 
-        channel_logos_request_old = {}
-        channel_logos_process = None
-        multiprocessing_manager_dict["logos_inprogress"] = False
-        multiprocessing_manager_dict["logos_completed"] = False
-        multiprocessing_manager_dict["logosmovie_inprogress"] = False
-        multiprocessing_manager_dict["logosmovie_completed"] = False
+        YukiData.channel_logos_request_old = {}
+        YukiData.channel_logos_process = None
+        YukiData.mp_manager_dict["logos_inprogress"] = False
+        YukiData.mp_manager_dict["logos_completed"] = False
+        YukiData.mp_manager_dict["logosmovie_inprogress"] = False
+        YukiData.mp_manager_dict["logosmovie_completed"] = False
         logos_cache = {}
 
         def get_pixmap_from_filename(pixmap_filename):
@@ -3799,20 +3903,19 @@ if __name__ == "__main__":
                 except Exception:
                     return None
 
-        timer_logos_update_lock = False
+        YukiData.timer_logos_update_lock = False
 
         def timer_logos_update():
-            global timer_logos_update_lock, multiprocessing_manager_dict
             try:
-                if not timer_logos_update_lock:
-                    timer_logos_update_lock = True
-                    if multiprocessing_manager_dict["logos_completed"]:
-                        multiprocessing_manager_dict["logos_completed"] = False
+                if not YukiData.timer_logos_update_lock:
+                    YukiData.timer_logos_update_lock = True
+                    if YukiData.mp_manager_dict["logos_completed"]:
+                        YukiData.mp_manager_dict["logos_completed"] = False
                         btn_update_click()
-                    if multiprocessing_manager_dict["logosmovie_completed"]:
-                        multiprocessing_manager_dict["logosmovie_completed"] = False
+                    if YukiData.mp_manager_dict["logosmovie_completed"]:
+                        YukiData.mp_manager_dict["logosmovie_completed"] = False
                         update_movie_icons()
-                    timer_logos_update_lock = False
+                    YukiData.timer_logos_update_lock = False
             except Exception:
                 pass
 
@@ -3823,10 +3926,6 @@ if __name__ == "__main__":
             return max(1, math.ceil(array_len / 100))
 
         def gen_chans():
-            global playing_channel, current_group, array
-            global prog_match_arr, channel_logos_request_old
-            global channel_logos_process, multiprocessing_manager_dict
-
             channel_logos_request = {}
 
             try:
@@ -3841,13 +3940,13 @@ if __name__ == "__main__":
             # Group and favourites filter
             array_filtered = []
             for j1 in array_sorted:
-                group1 = array[j1]["tvg-group"]
-                if current_group != all_channels_lang:
-                    if current_group == favourites_lang:
-                        if j1 not in favourite_sets:
+                group1 = YukiData.array[j1]["tvg-group"]
+                if YukiData.current_group != all_channels_lang:
+                    if YukiData.current_group == favourites_lang:
+                        if j1 not in YukiData.favourite_sets:
                             continue
                     else:
-                        if group1 != current_group:
+                        if group1 != YukiData.current_group:
                             continue
                 array_filtered.append(j1)
 
@@ -3881,37 +3980,48 @@ if __name__ == "__main__":
 
                 # First, match EPG name from settings
                 if (
-                    settings["m3u"] in channel_sets
-                    and i in channel_sets[settings["m3u"]]
+                    YukiData.settings["m3u"] in YukiData.channel_sets
+                    and i in YukiData.channel_sets[YukiData.settings["m3u"]]
                 ):
-                    if "epgname" in channel_sets[settings["m3u"]][i]:
-                        if channel_sets[settings["m3u"]][i]["epgname"]:
-                            epg_name = channel_sets[settings["m3u"]][i]["epgname"]
-                            if exists_in_epg(str(epg_name).lower(), programmes):
+                    if "epgname" in YukiData.channel_sets[YukiData.settings["m3u"]][i]:
+                        if YukiData.channel_sets[YukiData.settings["m3u"]][i][
+                            "epgname"
+                        ]:
+                            epg_name = YukiData.channel_sets[YukiData.settings["m3u"]][
+                                i
+                            ]["epgname"]
+                            if exists_in_epg(
+                                str(epg_name).lower(), YukiData.programmes
+                            ):
                                 prog_search = str(epg_name).lower()
                                 is_epgname_found = True
 
                 # Second, match from tvg-id
                 if not is_epgname_found:
-                    if array[i]["tvg-ID"]:
-                        if str(array[i]["tvg-ID"]) in prog_ids:
-                            prog_search_lst = prog_ids[str(array[i]["tvg-ID"])]
+                    if YukiData.array[i]["tvg-ID"]:
+                        if str(YukiData.array[i]["tvg-ID"]) in YukiData.prog_ids:
+                            prog_search_lst = YukiData.prog_ids[
+                                str(YukiData.array[i]["tvg-ID"])
+                            ]
                             if prog_search_lst:
                                 prog_search = prog_search_lst[0].lower()
                                 is_epgname_found = True
 
                 # Third, match from tvg-name
                 if not is_epgname_found:
-                    if array[i]["tvg-name"]:
-                        if exists_in_epg(str(array[i]["tvg-name"]).lower(), programmes):
-                            prog_search = str(array[i]["tvg-name"]).lower()
+                    if YukiData.array[i]["tvg-name"]:
+                        if exists_in_epg(
+                            str(YukiData.array[i]["tvg-name"]).lower(),
+                            YukiData.programmes,
+                        ):
+                            prog_search = str(YukiData.array[i]["tvg-name"]).lower()
                             is_epgname_found = True
                         else:
-                            spaces_replaced_name = array[i]["tvg-name"].replace(
-                                " ", "_"
-                            )
+                            spaces_replaced_name = YukiData.array[i][
+                                "tvg-name"
+                            ].replace(" ", "_")
                             if exists_in_epg(
-                                str(spaces_replaced_name).lower(), programmes
+                                str(spaces_replaced_name).lower(), YukiData.programmes
                             ):
                                 prog_search = str(spaces_replaced_name).lower()
                                 is_epgname_found = True
@@ -3921,10 +4031,10 @@ if __name__ == "__main__":
                     prog_search = i.lower()
                     is_epgname_found = True
 
-                prog_match_arr[i.lower()] = prog_search
-                if exists_in_epg(prog_search, programmes):
+                YukiData.prog_match_arr[i.lower()] = prog_search
+                if exists_in_epg(prog_search, YukiData.programmes):
                     current_prog = {"start": 0, "stop": 0, "title": "", "desc": ""}
-                    for pr in get_epg(programmes, prog_search):
+                    for pr in get_epg(YukiData.programmes, prog_search):
                         if time.time() > pr["start"] and time.time() < pr["stop"]:
                             current_prog = pr
                             break
@@ -3941,7 +4051,7 @@ if __name__ == "__main__":
                             / (current_prog["stop"] - current_prog["start"])
                             * 100
                         )
-                        if settings["hideepgpercentage"]:
+                        if YukiData.settings["hideepgpercentage"]:
                             prog = current_prog["title"]
                         else:
                             prog = str(percentage) + "% " + current_prog["title"]
@@ -3962,27 +4072,27 @@ if __name__ == "__main__":
                         prog = ""
                         prog_desc = ""
                 MyPlaylistWidget = YukiGUI.PlaylistWidget(
-                    YukiGUI, settings["hidechannellogos"]
+                    YukiGUI, YukiData.settings["hidechannellogos"]
                 )
                 MAX_SIZE_CHAN = 21
                 chan_name = i
 
                 orig_chan_name = chan_name
 
-                if settings["channellogos"] != 3:
+                if YukiData.settings["channellogos"] != 3:
                     try:
                         channel_logo1 = ""
-                        if "tvg-logo" in array[i]:
-                            channel_logo1 = array[i]["tvg-logo"]
+                        if "tvg-logo" in YukiData.array[i]:
+                            channel_logo1 = YukiData.array[i]["tvg-logo"]
 
                         epg_logo1 = ""
-                        if prog_search in epg_icons:
-                            epg_logo1 = epg_icons[prog_search]
+                        if prog_search in YukiData.epg_icons:
+                            epg_logo1 = YukiData.epg_icons[prog_search]
 
                         req_data_ua, req_data_ref = get_ua_ref_for_channel(
                             orig_chan_name
                         )
-                        channel_logos_request[array[i]["title"]] = [
+                        channel_logos_request[YukiData.array[i]["title"]] = [
                             channel_logo1,
                             epg_logo1,
                             req_data_ua,
@@ -3996,7 +4106,7 @@ if __name__ == "__main__":
                     chan_name = chan_name[0:MAX_SIZE_CHAN] + "..."
                 unicode_play_symbol = chr(9654) + " "
                 append_symbol = ""
-                if playing_channel == chan_name:
+                if YukiData.playing_channel == chan_name:
                     append_symbol = unicode_play_symbol
                 MyPlaylistWidget.name_label.setText(
                     append_symbol + str(k) + ". " + chan_name
@@ -4004,15 +4114,17 @@ if __name__ == "__main__":
                 MAX_SIZE = 28
                 orig_prog = prog
                 try:
-                    tooltip_group = "{}: {}".format(_("Group"), array[i]["tvg-group"])
+                    tooltip_group = "{}: {}".format(
+                        _("Group"), YukiData.array[i]["tvg-group"]
+                    )
                 except Exception:
                     tooltip_group = "{}: {}".format(_("Group"), _("All channels"))
                 if len(prog) > MAX_SIZE:
                     prog = prog[0:MAX_SIZE] + "..."
                 if (
-                    exists_in_epg(prog_search, programmes)
+                    exists_in_epg(prog_search, YukiData.programmes)
                     and orig_prog
-                    and not settings["hideepgfromplaylist"]
+                    and not YukiData.settings["hideepgfromplaylist"]
                 ):
                     MyPlaylistWidget.setDescription(
                         prog,
@@ -4040,16 +4152,16 @@ if __name__ == "__main__":
 
                 MyPlaylistWidget.setIcon(YukiGUI.tv_icon)
 
-                if settings["channellogos"] != 3:  # Do not load any logos
+                if YukiData.settings["channellogos"] != 3:  # Do not load any logos
                     try:
-                        if f"LOGO:::{orig_chan_name}" in multiprocessing_manager_dict:
-                            if settings["channellogos"] == 0:  # Prefer M3U
+                        if f"LOGO:::{orig_chan_name}" in YukiData.mp_manager_dict:
+                            if YukiData.settings["channellogos"] == 0:  # Prefer M3U
                                 first_loaded = False
-                                if multiprocessing_manager_dict[
-                                    f"LOGO:::{orig_chan_name}"
-                                ][0]:
+                                if YukiData.mp_manager_dict[f"LOGO:::{orig_chan_name}"][
+                                    0
+                                ]:
                                     chan_logo = get_pixmap_from_filename(
-                                        multiprocessing_manager_dict[
+                                        YukiData.mp_manager_dict[
                                             f"LOGO:::{orig_chan_name}"
                                         ][0]
                                     )
@@ -4058,19 +4170,19 @@ if __name__ == "__main__":
                                         MyPlaylistWidget.setIcon(chan_logo)
                                 if not first_loaded:
                                     chan_logo = get_pixmap_from_filename(
-                                        multiprocessing_manager_dict[
+                                        YukiData.mp_manager_dict[
                                             f"LOGO:::{orig_chan_name}"
                                         ][1]
                                     )
                                     if chan_logo:
                                         MyPlaylistWidget.setIcon(chan_logo)
-                            elif settings["channellogos"] == 1:  # Prefer EPG
+                            elif YukiData.settings["channellogos"] == 1:  # Prefer EPG
                                 first_loaded = False
-                                if multiprocessing_manager_dict[
-                                    f"LOGO:::{orig_chan_name}"
-                                ][1]:
+                                if YukiData.mp_manager_dict[f"LOGO:::{orig_chan_name}"][
+                                    1
+                                ]:
                                     chan_logo = get_pixmap_from_filename(
-                                        multiprocessing_manager_dict[
+                                        YukiData.mp_manager_dict[
                                             f"LOGO:::{orig_chan_name}"
                                         ][1]
                                     )
@@ -4079,20 +4191,20 @@ if __name__ == "__main__":
                                         MyPlaylistWidget.setIcon(chan_logo)
                                 if not first_loaded:
                                     chan_logo = get_pixmap_from_filename(
-                                        multiprocessing_manager_dict[
+                                        YukiData.mp_manager_dict[
                                             f"LOGO:::{orig_chan_name}"
                                         ][0]
                                     )
                                     if chan_logo:
                                         MyPlaylistWidget.setIcon(chan_logo)
                             elif (
-                                settings["channellogos"] == 2
+                                YukiData.settings["channellogos"] == 2
                             ):  # Do not load from EPG (only M3U)
-                                if multiprocessing_manager_dict[
-                                    f"LOGO:::{orig_chan_name}"
-                                ][0]:
+                                if YukiData.mp_manager_dict[f"LOGO:::{orig_chan_name}"][
+                                    0
+                                ]:
                                     chan_logo = get_pixmap_from_filename(
-                                        multiprocessing_manager_dict[
+                                        YukiData.mp_manager_dict[
                                             f"LOGO:::{orig_chan_name}"
                                         ][0]
                                     )
@@ -4108,15 +4220,15 @@ if __name__ == "__main__":
                 # Set size hint
                 myQListWidgetItem.setSizeHint(MyPlaylistWidget.sizeHint())
                 res[k0] = [myQListWidgetItem, MyPlaylistWidget, k0, i]
-            j1 = playing_channel.lower()
+            j1 = YukiData.playing_channel.lower()
             try:
-                j1 = prog_match_arr[j1]
+                j1 = YukiData.prog_match_arr[j1]
             except Exception:
                 pass
             if j1:
                 current_chan = None
                 try:
-                    cur = get_epg(programmes, j1)
+                    cur = get_epg(YukiData.programmes, j1)
                     for pr in cur:
                         if time.time() > pr["start"] and time.time() < pr["stop"]:
                             current_chan = pr
@@ -4127,39 +4239,41 @@ if __name__ == "__main__":
 
             # Fetch channel logos
             try:
-                if settings["channellogos"] != 3:
-                    if channel_logos_request != channel_logos_request_old:
-                        channel_logos_request_old = channel_logos_request
+                if YukiData.settings["channellogos"] != 3:
+                    if channel_logos_request != YukiData.channel_logos_request_old:
+                        YukiData.channel_logos_request_old = channel_logos_request
                         logger.debug("Channel logos request")
-                        if channel_logos_process and channel_logos_process.is_alive():
+                        if (
+                            YukiData.channel_logos_process
+                            and YukiData.channel_logos_process.is_alive()
+                        ):
                             # logger.debug(
                             #     "Old channel logos request found, stopping it"
                             # )
-                            channel_logos_process.kill()
-                        channel_logos_process = get_context("spawn").Process(
+                            YukiData.channel_logos_process.kill()
+                        YukiData.channel_logos_process = get_context("spawn").Process(
                             name="[yuki-iptv] channel_logos_worker",
                             target=channel_logos_worker,
                             daemon=True,
                             args=(
                                 loglevel,
                                 channel_logos_request,
-                                multiprocessing_manager_dict,
+                                YukiData.mp_manager_dict,
                             ),
                         )
-                        channel_logos_process.start()
+                        YukiData.channel_logos_process.start()
             except Exception:
                 logger.warning("Fetch channel logos failed with exception:")
                 logger.warning(traceback.format_exc())
 
             return res
 
-        row0 = -1
+        YukiData.row0 = -1
 
         def redraw_chans():
             channels_1 = gen_chans()
-            global row0
             update_tvguide()
-            row0 = win.listWidget.currentRow()
+            YukiData.row0 = win.listWidget.currentRow()
             val0 = win.listWidget.verticalScrollBar().value()
             win.listWidget.clear()
             if channels_1:
@@ -4169,31 +4283,29 @@ if __name__ == "__main__":
                     win.listWidget.setItemWidget(chan_3[0], chan_3[1])
             else:
                 win.listWidget.addItem(_("Nothing found"))
-            win.listWidget.setCurrentRow(row0)
+            win.listWidget.setCurrentRow(YukiData.row0)
             win.listWidget.verticalScrollBar().setValue(val0)
 
-        first_change = False
+        YukiData.first_change = False
 
         def group_change(self):
-            comm_instance.comboboxIndex = combobox.currentIndex()
-            global current_group, first_change
-            current_group = groups[self]
-            if not first_change:
-                first_change = True
+            comm_instance.comboboxIndex = YukiData.combobox.currentIndex()
+            YukiData.current_group = groups[self]
+            if not YukiData.first_change:
+                YukiData.first_change = True
             else:
                 btn_update_click()
 
         YukiGUI.btn_update.clicked.connect(redraw_chans)
 
-        first_playmode_change = False
+        YukiData.first_playmode_change = False
 
         def playmode_change(self=False):
             YukiData.playmodeIndex = playmode_selector.currentIndex()
-            global first_playmode_change
-            if not first_playmode_change:
-                first_playmode_change = True
+            if not YukiData.first_playmode_change:
+                YukiData.first_playmode_change = True
             else:
-                tv_widgets = [combobox, win.listWidget, YukiGUI.widget4]
+                tv_widgets = [YukiData.combobox, win.listWidget, YukiGUI.widget4]
                 movies_widgets = [movies_combobox, win.moviesWidget]
                 series_widgets = [win.seriesWidget]
                 # Clear search text when play mode is changed
@@ -4267,103 +4379,130 @@ if __name__ == "__main__":
 
         def tvguide_context_menu():
             update_tvguide()
-            tvguide_lbl.show()
+            YukiData.tvguide_lbl.show()
             tvguide_close_lbl.show()
 
         def settings_context_menu():
             if YukiGUI.chan_win.isVisible():
                 YukiGUI.chan_win.close()
-            YukiGUI.title.setText(str(item_selected))
+            YukiGUI.title.setText(str(YukiData.item_selected))
             if (
-                settings["m3u"] in channel_sets
-                and item_selected in channel_sets[settings["m3u"]]
+                YukiData.settings["m3u"] in YukiData.channel_sets
+                and YukiData.item_selected
+                in YukiData.channel_sets[YukiData.settings["m3u"]]
             ):
                 YukiGUI.deinterlace_chk.setChecked(
-                    channel_sets[settings["m3u"]][item_selected]["deinterlace"]
+                    YukiData.channel_sets[YukiData.settings["m3u"]][
+                        YukiData.item_selected
+                    ]["deinterlace"]
                 )
                 try:
                     YukiGUI.useragent_choose.setText(
-                        channel_sets[settings["m3u"]][item_selected]["ua"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["ua"]
                     )
                 except Exception:
                     YukiGUI.useragent_choose.setText("")
                 try:
                     YukiGUI.referer_choose_custom.setText(
-                        channel_sets[settings["m3u"]][item_selected]["ref"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["ref"]
                     )
                 except Exception:
                     YukiGUI.referer_choose_custom.setText("")
                 try:
                     YukiGUI.group_text.setText(
-                        channel_sets[settings["m3u"]][item_selected]["group"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["group"]
                     )
                 except Exception:
                     YukiGUI.group_text.setText("")
                 try:
                     YukiGUI.hidden_chk.setChecked(
-                        channel_sets[settings["m3u"]][item_selected]["hidden"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["hidden"]
                     )
                 except Exception:
                     YukiGUI.hidden_chk.setChecked(False)
                 try:
                     YukiGUI.contrast_choose.setValue(
-                        channel_sets[settings["m3u"]][item_selected]["contrast"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["contrast"]
                     )
                 except Exception:
                     YukiGUI.contrast_choose.setValue(0)
                 try:
                     YukiGUI.brightness_choose.setValue(
-                        channel_sets[settings["m3u"]][item_selected]["brightness"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["brightness"]
                     )
                 except Exception:
                     YukiGUI.brightness_choose.setValue(0)
                 try:
                     YukiGUI.hue_choose.setValue(
-                        channel_sets[settings["m3u"]][item_selected]["hue"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["hue"]
                     )
                 except Exception:
                     YukiGUI.hue_choose.setValue(0)
                 try:
                     YukiGUI.saturation_choose.setValue(
-                        channel_sets[settings["m3u"]][item_selected]["saturation"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["saturation"]
                     )
                 except Exception:
                     YukiGUI.saturation_choose.setValue(0)
                 try:
                     YukiGUI.gamma_choose.setValue(
-                        channel_sets[settings["m3u"]][item_selected]["gamma"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["gamma"]
                     )
                 except Exception:
                     YukiGUI.gamma_choose.setValue(0)
                 try:
                     YukiGUI.videoaspect_choose.setCurrentIndex(
-                        channel_sets[settings["m3u"]][item_selected]["videoaspect"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["videoaspect"]
                     )
                 except Exception:
                     YukiGUI.videoaspect_choose.setCurrentIndex(0)
                 try:
                     YukiGUI.zoom_choose.setCurrentIndex(
-                        channel_sets[settings["m3u"]][item_selected]["zoom"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["zoom"]
                     )
                 except Exception:
                     YukiGUI.zoom_choose.setCurrentIndex(0)
                 try:
                     YukiGUI.panscan_choose.setValue(
-                        channel_sets[settings["m3u"]][item_selected]["panscan"]
+                        YukiData.channel_sets[YukiData.settings["m3u"]][
+                            YukiData.item_selected
+                        ]["panscan"]
                     )
                 except Exception:
                     YukiGUI.panscan_choose.setValue(0)
                 try:
-                    epgname_saved = channel_sets[settings["m3u"]][item_selected][
-                        "epgname"
-                    ]
+                    epgname_saved = YukiData.channel_sets[YukiData.settings["m3u"]][
+                        YukiData.item_selected
+                    ]["epgname"]
                     if not epgname_saved:
                         epgname_saved = _("Default")
                     YukiGUI.epgname_lbl.setText(epgname_saved)
                 except Exception:
                     YukiGUI.epgname_lbl.setText(_("Default"))
             else:
-                YukiGUI.deinterlace_chk.setChecked(settings["deinterlace"])
+                YukiGUI.deinterlace_chk.setChecked(YukiData.settings["deinterlace"])
                 YukiGUI.hidden_chk.setChecked(False)
                 YukiGUI.contrast_choose.setValue(0)
                 YukiGUI.brightness_choose.setValue(0)
@@ -4381,7 +4520,7 @@ if __name__ == "__main__":
             YukiGUI.chan_win.show()
 
         def tvguide_favourites_add():
-            if item_selected in favourite_sets:
+            if YukiData.item_selected in YukiData.favourite_sets:
                 isdelete_fav_msg = QtWidgets.QMessageBox.question(
                     None,
                     MAIN_WINDOW_TITLE,
@@ -4391,9 +4530,9 @@ if __name__ == "__main__":
                     QtWidgets.QMessageBox.StandardButton.Yes,
                 )
                 if isdelete_fav_msg == QtWidgets.QMessageBox.StandardButton.Yes:
-                    favourite_sets.remove(item_selected)
+                    YukiData.favourite_sets.remove(YukiData.item_selected)
             else:
-                favourite_sets.append(item_selected)
+                YukiData.favourite_sets.append(YukiData.item_selected)
             save_favourite_sets()
             btn_update_click()
 
@@ -4402,12 +4541,12 @@ if __name__ == "__main__":
             YukiGUI.ext_win.show()
 
         def tvguide_hide():
-            tvguide_lbl.setText("")
-            tvguide_lbl.hide()
+            YukiData.tvguide_lbl.setText("")
+            YukiData.tvguide_lbl.hide()
             tvguide_close_lbl.hide()
 
         def favoritesplaylistsep_add():
-            ps_data = getArrayItem(item_selected)
+            ps_data = getArrayItem(YukiData.item_selected)
             str1 = "#EXTINF:-1"
             if ps_data["tvg-name"]:
                 str1 += f" tvg-name=\"{ps_data['tvg-name']}\""
@@ -4420,7 +4559,7 @@ if __name__ == "__main__":
             if ps_data["tvg-url"]:
                 str1 += f" tvg-url=\"{ps_data['tvg-url']}\""
             else:
-                str1 += f" tvg-url=\"{settings['epg']}\""
+                str1 += f" tvg-url=\"{YukiData.settings['epg']}\""
             if ps_data["catchup"]:
                 str1 += f" catchup=\"{ps_data['catchup']}\""
             if ps_data["catchup-source"]:
@@ -4434,7 +4573,7 @@ if __name__ == "__main__":
             if ps_data["referer"]:
                 str_append += f"#EXTVLCOPT:http-referrer={ps_data['referer']}\n"
 
-            str1 += f",{item_selected}\n{str_append}{ps_data['url']}\n"
+            str1 += f",{YukiData.item_selected}\n{str_append}{ps_data['url']}\n"
             file03 = open(str(Path(LOCAL_DIR, "favplaylist.m3u")), encoding="utf8")
             file03_contents = file03.read()
             file03.close()
@@ -4571,31 +4710,28 @@ if __name__ == "__main__":
         hideLoading()
 
         loading.setFont(YukiGUI.font_12_bold)
-        combobox = QtWidgets.QComboBox()
-        combobox.currentIndexChanged.connect(group_change)
+        YukiData.combobox = QtWidgets.QComboBox()
+        YukiData.combobox.currentIndexChanged.connect(group_change)
         for group in groups:
-            combobox.addItem(group)
+            YukiData.combobox.addItem(group)
 
-        currentMoviesGroup = {}
+        YukiData.currentMoviesGroup = {}
 
-        movie_logos_request_old = {}
-        movie_logos_process = None
+        YukiData.movie_logos_request_old = {}
+        YukiData.movie_logos_process = None
 
         def update_movie_icons():
-            if settings["channellogos"] != 3:  # Do not load any logos
+            if YukiData.settings["channellogos"] != 3:  # Do not load any logos
                 try:
                     for item4 in range(win.moviesWidget.count()):
                         movie_name = get_movie_text(win.moviesWidget.item(item4))
                         if movie_name:
-                            if (
-                                f"LOGOmovie:::{movie_name}"
-                                in multiprocessing_manager_dict
-                            ):
-                                if multiprocessing_manager_dict[
+                            if f"LOGOmovie:::{movie_name}" in YukiData.mp_manager_dict:
+                                if YukiData.mp_manager_dict[
                                     f"LOGOmovie:::{movie_name}"
                                 ][0]:
                                     movie_logo = get_pixmap_from_filename(
-                                        multiprocessing_manager_dict[
+                                        YukiData.mp_manager_dict[
                                             f"LOGOmovie:::{movie_name}"
                                         ][0]
                                     )
@@ -4608,12 +4744,11 @@ if __name__ == "__main__":
                     logger.warning(traceback.format_exc())
 
         def movies_group_change():
-            global currentMoviesGroup, movie_logos_request_old, movie_logos_process
             if YukiData.movies:
                 current_movies_group = movies_combobox.currentText()
                 if current_movies_group:
                     win.moviesWidget.clear()
-                    currentMoviesGroup = {}
+                    YukiData.currentMoviesGroup = {}
                     movie_logos_request = {}
                     for movies1 in YukiData.movies:
                         if "tvg-group" in YukiData.movies[movies1]:
@@ -4622,7 +4757,7 @@ if __name__ == "__main__":
                                 == current_movies_group
                             ):
                                 MovieWidget = YukiGUI.PlaylistWidget(
-                                    YukiGUI, settings["hidechannellogos"]
+                                    YukiGUI, YukiData.settings["hidechannellogos"]
                                 )
                                 MovieWidget.name_label.setText(
                                     YukiData.movies[movies1]["title"]
@@ -4644,7 +4779,7 @@ if __name__ == "__main__":
                                 win.moviesWidget.setItemWidget(
                                     myMovieQListWidgetItem, MovieWidget
                                 )
-                                currentMoviesGroup[
+                                YukiData.currentMoviesGroup[
                                     YukiData.movies[movies1]["title"]
                                 ] = YukiData.movies[movies1]
                                 req_data_ua1, req_data_ref1 = get_ua_ref_for_channel(
@@ -4663,30 +4798,32 @@ if __name__ == "__main__":
                                 ]
                     # Fetch movie logos
                     try:
-                        if settings["channellogos"] != 3:
-                            if movie_logos_request != movie_logos_request_old:
-                                movie_logos_request_old = movie_logos_request
+                        if YukiData.settings["channellogos"] != 3:
+                            if movie_logos_request != YukiData.movie_logos_request_old:
+                                YukiData.movie_logos_request_old = movie_logos_request
                                 logger.debug("Movie logos request")
                                 if (
-                                    movie_logos_process
-                                    and movie_logos_process.is_alive()
+                                    YukiData.movie_logos_process
+                                    and YukiData.movie_logos_process.is_alive()
                                 ):
                                     # logger.debug(
                                     #     "Old movie logos request found, stopping it"
                                     # )
-                                    movie_logos_process.kill()
-                                movie_logos_process = get_context("spawn").Process(
+                                    YukiData.movie_logos_process.kill()
+                                YukiData.movie_logos_process = get_context(
+                                    "spawn"
+                                ).Process(
                                     name="[yuki-iptv] channel_logos_worker_for_movie",
                                     target=channel_logos_worker,
                                     daemon=True,
                                     args=(
                                         loglevel,
                                         movie_logos_request,
-                                        multiprocessing_manager_dict,
+                                        YukiData.mp_manager_dict,
                                         "movie",
                                     ),
                                 )
-                                movie_logos_process.start()
+                                YukiData.movie_logos_process.start()
                     except Exception:
                         logger.warning("Fetch movie logos failed with exception:")
                         logger.warning(traceback.format_exc())
@@ -4696,11 +4833,10 @@ if __name__ == "__main__":
                 win.moviesWidget.addItem(_("Nothing found"))
 
         def movies_play(mov_item):
-            global playing_url
-            if get_movie_text(mov_item) in currentMoviesGroup:
+            if get_movie_text(mov_item) in YukiData.currentMoviesGroup:
                 itemClicked_event(
                     get_movie_text(mov_item),
-                    currentMoviesGroup[get_movie_text(mov_item)]["url"],
+                    YukiData.currentMoviesGroup[get_movie_text(mov_item)]["url"],
                 )
 
         win.moviesWidget.itemDoubleClicked.connect(movies_play)
@@ -4831,7 +4967,7 @@ if __name__ == "__main__":
 
             def focusOutEvent(self, event2):
                 super().focusOutEvent(event2)
-                if fullscreen:
+                if YukiData.fullscreen:
                     playlist_widget_visible1 = YukiGUI.playlist_widget.isVisible()
                     controlpanel_widget_visible1 = (
                         YukiGUI.controlpanel_widget.isVisible()
@@ -4851,7 +4987,7 @@ if __name__ == "__main__":
                     exInMainThread_partial(mainthread_timer_1)
 
         def channelfilter_clicked():
-            if fullscreen:
+            if YukiData.fullscreen:
                 playlist_widget_visible1 = YukiGUI.playlist_widget.isVisible()
                 controlpanel_widget_visible1 = YukiGUI.controlpanel_widget.isVisible()
                 YukiGUI.channelfilter.usePopup = True
@@ -4884,11 +5020,11 @@ if __name__ == "__main__":
             tvguide_many_chans = []
             tvguide_many_chans_names = []
             tvguide_many_i = -1
-            for tvguide_m_chan in [x6[0] for x6 in sorted(array.items())]:
+            for tvguide_m_chan in [x6[0] for x6 in sorted(YukiData.array.items())]:
                 epg_search = tvguide_m_chan.lower()
-                if epg_search in prog_match_arr:
-                    epg_search = prog_match_arr[epg_search.lower()]
-                if exists_in_epg(epg_search, programmes):
+                if epg_search in YukiData.prog_match_arr:
+                    epg_search = YukiData.prog_match_arr[epg_search.lower()]
+                if exists_in_epg(epg_search, YukiData.programmes):
                     tvguide_many_i += 1
                     tvguide_many_chans.append(epg_search)
                     tvguide_many_chans_names.append(tvguide_m_chan)
@@ -4900,7 +5036,7 @@ if __name__ == "__main__":
             for chan_6 in tvguide_many_chans:
                 a_1 = [
                     a_2
-                    for a_2 in get_epg(programmes, chan_6)
+                    for a_2 in get_epg(YukiData.programmes, chan_6)
                     if a_2["stop"] > time.time() - 1
                 ]
                 a_1_array[chan_6] = a_1
@@ -4949,7 +5085,7 @@ if __name__ == "__main__":
 
         YukiGUI.create2(
             win,
-            get_page_count(len(array)),
+            get_page_count(len(YukiData.array)),
             channelfilter_clicked,
             channelfilter_do,
             get_of_txt,
@@ -4958,13 +5094,13 @@ if __name__ == "__main__":
             MyLineEdit,
             ICONS_FOLDER,
             playmode_selector,
-            combobox,
+            YukiData.combobox,
             movies_combobox,
             YukiGUI.chan,
             loading,
         )
 
-        if settings["panelposition"] == 2:
+        if YukiData.settings["panelposition"] == 2:
             dockWidget_playlist.resize(
                 DOCKWIDGET_PLAYLIST_WIDTH, dockWidget_playlist.height()
             )
@@ -4975,19 +5111,19 @@ if __name__ == "__main__":
             dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
             dockWidget_playlist.setTitleBarWidget(QtWidgets.QWidget())
         dockWidget_playlist.setWidget(YukiGUI.widget)
-        dockWidget_playlist.setFloating(settings["panelposition"] == 2)
+        dockWidget_playlist.setFloating(YukiData.settings["panelposition"] == 2)
         dockWidget_playlist.setFeatures(
             QtWidgets.QDockWidget.DockWidgetFeature.NoDockWidgetFeatures
         )
-        if settings["panelposition"] == 0:
+        if YukiData.settings["panelposition"] == 0:
             win.addDockWidget(
                 QtCore.Qt.DockWidgetArea.RightDockWidgetArea, dockWidget_playlist
             )
-        elif settings["panelposition"] == 1:
+        elif YukiData.settings["panelposition"] == 1:
             win.addDockWidget(
                 QtCore.Qt.DockWidgetArea.LeftDockWidgetArea, dockWidget_playlist
             )
-        elif settings["panelposition"] == 2:
+        elif YukiData.settings["panelposition"] == 2:
             separate_playlist_data = read_option("separate_playlist")
             if separate_playlist_data:
                 dockWidget_playlist.setGeometry(
@@ -5006,31 +5142,30 @@ if __name__ == "__main__":
         FORBIDDEN_CHARS = ('"', "*", ":", "<", ">", "?", "\\", "/", "|", "[", "]")
 
         def do_screenshot():
-            global state, time_stop, playing_channel
-            if playing_channel:
-                state.show()
-                state.setTextYuki(_("Doing screenshot..."))
-                ch = playing_channel.replace(" ", "_")
+            if YukiData.playing_channel:
+                YukiData.state.show()
+                YukiData.state.setTextYuki(_("Doing screenshot..."))
+                ch = YukiData.playing_channel.replace(" ", "_")
                 for char in FORBIDDEN_CHARS:
                     ch = ch.replace(char, "")
                 cur_time = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
                 file_name = "screenshot_-_" + cur_time + "_-_" + ch + ".png"
-                if not settings["scrrecnosubfolders"]:
+                if not YukiData.settings["scrrecnosubfolders"]:
                     file_path = str(Path(save_folder, "screenshots", file_name))
                 else:
                     file_path = str(Path(save_folder, file_name))
                 try:
-                    player.screenshot_to_file(file_path, includes="subtitles")
-                    state.show()
-                    state.setTextYuki(_("Screenshot saved!"))
+                    YukiData.player.screenshot_to_file(file_path, includes="subtitles")
+                    YukiData.state.show()
+                    YukiData.state.setTextYuki(_("Screenshot saved!"))
                 except Exception:
-                    state.show()
-                    state.setTextYuki(_("Screenshot saving error!"))
-                time_stop = time.time() + 1
+                    YukiData.state.show()
+                    YukiData.state.setTextYuki(_("Screenshot saving error!"))
+                YukiData.time_stop = time.time() + 1
             else:
-                state.show()
-                state.setTextYuki("{}!".format(_("No channel selected")))
-                time_stop = time.time() + 1
+                YukiData.state.show()
+                YukiData.state.setTextYuki("{}!".format(_("No channel selected")))
+                YukiData.time_stop = time.time() + 1
 
         def update_tvguide(
             chan_1="",
@@ -5039,13 +5174,12 @@ if __name__ == "__main__":
             mark_integers=False,
             date_selected=None,
         ):
-            global item_selected
-            if array:
+            if YukiData.array:
                 if not chan_1:
-                    if item_selected:
-                        chan_2 = item_selected
+                    if YukiData.item_selected:
+                        chan_2 = YukiData.item_selected
                     else:
-                        chan_2 = sorted(array.items())[0][0]
+                        chan_2 = sorted(YukiData.array.items())[0][0]
                 else:
                     chan_2 = chan_1
                 try:
@@ -5058,12 +5192,12 @@ if __name__ == "__main__":
                 if do_return:
                     newline_symbol = "!@#$%^^&*("
                 try:
-                    chan_3 = prog_match_arr[chan_2]
+                    chan_3 = YukiData.prog_match_arr[chan_2]
                 except Exception:
                     chan_3 = chan_2
-                if exists_in_epg(chan_3, programmes):
+                if exists_in_epg(chan_3, YukiData.programmes):
                     txt = newline_symbol
-                    prog = get_epg(programmes, chan_3)
+                    prog = get_epg(YukiData.programmes, chan_3)
                     for pr in prog:
                         override_this = False
                         if show_all_guides:
@@ -5110,7 +5244,7 @@ if __name__ == "__main__":
                                 attach_1 = f" ({marked_integer})"
                             if (
                                 date_selected is not None
-                                and settings["catchupenable"]
+                                and YukiData.settings["catchupenable"]
                                 and YukiGUI.showonlychplaylist_chk.isChecked()
                             ):
                                 try:
@@ -5175,23 +5309,23 @@ if __name__ == "__main__":
                 if do_return:
                     return txt
                 txt = txt.replace("\n", "<br>").replace("<br>", "", 1)
-                tvguide_lbl.setText(txt)
+                YukiData.tvguide_lbl.setText(txt)
             return ""
 
         def show_tvguide():
-            if tvguide_lbl.isVisible():
-                tvguide_lbl.setText("")
-                tvguide_lbl.hide()
+            if YukiData.tvguide_lbl.isVisible():
+                YukiData.tvguide_lbl.setText("")
+                YukiData.tvguide_lbl.hide()
                 tvguide_close_lbl.hide()
             else:
                 update_tvguide()
-                tvguide_lbl.show()
+                YukiData.tvguide_lbl.show()
                 tvguide_close_lbl.show()
 
         def hide_tvguide():
-            if tvguide_lbl.isVisible():
-                tvguide_lbl.setText("")
-                tvguide_lbl.hide()
+            if YukiData.tvguide_lbl.isVisible():
+                YukiData.tvguide_lbl.setText("")
+                YukiData.tvguide_lbl.hide()
                 tvguide_close_lbl.hide()
 
         def update_tvguide_2():
@@ -5204,9 +5338,9 @@ if __name__ == "__main__":
                     YukiGUI.epg_win_checkbox.addItem(chan_0)
             else:
                 YukiGUI.epg_win_count.setText(
-                    "({}: {})".format(_("channels"), len(programmes))
+                    "({}: {})".format(_("channels"), len(YukiData.programmes))
                 )
-                for chan_0 in programmes:
+                for chan_0 in YukiData.programmes:
                     YukiGUI.epg_win_checkbox.addItem(chan_0)
 
         def show_tvguide_2():
@@ -5222,9 +5356,9 @@ if __name__ == "__main__":
         def show_archive():
             if not YukiGUI.epg_win.isVisible():
                 show_tvguide_2()
-                find_chan = item_selected
+                find_chan = YukiData.item_selected
                 if not find_chan:
-                    find_chan = playing_channel
+                    find_chan = YukiData.playing_channel
                 if find_chan:
                     try:
                         find_chan_index = YukiGUI.epg_win_checkbox.findText(
@@ -5238,22 +5372,21 @@ if __name__ == "__main__":
             else:
                 YukiGUI.epg_win.hide()
 
-        is_recording = False
-        recording_time = 0
-        record_file = None
+        YukiData.is_recording = False
+        YukiData.recording_time = 0
+        YukiData.record_file = None
 
         def start_record(ch1, url3):
-            global is_recording, record_file, time_stop, recording_time
             orig_channel_name = ch1
-            if not is_recording:
-                is_recording = True
+            if not YukiData.is_recording:
+                YukiData.is_recording = True
                 YukiGUI.lbl2.show()
                 YukiGUI.lbl2.setText(_("Preparing record"))
                 ch = ch1.replace(" ", "_")
                 for char in FORBIDDEN_CHARS:
                     ch = ch.replace(char, "")
                 cur_time = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
-                if not settings["scrrecnosubfolders"]:
+                if not YukiData.settings["scrrecnosubfolders"]:
                     out_file = str(
                         Path(
                             save_folder,
@@ -5267,29 +5400,28 @@ if __name__ == "__main__":
                             save_folder, "recording_-_" + cur_time + "_-_" + ch + ".mkv"
                         )
                     )
-                record_file = out_file
+                YukiData.record_file = out_file
                 record(
                     url3,
                     out_file,
                     orig_channel_name,
-                    f"Referer: {settings['referer']}",
+                    f"Referer: {YukiData.settings['referer']}",
                     get_ua_ref_for_channel,
                 )
             else:
-                is_recording = False
-                recording_time = 0
+                YukiData.is_recording = False
+                YukiData.recording_time = 0
                 stop_record()
                 YukiGUI.lbl2.setText("")
                 YukiGUI.lbl2.hide()
 
         def do_record():
-            global time_stop
-            if playing_channel:
-                start_record(playing_channel, playing_url)
+            if YukiData.playing_channel:
+                start_record(YukiData.playing_channel, YukiData.playing_url)
             else:
-                time_stop = time.time() + 1
-                state.show()
-                state.setTextYuki(_("No channel selected for record"))
+                YukiData.time_stop = time.time() + 1
+                YukiData.state.show()
+                YukiData.state.setTextYuki(_("No channel selected for record"))
 
         def my_log(mpv_loglevel1, component, message):
             mpv_log_str = f"[{mpv_loglevel1}] {component}: {message}"
@@ -5306,11 +5438,10 @@ if __name__ == "__main__":
                     mpv_logger.info(str(mpv_log_str))
 
         def playLastChannel():
-            global playing_url, playing_channel, combobox, m3u
             isPlayingLast = False
             if (
                 os.path.isfile(str(Path(LOCAL_DIR, "lastchannels.json")))
-                and settings["openprevchan"]
+                and YukiData.settings["openprevchan"]
             ):
                 try:
                     lastfile_1 = open(
@@ -5318,15 +5449,15 @@ if __name__ == "__main__":
                     )
                     lastfile_1_dat = json.loads(lastfile_1.read())
                     lastfile_1.close()
-                    if lastfile_1_dat[0] in m3u:
+                    if lastfile_1_dat[0] in array_sorted:
                         isPlayingLast = True
-                        player.user_agent = lastfile_1_dat[2]
+                        YukiData.player.user_agent = lastfile_1_dat[2]
                         setChanText("  " + lastfile_1_dat[0])
                         itemClicked_event(lastfile_1_dat[0])
                         setChanText("  " + lastfile_1_dat[0])
                         try:
-                            if lastfile_1_dat[3] < combobox.count():
-                                combobox.setCurrentIndex(lastfile_1_dat[3])
+                            if lastfile_1_dat[3] < YukiData.combobox.count():
+                                YukiData.combobox.setCurrentIndex(lastfile_1_dat[3])
                         except Exception:
                             pass
                         try:
@@ -5339,7 +5470,7 @@ if __name__ == "__main__":
             return isPlayingLast
 
         VIDEO_OUTPUT = "gpu,x11"
-        HWACCEL = "auto-safe" if settings["hwaccel"] else "no"
+        HWACCEL = "auto-safe" if YukiData.settings["hwaccel"] else "no"
 
         # Wayland fix
         is_apply_wayland_fix = False
@@ -5366,7 +5497,7 @@ if __name__ == "__main__":
         options_orig = options.copy()
         options_2 = {}
         try:
-            mpv_options_1 = settings["mpv_options"]
+            mpv_options_1 = YukiData.settings["mpv_options"]
             if "=" in mpv_options_1:
                 pairs = mpv_options_1.split()
                 for pair in pairs:
@@ -5396,7 +5527,7 @@ if __name__ == "__main__":
 
         logger.info(f"Using mpv options: {json.dumps(options)}")
 
-        player = None
+        YukiData.player = None
 
         def get_about_text():
             about_txt = f"<b>yuki-iptv {APP_VERSION}</b>"
@@ -5406,7 +5537,7 @@ if __name__ == "__main__":
                 + _("Using Qt {} ({})").format(QtCore.qVersion(), qt_library)
                 + QT_PLATFORM
             )
-            mpv_version = player.mpv_version
+            mpv_version = YukiData.player.mpv_version
             if " " in mpv_version:
                 mpv_version = mpv_version.split(" ", 1)[1]
             if not mpv_version:
@@ -5415,9 +5546,8 @@ if __name__ == "__main__":
             return about_txt
 
         def main_channel_settings():
-            global item_selected, playing_channel
-            if playing_channel:
-                item_selected = playing_channel
+            if YukiData.playing_channel:
+                YukiData.item_selected = YukiData.playing_channel
                 settings_context_menu()
             else:
                 msg = QtWidgets.QMessageBox(
@@ -5430,8 +5560,7 @@ if __name__ == "__main__":
 
         @idle_function
         def showhideplaylist(unused=None):
-            global fullscreen
-            if not fullscreen:
+            if not YukiData.fullscreen:
                 try:
                     show_hide_playlist()
                 except Exception:
@@ -5439,16 +5568,14 @@ if __name__ == "__main__":
 
         @idle_function
         def lowpanel_ch_1(unused=None):
-            global fullscreen
-            if not fullscreen:
+            if not YukiData.fullscreen:
                 try:
                     lowpanel_ch()
                 except Exception:
                     pass
 
         def showhideeverything():
-            global fullscreen
-            if not fullscreen:
+            if not YukiData.fullscreen:
                 if dockWidget_playlist.isVisible():
                     YukiData.compact_mode = True
                     dockWidget_playlist.hide()
@@ -5529,8 +5656,7 @@ if __name__ == "__main__":
                 pass
 
         def open_stream_info():
-            global playing_channel, time_stop
-            if playing_channel:
+            if YukiData.playing_channel:
                 for stream_info_i in reversed(
                     range(YukiGUI.stream_information_layout.count())
                 ):
@@ -5569,21 +5695,20 @@ if __name__ == "__main__":
                 else:
                     YukiGUI.streaminfo_win.hide()
             else:
-                state.show()
-                state.setTextYuki("{}!".format(_("No channel selected")))
-                time_stop = time.time() + 1
+                YukiData.state.show()
+                YukiData.state.setTextYuki("{}!".format(_("No channel selected")))
+                YukiData.time_stop = time.time() + 1
 
         YukiGUI.streaminfo_win.setWindowTitle(_("Stream Information"))
 
         def is_recording_func():
-            global ffmpeg_processes
             ret_code_rec = False
-            if ffmpeg_processes:
+            if YukiData.ffmpeg_processes:
                 ret_code_array = []
-                for ffmpeg_process_1 in ffmpeg_processes:
+                for ffmpeg_process_1 in YukiData.ffmpeg_processes:
                     if ffmpeg_process_1[0].processId() == 0:
                         ret_code_array.append(True)
-                        ffmpeg_processes.remove(ffmpeg_process_1)
+                        YukiData.ffmpeg_processes.remove(ffmpeg_process_1)
                     else:
                         ret_code_array.append(False)
                 ret_code_rec = False not in ret_code_array
@@ -5593,27 +5718,25 @@ if __name__ == "__main__":
 
         win.oldpos = None
 
-        force_turnoff_osc = False
+        YukiData.force_turnoff_osc = False
 
         def redraw_menubar():
-            global playing_channel
             try:
                 update_menubar(
-                    player.track_list,
-                    playing_channel,
-                    settings["m3u"],
+                    YukiData.player.track_list,
+                    YukiData.playing_channel,
+                    YukiData.settings["m3u"],
                     str(Path(LOCAL_DIR, "alwaysontop.json")),
                 )
             except Exception:
                 logger.warning("redraw_menubar failed")
                 show_exception(traceback.format_exc(), "redraw_menubar failed")
 
-        right_click_menu = QtWidgets.QMenu()
+        YukiData.right_click_menu = QtWidgets.QMenu()
 
         @idle_function
         def do_reconnect1(unused=None):
-            global playing_channel
-            if playing_channel:
+            if YukiData.playing_channel:
                 logger.info("Reconnecting to stream")
                 try:
                     doPlay(*comm_instance.do_play_args)
@@ -5629,7 +5752,7 @@ if __name__ == "__main__":
         def end_file_error_callback(unused=None):
             logger.warning("Playing error!")
             if YukiData.is_loading:
-                YukiData.resume_playback = not player.pause
+                YukiData.resume_playback = not YukiData.player.pause
                 mpv_stop()
                 YukiGUI.chan.setText("")
                 loading.setText(_("Playing error"))
@@ -5640,10 +5763,12 @@ if __name__ == "__main__":
 
         @idle_function
         def end_file_callback(unused=None):
-            global playing_channel
             if win.isVisible():
-                if playing_channel and player.path is None:
-                    if settings["autoreconnection"] and playing_group == 0:
+                if YukiData.playing_channel and YukiData.player.path is None:
+                    if (
+                        YukiData.settings["autoreconnection"]
+                        and YukiData.playing_group == 0
+                    ):
                         logger.warning("Connection to stream lost, waiting 1 sec...")
                         do_reconnect1_async()
                     else:
@@ -5651,44 +5776,43 @@ if __name__ == "__main__":
 
         @idle_function
         def file_loaded_callback(unused=None):
-            global playing_channel
-            if playing_channel:
+            if YukiData.playing_channel:
                 logger.info("redraw_menubar triggered by file_loaded_callback")
                 redraw_menubar()
 
         @idle_function
         def my_mouse_right_callback(unused=None):
-            global right_click_menu
-            _exec(right_click_menu, QtGui.QCursor.pos())
+            _exec(YukiData.right_click_menu, QtGui.QCursor.pos())
 
         @idle_function
         def my_mouse_left_callback(unused=None):
-            global right_click_menu, fullscreen
-            if right_click_menu.isVisible():
-                right_click_menu.hide()
-            elif settings["hideplaylistbyleftmouseclick"]:
+            if YukiData.right_click_menu.isVisible():
+                YukiData.right_click_menu.hide()
+            elif YukiData.settings["hideplaylistbyleftmouseclick"]:
                 show_hide_playlist()
 
         @idle_function
         def my_up_binding_execute(unused=None):
-            global state, time_stop
-            if settings["mouseswitchchannels"]:
+            if YukiData.settings["mouseswitchchannels"]:
                 next_channel()
             else:
-                volume = int(player.volume + settings["volumechangestep"])
+                volume = int(
+                    YukiData.player.volume + YukiData.settings["volumechangestep"]
+                )
                 volume = min(volume, 200)
                 YukiGUI.volume_slider.setValue(volume)
                 mpv_volume_set()
 
         @idle_function
         def my_down_binding_execute(unused=None):
-            global state, time_stop, fullscreen
-            if settings["mouseswitchchannels"]:
+            if YukiData.settings["mouseswitchchannels"]:
                 prev_channel()
             else:
-                volume = int(player.volume - settings["volumechangestep"])
+                volume = int(
+                    YukiData.player.volume - YukiData.settings["volumechangestep"]
+                )
                 volume = max(volume, 0)
-                time_stop = time.time() + 3
+                YukiData.time_stop = time.time() + 3
                 show_volume(volume)
                 YukiGUI.volume_slider.setValue(volume)
                 mpv_volume_set()
@@ -5711,13 +5835,13 @@ if __name__ == "__main__":
             xdg_open.wait()
 
         def go_channel(i1):
-            pause_state = player.pause
+            pause_state = YukiData.player.pause
             if YukiData.resume_playback:
                 YukiData.resume_playback = False
                 pause_state = False
             row = win.listWidget.currentRow()
             if row == -1:
-                row = row0
+                row = YukiData.row0
             next_row = row + i1
             if next_row < 0:
                 # Previous page
@@ -5743,7 +5867,7 @@ if __name__ == "__main__":
             if chk_pass:
                 win.listWidget.setCurrentRow(next_row)
                 itemClicked_event(win.listWidget.currentItem())
-            player.pause = pause_state
+            YukiData.player.pause = pause_state
 
         @idle_function
         def prev_channel(unused=None):
@@ -5759,7 +5883,7 @@ if __name__ == "__main__":
             qaction_prio = QtWidgets.QAction.Priority.HighPriority
 
         def get_keybind(func1):
-            return main_keybinds[func1]
+            return YukiData.main_keybinds[func1]
 
         def win_raise():
             win.show()
@@ -5772,8 +5896,8 @@ if __name__ == "__main__":
             mpv_volume_set()
 
         def mpris_seek(val):
-            if playing_channel:
-                player.command("seek", val)
+            if YukiData.playing_channel:
+                YukiData.player.command("seek", val)
 
         def mpris_set_position(track_id, val):
             if YukiData.mpris_ready and YukiData.mpris_running:
@@ -5784,9 +5908,9 @@ if __name__ == "__main__":
                     player_position,
                 ) = get_mpris_metadata()
                 if track_id == mpris_trackid:
-                    player.time_pos = val
+                    YukiData.player.time_pos = val
 
-        stopped = False
+        YukiData.stopped = False
 
         def get_playlist_hash(playlist):
             return hashlib.sha512(playlist["m3u"].encode("utf-8")).hexdigest()
@@ -5796,7 +5920,7 @@ if __name__ == "__main__":
             current_playlist = (f"{prefix}Unknown", _("Unknown"), "")
             current_playlist_name = _("Unknown")
             for playlist in playlists_saved:
-                if playlists_saved[playlist]["m3u"] == settings["m3u"]:
+                if playlists_saved[playlist]["m3u"] == YukiData.settings["m3u"]:
                     current_playlist_name = playlist
                     current_playlist = (
                         f"{prefix}{get_playlist_hash(playlists_saved[playlist])}",
@@ -5865,7 +5989,7 @@ if __name__ == "__main__":
                     mpris_data[0] == "org.mpris.MediaPlayer2.Player"
                     and mpris_data[1] == "Pause"
                 ):
-                    if not player.pause:
+                    if not YukiData.player.pause:
                         exInMainThread_partial(partial(mpv_play))
                 elif (
                     mpris_data[0] == "org.mpris.MediaPlayer2.Player"
@@ -5881,7 +6005,7 @@ if __name__ == "__main__":
                     mpris_data[0] == "org.mpris.MediaPlayer2.Player"
                     and mpris_data[1] == "Play"
                 ):
-                    if player.pause:
+                    if YukiData.player.pause:
                         exInMainThread_partial(partial(mpv_play))
                 elif (
                     mpris_data[0] == "org.mpris.MediaPlayer2.Player"
@@ -5939,11 +6063,11 @@ if __name__ == "__main__":
                     ):
                         if mpris_data_params[2]:
                             # Enable fullscreen
-                            if not fullscreen:
+                            if not YukiData.fullscreen:
                                 exInMainThread_partial(partial(mpv_fullscreen))
                         else:
                             # Disable fullscreen
-                            if fullscreen:
+                            if YukiData.fullscreen:
                                 exInMainThread_partial(partial(mpv_fullscreen))
                     elif (
                         mpris_data_params[0] == "org.mpris.MediaPlayer2.Player"
@@ -5977,8 +6101,8 @@ if __name__ == "__main__":
 
             def get_mpris_metadata():
                 # Playback status
-                if playing_channel:
-                    if player.pause or YukiData.is_loading:
+                if YukiData.playing_channel:
+                    if YukiData.player.pause or YukiData.is_loading:
                         playback_status = "Paused"
                     else:
                         playback_status = "Playing"
@@ -5986,21 +6110,27 @@ if __name__ == "__main__":
                     playback_status = "Stopped"
                 # Metadata
                 playing_url_hash = hashlib.sha512(
-                    playing_url.encode("utf-8")
+                    YukiData.playing_url.encode("utf-8")
                 ).hexdigest()
                 mpris_trackid = (
                     f"/page/codeberg/ame_chan_angel/yuki_iptv/Track/{playing_url_hash}"
-                    if playing_url
+                    if YukiData.playing_url
                     else "/page/codeberg/ame_chan_angel/yuki_iptv/Track/NoTrack"
                 )
                 # Logo
                 artUrl = ""
-                if playing_channel in array:
-                    if "tvg-logo" in array[playing_channel]:
-                        if array[playing_channel]["tvg-logo"]:
-                            artUrl = array[playing_channel]["tvg-logo"]
+                if YukiData.playing_channel in YukiData.array:
+                    if "tvg-logo" in YukiData.array[YukiData.playing_channel]:
+                        if YukiData.array[YukiData.playing_channel]["tvg-logo"]:
+                            artUrl = YukiData.array[YukiData.playing_channel][
+                                "tvg-logo"
+                            ]
                 # Position in microseconds
-                player_position = player.duration * 1000000 if player.duration else 0
+                player_position = (
+                    YukiData.player.duration * 1000000
+                    if YukiData.player.duration
+                    else 0
+                )
                 return playback_status, mpris_trackid, artUrl, player_position
 
             def get_mpris_options():
@@ -6015,7 +6145,7 @@ if __name__ == "__main__":
                     return {
                         "org.mpris.MediaPlayer2": {
                             "CanQuit": GLib.Variant("b", True),
-                            "Fullscreen": GLib.Variant("b", fullscreen),
+                            "Fullscreen": GLib.Variant("b", YukiData.fullscreen),
                             "CanSetFullscreen": GLib.Variant("b", True),
                             "CanRaise": GLib.Variant("b", True),
                             "HasTrackList": GLib.Variant("b", False),
@@ -6059,7 +6189,7 @@ if __name__ == "__main__":
                         "org.mpris.MediaPlayer2.Player": {
                             "PlaybackStatus": GLib.Variant("s", playback_status),
                             "LoopStatus": GLib.Variant("s", "None"),
-                            "Rate": GLib.Variant("d", player.speed),
+                            "Rate": GLib.Variant("d", YukiData.player.speed),
                             "Shuffle": GLib.Variant("b", False),
                             "Metadata": GLib.Variant(
                                 "a{sv}",
@@ -6067,13 +6197,22 @@ if __name__ == "__main__":
                                     "mpris:trackid": GLib.Variant("o", mpris_trackid),
                                     "mpris:artUrl": GLib.Variant("s", artUrl),
                                     "mpris:length": GLib.Variant("x", player_position),
-                                    "xesam:url": GLib.Variant("s", playing_url),
-                                    "xesam:title": GLib.Variant("s", playing_channel),
+                                    "xesam:url": GLib.Variant(
+                                        "s", YukiData.playing_url
+                                    ),
+                                    "xesam:title": GLib.Variant(
+                                        "s", YukiData.playing_channel
+                                    ),
                                 },
                             ),
-                            "Volume": GLib.Variant("d", float(player.volume / 100)),
+                            "Volume": GLib.Variant(
+                                "d", float(YukiData.player.volume / 100)
+                            ),
                             "Position": GLib.Variant(
-                                "x", player.time_pos * 1000000 if player.time_pos else 0
+                                "x",
+                                YukiData.player.time_pos * 1000000
+                                if YukiData.player.time_pos
+                                else 0,
                             ),
                             "MinimumRate": GLib.Variant("d", 0.01),
                             "MaximumRate": GLib.Variant("d", 5.0),
@@ -6101,18 +6240,16 @@ if __name__ == "__main__":
                     }
 
             def wait_until():
-                global stopped
                 while True:
-                    if win.isVisible() or stopped:
+                    if win.isVisible() or YukiData.stopped:
                         return True
                     else:
                         time.sleep(0.1)
                 return False
 
             def mpris_loop_start():
-                global stopped
                 wait_until()
-                if not stopped:
+                if not YukiData.stopped:
                     logger.info("Starting MPRIS loop")
                     try:
                         mpris_owner_bus_id = start_mpris(
@@ -6148,7 +6285,7 @@ if __name__ == "__main__":
                                     "PlaybackStatus": GLib.Variant(
                                         "s", playback_status
                                     ),
-                                    "Rate": GLib.Variant("d", player.speed),
+                                    "Rate": GLib.Variant("d", YukiData.player.speed),
                                     "Metadata": GLib.Variant(
                                         "a{sv}",
                                         {
@@ -6159,9 +6296,11 @@ if __name__ == "__main__":
                                             "mpris:length": GLib.Variant(
                                                 "x", player_position
                                             ),
-                                            "xesam:url": GLib.Variant("s", playing_url),
+                                            "xesam:url": GLib.Variant(
+                                                "s", YukiData.playing_url
+                                            ),
                                             "xesam:title": GLib.Variant(
-                                                "s", playing_channel
+                                                "s", YukiData.playing_channel
                                             ),
                                         },
                                     ),
@@ -6193,7 +6332,7 @@ if __name__ == "__main__":
                                 "org.mpris.MediaPlayer2.Player",
                                 {
                                     "Volume": GLib.Variant(
-                                        "d", float(player.volume / 100)
+                                        "d", float(YukiData.player.volume / 100)
                                     )
                                 },
                             )
@@ -6205,11 +6344,11 @@ if __name__ == "__main__":
                             partial(
                                 emit_mpris_change,
                                 "org.mpris.MediaPlayer2",
-                                {"Fullscreen": GLib.Variant("b", fullscreen)},
+                                {"Fullscreen": GLib.Variant("b", YukiData.fullscreen)},
                             )
                         )
 
-            event_handler = MPRISEventHandler()
+            YukiData.event_handler = MPRISEventHandler()
         except Exception:
             logger.warning(traceback.format_exc())
             logger.warning("Failed to set up MPRIS!")
@@ -6234,9 +6373,9 @@ if __name__ == "__main__":
                 channel_list = [chan_name for chan_name in array_sorted]
                 for chan1 in channel_list:
                     YukiGUI.choosechannel_ch.addItem(chan1)
-                if item_selected in channel_list:
+                if YukiData.item_selected in channel_list:
                     YukiGUI.choosechannel_ch.setCurrentIndex(
-                        channel_list.index(item_selected)
+                        channel_list.index(YukiData.item_selected)
                     )
                 YukiGUI.choosechannel_ch.currentIndexChanged.connect(
                     update_scheduler_programme
@@ -6258,7 +6397,7 @@ if __name__ == "__main__":
         YukiGUI.volume_slider.valueChanged.connect(mpv_volume_set_custom)
         YukiGUI.btn_screenshot.clicked.connect(do_screenshot)
         YukiGUI.btn_show_archive.clicked.connect(show_archive)
-        if not settings["catchupenable"]:
+        if not YukiData.settings["catchupenable"]:
             YukiGUI.btn_show_archive.setVisible(False)
         YukiGUI.btn_show_settings.clicked.connect(show_settings)
         YukiGUI.btn_show_playlists.clicked.connect(show_playlists)
@@ -6282,31 +6421,33 @@ if __name__ == "__main__":
         YukiGUI.stop_label.hide()
         dockWidget_controlPanel.setFixedHeight(DOCKWIDGET_CONTROLPANEL_HEIGHT_LOW)
 
-        state = QtWidgets.QLabel(win)
-        state.setStyleSheet("background-color: " + BCOLOR)
-        state.setFont(YukiGUI.font_12_bold)
-        state.setWordWrap(True)
-        state.move(50, 50)
-        state.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        YukiData.state = QtWidgets.QLabel(win)
+        YukiData.state.setStyleSheet("background-color: " + BCOLOR)
+        YukiData.state.setFont(YukiGUI.font_12_bold)
+        YukiData.state.setWordWrap(True)
+        YukiData.state.move(50, 50)
+        YukiData.state.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
         class Slider(QtWidgets.QSlider):
             def getRewindTime(self):
                 s_start = None
                 s_stop = None
                 s_index = None
-                if archive_epg:
+                if YukiData.archive_epg:
                     s_start = datetime.datetime.strptime(
-                        archive_epg[1], "%d.%m.%Y %H:%M:%S"
+                        YukiData.archive_epg[1], "%d.%m.%Y %H:%M:%S"
                     ).timestamp()
                     s_stop = datetime.datetime.strptime(
-                        archive_epg[2], "%d.%m.%Y %H:%M:%S"
+                        YukiData.archive_epg[2], "%d.%m.%Y %H:%M:%S"
                     ).timestamp()
-                    s_index = archive_epg[3]
+                    s_index = YukiData.archive_epg[3]
                 else:
-                    if settings["epg"] and exists_in_epg(
-                        playing_channel.lower(), programmes
+                    if YukiData.settings["epg"] and exists_in_epg(
+                        YukiData.playing_channel.lower(), YukiData.programmes
                     ):
-                        prog1 = get_epg(programmes, playing_channel.lower())
+                        prog1 = get_epg(
+                            YukiData.programmes, YukiData.playing_channel.lower()
+                        )
                         for pr in prog1:
                             if time.time() > pr["start"] and time.time() < pr["stop"]:
                                 s_start = pr["start"]
@@ -6322,7 +6463,7 @@ if __name__ == "__main__":
                 )
 
             def mouseMoveEvent(self, event1):
-                if playing_channel:
+                if YukiData.playing_channel:
                     rewind_time = self.getRewindTime()
                     if rewind_time:
                         QtWidgets.QToolTip.showText(
@@ -6334,7 +6475,7 @@ if __name__ == "__main__":
                 super().mouseMoveEvent(event1)
 
             def doMouseReleaseEvent(self):
-                if playing_channel:
+                if YukiData.playing_channel:
                     QtWidgets.QToolTip.hideText()
                     rewind_time = self.getRewindTime()
                     if rewind_time:
@@ -6344,7 +6485,7 @@ if __name__ == "__main__":
                             + urllib.parse.quote_plus(
                                 json.dumps(
                                     [
-                                        playing_channel,
+                                        YukiData.playing_channel,
                                         datetime.datetime.fromtimestamp(
                                             rewind_time[0]
                                         ).strftime("%d.%m.%Y %H:%M:%S"),
@@ -6364,47 +6505,45 @@ if __name__ == "__main__":
 
         YukiGUI.create_rewind(win, Slider, BCOLOR)
 
-        static_text = ""
-        gl_is_static = False
-        previous_text = ""
+        YukiData.static_text = ""
+        YukiData.gl_is_static = False
+        YukiData.previous_text = ""
 
         def set_text_state(text="", is_previous=False):
-            global static_text, gl_is_static, previous_text
             if is_previous:
-                text = previous_text
+                text = YukiData.previous_text
             else:
-                previous_text = text
-            if gl_is_static:
+                YukiData.previous_text = text
+            if YukiData.gl_is_static:
                 br = "    "
-                if not text or not static_text:
+                if not text or not YukiData.static_text:
                     br = ""
-                text = static_text + br + text
+                text = YukiData.static_text + br + text
             win.update()
-            state.setText(text)
+            YukiData.state.setText(text)
 
         def set_text_static(is_static):
-            global gl_is_static, static_text
-            static_text = ""
-            gl_is_static = is_static
+            YukiData.static_text = ""
+            YukiData.gl_is_static = is_static
 
-        state.setTextYuki = set_text_state
-        state.setStaticYuki = set_text_static
-        state.hide()
+        YukiData.state.setTextYuki = set_text_state
+        YukiData.state.setStaticYuki = set_text_static
+        YukiData.state.hide()
 
         def getUserAgent():
             try:
-                userAgent2 = player.user_agent
+                userAgent2 = YukiData.player.user_agent
             except Exception:
                 userAgent2 = def_user_agent
             return userAgent2
 
         def saveLastChannel():
-            if playing_url and playmode_selector.currentIndex() == 0:
+            if YukiData.playing_url and playmode_selector.currentIndex() == 0:
                 current_group_0 = 0
-                if combobox.currentIndex() != 0:
+                if YukiData.combobox.currentIndex() != 0:
                     try:
                         current_group_0 = groups.index(
-                            array[playing_channel]["tvg-group"]
+                            YukiData.array[YukiData.playing_channel]["tvg-group"]
                         )
                     except Exception:
                         pass
@@ -6419,8 +6558,8 @@ if __name__ == "__main__":
                 lastfile.write(
                     json.dumps(
                         [
-                            playing_channel,
-                            playing_url,
+                            YukiData.playing_channel,
+                            YukiData.playing_url,
                             getUserAgent(),
                             current_group_0,
                             current_channel_0,
@@ -6445,11 +6584,13 @@ if __name__ == "__main__":
             return w1_height
 
         def myExitHandler_before():
-            global stopped, epg_thread_2
             if comm_instance.comboboxIndex != -1:
                 write_option(
                     "comboboxindex",
-                    {"m3u": settings["m3u"], "index": comm_instance.comboboxIndex},
+                    {
+                        "m3u": YukiData.settings["m3u"],
+                        "index": comm_instance.comboboxIndex,
+                    },
                 )
             try:
                 if get_first_run():
@@ -6471,7 +6612,7 @@ if __name__ == "__main__":
                         },
                     )
                     logger.info("Main window position / width / height saved")
-                    if settings["panelposition"] == 2:
+                    if YukiData.settings["panelposition"] == 2:
                         logger.info(
                             "Saving separate playlist window "
                             "position / width / height..."
@@ -6513,13 +6654,13 @@ if __name__ == "__main__":
             if YukiData.mpris_loop:
                 YukiData.mpris_running = False
                 YukiData.mpris_loop.quit()
-            stopped = True
-            if epg_thread_2:
+            YukiData.stopped = True
+            if YukiData.epg_thread_2:
                 try:
-                    epg_thread_2.kill()
+                    YukiData.epg_thread_2.kill()
                 except Exception:
                     try:
-                        epg_thread_2.terminate()
+                        YukiData.epg_thread_2.terminate()
                     except Exception:
                         pass
             if multiprocessing_manager:
@@ -6536,13 +6677,13 @@ if __name__ == "__main__":
         def myExitHandler():
             myExitHandler_before()
             logger.info("Stopped")
-            if not do_save_settings:
+            if not YukiData.do_save_settings:
                 sys.exit(0)
 
-        first_boot_1 = True
+        YukiData.first_boot_1 = True
 
-        waiting_for_epg = False
-        epg_failed = False
+        YukiData.waiting_for_epg = False
+        YukiData.epg_failed = False
 
         def get_catchup_days(is_seconds=False):
             try:
@@ -6550,16 +6691,16 @@ if __name__ == "__main__":
                     max(
                         1,
                         max(
-                            int(array[xc1]["catchup-days"])
-                            for xc1 in array
-                            if "catchup-days" in array[xc1]
+                            int(YukiData.array[xc1]["catchup-days"])
+                            for xc1 in YukiData.array
+                            if "catchup-days" in YukiData.array[xc1]
                         ),
                     ),
                     7,
                 )
             except Exception:
                 catchup_days1 = 7
-            if not settings["catchupenable"]:
+            if not YukiData.settings["catchupenable"]:
                 catchup_days1 = 7
             if is_seconds:
                 catchup_days1 = 86400 * (catchup_days1 + 1)
@@ -6567,161 +6708,153 @@ if __name__ == "__main__":
 
         logger.info(f"catchup-days = {get_catchup_days()}")
 
-        epg_data = None
+        YukiData.epg_data = None
 
         def timer_channels_redraw():
-            global ic, ic3, multiprocessing_manager_dict
-            ic += 0.1
+            YukiData.ic += 0.1
             # redraw every 15 seconds
-            if ic > (
-                14.9 if not multiprocessing_manager_dict["logos_inprogress"] else 2.9
+            if YukiData.ic > (
+                14.9 if not YukiData.mp_manager_dict["logos_inprogress"] else 2.9
             ):
-                ic = 0
+                YukiData.ic = 0
                 btn_update_click()
-            ic3 += 0.1
+            YukiData.ic3 += 0.1
             # redraw every 15 seconds
-            if ic3 > (
-                14.9
-                if not multiprocessing_manager_dict["logosmovie_inprogress"]
-                else 2.9
+            if YukiData.ic3 > (
+                14.9 if not YukiData.mp_manager_dict["logosmovie_inprogress"] else 2.9
             ):
-                ic3 = 0
+                YukiData.ic3 = 0
                 update_movie_icons()
 
         @idle_function
         def thread_tvguide_update_1(unused=None):
-            global static_text, time_stop
-            state.setStaticYuki(True)
-            state.show()
-            static_text = _("Updating TV guide...")
-            state.setTextYuki("")
-            time_stop = time.time() + 3
+            YukiData.state.setStaticYuki(True)
+            YukiData.state.show()
+            YukiData.static_text = _("Updating TV guide...")
+            YukiData.state.setTextYuki("")
+            YukiData.time_stop = time.time() + 3
 
         @idle_function
         def thread_tvguide_update_2(unused=None):
-            global time_stop
-            state.setStaticYuki(False)
-            state.show()
-            state.setTextYuki(_("TV guide update error!"))
-            time_stop = time.time() + 3
+            YukiData.state.setStaticYuki(False)
+            YukiData.state.show()
+            YukiData.state.setTextYuki(_("TV guide update error!"))
+            YukiData.time_stop = time.time() + 3
 
         @async_gui_blocking_function
         def thread_tvguide_update():
-            global stopped, first_boot, programmes
-            global tvguide_sets, epg_updating, waiting_for_epg
-            global epg_failed, first_boot_1, multiprocessing_manager_dict
-            global epg_update_allowed, epg_data
-            while not stopped:
-                if not first_boot:
-                    first_boot = True
-                    if settings["epg"] and not epg_failed:
-                        if not use_local_tvguide:
-                            update_epg = not settings["donotupdateepg"]
-                            if not first_boot_1:
+            while not YukiData.stopped:
+                if not YukiData.first_boot:
+                    YukiData.first_boot = True
+                    if YukiData.settings["epg"] and not YukiData.epg_failed:
+                        if not YukiData.use_local_tvguide:
+                            update_epg = not YukiData.settings["donotupdateepg"]
+                            if not YukiData.first_boot_1:
                                 update_epg = True
                             if update_epg:
-                                if epg_update_allowed:
-                                    epg_updating = True
+                                if YukiData.epg_update_allowed:
+                                    YukiData.epg_updating = True
                                     thread_tvguide_update_1()
                                     try:
-                                        epg_data = None
-                                        waiting_for_epg = True
-                                        epg_data = (
+                                        YukiData.epg_data = None
+                                        YukiData.waiting_for_epg = True
+                                        YukiData.epg_data = (
                                             get_context("spawn")
                                             .Pool(1)
                                             .apply(
                                                 worker,
                                                 (
-                                                    settings,
+                                                    YukiData.settings,
                                                     get_catchup_days(),
-                                                    multiprocessing_manager_dict,
+                                                    YukiData.mp_manager_dict,
                                                 ),
                                             )
                                         )
                                     except Exception as e1:
-                                        epg_failed = True
+                                        YukiData.epg_failed = True
                                         logger.warning(
                                             "[TV guide, part 1] Caught exception: "
                                             + str(e1)
                                         )
                                         logger.warning(traceback.format_exc())
                                         thread_tvguide_update_2()
-                                        epg_updating = False
+                                        YukiData.epg_updating = False
                             else:
                                 logger.info("EPG update at boot disabled")
-                            first_boot_1 = False
+                            YukiData.first_boot_1 = False
                         else:
-                            programmes = {
-                                prog0.lower(): tvguide_sets[prog0]
-                                for prog0 in tvguide_sets
+                            YukiData.programmes = {
+                                prog0.lower(): YukiData.tvguide_sets[prog0]
+                                for prog0 in YukiData.tvguide_sets
                             }
                             btn_update_click()  # start update in main thread
                 time.sleep(0.1)
 
         def timer_record():
             try:
-                global time_stop, gl_is_static, static_text, recording_time, ic1
-                ic1 += 0.1
-                if ic1 > 0.9:
-                    ic1 = 0
+                YukiData.ic1 += 0.1
+                if YukiData.ic1 > 0.9:
+                    YukiData.ic1 = 0
                     # executing every second
-                    if is_recording:
-                        if not recording_time:
-                            recording_time = time.time()
-                        record_time = format_seconds(time.time() - recording_time)
-                        if os.path.isfile(record_file):
-                            record_size = convert_size(os.path.getsize(record_file))
+                    if YukiData.is_recording:
+                        if not YukiData.recording_time:
+                            YukiData.recording_time = time.time()
+                        record_time = format_seconds(
+                            time.time() - YukiData.recording_time
+                        )
+                        if os.path.isfile(YukiData.record_file):
+                            record_size = convert_size(
+                                os.path.getsize(YukiData.record_file)
+                            )
                             YukiGUI.lbl2.setText(
                                 "REC " + record_time + " - " + record_size
                             )
                         else:
-                            recording_time = time.time()
+                            YukiData.recording_time = time.time()
                             YukiGUI.lbl2.setText(_("Waiting for record"))
                 win.update()
-                if (time.time() > time_stop) and time_stop != 0:
-                    time_stop = 0
-                    if not gl_is_static:
-                        state.hide()
+                if (time.time() > YukiData.time_stop) and YukiData.time_stop != 0:
+                    YukiData.time_stop = 0
+                    if not YukiData.gl_is_static:
+                        YukiData.state.hide()
                         win.update()
                     else:
-                        state.setTextYuki("")
+                        YukiData.state.setTextYuki("")
             except Exception:
                 pass
 
-        x_conn = None
+        YukiData.x_conn = None
 
         def do_reconnect():
-            global x_conn
-            if (playing_channel and not YukiData.is_loading) and (
-                player.cache_buffering_state == 0
+            if (YukiData.playing_channel and not YukiData.is_loading) and (
+                YukiData.player.cache_buffering_state == 0
             ):
                 logger.info("Reconnecting to stream")
                 try:
                     doPlay(*comm_instance.do_play_args)
                 except Exception:
                     logger.warning("Failed reconnecting to stream - no known URL")
-            x_conn = None
+            YukiData.x_conn = None
 
         YukiData.connprinted = False
 
         def check_connection():
-            global x_conn
-            if settings["autoreconnection"]:
-                if playing_group == 0:
+            if YukiData.settings["autoreconnection"]:
+                if YukiData.playing_group == 0:
                     if not YukiData.connprinted:
                         YukiData.connprinted = True
                         logger.info("Connection loss detector enabled")
                     try:
                         if (
-                            playing_channel and not YukiData.is_loading
-                        ) and player.cache_buffering_state == 0:
-                            if not x_conn:
+                            YukiData.playing_channel and not YukiData.is_loading
+                        ) and YukiData.player.cache_buffering_state == 0:
+                            if not YukiData.x_conn:
                                 logger.warning(
                                     "Connection to stream lost, waiting 5 secs..."
                                 )
-                                x_conn = QtCore.QTimer()
-                                x_conn.timeout.connect(do_reconnect)
-                                x_conn.start(5000)
+                                YukiData.x_conn = QtCore.QTimer()
+                                YukiData.x_conn.timeout.connect(do_reconnect)
+                                YukiData.x_conn.start(5000)
                     except Exception:
                         logger.warning("Failed to set connection loss detector!")
             else:
@@ -6732,10 +6865,9 @@ if __name__ == "__main__":
         def timer_check_tvguide_obsolete():
             try:
                 if win.isVisible():
-                    global first_boot, ic2
                     check_connection()
                     try:
-                        if player.video_bitrate:
+                        if YukiData.player.video_bitrate:
                             bitrate_arr = [
                                 _("bps") + " ",
                                 _("kbps"),
@@ -6744,27 +6876,27 @@ if __name__ == "__main__":
                                 _("Tbps"),
                             ]
                             video_bitrate = " - " + str(
-                                format_bytes(player.video_bitrate, bitrate_arr)
+                                format_bytes(YukiData.player.video_bitrate, bitrate_arr)
                             )
                         else:
                             video_bitrate = ""
                     except Exception:
                         video_bitrate = ""
                     try:
-                        audio_codec = player.audio_codec.split(" ")[0].strip()
+                        audio_codec = YukiData.player.audio_codec.split(" ")[0].strip()
                     except Exception:
                         audio_codec = "no audio"
                     try:
-                        codec = player.video_codec.split(" ")[0].strip()
-                        width = player.width
-                        height = player.height
+                        codec = YukiData.player.video_codec.split(" ")[0].strip()
+                        width = YukiData.player.width
+                        height = YukiData.player.height
                     except Exception:
                         codec = "png"
                         width = 800
                         height = 600
-                    if player.avsync:
-                        avsync = str(round(player.avsync, 2))
-                        deavsync = round(player.avsync, 2)
+                    if YukiData.player.avsync:
+                        avsync = str(round(YukiData.player.avsync, 2))
+                        deavsync = round(YukiData.player.avsync, 2)
                         if deavsync < 0:
                             deavsync = deavsync * -1
                         if deavsync > 0.999:
@@ -6774,7 +6906,7 @@ if __name__ == "__main__":
                     if (
                         not (codec.lower() == "png" and width == 800 and height == 600)
                     ) and (width and height):
-                        if settings["hidebitrateinfo"]:
+                        if YukiData.settings["hidebitrateinfo"]:
                             YukiGUI.label_video_data.setText("")
                             YukiGUI.label_avsync.setText("")
                         else:
@@ -6788,35 +6920,35 @@ if __name__ == "__main__":
                     else:
                         YukiGUI.label_video_data.setText("")
                         YukiGUI.label_avsync.setText("")
-                    ic2 += 0.1
-                    if ic2 > 9.9:
-                        ic2 = 0
-                        if not epg_updating:
-                            if not is_program_actual(programmes, epg_ready):
+                    YukiData.ic2 += 0.1
+                    if YukiData.ic2 > 9.9:
+                        YukiData.ic2 = 0
+                        if not YukiData.epg_updating:
+                            if not is_program_actual(
+                                YukiData.programmes, YukiData.epg_ready
+                            ):
                                 force_update_epg()
             except Exception:
                 pass
 
         @idle_function
         def thread_tvguide_update_pt2_1(unused=None):
-            global time_stop
-            state.setStaticYuki(False)
-            state.show()
-            state.setTextYuki(_("TV guide update done!"))
-            time_stop = time.time() + 3
+            YukiData.state.setStaticYuki(False)
+            YukiData.state.show()
+            YukiData.state.setTextYuki(_("TV guide update done!"))
+            YukiData.time_stop = time.time() + 3
 
-        thread_tvguide_update_pt2_e2 = ""
+        YukiData.thread_tvguide_update_pt2_e2 = ""
 
         @idle_function
         def thread_tvguide_update_pt2_3(unused=None):
-            global time_stop
-            state.setStaticYuki(False)
-            state.show()
-            if "Programme not actual" in str(thread_tvguide_update_pt2_e2):
-                state.setTextYuki(_("EPG is outdated!"))
+            YukiData.state.setStaticYuki(False)
+            YukiData.state.show()
+            if "Programme not actual" in str(YukiData.thread_tvguide_update_pt2_e2):
+                YukiData.state.setTextYuki(_("EPG is outdated!"))
             else:
-                state.setTextYuki(_("TV guide update error!"))
-            time_stop = time.time() + 3
+                YukiData.state.setTextYuki(_("TV guide update error!"))
+            YukiData.time_stop = time.time() + 3
 
         @async_gui_blocking_function
         def thread_tvguide_update_pt2_2(unused=None):
@@ -6825,61 +6957,62 @@ if __name__ == "__main__":
 
         @async_gui_blocking_function
         def thread_tvguide_update_pt2():
-            global stopped, time_stop, first_boot, programmes
-            global static_text, tvguide_sets, epg_updating, ic
-            global waiting_for_epg, epg_failed, prog_ids
-            global epg_icons, thread_tvguide_update_pt2_e2
-            while not stopped:
-                if waiting_for_epg and epg_data and len(epg_data) == 7:
+            while not YukiData.stopped:
+                if (
+                    YukiData.waiting_for_epg
+                    and YukiData.epg_data
+                    and len(YukiData.epg_data) == 7
+                ):
                     try:
-                        if not epg_data[3]:
-                            thread_tvguide_update_pt2_e2 = epg_data[4]
+                        if not YukiData.epg_data[3]:
+                            YukiData.thread_tvguide_update_pt2_e2 = YukiData.epg_data[4]
                             thread_tvguide_update_pt2_2()
-                            raise epg_data[4]
-                        programmes = {
-                            prog0.lower(): epg_data[1][prog0] for prog0 in epg_data[1]
+                            raise YukiData.epg_data[4]
+                        YukiData.programmes = {
+                            prog0.lower(): YukiData.epg_data[1][prog0]
+                            for prog0 in YukiData.epg_data[1]
                         }
-                        if not is_program_actual(programmes, epg_ready):
+                        if not is_program_actual(
+                            YukiData.programmes, YukiData.epg_ready
+                        ):
                             raise Exception("Programme not actual")
                         thread_tvguide_update_pt2_1()
-                        prog_ids = epg_data[5]
-                        epg_icons = epg_data[6]
-                        tvguide_sets = programmes
+                        YukiData.prog_ids = YukiData.epg_data[5]
+                        YukiData.epg_icons = YukiData.epg_data[6]
+                        YukiData.tvguide_sets = YukiData.programmes
                         save_tvguide_sets()
                         btn_update_click()  # start update in main thread
                     except Exception as e2:
-                        epg_failed = True
+                        YukiData.epg_failed = True
                         logger.warning(
                             "[TV guide, part 2] Caught exception: " + str(e2)
                         )
                         logger.warning(traceback.format_exc())
-                        thread_tvguide_update_pt2_e2 = e2
+                        YukiData.thread_tvguide_update_pt2_e2 = e2
                         thread_tvguide_update_pt2_2()
-                    epg_updating = False
-                    waiting_for_epg = False
+                    YukiData.epg_updating = False
+                    YukiData.waiting_for_epg = False
                 time.sleep(1)
 
-        thread_5_lock = False
+        YukiData.thread_tvguide_progress_lock = False
 
         def timer_tvguide_progress():
             try:
-                global thread_5_lock, waiting_for_epg
-                global multiprocessing_manager_dict, static_text
-                if not thread_5_lock:
-                    thread_5_lock = True
+                if not YukiData.thread_tvguide_progress_lock:
+                    YukiData.thread_tvguide_progress_lock = True
                     try:
-                        if waiting_for_epg:
+                        if YukiData.waiting_for_epg:
                             if (
-                                "epg_progress" in multiprocessing_manager_dict
-                                and multiprocessing_manager_dict["epg_progress"]
+                                "epg_progress" in YukiData.mp_manager_dict
+                                and YukiData.mp_manager_dict["epg_progress"]
                             ):
-                                static_text = multiprocessing_manager_dict[
+                                YukiData.static_text = YukiData.mp_manager_dict[
                                     "epg_progress"
                                 ]
-                                state.setTextYuki(is_previous=True)
+                                YukiData.state.setTextYuki(is_previous=True)
                     except Exception:
                         pass
-                    thread_5_lock = False
+                    YukiData.thread_tvguide_progress_lock = False
             except Exception:
                 pass
 
@@ -6892,11 +7025,10 @@ if __name__ == "__main__":
         def timer_osc():
             try:
                 if win.isVisible():
-                    global playing_url, force_turnoff_osc
-                    if playing_url:
-                        if not settings["hidempv"]:
+                    if YukiData.playing_url:
+                        if not YukiData.settings["hidempv"]:
                             try:
-                                if not force_turnoff_osc:
+                                if not YukiData.force_turnoff_osc:
                                     set_mpv_osc(True)
                                 else:
                                     set_mpv_osc(False)
@@ -6910,37 +7042,36 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
-        dockWidget_playlistVisible = False
-        dockWidget_controlPanelVisible = False
-        rewindWidgetVisible = False
+        YukiData.dockWidget_playlistVisible = False
+        YukiData.dockWidget_controlPanelVisible = False
+        YukiData.rewindWidgetVisible = False
 
         dockWidget_playlist.installEventFilter(win)
 
-        prev_cursor = QtGui.QCursor.pos()
-        last_cursor_moved = 0
-        last_cursor_time = 0
+        YukiData.prev_cursor = QtGui.QCursor.pos()
+        YukiData.last_cursor_moved = 0
+        YukiData.last_cursor_time = 0
 
         def timer_cursor():
-            global fullscreen, prev_cursor, last_cursor_moved, last_cursor_time
             show_cursor = False
             cursor_offset = (
                 QtGui.QCursor.pos().x()
-                - prev_cursor.x()
+                - YukiData.prev_cursor.x()
                 + QtGui.QCursor.pos().y()
-                - prev_cursor.y()
+                - YukiData.prev_cursor.y()
             )
             if cursor_offset < 0:
                 cursor_offset = cursor_offset * -1
             if cursor_offset > 5:
-                prev_cursor = QtGui.QCursor.pos()
-                if (time.time() - last_cursor_moved) > 0.3:
-                    last_cursor_moved = time.time()
-                    last_cursor_time = time.time() + 1
+                YukiData.prev_cursor = QtGui.QCursor.pos()
+                if (time.time() - YukiData.last_cursor_moved) > 0.3:
+                    YukiData.last_cursor_moved = time.time()
+                    YukiData.last_cursor_time = time.time() + 1
                     show_cursor = True
             show_cursor_really = True
             if not show_cursor:
-                show_cursor_really = time.time() < last_cursor_time
-            if fullscreen:
+                show_cursor_really = time.time() < YukiData.last_cursor_time
+            if YukiData.fullscreen:
                 try:
                     if show_cursor_really:
                         win.container.unsetCursor()
@@ -6958,7 +7089,7 @@ if __name__ == "__main__":
             return win.mapToGlobal(QtCore.QPoint(x6, y6))
 
         def show_playlist_fullscreen():
-            if settings["panelposition"] in (0, 2):
+            if YukiData.settings["panelposition"] in (0, 2):
                 YukiGUI.playlist_widget.move(
                     maptoglobal(win.width() - DOCKWIDGET_PLAYLIST_WIDTH, 0)
                 )
@@ -6983,7 +7114,7 @@ if __name__ == "__main__":
             dockWidget_playlist.setWidget(YukiGUI.widget)
             YukiGUI.playlist_widget.hide()
 
-        VOLUME_SLIDER_WIDTH = False
+        YukiData.VOLUME_SLIDER_WIDTH = False
 
         def resizeandmove_controlpanel():
             lb2_width = 0
@@ -7012,10 +7143,9 @@ if __name__ == "__main__":
             )
 
         def show_controlpanel_fullscreen():
-            global VOLUME_SLIDER_WIDTH
-            if not VOLUME_SLIDER_WIDTH:
-                VOLUME_SLIDER_WIDTH = YukiGUI.volume_slider.width()
-            YukiGUI.volume_slider.setFixedWidth(VOLUME_SLIDER_WIDTH)
+            if not YukiData.VOLUME_SLIDER_WIDTH:
+                YukiData.VOLUME_SLIDER_WIDTH = YukiGUI.volume_slider.width()
+            YukiGUI.volume_slider.setFixedWidth(YukiData.VOLUME_SLIDER_WIDTH)
             YukiGUI.controlpanel_widget.setWindowOpacity(0.55)
             if YukiGUI.channelfilter.usePopup:
                 YukiGUI.controlpanel_widget.setWindowFlags(
@@ -7036,8 +7166,8 @@ if __name__ == "__main__":
             resizeandmove_controlpanel()
 
         def hide_controlpanel_fullscreen():
-            if VOLUME_SLIDER_WIDTH:
-                YukiGUI.volume_slider.setFixedWidth(VOLUME_SLIDER_WIDTH)
+            if YukiData.VOLUME_SLIDER_WIDTH:
+                YukiGUI.volume_slider.setFixedWidth(YukiData.VOLUME_SLIDER_WIDTH)
             YukiGUI.cp_layout.removeWidget(YukiGUI.controlpanel_dock_widget)
             dockWidget_controlPanel.setWidget(YukiGUI.controlpanel_dock_widget)
             YukiGUI.controlpanel_widget.hide()
@@ -7058,59 +7188,15 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
-        win_has_focus = False
-
-        def is_win_has_focus():
-            return (
-                win.isActiveWindow()
-                or YukiGUI.help_win.isActiveWindow()
-                or YukiGUI.streaminfo_win.isActiveWindow()
-                or YukiGUI.license_win.isActiveWindow()
-                or YukiGUI.sort_win.isActiveWindow()
-                or YukiGUI.chan_win.isActiveWindow()
-                or YukiGUI.ext_win.isActiveWindow()
-                or YukiGUI.scheduler_win.isActiveWindow()
-                or YukiGUI.xtream_win.isActiveWindow()
-                or YukiGUI.playlists_win.isActiveWindow()
-                or YukiGUI.playlists_win_edit.isActiveWindow()
-                or YukiGUI.epg_select_win.isActiveWindow()
-                or YukiGUI.tvguide_many_win.isActiveWindow()
-                or playlist_editor.isActiveWindow()
-                or YukiGUI.settings_win.isActiveWindow()
-                or YukiGUI.shortcuts_win.isActiveWindow()
-                or YukiGUI.shortcuts_win_2.isActiveWindow()
-            )
-
-        def is_other_wins_has_focus():
-            return (
-                YukiGUI.help_win.isActiveWindow()
-                or YukiGUI.streaminfo_win.isActiveWindow()
-                or YukiGUI.license_win.isActiveWindow()
-                or YukiGUI.sort_win.isActiveWindow()
-                or YukiGUI.chan_win.isActiveWindow()
-                or YukiGUI.ext_win.isActiveWindow()
-                or YukiGUI.scheduler_win.isActiveWindow()
-                or YukiGUI.xtream_win.isActiveWindow()
-                or YukiGUI.playlists_win.isActiveWindow()
-                or YukiGUI.playlists_win_edit.isActiveWindow()
-                or YukiGUI.epg_select_win.isActiveWindow()
-                or YukiGUI.tvguide_many_win.isActiveWindow()
-                or playlist_editor.isActiveWindow()
-                or YukiGUI.settings_win.isActiveWindow()
-                or YukiGUI.shortcuts_win.isActiveWindow()
-                or YukiGUI.shortcuts_win_2.isActiveWindow()
-            )
-
-        menubar_state = False
+        YukiData.menubar_state = False
 
         def timer_shortcuts():
-            global fullscreen, menubar_state, win_has_focus
             try:
-                if not fullscreen:
+                if not YukiData.fullscreen:
                     menubar_new_st = win.menuBar().isVisible()
-                    if menubar_new_st != menubar_state:
-                        menubar_state = menubar_new_st
-                        if menubar_state:
+                    if menubar_new_st != YukiData.menubar_state:
+                        YukiData.menubar_state = menubar_new_st
+                        if YukiData.menubar_state:
                             setShortcutState(False)
                         else:
                             setShortcutState(True)
@@ -7120,18 +7206,16 @@ if __name__ == "__main__":
         def timer_mouse():
             try:
                 if win.isVisible():
-                    global fullscreen, dockWidget_playlistVisible
-                    global dockWidget_controlPanelVisible, rewindWidgetVisible
                     if (
-                        state.isVisible()
-                        and state.text().startswith(_("Volume"))
+                        YukiData.state.isVisible()
+                        and YukiData.state.text().startswith(_("Volume"))
                         and not is_show_volume()
                     ):
-                        state.hide()
-                    YukiGUI.label_volume.setText(f"{int(player.volume)}%")
-                    if settings["panelposition"] != 2:
+                        YukiData.state.hide()
+                    YukiGUI.label_volume.setText(f"{int(YukiData.player.volume)}%")
+                    if YukiData.settings["panelposition"] != 2:
                         dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
-                    if fullscreen:
+                    if YukiData.fullscreen:
                         # Check cursor inside window
                         cur_pos = QtGui.QCursor.pos()
                         is_inside_window = (
@@ -7142,12 +7226,12 @@ if __name__ == "__main__":
                             and cur_pos.y() < (win.pos().y() + win.height())
                         )
                         # Playlist
-                        if settings["showplaylistmouse"]:
+                        if YukiData.settings["showplaylistmouse"]:
                             cursor_x = win.container.mapFromGlobal(
                                 QtGui.QCursor.pos()
                             ).x()
                             win_width = win.width()
-                            if settings["panelposition"] in (0, 2):
+                            if YukiData.settings["panelposition"] in (0, 2):
                                 is_cursor_x = cursor_x > win_width - (
                                     DOCKWIDGET_PLAYLIST_WIDTH + 10
                                 )
@@ -7160,14 +7244,14 @@ if __name__ == "__main__":
                                 and cursor_x < win_width
                                 and is_inside_window
                             ):
-                                if not dockWidget_playlistVisible:
-                                    dockWidget_playlistVisible = True
+                                if not YukiData.dockWidget_playlistVisible:
+                                    YukiData.dockWidget_playlistVisible = True
                                     show_playlist_fullscreen()
                             else:
-                                dockWidget_playlistVisible = False
+                                YukiData.dockWidget_playlistVisible = False
                                 hide_playlist_fullscreen()
                         # Control panel
-                        if settings["showcontrolsmouse"]:
+                        if YukiData.settings["showcontrolsmouse"]:
                             cursor_y = win.container.mapFromGlobal(
                                 QtGui.QCursor.pos()
                             ).y()
@@ -7180,13 +7264,13 @@ if __name__ == "__main__":
                                 and cursor_y < win_height
                                 and is_inside_window
                             ):
-                                if not dockWidget_controlPanelVisible:
-                                    dockWidget_controlPanelVisible = True
+                                if not YukiData.dockWidget_controlPanelVisible:
+                                    YukiData.dockWidget_controlPanelVisible = True
                                     show_controlpanel_fullscreen()
                             else:
-                                dockWidget_controlPanelVisible = False
+                                YukiData.dockWidget_controlPanelVisible = False
                                 hide_controlpanel_fullscreen()
-                    if settings["rewindenable"]:
+                    if YukiData.settings["rewindenable"]:
                         # Check cursor inside window
                         cur_pos = QtGui.QCursor.pos()
                         is_inside_window = (
@@ -7206,18 +7290,18 @@ if __name__ == "__main__":
                             is_cursor_y
                             and cursor_y < win_height
                             and is_inside_window
-                            and playing_channel
-                            and playing_channel in array
+                            and YukiData.playing_channel
+                            and YukiData.playing_channel in YukiData.array
                             and YukiData.current_prog1
                             and not YukiData.check_playlist_visible
                             and not YukiData.check_controlpanel_visible
                         ):
-                            if not rewindWidgetVisible:
-                                rewindWidgetVisible = True
+                            if not YukiData.rewindWidgetVisible:
+                                YukiData.rewindWidgetVisible = True
                                 win.resize_rewind()
                                 YukiGUI.rewind.show()
                         else:
-                            rewindWidgetVisible = False
+                            YukiData.rewindWidgetVisible = False
                             if YukiGUI.rewind.isVisible():
                                 if YukiData.rewind_value:
                                     if (
@@ -7231,8 +7315,7 @@ if __name__ == "__main__":
 
         @idle_function
         def show_hide_playlist(unused=None):
-            global fullscreen
-            if not fullscreen:
+            if not YukiData.fullscreen:
                 if dockWidget_playlist.isVisible():
                     YukiData.playlist_hidden = True
                     dockWidget_playlist.hide()
@@ -7284,42 +7367,40 @@ if __name__ == "__main__":
         def set_playback_speed(spd):
             try:
                 logger.info(f"Set speed to {spd}")
-                player.speed = spd
+                YukiData.player.speed = spd
                 try:
-                    event_handler.on_metadata()
+                    YukiData.event_handler.on_metadata()
                 except Exception:
                     pass
             except Exception:
                 logger.warning("set_playback_speed failed")
 
         def mpv_seek(secs):
-            global playing_channel
             try:
-                if playing_channel:
+                if YukiData.playing_channel:
                     logger.info(f"Seeking to {secs} seconds")
-                    player.command("seek", secs)
+                    YukiData.player.command("seek", secs)
             except Exception:
                 logger.warning("mpv_seek failed")
 
         def change_aot_mode():
-            global aot_action, fullscreen
-            if not fullscreen:
-                if aot_action.isChecked():
+            if not YukiData.fullscreen:
+                if YukiData.aot_action.isChecked():
                     logger.info("change_aot_mode to False")
-                    aot_action.setChecked(False)
+                    YukiData.aot_action.setChecked(False)
                     disable_always_on_top()
                 else:
                     logger.info("change_aot_mode to True")
-                    aot_action.setChecked(True)
+                    YukiData.aot_action.setChecked(True)
                     enable_always_on_top()
 
         def mpv_frame_step():
             logger.info("frame-step")
-            player.command("frame-step")
+            YukiData.player.command("frame-step")
 
         def mpv_frame_back_step():
             logger.info("frame-back-step")
-            player.command("frame-back-step")
+            YukiData.player.command("frame-back-step")
 
         funcs = {
             "show_sort": show_sort,
@@ -7438,17 +7519,17 @@ if __name__ == "__main__":
                     hotkeys_tmp = json.loads(hotkeys_file_tmp.read())[
                         "current_profile"
                     ]["keys"]
-                    main_keybinds = hotkeys_tmp
+                    YukiData.main_keybinds = hotkeys_tmp
                     logger.info("hotkeys.json found, using it as hotkey settings")
             except Exception:
                 logger.warning("failed to read hotkeys.json, using default shortcuts")
-                main_keybinds = main_keybinds_default.copy()
+                YukiData.main_keybinds = main_keybinds_default.copy()
         else:
             logger.info("No hotkeys.json found, using default hotkeys")
-            main_keybinds = main_keybinds_default.copy()
+            YukiData.main_keybinds = main_keybinds_default.copy()
 
-        if "show_clock" in main_keybinds:
-            main_keybinds.pop("show_clock")
+        if "show_clock" in YukiData.main_keybinds:
+            YukiData.main_keybinds.pop("show_clock")
 
         seq = get_seq()
 
@@ -7467,7 +7548,7 @@ if __name__ == "__main__":
                         shortcut_2.setKey(sc_new_keybind)
             reload_menubar_shortcuts()
 
-        all_keybinds = main_keybinds.copy()
+        all_keybinds = YukiData.main_keybinds.copy()
         all_keybinds.update(main_keybinds_internal)
         for kbd in all_keybinds:
             shortcuts[kbd] = [
@@ -7499,7 +7580,7 @@ if __name__ == "__main__":
         if volume_option is not None:
             vol_remembered = int(volume_option)
             YukiData.volume = vol_remembered
-        firstVolRun = False
+        YukiData.firstVolRun = False
 
         def restore_compact_state():
             try:
@@ -7515,18 +7596,18 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
-        if settings["m3u"] and m3u_exists:
+        if YukiData.settings["m3u"] and m3u_exists:
             win.show()
-            aot_action = init_mpv_player()
+            YukiData.aot_action = init_mpv_player()
             win.raise_()
             win.setFocus(QtCore.Qt.FocusReason.PopupFocusReason)
             win.activateWindow()
             try:
                 combobox_index1 = read_option("comboboxindex")
                 if combobox_index1:
-                    if combobox_index1["m3u"] == settings["m3u"]:
-                        if combobox_index1["index"] < combobox.count():
-                            combobox.setCurrentIndex(combobox_index1["index"])
+                    if combobox_index1["m3u"] == YukiData.settings["m3u"]:
+                        if combobox_index1["index"] < YukiData.combobox.count():
+                            YukiData.combobox.setCurrentIndex(combobox_index1["index"])
             except Exception:
                 pass
 
@@ -7543,11 +7624,11 @@ if __name__ == "__main__":
                     win.move(qr.topLeft())
                 if enable_libmpv_render_context:
                     logger.info("Render context enabled, switching vo to libmpv")
-                    player["vo"] = "libmpv"
+                    YukiData.player["vo"] = "libmpv"
                 if not playLastChannel():
                     logger.info("Show splash")
                     mpv_override_play(str(Path("yuki_iptv", ICONS_FOLDER, "main.png")))
-                    player.pause = True
+                    YukiData.player.pause = True
                 else:
                     logger.info("Playing last channel, splash turned off")
                 restore_compact_state()
@@ -7558,7 +7639,7 @@ if __name__ == "__main__":
             else:
                 after_mpv_init()
 
-            ic, ic1, ic2, ic3 = 0, 0, 0, 0
+            YukiData.ic, YukiData.ic1, YukiData.ic2, YukiData.ic3 = 0, 0, 0, 0
             timers_array = {}
             timers = {
                 timer_shortcuts: 25,
@@ -7596,7 +7677,7 @@ if __name__ == "__main__":
             moveWindowToCenter(YukiGUI.playlists_win)
 
         app_exit_code = _exec(app)
-        if do_save_settings:
+        if YukiData.do_save_settings:
             start_args = sys.argv
             if "python" not in sys.executable:
                 start_args.pop(0)
