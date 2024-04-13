@@ -91,7 +91,7 @@ from yuki_iptv.playlist import load_playlist
 from yuki_iptv.channel_logos import channel_logos_worker
 from yuki_iptv.settings import parse_settings
 from yuki_iptv.qt6compat import _exec
-from yuki_iptv.m3u_editor import M3UEditor
+from yuki_iptv.playlist_editor import PlaylistEditor
 from yuki_iptv.options import read_option, write_option
 from yuki_iptv.keybinds import main_keybinds_internal, main_keybinds_default
 from yuki_iptv.xdg import LOCAL_DIR, SAVE_FOLDER_DEFAULT
@@ -667,17 +667,17 @@ if __name__ == "__main__":
         channels = {}
         programmes = {}
 
-        m3u_editor = M3UEditor(
+        playlist_editor = PlaylistEditor(
             _=_, icon=YukiGUI.main_icon, icons_folder=ICONS_FOLDER, settings=settings
         )
 
-        def show_m3u_editor():
-            if m3u_editor.isVisible():
-                m3u_editor.hide()
+        def show_playlist_editor():
+            if playlist_editor.isVisible():
+                playlist_editor.hide()
             else:
-                moveWindowToCenter(m3u_editor)
-                m3u_editor.show()
-                moveWindowToCenter(m3u_editor)
+                moveWindowToCenter(playlist_editor)
+                playlist_editor.show()
+                moveWindowToCenter(playlist_editor)
 
         save_folder = settings["save_folder"]
 
@@ -2713,7 +2713,7 @@ if __name__ == "__main__":
                 ),
                 my_up_binding_execute,
                 my_down_binding_execute,
-                show_m3u_editor,
+                show_playlist_editor,
                 show_playlists,
                 show_exception,
                 get_curwindow_pos,
@@ -7014,7 +7014,7 @@ if __name__ == "__main__":
                 or YukiGUI.playlists_win_edit.isActiveWindow()
                 or YukiGUI.epg_select_win.isActiveWindow()
                 or YukiGUI.tvguide_many_win.isActiveWindow()
-                or m3u_editor.isActiveWindow()
+                or playlist_editor.isActiveWindow()
                 or YukiGUI.settings_win.isActiveWindow()
                 or YukiGUI.shortcuts_win.isActiveWindow()
                 or YukiGUI.shortcuts_win_2.isActiveWindow()
@@ -7033,7 +7033,7 @@ if __name__ == "__main__":
                 or YukiGUI.playlists_win_edit.isActiveWindow()
                 or YukiGUI.epg_select_win.isActiveWindow()
                 or YukiGUI.tvguide_many_win.isActiveWindow()
-                or m3u_editor.isActiveWindow()
+                or playlist_editor.isActiveWindow()
                 or YukiGUI.settings_win.isActiveWindow()
                 or YukiGUI.shortcuts_win.isActiveWindow()
                 or YukiGUI.shortcuts_win_2.isActiveWindow()
@@ -7286,7 +7286,7 @@ if __name__ == "__main__":
             "reload_playlist": reload_playlist,
             "force_update_epg": force_update_epg_act,
             "main_channel_settings": main_channel_settings,
-            "show_m3u_editor": show_m3u_editor,
+            "show_m3u_editor": show_playlist_editor,
             "my_down_binding_execute": my_down_binding_execute,
             "my_up_binding_execute": my_up_binding_execute,
             "(lambda: mpv_seek(-10))": (lambda: mpv_seek(-10)),

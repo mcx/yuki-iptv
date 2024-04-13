@@ -41,7 +41,7 @@ except Exception:
     pass
 
 
-class M3UEditor(QtWidgets.QMainWindow):
+class PlaylistEditor(QtWidgets.QMainWindow):
     def clear_table(self):
         self.statusBar().clearMessage()
         self.table.clear()
