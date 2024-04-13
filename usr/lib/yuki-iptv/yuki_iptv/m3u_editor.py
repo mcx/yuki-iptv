@@ -92,7 +92,7 @@ class M3UEditor(QtWidgets.QMainWindow):
         self.ask_changed(False)
         filename = QtWidgets.QFileDialog.getOpenFileName(
             self,
-            _("Select m3u playlist"),
+            _("Select playlist"),
             HOME_FOLDER,
             "All Files (*);;M3U (*.m3u *.m3u8);;XSPF (*.xspf)",
         )[0]
@@ -156,7 +156,7 @@ class M3UEditor(QtWidgets.QMainWindow):
             m3u_str += f'{output["url"]}\n'
         # Writing to file
         save_fname = QtWidgets.QFileDialog.getSaveFileName(
-            self, _("Save File"), HOME_FOLDER, _("Playlists (*.m3u)")
+            self, _("Save File"), HOME_FOLDER, _("Playlists (*.m3u *.m3u8)")
         )[0]
         if save_fname:
             try:
@@ -173,16 +173,16 @@ class M3UEditor(QtWidgets.QMainWindow):
 
     def populate_menubar(self):
         # Menubar
-        open_action = qaction(_("Load M3U"), self)
+        open_action = qaction(_("&Open file"), self)
         open_action.setShortcut("Ctrl+O")
         open_action.triggered.connect(self.select_file)
 
-        save_action = qaction(_("Save as"), self)
+        save_action = qaction(_("&Save as"), self)
         save_action.setShortcut("Ctrl+Shift+S")
         save_action.triggered.connect(self.save_file)
 
         menubar = self.menuBar()
-        file_menu = menubar.addMenu(_("File"))
+        file_menu = menubar.addMenu(_("&File"))
         file_menu.addAction(open_action)
         file_menu.addAction(save_action)
 
@@ -379,7 +379,7 @@ class M3UEditor(QtWidgets.QMainWindow):
             "url",
         ]
 
-        self.setWindowTitle(_("m3u Editor"))
+        self.setWindowTitle(_("Playlist editor"))
         self.setWindowIcon(icon)
         self.setGeometry(0, 0, 1200, 600)
         self.populate_menubar()

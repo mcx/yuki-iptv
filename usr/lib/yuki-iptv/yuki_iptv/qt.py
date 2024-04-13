@@ -23,8 +23,10 @@
 #
 import sys
 import gettext
+import logging
 
 _ = gettext.gettext
+logger = logging.getLogger("yuki-iptv exception")
 
 
 def get_qt_library():
@@ -54,15 +56,16 @@ def get_qt_library():
     return qt_library, QtWidgets, QtCore, QtGui, QShortcut, QtOpenGLWidgets
 
 
-def show_exception(e, e_traceback="", prev=""):
+def show_exception(error, title=""):
     qt_library, QtWidgets, QtCore, QtGui, QShortcut, QtOpenGLWidgets = get_qt_library()
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
     else:
         app = QtWidgets.QApplication.instance()  # noqa: F841
-    if e_traceback:
-        e = e_traceback.strip()
-    message = "{}{}\n\n{}".format(_("yuki-iptv error"), prev, str(e))
+    if title:
+        title = f"\n{title}"
+    message = "{}{}\n\n{}".format(_("yuki-iptv error") + ":", title, str(error))
+    logger.warning(message)
     try:
         qt_icon_critical = QtWidgets.QMessageBox.Icon.Critical
     except Exception:

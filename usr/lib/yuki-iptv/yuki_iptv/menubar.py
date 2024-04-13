@@ -99,12 +99,12 @@ def apply_vf_filter(vf_filter, e_l):
                 vf_filter.split("::::::::")[0], "remove", vf_filter.split("::::::::")[1]
             )
             YukiData.cur_vf_filters.remove(vf_filter)
-    except Exception as e_4:
+    except Exception:
+        exc = traceback.format_exc()
         logger.error("ERROR in vf-filter apply")
         logger.error("")
-        e4_traceback = traceback.format_exc()
-        logger.error(e4_traceback)
-        YukiData.show_exception(e_4, e4_traceback, "\n\n" + _("Error applying filters"))
+        logger.error(exc)
+        YukiData.show_exception(exc, _("Error applying filters"))
 
 
 def get_seq():
@@ -187,7 +187,7 @@ def init_menubar(data):
     doSetShortcut(YukiData.reloadPlaylist, kbd("reload_playlist"))
     YukiData.reloadPlaylist.triggered.connect(lambda: YukiData.reload_playlist())
 
-    YukiData.m3uEditor = qaction(_("&m3u Editor") + YukiData.str_offset, data)
+    YukiData.m3uEditor = qaction(_("P&laylist editor") + YukiData.str_offset, data)
     doSetShortcut(YukiData.m3uEditor, kbd("show_m3u_editor"))
     YukiData.m3uEditor.triggered.connect(lambda: YukiData.show_m3u_editor())
 
@@ -411,7 +411,7 @@ def init_menubar(data):
 
 
 def populate_menubar(
-    i, menubar, data, track_list=None, playing_chan=None, get_keybind=None
+    i, menubar, data, track_list=None, playing_channel=None, get_keybind=None
 ):
     logger.info("populate_menubar called")
     # File
@@ -545,11 +545,11 @@ def get_first_run():
     return YukiData.first_run
 
 
-def update_menubar(track_list, playing_chan, m3u, aot_file):
+def update_menubar(track_list, playing_channel, m3u, aot_file):
     # Filters enable / disable
-    if playing_chan:
+    if playing_channel:
         recursive_filter_setstate(True)
-        # print(playing_chan + '::::::::::::::' + m3u)
+        # print(playing_channel + '::::::::::::::' + m3u)
         if not YukiData.first_run:
             YukiData.first_run = True
             logger.info("YukiData.first_run")
@@ -587,7 +587,7 @@ def update_menubar(track_list, playing_chan, m3u, aot_file):
         YukiData.menubars[i][0].clear()
         YukiData.menubars[i][1].clear()
         YukiData.menubars[i][2].clear()
-        if track_list and playing_chan:
+        if track_list and playing_channel:
             if not [x for x in track_list if x["type"] == "video"]:
                 YukiData.menubars[i][0].addAction(YukiData.get_empty_action())
             if not [x for x in track_list if x["type"] == "audio"]:
