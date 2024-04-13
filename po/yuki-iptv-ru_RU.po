@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-13 20:50+0000\n"
-"PO-Revision-Date: 2024-04-13 18:27+0000\n"
+"PO-Revision-Date: 2024-04-13 21:04+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Russian <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
+"n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:580
@@ -572,7 +572,7 @@ msgstr "Настройки"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7423 usr/lib/yuki-iptv/yuki_iptv/gui.py:1234
 msgid "Channel sort"
-msgstr ""
+msgstr "Сортировка каналов"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7426
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:269
@@ -696,19 +696,19 @@ msgstr "Очистить кэш логотипов"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:532
 msgid "as in playlist"
-msgstr ""
+msgstr "как в плейлисте"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:533
 msgid "alphabetical order"
-msgstr ""
+msgstr "по алфавиту"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:534
 msgid "reverse alphabetical order"
-msgstr ""
+msgstr "по алфавиту в обратном порядке"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:535
 msgid "custom"
-msgstr ""
+msgstr "пользовательская"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:553
 msgid ""
@@ -979,6 +979,8 @@ msgid ""
 "Channel\n"
 "sort"
 msgstr ""
+"Сортировка\n"
+"каналов"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:774
 msgid "Cache"
@@ -1206,6 +1208,8 @@ msgid ""
 "Do not forget\n"
 "to set custom sort order in settings!"
 msgstr ""
+"Не забудьте указать\n"
+"пользовательскую сортировку в настройках!"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:107
 msgid "Error applying filters"
@@ -1269,7 +1273,7 @@ msgstr "&Нормализация громкости"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:373
 msgid "&Channel sort"
-msgstr ""
+msgstr "&Сортировка каналов"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:380
 msgid "&Settings"
