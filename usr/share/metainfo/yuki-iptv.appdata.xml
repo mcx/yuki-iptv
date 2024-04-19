@@ -26,7 +26,7 @@
        <li>Hide channels</li>
        <li>Video settings for each channel - contrast, brightness, hue, saturation, gamma</li>
        <li>Change user agent / HTTP Referer for each channel</li>
-       <li>M3u playlist editor</li>
+       <li>Playlist editor</li>
        <li>TV archive / catchup</li>
        <li>MPRIS support</li>
        <li>and many more...</li>
@@ -38,6 +38,7 @@
   <screenshots>
     <screenshot type="default">
       <image>https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd</image>
+      <caption>The main window showing the application in action</caption>
     </screenshot>
   </screenshots>
 
@@ -186,7 +187,7 @@
   <url type="homepage">https://codeberg.org/Ame-chan-angel/yuki-iptv</url>
   <url type="bugtracker">https://codeberg.org/Ame-chan-angel/yuki-iptv/issues</url>
   <url type="translate">https://translate.codeberg.org/engage/yuki-iptv/</url>
-  <developer_name>Ame-chan-angel</developer_name>
+  <developer_name>Ame-chan-angel and yuki-iptv contributors</developer_name>
   <translation type="gettext">yuki-iptv</translation>
   <content_rating type="oars-1.1"/>
 </component>

@@ -33,7 +33,7 @@ The channels and pictures in the screenshots are for demonstration purposes only
 - Hide channels
 - Video settings for each channel - contrast, brightness, hue, saturation, gamma
 - Change user agent / HTTP Referer for each channel
-- M3u playlist editor
+- Playlist editor
 - TV archive / catchup
 - MPRIS support
 - and many more...
