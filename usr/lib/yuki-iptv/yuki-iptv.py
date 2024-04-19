@@ -5771,7 +5771,7 @@ if __name__ == "__main__":
                     ):
                         logger.warning("Connection to stream lost, waiting 1 sec...")
                         do_reconnect1_async()
-                    else:
+                    elif not YukiData.is_loading:
                         mpv_stop()
 
         @idle_function

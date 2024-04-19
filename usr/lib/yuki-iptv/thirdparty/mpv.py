@@ -526,6 +526,7 @@ backend.mpv_create.restype = MpvHandle
 _mpv_create = backend.mpv_create
 
 _API_VER = _mpv_client_api_version()[0]
+_USE_NEW_LOADFILE = backend.mpv_client_api_version() >= 131075
 
 _handle_func('mpv_destroy' if _API_VER > 1 else 'mpv_detach_destroy', [], None, errcheck=None)
 _handle_func('mpv_create_client',           [c_char_p],                                 MpvHandle, notnull_errcheck)
@@ -1154,7 +1155,10 @@ class MPV(object):
 
     def loadfile(self, filename, mode='replace', **options):
         """Mapped mpv loadfile command, see man mpv(1)."""
-        self.command('loadfile', filename.encode(fs_enc), mode, MPV._encode_options(options))
+        if _USE_NEW_LOADFILE:
+            self.command('loadfile', filename.encode(fs_enc), mode, -1, MPV._encode_options(options))
+        else:
+            self.command('loadfile', filename.encode(fs_enc), mode, MPV._encode_options(options))
 
     def loadlist(self, playlist, mode='replace'):
         """Mapped mpv loadlist command, see man mpv(1)."""
