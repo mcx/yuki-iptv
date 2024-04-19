@@ -10,6 +10,7 @@ The channels and pictures in the screenshots are for demonstration purposes only
 ## Content
 
 - [Features](#features)
+- [deb packages](#deb-packages)
 - [Ubuntu PPA](#ubuntu-ppa)
 - [Open Build Service (rpm packages)](#open-build-service-rpm-packages)
 - [Unofficial builds](#unofficial-builds)
@@ -36,6 +37,10 @@ The channels and pictures in the screenshots are for demonstration purposes only
 - TV archive / catchup
 - MPRIS support
 - and many more...
+
+## deb packages
+
+https://codeberg.org/Ame-chan-angel/yuki-iptv/releases
 
 ## Ubuntu PPA
 
