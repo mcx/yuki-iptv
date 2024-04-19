@@ -1,3 +1,20 @@
+yuki-iptv (0.0.11) unstable; urgency=medium
+
+  * Translations update from Weblate
+  * libmpv 0.38.0 fixes
+  * Restore channel sorting
+  * More verbose exceptions
+  * Add "Floating panel position" - "Separate window" option
+  * Add option "Hide playlist by left mouse click"
+  * Fix "Bad paging"
+  * Fix "Jumpy label"
+  * Fix "No autoplay after Playing error"
+  * Fix "RuntimeError: wrapped C/C++ object of type QAction has been deleted"
+  * Fix "Wrong Qt version reported"
+  * Disable debug logging for MPRIS
+
+ -- Ame-chan-angel <amechanangel@proton.me>  Fri, 19 Apr 2024 19:51:06 +0000
+
 yuki-iptv (0.0.10) unstable; urgency=medium
 
   * Translations update from Weblate

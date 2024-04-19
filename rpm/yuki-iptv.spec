@@ -69,6 +69,19 @@ sed -i "s/__DEB_VERSION__/%{version}/g" usr/lib/yuki-iptv/yuki-iptv.py
 cp -af usr %{buildroot}
 
 %changelog
+* Fri Apr 19 2024 Ame-chan-angel <amechanangel@proton.me> - 0.0.11
+  - Translations update from Weblate
+  - libmpv 0.38.0 fixes
+  - Restore channel sorting
+  - More verbose exceptions
+  - Add "Floating panel position" - "Separate window" option
+  - Add option "Hide playlist by left mouse click"
+  - Fix "Bad paging"
+  - Fix "Jumpy label"
+  - Fix "No autoplay after Playing error"
+  - Fix "RuntimeError: wrapped C/C++ object of type QAction has been deleted"
+  - Fix "Wrong Qt version reported"
+  - Disable debug logging for MPRIS
 * Sun Mar 17 2024 Ame-chan-angel <amechanangel@proton.me> - 0.0.10
   - Translations update from Weblate
   - Show channel URL in stream information window

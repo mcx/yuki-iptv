@@ -42,6 +42,22 @@
   </screenshots>
 
   <releases>
+    <release version="0.0.11" date="2024-04-19">
+      <description>
+        <p>Translations update from Weblate</p>
+        <p>libmpv 0.38.0 fixes</p>
+        <p>Restore channel sorting</p>
+        <p>More verbose exceptions</p>
+        <p>Add "Floating panel position" - "Separate window" option</p>
+        <p>Add option "Hide playlist by left mouse click"</p>
+        <p>Fix "Bad paging"</p>
+        <p>Fix "Jumpy label"</p>
+        <p>Fix "No autoplay after Playing error"</p>
+        <p>Fix "RuntimeError: wrapped C/C++ object of type QAction has been deleted"</p>
+        <p>Fix "Wrong Qt version reported"</p>
+        <p>Disable debug logging for MPRIS</p>
+      </description>
+    </release>
     <release version="0.0.10" date="2024-03-17">
       <description>
         <p>Translations update from Weblate</p>
