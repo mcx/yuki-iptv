@@ -526,7 +526,7 @@ backend.mpv_create.restype = MpvHandle
 _mpv_create = backend.mpv_create
 
 _API_VER = _mpv_client_api_version()[0]
-_USE_NEW_LOADFILE = backend.mpv_client_api_version() >= 131075
+_USE_NEW_LOADFILE = _mpv_client_api_version() >= (2, 3)
 
 _handle_func('mpv_destroy' if _API_VER > 1 else 'mpv_detach_destroy', [], None, errcheck=None)
 _handle_func('mpv_create_client',           [c_char_p],                                 MpvHandle, notnull_errcheck)
