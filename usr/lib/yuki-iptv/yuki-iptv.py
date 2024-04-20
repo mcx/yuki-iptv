@@ -3919,6 +3919,8 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
+        custom_logos_enabled = os.path.isdir(Path(LOCAL_DIR, "logos"))
+
         all_channels_lang = _("All channels")
         favourites_lang = _("Favourites")
 
@@ -4084,6 +4086,37 @@ if __name__ == "__main__":
                         channel_logo1 = ""
                         if "tvg-logo" in YukiData.array[i]:
                             channel_logo1 = YukiData.array[i]["tvg-logo"]
+
+                        if (
+                            custom_logos_enabled
+                            and not channel_logo1
+                            and "channel-logo-file-checked" not in YukiData.array[i]
+                        ):
+                            YukiData.array[i]["channel-logo-file-checked"] = True
+                            try:
+                                if os.path.isfile(Path(LOCAL_DIR, "logos", f"{i}.png")):
+                                    channel_logo1 = str(
+                                        Path(LOCAL_DIR, "logos", f"{i}.png")
+                                    )
+                                    YukiData.array[i]["tvg-logo"] = channel_logo1
+                            except Exception:
+                                pass
+                            try:
+                                if os.path.isfile(Path(LOCAL_DIR, "logos", f"{i}.jpg")):
+                                    channel_logo1 = str(
+                                        Path(LOCAL_DIR, "logos", f"{i}.jpg")
+                                    )
+                                    YukiData.array[i]["tvg-logo"] = channel_logo1
+                            except Exception:
+                                pass
+                            try:
+                                if os.path.isfile(Path(LOCAL_DIR, "logos", f"{i}.svg")):
+                                    channel_logo1 = str(
+                                        Path(LOCAL_DIR, "logos", f"{i}.svg")
+                                    )
+                                    YukiData.array[i]["tvg-logo"] = channel_logo1
+                            except Exception:
+                                pass
 
                         epg_logo1 = ""
                         if prog_search in YukiData.epg_icons:
