@@ -4093,26 +4093,33 @@ if __name__ == "__main__":
                             and "channel-logo-file-checked" not in YukiData.array[i]
                         ):
                             YukiData.array[i]["channel-logo-file-checked"] = True
+                            name_escaped = i.replace("/", "_")
                             try:
-                                if os.path.isfile(Path(LOCAL_DIR, "logos", f"{i}.png")):
+                                if os.path.isfile(
+                                    Path(LOCAL_DIR, "logos", f"{name_escaped}.png")
+                                ):
                                     channel_logo1 = str(
-                                        Path(LOCAL_DIR, "logos", f"{i}.png")
+                                        Path(LOCAL_DIR, "logos", f"{name_escaped}.png")
                                     )
                                     YukiData.array[i]["tvg-logo"] = channel_logo1
                             except Exception:
                                 pass
                             try:
-                                if os.path.isfile(Path(LOCAL_DIR, "logos", f"{i}.jpg")):
+                                if os.path.isfile(
+                                    Path(LOCAL_DIR, "logos", f"{name_escaped}.jpg")
+                                ):
                                     channel_logo1 = str(
-                                        Path(LOCAL_DIR, "logos", f"{i}.jpg")
+                                        Path(LOCAL_DIR, "logos", f"{name_escaped}.jpg")
                                     )
                                     YukiData.array[i]["tvg-logo"] = channel_logo1
                             except Exception:
                                 pass
                             try:
-                                if os.path.isfile(Path(LOCAL_DIR, "logos", f"{i}.svg")):
+                                if os.path.isfile(
+                                    Path(LOCAL_DIR, "logos", f"{name_escaped}.svg")
+                                ):
                                     channel_logo1 = str(
-                                        Path(LOCAL_DIR, "logos", f"{i}.svg")
+                                        Path(LOCAL_DIR, "logos", f"{name_escaped}.svg")
                                     )
                                     YukiData.array[i]["tvg-logo"] = channel_logo1
                             except Exception:
