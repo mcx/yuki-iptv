@@ -554,7 +554,7 @@ class YukiGUIClass:
         )
         self.donot_flag = QtWidgets.QCheckBox()
 
-        self.openprevchan_label = QtWidgets.QLabel(
+        self.openprevchannel_label = QtWidgets.QLabel(
             "{}:".format(_("Open previous channel\nat startup"))
         )
         self.hidempv_label = QtWidgets.QLabel("{}:".format(_("Hide mpv panel")))
@@ -578,7 +578,7 @@ class YukiGUIClass:
         )
         self.volumechangestep_percent = QtWidgets.QLabel("%")
 
-        self.openprevchan_flag = QtWidgets.QCheckBox()
+        self.openprevchannel_flag = QtWidgets.QCheckBox()
 
         self.hidempv_flag = QtWidgets.QCheckBox()
 
@@ -810,8 +810,8 @@ class YukiGUIClass:
         self.tab_main.layout.addWidget(self.scrrecnosubfolders_flag, 1, 1)
         self.tab_main.layout.addWidget(self.sort_label, 2, 0)
         self.tab_main.layout.addWidget(self.sort_widget, 2, 1)
-        self.tab_main.layout.addWidget(self.openprevchan_label, 3, 0)
-        self.tab_main.layout.addWidget(self.openprevchan_flag, 3, 1)
+        self.tab_main.layout.addWidget(self.openprevchannel_label, 3, 0)
+        self.tab_main.layout.addWidget(self.openprevchannel_flag, 3, 1)
         self.tab_main.setLayout(self.tab_main.layout)
 
         self.tab_video.layout = QtWidgets.QGridLayout()
@@ -1234,10 +1234,10 @@ class YukiGUIClass:
         self.sort_win.setWindowTitle(_("Channel sort"))
         self.sort_win.setWindowIcon(self.main_icon)
 
-        self.chan_win = QtWidgets.QMainWindow()
-        self.chan_win.resize(400, 250)
-        self.chan_win.setWindowTitle(_("Video settings"))
-        self.chan_win.setWindowIcon(self.main_icon)
+        self.channels_win = QtWidgets.QMainWindow()
+        self.channels_win.resize(400, 250)
+        self.channels_win.setWindowTitle(_("Video settings"))
+        self.channels_win.setWindowIcon(self.main_icon)
 
         self.ext_win = QtWidgets.QMainWindow()
         self.ext_win.resize(300, 60)
@@ -1317,7 +1317,7 @@ class YukiGUIClass:
             "ua": self.useragent_choose_2.text(),
             "mpv_options": self.mpv_options.text(),
             "donotupdateepg": self.donot_flag.isChecked(),
-            "openprevchan": self.openprevchan_flag.isChecked(),
+            "openprevchannel": self.openprevchannel_flag.isChecked(),
             "hidempv": self.hidempv_flag.isChecked(),
             "hideepgpercentage": self.hideepgpercentage_flag.isChecked(),
             "hideepgfromplaylist": self.hideepgfromplaylist_flag.isChecked(),
@@ -1392,7 +1392,6 @@ class YukiGUIClass:
         playmode_selector,
         combobox,
         movies_combobox,
-        chan,
         loading,
     ):
         _ = self._
@@ -1499,7 +1498,7 @@ class YukiGUIClass:
         self.widget.layout().addWidget(win.seriesWidget)
         # Series end
         self.widget.layout().addWidget(self.widget4)
-        self.widget.layout().addWidget(chan)
+        self.widget.layout().addWidget(self.channel)
         self.widget.layout().addWidget(loading)
 
     def create3(self, win, centerwidget, ICONS_FOLDER):
@@ -1508,11 +1507,11 @@ class YukiGUIClass:
         QtWidgets = self.QtWidgets
         QtGui = self.QtGui
 
-        self.chan = QtWidgets.QLabel(_("No channel selected"))
-        self.chan.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.chan.setStyleSheet("color: green")
-        self.chan.setFont(self.font_11_bold)
-        self.chan.resize(200, 30)
+        self.channel = QtWidgets.QLabel(_("No channel selected"))
+        self.channel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.channel.setStyleSheet("color: green")
+        self.channel.setFont(self.font_11_bold)
+        self.channel.resize(200, 30)
 
         self.loading1 = QtWidgets.QLabel(win)
         self.loading_movie = QtGui.QMovie(

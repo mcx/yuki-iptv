@@ -44,7 +44,9 @@ except Exception:
     use_wand = False
 
 
-def fetch_remote_channel_icon(loglevel, chan_name, logo_url, req_data_ua, req_data_ref):
+def fetch_remote_channel_icon(
+    loglevel, channel_name, logo_url, req_data_ua, req_data_ref
+):
     icon_ret = None
     if not logo_url:
         return None

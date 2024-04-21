@@ -1115,7 +1115,7 @@ if __name__ == "__main__":
                 arr1 = getArrayItem(archive_json[0])
                 arr1 = format_catchup_array(arr1)
 
-                chan_url = getArrayItem(archive_json[0])["url"]
+                channel_url = getArrayItem(archive_json[0])["url"]
                 start_time = archive_json[1]
                 end_time = archive_json[2]
                 prog_index = archive_json[3]
@@ -1149,13 +1149,13 @@ if __name__ == "__main__":
                     arr2["catchup"] = "xc"
 
                 play_url = get_catchup_url(
-                    chan_url, arr2, start_time, end_time, catchup_id
+                    channel_url, arr2, start_time, end_time, catchup_id
                 )
 
                 itemClicked_event(
                     archive_json[0], play_url, True, is_rewind=(len(archive_json) == 5)
                 )
-                setChanText("({}) {}".format(_("Archive"), archive_json[0]), True)
+                setChannelText("({}) {}".format(_("Archive"), archive_json[0]), True)
                 YukiGUI.progress.hide()
                 YukiGUI.start_label.setText("")
                 YukiGUI.start_label.hide()
@@ -1511,7 +1511,7 @@ if __name__ == "__main__":
             )
 
         def addrecord_clicked():
-            selected_chan = YukiGUI.choosechannel_ch.currentText()
+            selected_channel = YukiGUI.choosechannel_ch.currentText()
             start_time_r = (
                 YukiGUI.starttime_w.dateTime().toPyDateTime().strftime("%d.%m.%y %H:%M")
             )
@@ -1519,7 +1519,7 @@ if __name__ == "__main__":
                 YukiGUI.endtime_w.dateTime().toPyDateTime().strftime("%d.%m.%y %H:%M")
             )
             YukiGUI.schedulers.addItem(
-                _("Channel") + ": " + selected_chan + "\n"
+                _("Channel") + ": " + selected_channel + "\n"
                 "{}: ".format(_("Start record time")) + start_time_r + "\n"
                 "{}: ".format(_("End record time")) + end_time_r + "\n"
             )
@@ -1872,10 +1872,12 @@ if __name__ == "__main__":
                 if not params or not isinstance(params, dict):
                     return
                 if "channels" in params:
-                    chans = params["channels"]
-                    if "5.1" in chans or "7.1" in chans:
-                        chans += " " + _("surround sound")
-                    stream_info.audio_properties[_("Layout")][_("Channels")] = chans
+                    layout_channels = params["channels"]
+                    if "5.1" in layout_channels or "7.1" in layout_channels:
+                        layout_channels += " " + _("surround sound")
+                    stream_info.audio_properties[_("Layout")][
+                        _("Channels")
+                    ] = layout_channels
                 if "samplerate" in params:
                     sr = float(params["samplerate"]) / 1000.0
                     stream_info.audio_properties[_("General")][_("Sample Rate")] = (
@@ -2082,10 +2084,10 @@ if __name__ == "__main__":
                 va1 = YukiData.player.video_aspect
             return va1
 
-        def doPlay(play_url1, ua_ch=def_user_agent, chan_name_0=""):
-            comm_instance.do_play_args = (play_url1, ua_ch, chan_name_0)
+        def doPlay(play_url1, ua_ch=def_user_agent, channel_name_0=""):
+            comm_instance.do_play_args = (play_url1, ua_ch, channel_name_0)
             logger.info("")
-            logger.info(f"Playing '{chan_name_0}' ('{format_url_clean(play_url1)}')")
+            logger.info(f"Playing '{channel_name_0}' ('{format_url_clean(play_url1)}')")
             # Loading
             loading.setText(_("Loading..."))
             loading.setStyleSheet("color: #778a30")
@@ -2118,17 +2120,17 @@ if __name__ == "__main__":
                 pass
             YukiData.player.loop = False
             # Playing
-            mpv_override_play(play_url1, chan_name_0)
+            mpv_override_play(play_url1, channel_name_0)
             # Set channel (video) settings
-            setPlayerSettings(chan_name_0)
+            setPlayerSettings(channel_name_0)
             # Monitor playback (for stream information)
             monitor_playback()
 
-        def chan_set_save():
-            chan_3 = YukiGUI.title.text()
+        def channel_settings_save():
+            channel_3 = YukiGUI.title.text()
             if YukiData.settings["m3u"] not in YukiData.channel_sets:
                 YukiData.channel_sets[YukiData.settings["m3u"]] = {}
-            YukiData.channel_sets[YukiData.settings["m3u"]][chan_3] = {
+            YukiData.channel_sets[YukiData.settings["m3u"]][channel_3] = {
                 "deinterlace": YukiGUI.deinterlace_chk.isChecked(),
                 "ua": YukiGUI.useragent_choose.text(),
                 "ref": YukiGUI.referer_choose_custom.text(),
@@ -2149,7 +2151,7 @@ if __name__ == "__main__":
                 ),
             }
             save_channel_sets()
-            if YukiData.playing_channel == chan_3:
+            if YukiData.playing_channel == channel_3:
                 YukiData.player.deinterlace = YukiGUI.deinterlace_chk.isChecked()
                 YukiData.player.contrast = YukiGUI.contrast_choose.value()
                 YukiData.player.brightness = YukiGUI.brightness_choose.value()
@@ -2168,11 +2170,11 @@ if __name__ == "__main__":
                     ]
                 )
             btn_update_click()
-            YukiGUI.chan_win.close()
+            YukiGUI.channels_win.close()
 
-        YukiGUI.save_btn.clicked.connect(chan_set_save)
+        YukiGUI.save_btn.clicked.connect(channel_settings_save)
 
-        YukiGUI.chan_win.setCentralWidget(YukiGUI.wid)
+        YukiGUI.channels_win.setCentralWidget(YukiGUI.wid)
 
         YukiData.do_save_settings = False
 
@@ -2264,7 +2266,7 @@ if __name__ == "__main__":
         YukiGUI.useragent_choose_2.setText(YukiData.settings["ua"])
         YukiGUI.mpv_options.setText(YukiData.settings["mpv_options"])
         YukiGUI.donot_flag.setChecked(YukiData.settings["donotupdateepg"])
-        YukiGUI.openprevchan_flag.setChecked(YukiData.settings["openprevchan"])
+        YukiGUI.openprevchannel_flag.setChecked(YukiData.settings["openprevchannel"])
         YukiGUI.hidempv_flag.setChecked(YukiData.settings["hidempv"])
         YukiGUI.hideepgpercentage_flag.setChecked(
             YukiData.settings["hideepgpercentage"]
@@ -3252,15 +3254,15 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
-        def setChanText(chanText, do_chan_set=False):
-            chTextStrip = chanText.strip()
+        def setChannelText(channelText, do_channel_set=False):
+            chTextStrip = channelText.strip()
             if chTextStrip:
                 win.setWindowTitle(chTextStrip + " - " + MAIN_WINDOW_TITLE)
             else:
                 win.setWindowTitle(MAIN_WINDOW_TITLE)
             set_mpv_title()
-            if not do_chan_set:
-                YukiGUI.chan.setText(chanText)
+            if not do_channel_set:
+                YukiGUI.channel.setText(channelText)
             if YukiData.fullscreen and chTextStrip:
                 YukiData.state.show()
                 YukiData.state.setTextYuki(chTextStrip)
@@ -3453,7 +3455,7 @@ if __name__ == "__main__":
                 channel_name = j
                 if len(channel_name) > MAX_CHAN_SIZE:
                     channel_name = channel_name[: MAX_CHAN_SIZE - 3] + "..."
-                setChanText("  " + channel_name)
+                setChannelText("  " + channel_name)
                 current_prog = None
                 jlower = j.lower()
                 try:
@@ -3512,14 +3514,14 @@ if __name__ == "__main__":
             YukiData.playing_url = ""
             setUrlText()
             hideLoading()
-            setChanText("")
+            setChannelText("")
             YukiData.playing = False
             stopPlayer()
             YukiData.player.loop = True
             YukiData.player.deinterlace = False
             mpv_override_play(str(Path("yuki_iptv", ICONS_FOLDER, "main.png")))
             YukiData.player.pause = True
-            YukiGUI.chan.setText(_("No channel selected"))
+            YukiGUI.channel.setText(_("No channel selected"))
             YukiGUI.progress.hide()
             YukiGUI.start_label.hide()
             YukiGUI.stop_label.hide()
@@ -3629,7 +3631,7 @@ if __name__ == "__main__":
                     win.menu_bar_qt.hide()
                     YukiData.fullscreen = True
                     dockWidget_playlist.hide()
-                    YukiGUI.chan.hide()
+                    YukiGUI.channel.hide()
                     YukiGUI.label_video_data.hide()
                     YukiGUI.label_avsync.hide()
                     for lbl3 in YukiGUI.controlpanel_btns:
@@ -3701,7 +3703,7 @@ if __name__ == "__main__":
                             lbl3.show()
                     dockWidget_controlPanel.show()
                     dockWidget_playlist.show()
-                    YukiGUI.chan.show()
+                    YukiGUI.channel.show()
                     win.update()
                     if not YukiData.currentMaximized:
                         win.showNormal()
@@ -3927,7 +3929,7 @@ if __name__ == "__main__":
         def get_page_count(array_len):
             return max(1, math.ceil(array_len / 100))
 
-        def gen_chans():
+        def generate_channels():
             channel_logos_request = {}
 
             try:
@@ -4076,10 +4078,10 @@ if __name__ == "__main__":
                 MyPlaylistWidget = YukiGUI.PlaylistWidget(
                     YukiGUI, YukiData.settings["hidechannellogos"]
                 )
-                MAX_SIZE_CHAN = 21
-                chan_name = i
+                CHANNEL_TITLE_MAX_SIZE = 21
+                channel_name = i
 
-                orig_chan_name = chan_name
+                original_channel_name = channel_name
 
                 if YukiData.settings["channellogos"] != 3:
                     try:
@@ -4130,7 +4132,7 @@ if __name__ == "__main__":
                             epg_logo1 = YukiData.epg_icons[prog_search]
 
                         req_data_ua, req_data_ref = get_ua_ref_for_channel(
-                            orig_chan_name
+                            original_channel_name
                         )
                         channel_logos_request[YukiData.array[i]["title"]] = [
                             channel_logo1,
@@ -4142,14 +4144,14 @@ if __name__ == "__main__":
                         logger.warning(f"Exception in channel logos (channel '{i}')")
                         logger.warning(traceback.format_exc())
 
-                if len(chan_name) > MAX_SIZE_CHAN:
-                    chan_name = chan_name[0:MAX_SIZE_CHAN] + "..."
+                if len(channel_name) > CHANNEL_TITLE_MAX_SIZE:
+                    channel_name = channel_name[0:CHANNEL_TITLE_MAX_SIZE] + "..."
                 unicode_play_symbol = chr(9654) + " "
                 append_symbol = ""
-                if YukiData.playing_channel == chan_name:
+                if YukiData.playing_channel == channel_name:
                     append_symbol = unicode_play_symbol
                 MyPlaylistWidget.name_label.setText(
-                    append_symbol + str(k) + ". " + chan_name
+                    append_symbol + str(k) + ". " + channel_name
                 )
                 MAX_SIZE = 28
                 orig_prog = prog
@@ -4194,62 +4196,65 @@ if __name__ == "__main__":
 
                 if YukiData.settings["channellogos"] != 3:  # Do not load any logos
                     try:
-                        if f"LOGO:::{orig_chan_name}" in YukiData.mp_manager_dict:
+                        if (
+                            f"LOGO:::{original_channel_name}"
+                            in YukiData.mp_manager_dict
+                        ):
                             if YukiData.settings["channellogos"] == 0:  # Prefer M3U
                                 first_loaded = False
-                                if YukiData.mp_manager_dict[f"LOGO:::{orig_chan_name}"][
-                                    0
-                                ]:
-                                    chan_logo = get_pixmap_from_filename(
+                                if YukiData.mp_manager_dict[
+                                    f"LOGO:::{original_channel_name}"
+                                ][0]:
+                                    channel_logo = get_pixmap_from_filename(
                                         YukiData.mp_manager_dict[
-                                            f"LOGO:::{orig_chan_name}"
+                                            f"LOGO:::{original_channel_name}"
                                         ][0]
                                     )
-                                    if chan_logo:
+                                    if channel_logo:
                                         first_loaded = True
-                                        MyPlaylistWidget.setIcon(chan_logo)
+                                        MyPlaylistWidget.setIcon(channel_logo)
                                 if not first_loaded:
-                                    chan_logo = get_pixmap_from_filename(
+                                    channel_logo = get_pixmap_from_filename(
                                         YukiData.mp_manager_dict[
-                                            f"LOGO:::{orig_chan_name}"
+                                            f"LOGO:::{original_channel_name}"
                                         ][1]
                                     )
-                                    if chan_logo:
-                                        MyPlaylistWidget.setIcon(chan_logo)
+                                    if channel_logo:
+                                        MyPlaylistWidget.setIcon(channel_logo)
                             elif YukiData.settings["channellogos"] == 1:  # Prefer EPG
                                 first_loaded = False
-                                if YukiData.mp_manager_dict[f"LOGO:::{orig_chan_name}"][
-                                    1
-                                ]:
-                                    chan_logo = get_pixmap_from_filename(
+                                if YukiData.mp_manager_dict[
+                                    f"LOGO:::{original_channel_name}"
+                                ][1]:
+                                    channel_logo = get_pixmap_from_filename(
                                         YukiData.mp_manager_dict[
-                                            f"LOGO:::{orig_chan_name}"
+                                            f"LOGO:::{original_channel_name}"
                                         ][1]
                                     )
-                                    if chan_logo:
+                                    if channel_logo:
                                         first_loaded = True
-                                        MyPlaylistWidget.setIcon(chan_logo)
+                                        MyPlaylistWidget.setIcon(channel_logo)
                                 if not first_loaded:
-                                    chan_logo = get_pixmap_from_filename(
+                                    channel_logo = get_pixmap_from_filename(
                                         YukiData.mp_manager_dict[
-                                            f"LOGO:::{orig_chan_name}"
+                                            f"LOGO:::{original_channel_name}"
                                         ][0]
                                     )
-                                    if chan_logo:
-                                        MyPlaylistWidget.setIcon(chan_logo)
+                                    if channel_logo:
+                                        MyPlaylistWidget.setIcon(channel_logo)
                             elif (
                                 YukiData.settings["channellogos"] == 2
                             ):  # Do not load from EPG (only M3U)
-                                if YukiData.mp_manager_dict[f"LOGO:::{orig_chan_name}"][
-                                    0
-                                ]:
-                                    chan_logo = get_pixmap_from_filename(
+                                if YukiData.mp_manager_dict[
+                                    f"LOGO:::{original_channel_name}"
+                                ][0]:
+                                    channel_logo = get_pixmap_from_filename(
                                         YukiData.mp_manager_dict[
-                                            f"LOGO:::{orig_chan_name}"
+                                            f"LOGO:::{original_channel_name}"
                                         ][0]
                                     )
-                                    if chan_logo:
-                                        MyPlaylistWidget.setIcon(chan_logo)
+                                    if channel_logo:
+                                        MyPlaylistWidget.setIcon(channel_logo)
                     except Exception:
                         logger.warning("Set channel logos failed with exception")
                         logger.warning(traceback.format_exc())
@@ -4266,16 +4271,16 @@ if __name__ == "__main__":
             except Exception:
                 pass
             if j1:
-                current_chan = None
+                current_channel = None
                 try:
                     cur = get_epg(YukiData.programmes, j1)
                     for pr in cur:
                         if time.time() > pr["start"] and time.time() < pr["stop"]:
-                            current_chan = pr
+                            current_channel = pr
                             break
                 except Exception:
                     pass
-                show_progress(current_chan)
+                show_progress(current_channel)
 
             # Fetch channel logos
             try:
@@ -4310,17 +4315,17 @@ if __name__ == "__main__":
 
         YukiData.row0 = -1
 
-        def redraw_chans():
-            channels_1 = gen_chans()
+        def redraw_channels():
+            channels_1 = generate_channels()
             update_tvguide()
             YukiData.row0 = win.listWidget.currentRow()
             val0 = win.listWidget.verticalScrollBar().value()
             win.listWidget.clear()
             if channels_1:
                 for channel_1 in channels_1.values():
-                    chan_3 = channel_1
-                    win.listWidget.addItem(chan_3[0])
-                    win.listWidget.setItemWidget(chan_3[0], chan_3[1])
+                    channel_3 = channel_1
+                    win.listWidget.addItem(channel_3[0])
+                    win.listWidget.setItemWidget(channel_3[0], channel_3[1])
             else:
                 win.listWidget.addItem(_("Nothing found"))
             win.listWidget.setCurrentRow(YukiData.row0)
@@ -4336,7 +4341,7 @@ if __name__ == "__main__":
             else:
                 btn_update_click()
 
-        YukiGUI.btn_update.clicked.connect(redraw_chans)
+        YukiGUI.btn_update.clicked.connect(redraw_channels)
 
         YukiData.first_playmode_change = False
 
@@ -4392,7 +4397,7 @@ if __name__ == "__main__":
                     except Exception:
                         pass
 
-        channels = gen_chans()
+        channels = generate_channels()
         for channel in channels:
             # Add QListWidgetItem into QListWidget
             win.listWidget.addItem(channels[channel][0])
@@ -4423,8 +4428,8 @@ if __name__ == "__main__":
             tvguide_close_lbl.show()
 
         def settings_context_menu():
-            if YukiGUI.chan_win.isVisible():
-                YukiGUI.chan_win.close()
+            if YukiGUI.channels_win.isVisible():
+                YukiGUI.channels_win.close()
             YukiGUI.title.setText(str(YukiData.item_selected))
             if (
                 YukiData.settings["m3u"] in YukiData.channel_sets
@@ -4556,8 +4561,8 @@ if __name__ == "__main__":
                 YukiGUI.referer_choose_custom.setText("")
                 YukiGUI.group_text.setText("")
                 YukiGUI.epgname_lbl.setText(_("Default"))
-            moveWindowToCenter(YukiGUI.chan_win)
-            YukiGUI.chan_win.show()
+            moveWindowToCenter(YukiGUI.channels_win)
+            YukiGUI.channels_win.show()
 
         def tvguide_favourites_add():
             if YukiData.item_selected in YukiData.favourite_sets:
@@ -5050,43 +5055,45 @@ if __name__ == "__main__":
 
         def page_change():
             win.listWidget.verticalScrollBar().setValue(0)
-            redraw_chans()
+            redraw_channels()
             try:
                 YukiGUI.page_box.clearFocus()
             except Exception:
                 pass
 
         def tvguide_many_clicked():
-            tvguide_many_chans = []
-            tvguide_many_chans_names = []
+            tvguide_many_channels = []
+            tvguide_many_channels_names = []
             tvguide_many_i = -1
-            for tvguide_m_chan in [x6[0] for x6 in sorted(YukiData.array.items())]:
-                epg_search = tvguide_m_chan.lower()
+            for tvguide_m_channel in [x6[0] for x6 in sorted(YukiData.array.items())]:
+                epg_search = tvguide_m_channel.lower()
                 if epg_search in YukiData.prog_match_arr:
                     epg_search = YukiData.prog_match_arr[epg_search.lower()]
                 if exists_in_epg(epg_search, YukiData.programmes):
                     tvguide_many_i += 1
-                    tvguide_many_chans.append(epg_search)
-                    tvguide_many_chans_names.append(tvguide_m_chan)
-            YukiGUI.tvguide_many_table.setRowCount(len(tvguide_many_chans))
-            YukiGUI.tvguide_many_table.setVerticalHeaderLabels(tvguide_many_chans_names)
+                    tvguide_many_channels.append(epg_search)
+                    tvguide_many_channels_names.append(tvguide_m_channel)
+            YukiGUI.tvguide_many_table.setRowCount(len(tvguide_many_channels))
+            YukiGUI.tvguide_many_table.setVerticalHeaderLabels(
+                tvguide_many_channels_names
+            )
             logger.info(YukiGUI.tvguide_many_table.horizontalHeader())
             a_1_len_array = []
             a_1_array = {}
-            for chan_6 in tvguide_many_chans:
+            for channel_6 in tvguide_many_channels:
                 a_1 = [
                     a_2
-                    for a_2 in get_epg(YukiData.programmes, chan_6)
+                    for a_2 in get_epg(YukiData.programmes, channel_6)
                     if a_2["stop"] > time.time() - 1
                 ]
-                a_1_array[chan_6] = a_1
+                a_1_array[channel_6] = a_1
                 a_1_len_array.append(len(a_1))
             YukiGUI.tvguide_many_table.setColumnCount(max(a_1_len_array))
             tvguide_many_i2 = -1
-            for chan_7 in tvguide_many_chans:
+            for channel_7 in tvguide_many_channels:
                 tvguide_many_i2 += 1
                 a_3_i = -1
-                for a_3 in a_1_array[chan_7]:
+                for a_3 in a_1_array[channel_7]:
                     a_3_i += 1
                     start_3_many = (
                         datetime.datetime.fromtimestamp(a_3["start"]).strftime("%H:%M")
@@ -5136,7 +5143,6 @@ if __name__ == "__main__":
             playmode_selector,
             YukiData.combobox,
             movies_combobox,
-            YukiGUI.chan,
             loading,
         )
 
@@ -5208,36 +5214,36 @@ if __name__ == "__main__":
                 YukiData.time_stop = time.time() + 1
 
         def update_tvguide(
-            chan_1="",
+            channel_1="",
             do_return=False,
             show_all_guides=False,
             mark_integers=False,
             date_selected=None,
         ):
             if YukiData.array:
-                if not chan_1:
+                if not channel_1:
                     if YukiData.item_selected:
-                        chan_2 = YukiData.item_selected
+                        channel_2 = YukiData.item_selected
                     else:
-                        chan_2 = sorted(YukiData.array.items())[0][0]
+                        channel_2 = sorted(YukiData.array.items())[0][0]
                 else:
-                    chan_2 = chan_1
+                    channel_2 = channel_1
                 try:
-                    chan_1_item = getArrayItem(chan_1)
+                    channel_1_item = getArrayItem(channel_1)
                 except Exception:
-                    chan_1_item = None
+                    channel_1_item = None
                 txt = _("No TV guide for channel")
-                chan_2 = chan_2.lower()
+                channel_2 = channel_2.lower()
                 newline_symbol = "\n"
                 if do_return:
                     newline_symbol = "!@#$%^^&*("
                 try:
-                    chan_3 = YukiData.prog_match_arr[chan_2]
+                    channel_3 = YukiData.prog_match_arr[channel_2]
                 except Exception:
-                    chan_3 = chan_2
-                if exists_in_epg(chan_3, YukiData.programmes):
+                    channel_3 = channel_2
+                if exists_in_epg(channel_3, YukiData.programmes):
                     txt = newline_symbol
-                    prog = get_epg(YukiData.programmes, chan_3)
+                    prog = get_epg(YukiData.programmes, channel_3)
                     for pr in prog:
                         override_this = False
                         if show_all_guides:
@@ -5288,7 +5294,7 @@ if __name__ == "__main__":
                                 and YukiGUI.showonlychplaylist_chk.isChecked()
                             ):
                                 try:
-                                    catchup_days2 = int(chan_1_item["catchup-days"])
+                                    catchup_days2 = int(channel_1_item["catchup-days"])
                                 except Exception:
                                     catchup_days2 = 7
                                 # support for seconds
@@ -5305,7 +5311,7 @@ if __name__ == "__main__":
                                     archive_link = urllib.parse.quote_plus(
                                         json.dumps(
                                             [
-                                                chan_1,
+                                                channel_1,
                                                 datetime.datetime.fromtimestamp(
                                                     pr["start"]
                                                 ).strftime("%d.%m.%Y %H:%M:%S"),
@@ -5374,14 +5380,14 @@ if __name__ == "__main__":
                 YukiGUI.epg_win_count.setText(
                     "({}: {})".format(_("channels"), len(array_sorted))
                 )
-                for chan_0 in array_sorted:
-                    YukiGUI.epg_win_checkbox.addItem(chan_0)
+                for channel_0 in array_sorted:
+                    YukiGUI.epg_win_checkbox.addItem(channel_0)
             else:
                 YukiGUI.epg_win_count.setText(
                     "({}: {})".format(_("channels"), len(YukiData.programmes))
                 )
-                for chan_0 in YukiData.programmes:
-                    YukiGUI.epg_win_checkbox.addItem(chan_0)
+                for channel_0 in YukiData.programmes:
+                    YukiGUI.epg_win_checkbox.addItem(channel_0)
 
         def show_tvguide_2():
             if YukiGUI.epg_win.isVisible():
@@ -5396,18 +5402,18 @@ if __name__ == "__main__":
         def show_archive():
             if not YukiGUI.epg_win.isVisible():
                 show_tvguide_2()
-                find_chan = YukiData.item_selected
-                if not find_chan:
-                    find_chan = YukiData.playing_channel
-                if find_chan:
+                find_channel = YukiData.item_selected
+                if not find_channel:
+                    find_channel = YukiData.playing_channel
+                if find_channel:
                     try:
-                        find_chan_index = YukiGUI.epg_win_checkbox.findText(
-                            find_chan, QtCore.Qt.MatchFlag.MatchExactly
+                        find_channel_index = YukiGUI.epg_win_checkbox.findText(
+                            find_channel, QtCore.Qt.MatchFlag.MatchExactly
                         )
                     except Exception:
-                        find_chan_index = -1
-                    if find_chan_index != -1:
-                        YukiGUI.epg_win_checkbox.setCurrentIndex(find_chan_index)
+                        find_channel_index = -1
+                    if find_channel_index != -1:
+                        YukiGUI.epg_win_checkbox.setCurrentIndex(find_channel_index)
                 epg_date_changed(YukiGUI.epg_select_date.selectedDate())
             else:
                 YukiGUI.epg_win.hide()
@@ -5481,7 +5487,7 @@ if __name__ == "__main__":
             isPlayingLast = False
             if (
                 os.path.isfile(str(Path(LOCAL_DIR, "lastchannels.json")))
-                and YukiData.settings["openprevchan"]
+                and YukiData.settings["openprevchannel"]
             ):
                 try:
                     lastfile_1 = open(
@@ -5492,9 +5498,9 @@ if __name__ == "__main__":
                     if lastfile_1_dat[0] in array_sorted:
                         isPlayingLast = True
                         YukiData.player.user_agent = lastfile_1_dat[2]
-                        setChanText("  " + lastfile_1_dat[0])
+                        setChannelText("  " + lastfile_1_dat[0])
                         itemClicked_event(lastfile_1_dat[0])
-                        setChanText("  " + lastfile_1_dat[0])
+                        setChannelText("  " + lastfile_1_dat[0])
                         try:
                             if lastfile_1_dat[3] < YukiData.combobox.count():
                                 YukiData.combobox.setCurrentIndex(lastfile_1_dat[3])
@@ -5794,7 +5800,7 @@ if __name__ == "__main__":
             if YukiData.is_loading:
                 YukiData.resume_playback = not YukiData.player.pause
                 mpv_stop()
-                YukiGUI.chan.setText("")
+                YukiGUI.channel.setText("")
                 loading.setText(_("Playing error"))
                 loading.setStyleSheet("color: red")
                 showLoading()
@@ -6394,7 +6400,7 @@ if __name__ == "__main__":
             logger.warning("Failed to set up MPRIS!")
 
         def update_scheduler_programme():
-            channel_list_2 = [chan_name for chan_name in array_sorted]
+            channel_list_2 = [channel_name for channel_name in array_sorted]
             ch_choosed = YukiGUI.choosechannel_ch.currentText()
             YukiGUI.tvguide_sch.clear()
             if ch_choosed in channel_list_2:
@@ -6410,9 +6416,9 @@ if __name__ == "__main__":
                 YukiGUI.scheduler_win.hide()
             else:
                 YukiGUI.choosechannel_ch.clear()
-                channel_list = [chan_name for chan_name in array_sorted]
-                for chan1 in channel_list:
-                    YukiGUI.choosechannel_ch.addItem(chan1)
+                channel_list = [channel_name for channel_name in array_sorted]
+                for channel1 in channel_list:
+                    YukiGUI.choosechannel_ch.addItem(channel1)
                 if YukiData.item_selected in channel_list:
                     YukiGUI.choosechannel_ch.setCurrentIndex(
                         channel_list.index(YukiData.item_selected)

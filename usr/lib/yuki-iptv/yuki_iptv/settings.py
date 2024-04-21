@@ -42,7 +42,7 @@ def parse_settings():
         "ua": "Mozilla/5.0",
         "mpv_options": "",
         "donotupdateepg": False,
-        "openprevchan": False,
+        "openprevchannel": False,
         "hidempv": False,
         "hideepgfromplaylist": False,
         "hideplaylistbyleftmouseclick": False,

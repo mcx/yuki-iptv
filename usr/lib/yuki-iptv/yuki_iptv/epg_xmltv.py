@@ -115,14 +115,14 @@ def parse_as_xmltv(
         except Exception:
             stop = 0
         try:
-            chans = ids[programme.attrib["channel"].strip()]
+            channels = ids[programme.attrib["channel"].strip()]
             catchup_id = ""
             try:
                 if "catchup-id" in programme.attrib:
                     catchup_id = programme.attrib["catchup-id"]
             except Exception:
                 pass
-            for channel_epg_1 in chans:
+            for channel_epg_1 in channels:
                 if channel_epg_1 not in programmes_epg:
                     programmes_epg[channel_epg_1] = []
                 try:

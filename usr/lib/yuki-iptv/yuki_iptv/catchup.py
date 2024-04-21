@@ -211,88 +211,92 @@ def format_placeholders(start_time, end_time, catchup_id, orig_url):
     return orig_url
 
 
-def get_catchup_url(chan_url, arr1, start_time, end_time, catchup_id):
+def get_catchup_url(channel_url, arr1, start_time, end_time, catchup_id):
     logger.info(f"Start time: {start_time}")
     logger.info(f"End time: {end_time}")
     if catchup_id:
         logger.info(f"Catchup id: {catchup_id}")
-    play_url = chan_url
+    play_url = channel_url
     if arr1["catchup"] == "default":
         play_url = format_placeholders(
             start_time, end_time, catchup_id, arr1["catchup-source"]
         )
     elif arr1["catchup"] == "append":
-        play_url = chan_url + format_placeholders(
+        play_url = channel_url + format_placeholders(
             start_time, end_time, catchup_id, arr1["catchup-source"]
         )
     elif arr1["catchup"] == "shift":
-        if "?" in chan_url:
-            play_url = chan_url + format_placeholders(
+        if "?" in channel_url:
+            play_url = channel_url + format_placeholders(
                 start_time, end_time, catchup_id, "&utc={utc}&lutc={lutc}"
             )
         else:
-            play_url = chan_url + format_placeholders(
+            play_url = channel_url + format_placeholders(
                 start_time, end_time, catchup_id, "?utc={utc}&lutc={lutc}"
             )
     elif arr1["catchup"] in ("flussonic", "flussonic-hls", "flussonic-ts", "fs"):
-        fs_url = chan_url
+        fs_url = channel_url
         logger.info("")
         logger.info(f"orig fs url: {fs_url}")
         flussonic_re = re.findall(
-            r"^(http[s]?://[^/]+)/(.*)/([^/]*)(mpegts|\.m3u8)(\?.+=.+)?$", chan_url
+            r"^(http[s]?://[^/]+)/(.*)/([^/]*)(mpegts|\.m3u8)(\?.+=.+)?$", channel_url
         )
         if flussonic_re:
             if len(flussonic_re[0]) == 5:
                 fs_host = flussonic_re[0][0]
-                fs_chanid = flussonic_re[0][1]
+                fs_channelid = flussonic_re[0][1]
                 fs_listtype = flussonic_re[0][2]
                 fs_streamtype = flussonic_re[0][3]
                 fs_urlappend = flussonic_re[0][4]
                 if fs_streamtype == "mpegts":
                     fs_url = "{}/{}/timeshift_abs-{}.ts{}".format(
-                        fs_host, fs_chanid, "${start}", fs_urlappend
+                        fs_host, fs_channelid, "${start}", fs_urlappend
                     )
                 else:
                     if fs_listtype == "index":
                         fs_url = "{}/{}/timeshift_rel-{}.m3u8{}".format(
-                            fs_host, fs_chanid, "{offset:1}", fs_urlappend
+                            fs_host, fs_channelid, "{offset:1}", fs_urlappend
                         )
                     else:
                         fs_url = "{}/{}/{}-timeshift_rel-{}.m3u8{}".format(
-                            fs_host, fs_chanid, fs_listtype, "{offset:1}", fs_urlappend
+                            fs_host,
+                            fs_channelid,
+                            fs_listtype,
+                            "{offset:1}",
+                            fs_urlappend,
                         )
         else:
             flussonic_re_2 = re.findall(
-                r"^(http[s]?://[^/]+)/(.*)/([^\\?]*)(\\?.+=.+)?$", chan_url
+                r"^(http[s]?://[^/]+)/(.*)/([^\\?]*)(\\?.+=.+)?$", channel_url
             )
             if flussonic_re_2:
                 if len(flussonic_re_2[0]) == 4:
                     fs_host = flussonic_re_2[0][0]
-                    fs_chanid = flussonic_re_2[0][1]
+                    fs_channelid = flussonic_re_2[0][1]
                     fs_urlappend = flussonic_re_2[0][3]
                     if arr1["catchup"] in ("flussonic-ts", "fs"):
                         fs_url = "{}/{}/timeshift_abs-{}.ts{}".format(
-                            fs_host, fs_chanid, "${start}", fs_urlappend
+                            fs_host, fs_channelid, "${start}", fs_urlappend
                         )
                     elif arr1["catchup"] in ("flussonic", "flussonic-hls"):
                         fs_url = "{}/{}/timeshift_rel-{}.m3u8{}".format(
-                            fs_host, fs_chanid, "{offset:1}", fs_urlappend
+                            fs_host, fs_channelid, "{offset:1}", fs_urlappend
                         )
         play_url = format_placeholders(start_time, end_time, catchup_id, fs_url)
     elif arr1["catchup"] == "xc":
-        xc_url = chan_url
+        xc_url = channel_url
         logger.info("")
         logger.info(f"orig xc url: {xc_url}")
         xc_re = re.findall(
             r"^(http[s]?://[^/]+)/(?:live/)?([^/]+)/([^/]+)/([^/\.]+)(\.m3u[8]?|\.ts?)?$",  # noqa: E501
-            chan_url,
+            channel_url,
         )
         if xc_re:
             if len(xc_re[0]) == 5:
                 xc_host = xc_re[0][0]
                 xc_username = xc_re[0][1]
                 xc_password = xc_re[0][2]
-                xc_chanid = xc_re[0][3]
+                xc_channelid = xc_re[0][3]
                 xc_extension = xc_re[0][4]
                 if not xc_extension:
                     xc_extension = ".ts"
@@ -302,7 +306,7 @@ def get_catchup_url(chan_url, arr1, start_time, end_time, catchup_id):
                     xc_password,
                     "{duration:60}",
                     "{Y}-{m}-{d}:{H}-{M}",
-                    xc_chanid,
+                    xc_channelid,
                     xc_extension,
                 )
         play_url = format_placeholders(start_time, end_time, catchup_id, xc_url)

@@ -233,11 +233,11 @@ class M3UParser:
                     if line.startswith("#"):
                         buffer.append(line)
                     else:
-                        chan = False
+                        channel = False
                         overrides = {}
                         for line1 in buffer:
                             if line1.startswith("#EXTINF:"):
-                                chan = line1
+                                channel = line1
                             if line1.startswith("#EXTGRP:"):
                                 group1 = line1.replace("#EXTGRP:", "").strip()
                                 if group1:
@@ -260,8 +260,8 @@ class M3UParser:
                                     ).strip()
                                     if http_referer:
                                         overrides["referer"] = http_referer
-                        if chan:
-                            parsed_chan = self.parse_channel(chan, line, overrides)
+                        if channel:
+                            parsed_chan = self.parse_channel(channel, line, overrides)
                             if parsed_chan["tvg-url"]:
                                 if parsed_chan["tvg-url"] not in self.epg_urls:
                                     self.epg_urls.append(parsed_chan["tvg-url"])

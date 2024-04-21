@@ -59,16 +59,16 @@ class ChannelM3U:
 
 
 def get_series_name(obj):
-    chan_name_1 = obj["tvg-name"]
-    if not chan_name_1:
-        chan_name_1 = obj["title"]
-    return chan_name_1
+    channel_name_1 = obj["tvg-name"]
+    if not channel_name_1:
+        channel_name_1 = obj["title"]
+    return channel_name_1
 
 
 def parse_series(obj1, series):
     is_matched = False
-    chan_name_1 = get_series_name(obj1)
-    series_match = SERIES.fullmatch(chan_name_1)
+    channel_name_1 = get_series_name(obj1)
+    series_match = SERIES.fullmatch(channel_name_1)
     if series_match is not None:
         try:
             res1 = series_match.groupdict()
@@ -88,8 +88,8 @@ def parse_series(obj1, series):
 
             episode_name1 = res1["episode"]
             ep_channel = ChannelM3U()
-            ep_channel.name = chan_name_1
-            ep_channel.title = chan_name_1
+            ep_channel.name = channel_name_1
+            ep_channel.title = channel_name_1
             ep_channel.logo = obj1["tvg-logo"]
             ep_channel.url = obj1["url"]
             season1.episodes[episode_name1] = ep_channel
