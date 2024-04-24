@@ -342,10 +342,8 @@ if args1.version:
     print(f"{MAIN_WINDOW_TITLE} {APP_VERSION}")
     sys.exit(0)
 
-if not os.path.isdir(LOCAL_DIR):
-    os.mkdir(LOCAL_DIR)
-if not os.path.isdir(SAVE_FOLDER_DEFAULT):
-    os.mkdir(SAVE_FOLDER_DEFAULT)
+Path(LOCAL_DIR).mkdir(parents=True, exist_ok=True)
+Path(SAVE_FOLDER_DEFAULT).mkdir(parents=True, exist_ok=True)
 
 
 # Used as a decorator to run things in the main loop, from another thread
@@ -762,13 +760,13 @@ if __name__ == "__main__":
 
         if not os.path.isdir(str(Path(save_folder))):
             try:
-                os.mkdir(str(Path(save_folder)))
+                Path(save_folder).mkdir(parents=True, exist_ok=True)
             except Exception:
                 logger.warning("Failed to create save folder!")
                 show_exception("Failed to create save folder!")
                 save_folder = SAVE_FOLDER_DEFAULT
                 if not os.path.isdir(str(Path(save_folder))):
-                    os.mkdir(str(Path(save_folder)))
+                    Path(save_folder).mkdir(parents=True, exist_ok=True)
 
         if not os.access(save_folder, os.W_OK | os.X_OK):
             save_folder = SAVE_FOLDER_DEFAULT
@@ -781,10 +779,8 @@ if __name__ == "__main__":
 
         if not YukiData.settings["scrrecnosubfolders"]:
             try:
-                if not os.path.isdir(str(Path(save_folder, "screenshots"))):
-                    os.mkdir(str(Path(save_folder, "screenshots")))
-                if not os.path.isdir(str(Path(save_folder, "recordings"))):
-                    os.mkdir(str(Path(save_folder, "recordings")))
+                Path(save_folder, "screenshots").mkdir(parents=True, exist_ok=True)
+                Path(save_folder, "recordings").mkdir(parents=True, exist_ok=True)
             except Exception:
                 save_folder = SAVE_FOLDER_DEFAULT
                 logger.warning(
@@ -862,8 +858,7 @@ if __name__ == "__main__":
                 xtream_password,
                 xtream_url,
             ) = m3u_url.split("::::::::::::::")
-            if not os.path.isdir(str(Path(LOCAL_DIR, "xtream"))):
-                os.mkdir(str(Path(LOCAL_DIR, "xtream")))
+            Path(LOCAL_DIR, "xtream").mkdir(parents=True, exist_ok=True)
             xtream_headers = {"User-Agent": YukiData.settings["ua"]}
             if YukiData.settings["referer"]:
                 xtream_headers["Referer"] = YukiData.settings["referer"]
@@ -3869,8 +3864,7 @@ if __name__ == "__main__":
 
         YukiData.current_group = _("All channels")
 
-        if not os.path.isdir(str(Path(LOCAL_DIR, "logo_cache"))):
-            os.mkdir(str(Path(LOCAL_DIR, "logo_cache")))
+        Path(LOCAL_DIR, "logo_cache").mkdir(parents=True, exist_ok=True)
 
         def get_of_txt(of_num):
             # try:
