@@ -88,7 +88,7 @@ from yuki_iptv.misc import (
     convert_size,
 )
 from yuki_iptv.playlist import load_playlist
-from yuki_iptv.channel_logos import channel_logos_worker
+from yuki_iptv.channel_logos import channel_logos_worker, get_custom_channel_logo
 from yuki_iptv.settings import parse_settings
 from yuki_iptv.qt6compat import _exec
 from yuki_iptv.playlist_editor import PlaylistEditor
@@ -3921,7 +3921,9 @@ if __name__ == "__main__":
             except Exception:
                 pass
 
-        custom_logos_enabled = os.path.isdir(Path(LOCAL_DIR, "logos"))
+        custom_logos_enabled = os.path.isdir(Path(LOCAL_DIR, "logos")) or os.path.isdir(
+            Path("..", "..", "share", "yuki-iptv", "channel_logos")
+        )
 
         all_channels_lang = _("All channels")
         favourites_lang = _("Favourites")
@@ -4095,37 +4097,10 @@ if __name__ == "__main__":
                             and "channel-logo-file-checked" not in YukiData.array[i]
                         ):
                             YukiData.array[i]["channel-logo-file-checked"] = True
-                            name_escaped = i.replace("/", "_")
-                            try:
-                                if os.path.isfile(
-                                    Path(LOCAL_DIR, "logos", f"{name_escaped}.png")
-                                ):
-                                    channel_logo1 = str(
-                                        Path(LOCAL_DIR, "logos", f"{name_escaped}.png")
-                                    )
-                                    YukiData.array[i]["tvg-logo"] = channel_logo1
-                            except Exception:
-                                pass
-                            try:
-                                if os.path.isfile(
-                                    Path(LOCAL_DIR, "logos", f"{name_escaped}.jpg")
-                                ):
-                                    channel_logo1 = str(
-                                        Path(LOCAL_DIR, "logos", f"{name_escaped}.jpg")
-                                    )
-                                    YukiData.array[i]["tvg-logo"] = channel_logo1
-                            except Exception:
-                                pass
-                            try:
-                                if os.path.isfile(
-                                    Path(LOCAL_DIR, "logos", f"{name_escaped}.svg")
-                                ):
-                                    channel_logo1 = str(
-                                        Path(LOCAL_DIR, "logos", f"{name_escaped}.svg")
-                                    )
-                                    YukiData.array[i]["tvg-logo"] = channel_logo1
-                            except Exception:
-                                pass
+                            custom_channel_logo = get_custom_channel_logo(i)
+                            if custom_channel_logo:
+                                channel_logo1 = custom_channel_logo
+                                YukiData.array[i]["tvg-logo"] = custom_channel_logo
 
                         epg_logo1 = ""
                         if prog_search in YukiData.epg_icons:

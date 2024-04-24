@@ -118,3 +118,44 @@ def channel_logos_worker(loglevel, requested_logos, update_dict, append=""):
     # logger.debug("channel_logos_worker ended")
     update_dict[f"logos{append}_inprogress"] = False
     update_dict[f"logos{append}_completed"] = True
+
+
+def get_custom_channel_logo(channel_name):
+    custom_channel_logo = ""
+    name_escaped = channel_name.replace("/", "_")
+    exts = ("png", "jpg", "svg")
+    # System
+    for ext in exts:
+        try:
+            if os.path.isfile(
+                Path(
+                    "..",
+                    "..",
+                    "share",
+                    "yuki-iptv",
+                    "channel_logos",
+                    f"{name_escaped}.{ext}",
+                )
+            ):
+                custom_channel_logo = str(
+                    Path(
+                        "..",
+                        "..",
+                        "share",
+                        "yuki-iptv",
+                        "channel_logos",
+                        f"{name_escaped}.{ext}",
+                    )
+                )
+        except Exception:
+            pass
+    # Local
+    for ext in exts:
+        try:
+            if os.path.isfile(Path(LOCAL_DIR, "logos", f"{name_escaped}.{ext}")):
+                custom_channel_logo = str(
+                    Path(LOCAL_DIR, "logos", f"{name_escaped}.{ext}")
+                )
+        except Exception:
+            pass
+    return custom_channel_logo
