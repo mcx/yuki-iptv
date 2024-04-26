@@ -5122,6 +5122,7 @@ if __name__ == "__main__":
             playlist_label = QtWidgets.QLabel(_("Playlist"))
             playlist_label.setFont(YukiGUI.font_12_bold)
             dockWidget_playlist.setTitleBarWidget(playlist_label)
+            YukiGUI.widget.layout().addWidget(QtWidgets.QSizeGrip(YukiGUI.widget))
         else:
             dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
             dockWidget_playlist.setTitleBarWidget(QtWidgets.QWidget())
