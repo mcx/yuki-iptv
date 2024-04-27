@@ -21,6 +21,7 @@ Requires:	python3-pillow
 %else
 Requires:	python3-qt6
 %if %{defined mageia}
+Requires:	qttranslations6
 Requires:	python3-pillow
 %else
 Requires:	python3-Wand
