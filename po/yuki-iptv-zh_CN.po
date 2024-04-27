@@ -4,8 +4,9 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-13 20:50+0000\n"
-"PO-Revision-Date: 2024-03-05 19:34+0000\n"
-"Last-Translator: Ame-chan-angel <amechanangel@proton.me>\n"
+"PO-Revision-Date: 2024-04-27 21:28+0000\n"
+"Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
+"codeberg.org>\n"
 "Language-Team: Chinese (Simplified) <https://translate.codeberg.org/projects/"
 "yuki-iptv/yuki-iptv/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:580
 msgid "Loading TV guide cache..."
@@ -82,7 +83,7 @@ msgstr "未指定 URL！"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1265
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:95
 msgid "Select playlist"
-msgstr ""
+msgstr "选择播放列表"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1275
 msgid "Select EPG file"
@@ -97,7 +98,7 @@ msgstr "默认"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1317
 msgid "Failed to open external player!"
-msgstr ""
+msgstr "打开外部播放器失败！"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1433
 msgid "Channel"
@@ -328,7 +329,7 @@ msgstr "系列"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4971
 msgid "Playlist"
-msgstr ""
+msgstr "播放列表"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5012
 msgid "Doing screenshot..."
@@ -537,7 +538,7 @@ msgstr "上一个(&P)"
 #: usr/lib/yuki-iptv/yuki-iptv.py:7418
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:191
 msgid "P&laylist editor"
-msgstr ""
+msgstr "播放列表编辑器(&L)"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7419
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:183
@@ -557,7 +558,7 @@ msgstr "设置"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7423 usr/lib/yuki-iptv/yuki_iptv/gui.py:1234
 msgid "Channel sort"
-msgstr ""
+msgstr "频道排序"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7426
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:269
@@ -681,19 +682,19 @@ msgstr "清除徽标缓存"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:532
 msgid "as in playlist"
-msgstr ""
+msgstr "和播放列表一致"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:533
 msgid "alphabetical order"
-msgstr ""
+msgstr "字母表顺序"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:534
 msgid "reverse alphabetical order"
-msgstr ""
+msgstr "字母表倒序"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:535
 msgid "custom"
-msgstr ""
+msgstr "自定义"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:553
 msgid ""
@@ -777,7 +778,7 @@ msgstr "左侧"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:637
 msgid "Separate window"
-msgstr ""
+msgstr "分离窗口"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:640
 msgid ""
@@ -884,7 +885,7 @@ msgstr "隐藏频道徽标"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:717
 msgid "Show/hide playlist by left mouse click"
-msgstr ""
+msgstr "左键单击时显示/隐藏播放列表"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:723
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:961
@@ -956,6 +957,8 @@ msgid ""
 "Channel\n"
 "sort"
 msgstr ""
+"频道\n"
+"排序"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:774
 msgid "Cache"
@@ -1178,6 +1181,8 @@ msgid ""
 "Do not forget\n"
 "to set custom sort order in settings!"
 msgstr ""
+"别忘了\n"
+"在设置中指定自定义排序！"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:107
 msgid "Error applying filters"
@@ -1241,7 +1246,7 @@ msgstr "音量标准化(&N)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:373
 msgid "&Channel sort"
-msgstr ""
+msgstr "频道排序(&C)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:380
 msgid "&Settings"
@@ -1341,7 +1346,7 @@ msgstr "保存文件"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:159
 msgid "Playlists (*.m3u *.m3u8)"
-msgstr ""
+msgstr "播放列表 (*.m3u *.m3u8)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:167
 msgid "Playlist successfully saved!"
@@ -1349,11 +1354,11 @@ msgstr "成功保存播放列表！"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:176
 msgid "&Open file"
-msgstr ""
+msgstr "打开文件(&O)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:180
 msgid "&Save as"
-msgstr ""
+msgstr "另存为(&S)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:274
 msgid "find"
@@ -1389,7 +1394,7 @@ msgstr ""
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:382
 msgid "Playlist editor"
-msgstr ""
+msgstr "播放列表编辑器"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:392
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:418
