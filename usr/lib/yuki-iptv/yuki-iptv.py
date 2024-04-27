@@ -432,6 +432,26 @@ if __name__ == "__main__":
     except Exception:
         logger.warning("failed to read settings.json")
 
+    if qt_library == "PyQt6":
+        try:
+            translator = QtCore.QTranslator()
+            if not translator.load(
+                QtCore.QLocale.system(),
+                "qtbase",
+                "_",
+                os.path.abspath(
+                    QtCore.QLibraryInfo.path(
+                        QtCore.QLibraryInfo.LibraryPath.TranslationsPath
+                    )
+                ),
+                ".qm",
+            ):
+                logger.warning("failed to load system translations for Qt")
+            app.installTranslator(translator)
+        except Exception:
+            logger.warning("failed to set up system translations for Qt")
+            logger.warning(traceback.format_exc())
+
     try:
         if setAppFusion:
             app.setStyle("fusion")
