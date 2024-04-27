@@ -5122,11 +5122,25 @@ if __name__ == "__main__":
             playlist_label = QtWidgets.QLabel(_("Playlist"))
             playlist_label.setFont(YukiGUI.font_12_bold)
             dockWidget_playlist.setTitleBarWidget(playlist_label)
-            YukiGUI.widget.layout().addWidget(QtWidgets.QSizeGrip(YukiGUI.widget))
         else:
             dockWidget_playlist.setFixedWidth(DOCKWIDGET_PLAYLIST_WIDTH)
             dockWidget_playlist.setTitleBarWidget(QtWidgets.QWidget())
-        dockWidget_playlist.setWidget(YukiGUI.widget)
+        if YukiData.settings["panelposition"] == 2:
+            gripWidget = QtWidgets.QWidget()
+            gripLayout = QtWidgets.QVBoxLayout()
+            gripLayout.setContentsMargins(0, 0, 0, 0)
+            gripLayout.setSpacing(0)
+            gripLayout.addWidget(YukiGUI.widget)
+            gripLayout.addWidget(
+                QtWidgets.QSizeGrip(YukiGUI.widget),
+                0,
+                QtCore.Qt.AlignmentFlag.AlignBottom
+                | QtCore.Qt.AlignmentFlag.AlignRight,
+            )
+            gripWidget.setLayout(gripLayout)
+            dockWidget_playlist.setWidget(gripWidget)
+        else:
+            dockWidget_playlist.setWidget(YukiGUI.widget)
         dockWidget_playlist.setFloating(YukiData.settings["panelposition"] == 2)
         dockWidget_playlist.setFeatures(
             QtWidgets.QDockWidget.DockWidgetFeature.NoDockWidgetFeatures
