@@ -88,6 +88,18 @@ from yuki_iptv.misc import (
     format_bytes,
     format_seconds,
     convert_size,
+    AUDIO_SAMPLE_FORMATS,
+    BCOLOR,
+    DOCKWIDGET_CONTROLPANEL_HEIGHT_HIGH,
+    DOCKWIDGET_CONTROLPANEL_HEIGHT_LOW,
+    DOCKWIDGET_PLAYLIST_WIDTH,
+    MAIN_WINDOW_TITLE,
+    MPV_OPTIONS_LINK,
+    stream_info,
+    TVGUIDE_WIDTH,
+    UPDATE_BR_INTERVAL,
+    WINDOW_SIZE,
+    YukiData,
 )
 from yuki_iptv.playlist import load_playlist
 from yuki_iptv.channel_logos import channel_logos_worker, get_custom_channel_logo
@@ -176,169 +188,6 @@ def cached_gettext(gettext_str):
 
 _ = cached_gettext
 # i18n end
-
-MAIN_WINDOW_TITLE = "yuki-iptv"
-WINDOW_SIZE = (1200, 600)
-DOCKWIDGET_CONTROLPANEL_HEIGHT = int(WINDOW_SIZE[1] / 10)
-DOCKWIDGET_CONTROLPANEL_HEIGHT_OFFSET = 10
-DOCKWIDGET_CONTROLPANEL_HEIGHT_HIGH = (
-    DOCKWIDGET_CONTROLPANEL_HEIGHT + DOCKWIDGET_CONTROLPANEL_HEIGHT_OFFSET
-)
-DOCKWIDGET_CONTROLPANEL_HEIGHT_LOW = DOCKWIDGET_CONTROLPANEL_HEIGHT_HIGH - (
-    DOCKWIDGET_CONTROLPANEL_HEIGHT_OFFSET + 10
-)
-DOCKWIDGET_PLAYLIST_WIDTH = int((WINDOW_SIZE[0] / 2) - 200)
-TVGUIDE_WIDTH = int(WINDOW_SIZE[0] / 5)
-BCOLOR = "#A2A3A3"
-
-UPDATE_BR_INTERVAL = 5
-
-AUDIO_SAMPLE_FORMATS = {
-    "u16": "unsigned 16 bits",
-    "s16": "signed 16 bits",
-    "s16p": "signed 16 bits, planar",
-    "flt": "float",
-    "float": "float",
-    "fltp": "float, planar",
-    "floatp": "float, planar",
-    "dbl": "double",
-    "dblp": "double, planar",
-}
-
-MPV_OPTIONS_LINK = "https://mpv.io/manual/master/#options"
-
-
-class stream_info:
-    pass
-
-
-class YukiData:
-    aot_action = None
-    archive_epg = None
-    array = None
-    channel_logos_process = None
-    channel_logos_request_old = None
-    channel_sets = None
-    channel_sort = None
-    combobox = None
-    cur_always_on_top_state = None
-    current_group = None
-    currentMaximized = None
-    currentMoviesGroup = None
-    currentWidthHeight = None
-    dockWidget_controlPanelVisible = None
-    dockWidget_playlistVisible = None
-    do_save_settings = None
-    epg_data = None
-    epg_failed = None
-    epg_icons = None
-    epg_ready = None
-    epg_selected_date = None
-    epg_thread_2 = None
-    epg_update_allowed = None
-    epg_updating = None
-    event_handler = None
-    favourite_sets = None
-    ffmpeg_processes = None
-    first_boot = None
-    first_boot_1 = None
-    first_change = None
-    first_playmode_change = None
-    firstVolRun = None
-    force_turnoff_osc = None
-    fullscreen = None
-    gl_is_static = None
-    ic = None
-    ic1 = None
-    ic2 = None
-    ic3 = None
-    isControlPanelVisible = None
-    isPlaylistVisible = None
-    is_recording = None
-    is_recording_old = None
-    item_selected = None
-    last_cursor_moved = None
-    last_cursor_time = None
-    main_keybinds = None
-    menubar_state = None
-    movie_logos_process = None
-    movie_logos_request_old = None
-    mpv_osc_enabled = None
-    mp_manager_dict = None
-    old_value = None
-    player = None
-    player_tracks = None
-    playing = None
-    playing_archive = None
-    playing_channel = None
-    playing_group = None
-    playing_url = None
-    prev_cursor = None
-    previous_text = None
-    prog_ids = None
-    prog_match_arr = None
-    programmes = None
-    record_file = None
-    recording_time = None
-    recViaScheduler = None
-    rewindWidgetVisible = None
-    right_click_menu = None
-    row0 = None
-    settings = None
-    state = None
-    static_text = None
-    stopped = None
-    thread_tvguide_progress_lock = None
-    thread_tvguide_update_pt2_e2 = None
-    timer_logos_update_lock = None
-    time_stop = None
-    tvguide_lbl = None
-    tvguide_sets = None
-    use_local_tvguide = None
-    VOLUME_SLIDER_WIDTH = None
-    waiting_for_epg = None
-    x_conn = None
-    resume_playback = False
-    compact_mode = False
-    playlist_hidden = False
-    controlpanel_hidden = False
-    fullscreen_locked = False
-    selected_shortcut_row = -1
-    shortcuts_state = False
-    use_dark_icon_theme = False
-    playmodeIndex = 0
-    serie_selected = False
-    movies = {}
-    series = {}
-    osc = -1
-    volume = 100
-    needs_resize = False
-    first_start = False
-    streaminfo_win_visible = False
-    current_prog1 = None
-    check_playlist_visible = False
-    check_controlpanel_visible = False
-    rewind_value = None
-    xtream_list_old = set()
-    xtream_list_lock = False
-    xtream_expiration_list = {}
-    is_xtream = False
-    # MPRIS
-    mpris_loop = None
-    mpris_ready = False
-    mpris_running = False
-    mpris_select_playlist = None
-    is_loading = False
-    old_playing_url = ""
-
-
-stream_info.video_properties = {}
-stream_info.audio_properties = {}
-stream_info.video_bitrates = []
-stream_info.audio_bitrates = []
-
-DOCKWIDGET_CONTROLPANEL_HEIGHT = max(DOCKWIDGET_CONTROLPANEL_HEIGHT, 0)
-DOCKWIDGET_PLAYLIST_WIDTH = max(DOCKWIDGET_PLAYLIST_WIDTH, 0)
 
 if args1.version:
     print(f"{MAIN_WINDOW_TITLE} {APP_VERSION}")
@@ -434,26 +283,6 @@ if __name__ == "__main__":
     except Exception:
         logger.warning("failed to read settings.json")
 
-    if qt_library == "PyQt6":
-        try:
-            translator = QtCore.QTranslator()
-            if not translator.load(
-                QtCore.QLocale.system(),
-                "qtbase",
-                "_",
-                os.path.abspath(
-                    QtCore.QLibraryInfo.path(
-                        QtCore.QLibraryInfo.LibraryPath.TranslationsPath
-                    )
-                ),
-                ".qm",
-            ):
-                logger.warning("System translations for Qt not loaded")
-            app.installTranslator(translator)
-        except Exception:
-            logger.warning("Failed to set up system translations for Qt")
-            logger.warning(traceback.format_exc())
-
     try:
         if setAppFusion:
             app.setStyle("fusion")
@@ -479,6 +308,26 @@ if __name__ == "__main__":
         except Exception:
             logger.warning("Failed to determine Qt platform!")
         logger.info("")
+
+        if qt_library == "PyQt6":
+            try:
+                translator = QtCore.QTranslator()
+                if not translator.load(
+                    QtCore.QLocale.system(),
+                    "qtbase",
+                    "_",
+                    os.path.abspath(
+                        QtCore.QLibraryInfo.path(
+                            QtCore.QLibraryInfo.LibraryPath.TranslationsPath
+                        )
+                    ),
+                    ".qm",
+                ):
+                    logger.warning("System translations for Qt not loaded")
+                app.installTranslator(translator)
+            except Exception:
+                logger.warning("Failed to set up system translations for Qt")
+                logger.warning(traceback.format_exc())
 
         enable_libmpv_render_context = False  # TODO: for native Wayland
 
