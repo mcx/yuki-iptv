@@ -446,10 +446,10 @@ if __name__ == "__main__":
                 ),
                 ".qm",
             ):
-                logger.warning("failed to load system translations for Qt")
+                logger.warning("System translations for Qt not loaded")
             app.installTranslator(translator)
         except Exception:
-            logger.warning("failed to set up system translations for Qt")
+            logger.warning("Failed to set up system translations for Qt")
             logger.warning(traceback.format_exc())
 
     try:
