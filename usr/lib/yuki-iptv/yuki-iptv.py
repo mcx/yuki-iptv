@@ -2563,7 +2563,7 @@ if __name__ == "__main__":
             resettodefaults_btn_clicked_msg_1 = QtWidgets.QMessageBox.question(
                 None,
                 MAIN_WINDOW_TITLE,
-                _("Are you sure?"),
+                _("Delete playlist permanently?"),
                 QtWidgets.QMessageBox.StandardButton.Yes
                 | QtWidgets.QMessageBox.StandardButton.No,
                 QtWidgets.QMessageBox.StandardButton.Yes,
@@ -4622,7 +4622,7 @@ if __name__ == "__main__":
                     playlistsep_del_msg = QtWidgets.QMessageBox.question(
                         None,
                         MAIN_WINDOW_TITLE,
-                        _("Are you sure?"),
+                        _("Remove channel from Favourites+?"),
                         QtWidgets.QMessageBox.StandardButton.Yes
                         | QtWidgets.QMessageBox.StandardButton.No,
                         QtWidgets.QMessageBox.StandardButton.Yes,
