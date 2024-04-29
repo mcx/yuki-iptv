@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-29 00:57+0000\n"
-"PO-Revision-Date: 2024-04-13 21:04+0000\n"
+"PO-Revision-Date: 2024-04-29 01:01+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Russian <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
+"n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Weblate 5.4.3\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:676
@@ -223,7 +223,7 @@ msgstr "Загрузка..."
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2566
 msgid "Delete playlist permanently?"
-msgstr ""
+msgstr "Удалить плейлист безвозвратно?"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2825 usr/lib/yuki-iptv/yuki_iptv/gui.py:205
 msgid "Pause"
@@ -292,7 +292,7 @@ msgstr "Удалить из избранного"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4625
 msgid "Remove channel from Favourites+?"
-msgstr ""
+msgstr "Удалить канал из Избранного+?"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4661 usr/lib/yuki-iptv/yuki-iptv.py:7556
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:282
