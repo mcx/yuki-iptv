@@ -57,93 +57,54 @@ def is_ffmpeg_recording():
     return ret
 
 
-def exit_handler(exit_code, exit_status):
+def exit_handler(process, exit_code, exit_status):
     is_ok = True
     if exit_code != 0:
         is_ok = False
     if exit_code == 255:
         is_ok = True
     if not is_ok or exit_status != QtCore.QProcess.ExitStatus.NormalExit:
-        ffmpeg_proc_program = YukiData.ffmpeg_proc.program()
-        if not (
+        ffmpeg_proc_program = process.program()
+        is_killed = False
+        try:
+            is_killed = process._yuki_killed
+        except Exception:
+            pass
+        if not is_killed and not (
             ("yt-dlp" in ffmpeg_proc_program or "youtube-dl" in ffmpeg_proc_program)
-            and exit_code == 15
+            and exit_code == int(signal.SIGTERM)
         ):
             logger.warning("ffmpeg process crashed")
-            ffmpeg_process_found = False
             if YukiData.show_record_exception:
+                standard_output = process.readAllStandardOutput()
                 try:
-                    if (
-                        YukiData.ffmpeg_proc
-                        and YukiData.ffmpeg_proc.processId() == 0
-                        and YukiData.ffmpeg_proc.exitCode() == exit_code
-                        and YukiData.ffmpeg_proc.exitStatus() == exit_status
-                    ):
-                        standard_output = YukiData.ffmpeg_proc.readAllStandardOutput()
-                        try:
-                            standard_output = bytes(standard_output).decode("utf-8")
-                            standard_output = "\n".join(
-                                standard_output.split("\n")[-15:]
-                            )
-                        except Exception:
-                            pass
-                        standard_error = YukiData.ffmpeg_proc.readAllStandardError()
-                        try:
-                            standard_error = bytes(standard_error).decode("utf-8")
-                            standard_error = "\n".join(standard_error.split("\n")[-15:])
-                        except Exception:
-                            pass
-                        ffmpeg_process_found = True
-                        YukiData.show_record_exception(
-                            _("ffmpeg crashed!") + "\n"
-                            "" + _("exit code:") + " " + str(exit_code) + ""
-                            "\nstdout:\n" + str(standard_output) + ""
-                            "\nstderr:\n" + str(standard_error)
-                        )
-                    else:
-                        if YukiData.ffmpeg_processes:
-                            for ffmpeg_process in YukiData.ffmpeg_processes:
-                                if (
-                                    ffmpeg_process
-                                    and ffmpeg_process.processId() == 0
-                                    and ffmpeg_process[0].exitCode() == exit_code
-                                    and ffmpeg_process[0].exitStatus() == exit_status
-                                ):
-                                    standard_output = ffmpeg_process[
-                                        0
-                                    ].readAllStandardOutput()
-                                    try:
-                                        standard_output = bytes(standard_output).decode(
-                                            "utf-8"
-                                        )
-                                        standard_output = "\n".join(
-                                            standard_output.split("\n")[-15:]
-                                        )
-                                    except Exception:
-                                        pass
-                                    standard_error = ffmpeg_process[
-                                        0
-                                    ].readAllStandardError()
-                                    try:
-                                        standard_error = bytes(standard_error).decode(
-                                            "utf-8"
-                                        )
-                                        standard_error = "\n".join(
-                                            standard_error.split("\n")[-15:]
-                                        )
-                                    except Exception:
-                                        pass
-                                    ffmpeg_process_found = True
-                                    YukiData.show_record_exception(
-                                        _("ffmpeg crashed!") + "\n"
-                                        "" + _("exit code:") + " " + str(exit_code) + ""
-                                        "\nstdout:\n" + str(standard_output) + ""
-                                        "\nstderr:\n" + str(standard_error)
-                                    )
+                    standard_output = bytes(standard_output).decode("utf-8")
+                    standard_output = "\n".join(standard_output.split("\n")[-15:])
                 except Exception:
                     pass
-                if not ffmpeg_process_found:
-                    YukiData.show_record_exception(_("ffmpeg crashed!"))
+                standard_error = process.readAllStandardError()
+                try:
+                    standard_error = bytes(standard_error).decode("utf-8")
+                    standard_error = "\n".join(standard_error.split("\n")[-15:])
+                except Exception:
+                    pass
+                YukiData.show_record_exception(
+                    _("ffmpeg crashed!") + "\n"
+                    "" + _("exit code:") + " " + str(exit_code) + ""
+                    "\nstdout:\n" + str(standard_output) + ""
+                    "\nstderr:\n" + str(standard_error)
+                )
+
+
+def is_youtube_url(url):
+    return urllib.parse.urlparse(url).netloc in (
+        "youtube.com",
+        "www.youtube.com",
+        "youtube-nocookie.com",
+        "www.youtube-nocookie.com",
+        "youtu.be",
+        "www.youtu.be",
+    )
 
 
 def record(
@@ -185,10 +146,10 @@ def record(
             "-sn",
             "-map",
             "-0:d?",
+            "-map",
+            "-0:t?",
             "-codec",
             "copy",
-            "-acodec",
-            "aac",
             "-max_muxing_queue_size",
             "4096",
             out_file,
@@ -210,24 +171,17 @@ def record(
                 "-sn",
                 "-map",
                 "-0:d?",
+                "-map",
+                "-0:t?",
                 "-codec",
                 "copy",
-                "-acodec",
-                "aac",
                 "-max_muxing_queue_size",
                 "4096",
                 out_file,
             ]
         )
     process = "ffmpeg"
-    if urllib.parse.urlparse(input_url).netloc in (
-        "youtube.com",
-        "www.youtube.com",
-        "youtube-nocookie.com",
-        "www.youtube-nocookie.com",
-        "youtu.be",
-        "www.youtu.be",
-    ):
+    if is_youtube_url(input_url):
         process = "yt-dlp"
         try:
             yt_detect_process = subprocess.Popen(
@@ -253,11 +207,19 @@ def record(
     if not is_return:
         YukiData.ffmpeg_proc = QtCore.QProcess()
         YukiData.ffmpeg_proc.start(process, arr)
-        YukiData.ffmpeg_proc.finished.connect(exit_handler)
+        YukiData.ffmpeg_proc.finished.connect(
+            lambda exit_code, exit_status: exit_handler(
+                YukiData.ffmpeg_proc, exit_code, exit_status
+            )
+        )
     else:
         ffmpeg_ret_proc = QtCore.QProcess()
         ffmpeg_ret_proc.start(process, arr)
-        ffmpeg_ret_proc.finished.connect(exit_handler)
+        ffmpeg_ret_proc.finished.connect(
+            lambda exit_code, exit_status: exit_handler(
+                ffmpeg_ret_proc, exit_code, exit_status
+            )
+        )
         return ffmpeg_ret_proc
 
 
@@ -269,31 +231,42 @@ def record_return(
     )
 
 
+def kill_process_childs(proc):
+    try:
+        child_process_ids = [
+            int(line)
+            for line in subprocess.run(
+                [
+                    "ps",
+                    "-opid",
+                    "--no-headers",
+                    "--ppid",
+                    str(proc.processId()),
+                ],
+                stdout=subprocess.PIPE,
+                encoding="utf8",
+            ).stdout.splitlines()
+        ]
+        for child_process_id in child_process_ids:
+            logger.info(f"Terminating process with PID {child_process_id}")
+            os.kill(child_process_id, signal.SIGTERM)
+    except Exception:
+        pass
+
+
+def terminate_record_process(proc):
+    program = proc.program()
+    if "yt-dlp" in program or "youtube-dl" in program:
+        kill_process_childs(proc)
+        proc.terminate()
+    else:
+        proc._yuki_killed = True
+        proc.kill()
+
+
 def stop_record():
     if YukiData.ffmpeg_proc:
-        ffmpeg_proc_program = YukiData.ffmpeg_proc.program()
-        if "yt-dlp" in ffmpeg_proc_program or "youtube-dl" in ffmpeg_proc_program:
-            try:
-                child_process_ids = [
-                    int(line)
-                    for line in subprocess.run(
-                        [
-                            "ps",
-                            "-opid",
-                            "--no-headers",
-                            "--ppid",
-                            str(YukiData.ffmpeg_proc.processId()),
-                        ],
-                        stdout=subprocess.PIPE,
-                        encoding="utf8",
-                    ).stdout.splitlines()
-                ]
-                for child_process_id in child_process_ids:
-                    logger.info(f"Terminating process with PID {child_process_id}")
-                    os.kill(child_process_id, signal.SIGTERM)
-            except Exception:
-                pass
-        YukiData.ffmpeg_proc.terminate()
+        terminate_record_process(YukiData.ffmpeg_proc)
 
 
 def init_record(show_exception, ffmpeg_processes):

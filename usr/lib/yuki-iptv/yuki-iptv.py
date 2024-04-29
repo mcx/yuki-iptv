@@ -64,6 +64,8 @@ from yuki_iptv.record import (
     stop_record,
     is_ffmpeg_recording,
     init_record,
+    terminate_record_process,
+    is_youtube_url,
 )
 from yuki_iptv.menubar import (
     init_yuki_iptv_menubar,
@@ -1547,19 +1549,25 @@ if __name__ == "__main__":
             for char in FORBIDDEN_CHARS:
                 ch = ch.replace(char, "")
             cur_time = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
+            record_url = getArrayItem(ch_name)["url"]
+            record_format = ".ts"
+            if is_youtube_url(record_url):
+                record_format = ".mkv"
             if not YukiData.settings["scrrecnosubfolders"]:
                 out_file = str(
                     Path(
                         save_folder,
                         "recordings",
-                        "recording_-_" + cur_time + "_-_" + ch + ".mkv",
+                        "recording_-_" + cur_time + "_-_" + ch + record_format,
                     )
                 )
             else:
                 out_file = str(
-                    Path(save_folder, "recording_-_" + cur_time + "_-_" + ch + ".mkv")
+                    Path(
+                        save_folder,
+                        "recording_-_" + cur_time + "_-_" + ch + record_format,
+                    )
                 )
-            record_url = getArrayItem(ch_name)["url"]
             return [
                 record_return(
                     record_url,
@@ -1577,7 +1585,7 @@ if __name__ == "__main__":
             if name2 in sch_recordings:
                 ffmpeg_process = sch_recordings[name2][0]
                 if ffmpeg_process:
-                    ffmpeg_process.terminate()
+                    terminate_record_process(ffmpeg_process)
 
         YukiData.recViaScheduler = False
 
@@ -5436,18 +5444,22 @@ if __name__ == "__main__":
                 for char in FORBIDDEN_CHARS:
                     ch = ch.replace(char, "")
                 cur_time = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
+                record_format = ".ts"
+                if is_youtube_url(url3):
+                    record_format = ".mkv"
                 if not YukiData.settings["scrrecnosubfolders"]:
                     out_file = str(
                         Path(
                             save_folder,
                             "recordings",
-                            "recording_-_" + cur_time + "_-_" + ch + ".mkv",
+                            "recording_-_" + cur_time + "_-_" + ch + record_format,
                         )
                     )
                 else:
                     out_file = str(
                         Path(
-                            save_folder, "recording_-_" + cur_time + "_-_" + ch + ".mkv"
+                            save_folder,
+                            "recording_-_" + cur_time + "_-_" + ch + record_format,
                         )
                     )
                 YukiData.record_file = out_file
