@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-29 00:57+0000\n"
-"PO-Revision-Date: 2024-04-27 21:28+0000\n"
+"PO-Revision-Date: 2024-05-01 05:26+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: Chinese (Simplified) <https://translate.codeberg.org/projects/"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4.3\n"
+"X-Generator: Weblate 5.5.2\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:676
 msgid "Loading TV guide cache..."
@@ -221,7 +221,7 @@ msgstr "正在加载..."
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2566
 msgid "Delete playlist permanently?"
-msgstr ""
+msgstr "是否永久删除播放列表？"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2825 usr/lib/yuki-iptv/yuki_iptv/gui.py:205
 msgid "Pause"
@@ -290,7 +290,7 @@ msgstr "从收藏中删除"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4625
 msgid "Remove channel from Favourites+?"
-msgstr ""
+msgstr "是否从收藏+移除频道？"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4661 usr/lib/yuki-iptv/yuki-iptv.py:7556
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:282

@@ -4,17 +4,17 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-29 00:57+0000\n"
-"PO-Revision-Date: 2024-04-16 20:38+0000\n"
+"PO-Revision-Date: 2024-05-01 05:26+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
-"Language-Team: Dutch <https://translate.codeberg.org/projects/yuki-iptv/yuki-"
-"iptv/nl/>\n"
+"Language-Team: Dutch <https://translate.codeberg.org/projects/yuki-iptv/"
+"yuki-iptv/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.3\n"
+"X-Generator: Weblate 5.5.2\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:676
 msgid "Loading TV guide cache..."
@@ -221,7 +221,7 @@ msgstr "Bezig met laden…"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2566
 msgid "Delete playlist permanently?"
-msgstr ""
+msgstr "Wilt u de afspeellijst permanent verwijderen?"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2825 usr/lib/yuki-iptv/yuki_iptv/gui.py:205
 msgid "Pause"
@@ -290,7 +290,7 @@ msgstr "Verwijderen uit favorieten"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4625
 msgid "Remove channel from Favourites+?"
-msgstr ""
+msgstr "Wilt u dit kanaal uit uw favorieten+ verwijderen?"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4661 usr/lib/yuki-iptv/yuki-iptv.py:7556
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:282
