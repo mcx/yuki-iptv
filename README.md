@@ -2,8 +2,6 @@
 
 **IPTV player with EPG support**
 
-[Telegram group for discussions](https://t.me/ame_chan_lounge)
-
 [![Screenshot](https://codeberg.org/attachments/80c17041-40da-410a-848f-558019e69391)](https://codeberg.org/attachments/f0b6d5bb-fa6f-4b16-a375-9e2f9775d6dd)
 
 ⚠️ Disclaimer: yuki-iptv doesn't provide content or TV channels.  
