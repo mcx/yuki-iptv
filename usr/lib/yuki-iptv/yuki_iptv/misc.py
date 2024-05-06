@@ -52,8 +52,6 @@ AUDIO_SAMPLE_FORMATS = {
 }
 
 MPV_OPTIONS_LINK = "https://mpv.io/manual/master/#options"
-REPOSITORY_LINK = "https://codeberg.org/Ame-chan-angel/yuki-iptv"
-TELEGRAM_LINK = "https://t.me/ame_chan_lounge"
 
 
 class stream_info:
