@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-29 00:57+0000\n"
-"PO-Revision-Date: 2024-04-04 22:18+0000\n"
+"PO-Revision-Date: 2024-05-19 05:35+0000\n"
 "Last-Translator: Ame-chan-angel <Ame-chan-angel@users.noreply.translate."
 "codeberg.org>\n"
 "Language-Team: French <https://translate.codeberg.org/projects/yuki-iptv/"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4.3\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:676
 msgid "Loading TV guide cache..."
@@ -82,7 +82,7 @@ msgstr "URL non renseignée !"
 #: usr/lib/yuki-iptv/yuki-iptv.py:1369
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:95
 msgid "Select playlist"
-msgstr ""
+msgstr "Sélection de la playlist"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1379
 msgid "Select EPG file"
@@ -97,7 +97,7 @@ msgstr "Défaut"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1421
 msgid "Failed to open external player!"
-msgstr ""
+msgstr "Impossible d'ouvrir le lecteur externe !"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:1537
 msgid "Channel"
@@ -221,7 +221,7 @@ msgstr "Chargement..."
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2566
 msgid "Delete playlist permanently?"
-msgstr ""
+msgstr "Supprimer la playlist definitivement ?"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:2825 usr/lib/yuki-iptv/yuki_iptv/gui.py:205
 msgid "Pause"
@@ -290,7 +290,7 @@ msgstr "Retirer des favoris"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4625
 msgid "Remove channel from Favourites+?"
-msgstr ""
+msgstr "Supprimer la chaine des Favoris+ ?"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:4661 usr/lib/yuki-iptv/yuki-iptv.py:7556
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:282
@@ -336,7 +336,7 @@ msgstr "Séries"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5142
 msgid "Playlist"
-msgstr ""
+msgstr "Playlists"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5197
 msgid "Doing screenshot..."
@@ -352,7 +352,7 @@ msgstr "Sauvegarde de la capture d'écran impossible !"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5333
 msgid "Open archive"
-msgstr ""
+msgstr "Ouvrir une archive"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5385 usr/lib/yuki-iptv/yuki-iptv.py:5391
 msgid "channels"
@@ -372,7 +372,7 @@ msgstr "Options MPV personnalisées invalides, non prise en compte"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5584
 msgid "IPTV player with EPG support"
-msgstr ""
+msgstr "Lecteur IPTV avec support d'EPG"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5587
 msgid "Using Qt {} ({})"
@@ -549,7 +549,7 @@ msgstr "&Précédent"
 #: usr/lib/yuki-iptv/yuki-iptv.py:7549
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:191
 msgid "P&laylist editor"
-msgstr ""
+msgstr "P&laylist éditeur"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7550
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:183
@@ -569,7 +569,7 @@ msgstr "Paramètres"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7554 usr/lib/yuki-iptv/yuki_iptv/gui.py:1234
 msgid "Channel sort"
-msgstr ""
+msgstr "Tri des chaînes"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7557
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:269
@@ -588,12 +588,12 @@ msgstr "Garder la fenêtre au premier plan"
 #: usr/lib/yuki-iptv/yuki-iptv.py:7560
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:209
 msgid "&Frame step"
-msgstr ""
+msgstr "&Cadre de travail"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:7561
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:213
 msgid "Fra&me back step"
-msgstr ""
+msgstr "Et&ape de cadre de travail"
 
 #: usr/lib/yuki-iptv/yuki_iptv/epg.py:92
 msgid "Updating TV guide... (loading {}/{})"
@@ -693,19 +693,19 @@ msgstr "Vider le cache des logos"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:532
 msgid "as in playlist"
-msgstr ""
+msgstr "comme dans la playlist"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:533
 msgid "alphabetical order"
-msgstr ""
+msgstr "ordre alphabétique"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:534
 msgid "reverse alphabetical order"
-msgstr ""
+msgstr "ordre alphabétique inversé"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:535
 msgid "custom"
-msgstr ""
+msgstr "personnalisé"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:553
 msgid ""
@@ -789,7 +789,7 @@ msgstr "Gauche"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:637
 msgid "Separate window"
-msgstr ""
+msgstr "Fenêtre séparée"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:640
 msgid ""
@@ -886,15 +886,15 @@ msgstr "Activer les replays"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:708
 msgid "Enable rewind"
-msgstr ""
+msgstr "Activer le rembobinage"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:712
 msgid "Hide channel logos"
-msgstr ""
+msgstr "Cacher les logos des chaînes"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:717
 msgid "Show/hide playlist by left mouse click"
-msgstr ""
+msgstr "Montrer/Cacher la playlist avec le clic gauche de la souris"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:723
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:961
@@ -964,6 +964,8 @@ msgid ""
 "Channel\n"
 "sort"
 msgstr ""
+"Tri des\n"
+"chaînes"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:774
 msgid "Cache"
@@ -1065,7 +1067,7 @@ msgstr "&À propos de yuki-iptv"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:1367
 msgid "Rewind"
-msgstr ""
+msgstr "Rembobiner"
 
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:1423
 #: usr/lib/yuki-iptv/yuki_iptv/gui.py:1573
@@ -1185,6 +1187,8 @@ msgid ""
 "Do not forget\n"
 "to set custom sort order in settings!"
 msgstr ""
+"Ne pas oublier\n"
+"de configurer le tri personnalisé dans les réglages !"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:107
 msgid "Error applying filters"
@@ -1248,7 +1252,7 @@ msgstr "&Normalisation du volume"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:373
 msgid "&Channel sort"
-msgstr ""
+msgstr "&Tri des chaînes"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:380
 msgid "&Settings"
@@ -1350,7 +1354,7 @@ msgstr "Enregistrer le fichier"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:159
 msgid "Playlists (*.m3u *.m3u8)"
-msgstr ""
+msgstr "Listes de lecture (*.m3u *.m3u8)"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:167
 msgid "Playlist successfully saved!"
@@ -1358,11 +1362,11 @@ msgstr "Playlist enregistrée avec succès !"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:176
 msgid "&Open file"
-msgstr ""
+msgstr "&Ouvrir le fichier"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:180
 msgid "&Save as"
-msgstr ""
+msgstr "&Sauvegarder sous"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:274
 msgid "find"
@@ -1396,7 +1400,7 @@ msgstr "taper un mot puis appuyer sur Entrée"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:382
 msgid "Playlist editor"
-msgstr ""
+msgstr "Editeur de Playlist"
 
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:392
 #: usr/lib/yuki-iptv/yuki_iptv/playlist_editor.py:418
