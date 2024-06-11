@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2021, 2022 Astroncia -->
-<!-- Copyright 2023, 2024 Ame-chan-angel <amechanangel@proton.me> -->
+<!-- Copyright 2023, 2024 Liya Astrova <amechanangel@proton.me> -->
 <component type="desktop">
   <id>yuki-iptv.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
@@ -187,7 +187,7 @@
   <url type="homepage">https://codeberg.org/Ame-chan-angel/yuki-iptv</url>
   <url type="bugtracker">https://codeberg.org/Ame-chan-angel/yuki-iptv/issues</url>
   <url type="translate">https://translate.codeberg.org/engage/yuki-iptv/</url>
-  <developer_name>Ame-chan-angel and yuki-iptv contributors</developer_name>
+  <developer_name>Liya Astrova</developer_name>
   <translation type="gettext">yuki-iptv</translation>
   <content_rating type="oars-1.1"/>
 </component>

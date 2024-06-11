@@ -1,6 +1,6 @@
 # yuki-iptv - IPTV player with EPG support
 # Copyright (C) 2021, 2022 Astroncia
-# Copyright (C) 2023-2024 Ame-chan-angel
+# Copyright (C) 2023-2024 Liya Astrova
 # This file is distributed under the same license as the yuki-iptv package.
 #
 #, fuzzy
