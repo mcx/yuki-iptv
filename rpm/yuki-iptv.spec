@@ -4,7 +4,7 @@ Version:	1.0
 Release:	1
 Group:		Multimedia
 License:	GPL-3.0-or-later
-URL:		https://codeberg.org/Ame-chan-angel/yuki-iptv
+URL:		https://codeberg.org/liya/yuki-iptv
 Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	hicolor-icon-theme
 BuildRequires:	gettext

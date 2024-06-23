@@ -184,8 +184,8 @@
     </release>
   </releases>
 
-  <url type="homepage">https://codeberg.org/Ame-chan-angel/yuki-iptv</url>
-  <url type="bugtracker">https://codeberg.org/Ame-chan-angel/yuki-iptv/issues</url>
+  <url type="homepage">https://codeberg.org/liya/yuki-iptv</url>
+  <url type="bugtracker">https://codeberg.org/liya/yuki-iptv/issues</url>
   <url type="translate">https://translate.codeberg.org/engage/yuki-iptv/</url>
   <developer_name>Liya Astrova</developer_name>
   <translation type="gettext">yuki-iptv</translation>
