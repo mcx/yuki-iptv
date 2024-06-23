@@ -5443,6 +5443,7 @@ if __name__ == "__main__":
         def get_about_text():
             about_txt = f"<b>yuki-iptv {APP_VERSION}</b>"
             about_txt += "<br><br>" + _("IPTV player with EPG support")
+            about_txt += "<br><br>" + _("Developer: {}").format("Liya Astrova")
             about_txt += (
                 "<br><br>"
                 + _("Using Qt {} ({})").format(QtCore.qVersion(), qt_library)
