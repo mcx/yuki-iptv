@@ -9,6 +9,7 @@ The channels and pictures in the screenshots are for demonstration purposes only
 
 ## Content
 
+- [Raising funds](#raising-funds)
 - [Features](#features)
 - [deb packages](#deb-packages)
 - [Ubuntu PPA](#ubuntu-ppa)
@@ -17,6 +18,10 @@ The channels and pictures in the screenshots are for demonstration purposes only
 - [HowTo make playlists for movies/series](#howto-make-playlists-for-movies-series)
 - [License](#license)
 - [Localization](#localization)
+
+## Raising funds
+
+https://codeberg.org/liya/yuki-iptv/src/branch/master/DONATE.md
 
 ## Features
 

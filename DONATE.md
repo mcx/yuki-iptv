@@ -1,6 +1,6 @@
-# Support yuki-iptv development / Поддержите разработку yuki-iptv!
+# Support yuki-iptv development!
 
-## Russia / Россия
+## Russia
 
 [ЮMoney](https://yoomoney.ru/to/4100118739204535)  
 
