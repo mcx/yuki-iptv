@@ -53,6 +53,8 @@ AUDIO_SAMPLE_FORMATS = {
 
 MPV_OPTIONS_LINK = "https://mpv.io/manual/master/#options"
 
+DONATE_LINK = "https://codeberg.org/liya/yuki-iptv/src/branch/master/DONATE.md"
+
 
 class stream_info:
     pass

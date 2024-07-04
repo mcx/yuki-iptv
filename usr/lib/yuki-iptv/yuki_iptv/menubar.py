@@ -22,14 +22,17 @@
 # License - https://creativecommons.org/licenses/by/4.0/
 #
 import os
+import time
 import logging
 import gettext
 import json
 import traceback
+import webbrowser
 from functools import partial
 from yuki_iptv.qt import get_qt_library
 from yuki_iptv.qt6compat import qaction
-from yuki_iptv.options import read_option
+from yuki_iptv.options import read_option, write_option
+from yuki_iptv.misc import DONATE_LINK
 
 qt_library, QtWidgets, QtCore, QtGui, QShortcut, QtOpenGLWidgets = get_qt_library()
 logger = logging.getLogger(__name__)
@@ -37,6 +40,8 @@ _ = gettext.gettext
 
 
 class YukiData:
+    enable_donation = -1
+    donate_hide_checked = False
     menubar_ready = False
     first_run = False
     first_run1 = False
@@ -175,6 +180,10 @@ def reload_menubar_shortcuts():
     for i_1 in YukiData.secs:
         sec_i_1 += 1
         doSetShortcut(i_1, qkeysequence(sec_keys_1[sec_i_1]))
+
+
+def donate_action():
+    webbrowser.open(DONATE_LINK)
 
 
 def init_menubar(data):
@@ -385,6 +394,30 @@ def init_menubar(data):
     YukiData.aboutAction = qaction(_("&About yuki-iptv"), data)
     YukiData.aboutAction.triggered.connect(lambda: YukiData.show_help())
 
+    # Donate
+
+    if YukiData.enable_donation == -1:
+        donate_show_time = 1210000  # 2 weeks
+        install_time = read_option("install_time")
+        if install_time is None:
+            install_time = time.time()
+            write_option("install_time", install_time)
+        YukiData.enable_donation = (time.time() - install_time) > donate_show_time
+
+    if YukiData.enable_donation:
+        if not YukiData.donate_hide_checked:
+            YukiData.donate_hide_checked = True
+            donate_hide_time = 259200  # 3 days
+            hide_time = read_option("hide_time")
+            if hide_time is None:
+                hide_time = time.time()
+                write_option("hide_time", hide_time)
+            if (time.time() - hide_time) > donate_hide_time:
+                YukiData.enable_donation = False
+
+        YukiData.donateAction = qaction(_("&Donate"), data)
+        YukiData.donateAction.triggered.connect(donate_action)
+
     # Empty (track list)
     def get_empty_action():
         empty_action = qaction("<{}>".format(_("empty")), data)
@@ -521,6 +554,11 @@ def populate_menubar(
 
     help_menu = menubar.addMenu(_("&Help"))
     help_menu.addAction(YukiData.aboutAction)
+
+    # Donate
+
+    if YukiData.enable_donation:
+        menubar.addAction(YukiData.donateAction)
 
     YukiData.menubars[i] = [video_track_menu, audio_track_menu, sub_track_menu]
 
