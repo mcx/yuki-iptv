@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: yuki-iptv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-04 18:13+0000\n"
-"PO-Revision-Date: 2024-06-23 06:28+0000\n"
+"PO-Revision-Date: 2024-07-04 18:19+0000\n"
 "Last-Translator: Liya Astrova <liya@users.noreply.translate.codeberg.org>\n"
 "Language-Team: Russian <https://translate.codeberg.org/projects/yuki-iptv/"
 "yuki-iptv/ru/>\n"
@@ -13,9 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Generator: Weblate 5.5.5\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
+"n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Weblate 5.6.1\n"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:528
 msgid "Loading TV guide cache..."
@@ -389,7 +389,7 @@ msgstr "Используется libmpv {}"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5459
 msgid "Donate"
-msgstr ""
+msgstr "Поддержать разработку материально"
 
 #: usr/lib/yuki-iptv/yuki-iptv.py:5589 usr/lib/yuki-iptv/yuki_iptv/gui.py:793
 msgid "Video"
@@ -1295,7 +1295,7 @@ msgstr "&Настройки"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:418
 msgid "&Donate"
-msgstr ""
+msgstr "П&оддержать"
 
 #: usr/lib/yuki-iptv/yuki_iptv/menubar.py:423
 msgid "empty"
