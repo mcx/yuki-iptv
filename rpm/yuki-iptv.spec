@@ -70,6 +70,13 @@ sed -i "s/__DEB_VERSION__/%{version}/g" usr/lib/yuki-iptv/yuki-iptv.py
 cp -af usr %{buildroot}
 
 %changelog
+* Thu Jul 04 2024 Liya Astrova <liyaastrova@proton.me> - 0.0.12
+  - Translations update from Weblate
+  - Change record format to ts
+  - Load Qt system translations
+  - Add resize grip to playlist in separate window
+  - Add support for custom channel logos
+  - Better libmpv API version check
 * Fri Apr 19 2024 Liya Astrova <liyaastrova@proton.me> - 0.0.11
   - Translations update from Weblate
   - libmpv 0.38.0 fixes

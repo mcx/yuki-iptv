@@ -43,6 +43,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.0.12" date="2024-07-04">
+      <description>
+        <p>Translations update from Weblate</p>
+        <p>Change record format to ts</p>
+        <p>Load Qt system translations</p>
+        <p>Add resize grip to playlist in separate window</p>
+        <p>Add support for custom channel logos</p>
+        <p>Better libmpv API version check</p>
+      </description>
+    </release>
     <release version="0.0.11" date="2024-04-19">
       <description>
         <p>Translations update from Weblate</p>

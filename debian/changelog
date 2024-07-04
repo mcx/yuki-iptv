@@ -1,3 +1,14 @@
+yuki-iptv (0.0.12) unstable; urgency=medium
+
+  * Translations update from Weblate
+  * Change record format to ts
+  * Load Qt system translations
+  * Add resize grip to playlist in separate window
+  * Add support for custom channel logos
+  * Better libmpv API version check
+
+ -- Liya Astrova <liyaastrova@proton.me>  Thu, 04 Jul 2024 19:30:08 +0000
+
 yuki-iptv (0.0.11) unstable; urgency=medium
 
   * Translations update from Weblate
