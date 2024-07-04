@@ -95,7 +95,6 @@ from yuki_iptv.misc import (
     DOCKWIDGET_PLAYLIST_WIDTH,
     MAIN_WINDOW_TITLE,
     MPV_OPTIONS_LINK,
-    DONATE_LINK,
     stream_info,
     TVGUIDE_WIDTH,
     UPDATE_BR_INTERVAL,
@@ -5456,7 +5455,6 @@ if __name__ == "__main__":
             if not mpv_version:
                 mpv_version = "UNKNOWN"
             about_txt += "<br>" + _("Using libmpv {}").format(mpv_version)
-            about_txt += f"<br><br><a href='{DONATE_LINK}'>" + _("Donate") + "</a>"
             return about_txt
 
         def main_channel_settings():
