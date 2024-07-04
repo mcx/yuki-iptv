@@ -13,7 +13,7 @@ yuki-iptv (0.0.11) unstable; urgency=medium
   * Fix "Wrong Qt version reported"
   * Disable debug logging for MPRIS
 
- -- Liya Astrova <amechanangel@proton.me>  Fri, 19 Apr 2024 19:51:06 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Fri, 19 Apr 2024 19:51:06 +0000
 
 yuki-iptv (0.0.10) unstable; urgency=medium
 
@@ -29,7 +29,7 @@ yuki-iptv (0.0.10) unstable; urgency=medium
   * Fix VOD matching
   * Add EPG id for XTream channels
 
- -- Liya Astrova <amechanangel@proton.me>  Sun, 17 Mar 2024 12:37:31 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Sun, 17 Mar 2024 12:37:31 +0000
 
 yuki-iptv (0.0.9) unstable; urgency=medium
 
@@ -39,7 +39,7 @@ yuki-iptv (0.0.9) unstable; urgency=medium
   * Add file filter when adding playlist
   * Add file filter when opening file in M3U editor
 
- -- Liya Astrova <amechanangel@proton.me>  Tue, 23 Jan 2024 04:13:28 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Tue, 23 Jan 2024 04:13:28 +0000
 
 yuki-iptv (0.0.8) unstable; urgency=medium
 
@@ -63,7 +63,7 @@ yuki-iptv (0.0.8) unstable; urgency=medium
   * Fix catchup on XTream playlists
   * Load EPG for XTream
 
- -- Liya Astrova <amechanangel@proton.me>  Tue, 07 Nov 2023 08:23:17 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Tue, 07 Nov 2023 08:23:17 +0000
 
 yuki-iptv (0.0.7) unstable; urgency=medium
 
@@ -71,7 +71,7 @@ yuki-iptv (0.0.7) unstable; urgency=medium
   * Use Wand for channel logos
   * Add tvg-group tag support
 
- -- Liya Astrova <amechanangel@proton.me>  Mon, 05 Jun 2023 22:30:31 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Mon, 05 Jun 2023 22:30:31 +0000
 
 yuki-iptv (0.0.6) unstable; urgency=medium
 
@@ -81,13 +81,13 @@ yuki-iptv (0.0.6) unstable; urgency=medium
   * Detect group in xspf playlists
   * Increase connect and read timeout
 
- -- Liya Astrova <amechanangel@proton.me>  Sun, 14 May 2023 20:53:12 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Sun, 14 May 2023 20:53:12 +0000
 
 yuki-iptv (0.0.5) unstable; urgency=medium
 
   * Load EPG for all days available
 
- -- Liya Astrova <amechanangel@proton.me>  Tue, 02 May 2023 05:56:35 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Tue, 02 May 2023 05:56:35 +0000
 
 yuki-iptv (0.0.4) unstable; urgency=medium
 
@@ -99,7 +99,7 @@ yuki-iptv (0.0.4) unstable; urgency=medium
   * UI improvements
   * packaging: add python3-pydbus to depends
 
- -- Liya Astrova <amechanangel@proton.me>  Sat, 15 Apr 2023 18:52:48 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Sat, 15 Apr 2023 18:52:48 +0000
 
 yuki-iptv (0.0.3) unstable; urgency=medium
 
@@ -113,7 +113,7 @@ yuki-iptv (0.0.3) unstable; urgency=medium
   * Show logo when file ended
   * Fix channel looping
 
- -- Liya Astrova <amechanangel@proton.me>  Sun, 09 Apr 2023 20:48:06 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Sun, 09 Apr 2023 20:48:06 +0000
 
 yuki-iptv (0.0.2) unstable; urgency=medium
 
@@ -140,10 +140,10 @@ yuki-iptv (0.0.2) unstable; urgency=medium
   * Drop default EPG URLs
   * Drop import from Hypnotix
 
- -- Liya Astrova <amechanangel@proton.me>  Thu, 06 Apr 2023 18:29:16 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Thu, 06 Apr 2023 18:29:16 +0000
 
 yuki-iptv (0.0.1) unstable; urgency=medium
 
   * Change project name to yuki-iptv
 
- -- Liya Astrova <amechanangel@proton.me>  Mon, 27 Mar 2023 18:25:20 +0000
+ -- Liya Astrova <liyaastrova@proton.me>  Mon, 27 Mar 2023 18:25:20 +0000

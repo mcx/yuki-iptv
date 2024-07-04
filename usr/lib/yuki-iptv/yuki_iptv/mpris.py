@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2024 Liya Astrova <amechanangel@proton.me>
+# Copyright (c) 2024 Liya Astrova <liyaastrova@proton.me>
 #
 # This file is part of yuki-iptv.
 #

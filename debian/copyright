@@ -1,12 +1,12 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: yuki-iptv
-Upstream-Contact: Liya Astrova <amechanangel@proton.me>
+Upstream-Contact: Liya Astrova <liyaastrova@proton.me>
 Source: https://codeberg.org/liya/yuki-iptv
 
 Files: *
 Copyright:
  2021-2022 Astroncia
- 2023-2024 Liya Astrova <amechanangel@proton.me>
+ 2023-2024 Liya Astrova <liyaastrova@proton.me>
 License: GPL-3+
 
 Files: usr/lib/yuki-iptv/thirdparty/mpv.py

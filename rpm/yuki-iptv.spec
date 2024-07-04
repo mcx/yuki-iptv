@@ -70,7 +70,7 @@ sed -i "s/__DEB_VERSION__/%{version}/g" usr/lib/yuki-iptv/yuki-iptv.py
 cp -af usr %{buildroot}
 
 %changelog
-* Fri Apr 19 2024 Liya Astrova <amechanangel@proton.me> - 0.0.11
+* Fri Apr 19 2024 Liya Astrova <liyaastrova@proton.me> - 0.0.11
   - Translations update from Weblate
   - libmpv 0.38.0 fixes
   - Restore channel sorting
@@ -83,7 +83,7 @@ cp -af usr %{buildroot}
   - Fix "RuntimeError: wrapped C/C++ object of type QAction has been deleted"
   - Fix "Wrong Qt version reported"
   - Disable debug logging for MPRIS
-* Sun Mar 17 2024 Liya Astrova <amechanangel@proton.me> - 0.0.10
+* Sun Mar 17 2024 Liya Astrova <liyaastrova@proton.me> - 0.0.10
   - Translations update from Weblate
   - Show channel URL in stream information window
   - Do not crash if save folder is not writable
@@ -95,13 +95,13 @@ cp -af usr %{buildroot}
   - Fix MPRIS
   - Fix VOD matching
   - Add EPG id for XTream channels
-* Tue Jan 23 2024 Liya Astrova <amechanangel@proton.me> - 0.0.9
+* Tue Jan 23 2024 Liya Astrova <liyaastrova@proton.me> - 0.0.9
   - l10n: Update translations
   - Respect XDG environment variables
   - Fix YouTube channels recording
   - Add file filter when adding playlist
   - Add file filter when opening file in M3U editor
-* Tue Nov 07 2023 Liya Astrova <amechanangel@proton.me> - 0.0.8
+* Tue Nov 07 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.8
   - l10n: Update translations
   - Fix parsing channel name with comma
   - Show audio/video desynchronization
@@ -121,19 +121,19 @@ cp -af usr %{buildroot}
   - Show XTream expiration dates in playlists window
   - Fix catchup on XTream playlists
   - Load EPG for XTream
-* Mon Jun 05 2023 Liya Astrova <amechanangel@proton.me> - 0.0.7
+* Mon Jun 05 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.7
   - Fix encoding in remote playlists
   - Use Wand for channel logos
   - Add tvg-group tag support
-* Sun May 14 2023 Liya Astrova <amechanangel@proton.me> - 0.0.6
+* Sun May 14 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.6
   - Add 'Hide EPG from playlist' option
   - Add 'Multicast optimization' option
   - Fix control panel not aware of multiple screens
   - Detect group in xspf playlists
   - Increase connect and read timeout
-* Tue May 02 2023 Liya Astrova <amechanangel@proton.me> - 0.0.5
+* Tue May 02 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.5
   - Load EPG for all days available
-* Sat Apr 15 2023 Liya Astrova <amechanangel@proton.me> - 0.0.4
+* Sat Apr 15 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.4
   - Optimize channel logos load
   - Show warning if ffmpeg crashed
   - Remember video / audio / subtitle tracks for channel
@@ -141,7 +141,7 @@ cp -af usr %{buildroot}
   - Fix pause button behaviour on changing channels
   - UI improvements
   - packaging: add python3-pydbus to depends
-* Sun Apr 09 2023 Liya Astrova <amechanangel@proton.me> - 0.0.3
+* Sun Apr 09 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.3
   - EPG: trying to fix EPG cache load freezing
   - EPG: fix XMLTV timezone parsing
   - EPG: re-implement JTV support from scratch
@@ -151,7 +151,7 @@ cp -af usr %{buildroot}
   - Fix autoreconnection option
   - Show logo when file ended
   - Fix channel looping
-* Thu Apr 06 2023 Liya Astrova <amechanangel@proton.me> - 0.0.2
+* Thu Apr 06 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.2
   - l10n: Update translations
   - Fix disabling osc via MPV options
   - Make libmpv respect loglevel option
@@ -174,5 +174,5 @@ cp -af usr %{buildroot}
   - Check playlist name is not empty before saving
   - Drop default EPG URLs
   - Drop import from Hypnotix
-* Mon Mar 27 2023 Liya Astrova <amechanangel@proton.me> - 0.0.1
+* Mon Mar 27 2023 Liya Astrova <liyaastrova@proton.me> - 0.0.1
   - Change project name to yuki-iptv
